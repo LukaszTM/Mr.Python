@@ -17,6 +17,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 - **XP ⚡, seria dni 🔥 i cel dzienny 🎯** (30 XP).
 - **Kolorowanie składni** Pythona w przykładach kodu.
 - Profil ze statystykami i postępem w każdej części.
+- **Ciemny motyw w stylu edytora kodu** w kolorach Pythona – ścieżka lekcji jako oś czasu,
+  przykłady w oknie edytora z numerami linii, odpowiedzi wpisywane jak w konsoli.
 
 Postęp jest zapisywany lokalnie na urządzeniu (SharedPreferences).
 

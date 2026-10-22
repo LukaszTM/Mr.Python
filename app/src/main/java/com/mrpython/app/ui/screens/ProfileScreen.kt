@@ -28,14 +28,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.ui.AppUiState
-import com.mrpython.app.ui.components.ChunkyButton
+import com.mrpython.app.ui.components.SecondaryButton
 import com.mrpython.app.ui.components.ProgressBar
 import com.mrpython.app.ui.theme.AppColors
 
@@ -57,13 +57,13 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
             Modifier
                 .size(110.dp)
                 .clip(CircleShape)
-                .background(Color(0xFFFFE873))
-                .border(4.dp, Color(0xFF3776AB), CircleShape),
+                .background(AppColors.SurfaceHigh)
+                .border(3.dp, AppColors.Yellow, CircleShape),
             contentAlignment = Alignment.Center,
         ) { Text("🐍", fontSize = 56.sp) }
         Spacer(Modifier.height(12.dp))
-        Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = AppColors.Text)
-        Text("Uczę się Pythona", color = AppColors.TextLight)
+        Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = AppColors.Text)
+        Text("import wiedza  # uczę się Pythona", color = AppColors.TextDim, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Statystyki")
@@ -74,31 +74,29 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
-            StatCard("❤️", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
+            StatCard("♥", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
         }
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Postęp kursu")
         CourseContent.units.forEachIndexed { i, unit ->
             val unitDone = unit.lessons.count { it.id in p.completedLessons }
-            val color = AppColors.unitColors[i % AppColors.unitColors.size].first
+            val color = AppColors.unitColors[i % AppColors.unitColors.size]
             Column(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                 Row {
-                    Text(unit.title, fontWeight = FontWeight.Bold, color = AppColors.Text)
+                    Text(unit.title, fontWeight = FontWeight.SemiBold, color = AppColors.Text)
                     Spacer(Modifier.weight(1f))
-                    Text("$unitDone/${unit.lessons.size}", color = AppColors.TextLight)
+                    Text("$unitDone/${unit.lessons.size}", color = AppColors.TextDim, fontFamily = FontFamily.Monospace)
                 }
                 Spacer(Modifier.height(6.dp))
-                ProgressBar(unitDone.toFloat() / unit.lessons.size, Modifier.fillMaxWidth(), color = color, height = 12.dp)
+                ProgressBar(unitDone.toFloat() / unit.lessons.size, Modifier.fillMaxWidth(), color = color)
             }
         }
         Spacer(Modifier.height(32.dp))
-        ChunkyButton(
+        SecondaryButton(
             text = "Zresetuj postęp",
             onClick = { confirmReset = true },
-            color = Color.White,
-            shadowColor = AppColors.Gray,
-            textColor = AppColors.Red,
+            color = AppColors.Error,
         )
     }
 
@@ -109,13 +107,15 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
             text = { Text("Stracisz wszystkie XP, serię i ukończone lekcje. Tego nie da się cofnąć.") },
             confirmButton = {
                 TextButton(onClick = { confirmReset = false; onReset() }) {
-                    Text("Resetuj", color = AppColors.Red, fontWeight = FontWeight.Bold)
+                    Text("Resetuj", color = AppColors.Error, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { confirmReset = false }) { Text("Anuluj") }
+                TextButton(onClick = { confirmReset = false }) { Text("Anuluj", color = AppColors.Yellow) }
             },
-            containerColor = Color.White,
+            containerColor = AppColors.Surface,
+            titleContentColor = AppColors.Text,
+            textContentColor = AppColors.TextDim,
         )
     }
 }
@@ -123,30 +123,33 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
 @Composable
 private fun SectionTitle(text: String) {
     Text(
-        text,
+        "# $text",
         Modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp),
-        fontSize = 20.sp,
-        fontWeight = FontWeight.ExtraBold,
-        color = AppColors.Text,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Monospace,
+        color = AppColors.TextDim,
     )
 }
 
 @Composable
 private fun StatCard(icon: String, value: String, label: String, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(14.dp)
+    val shape = RoundedCornerShape(12.dp)
     Row(
         modifier
-            .border(2.dp, AppColors.Gray, shape)
+            .clip(shape)
+            .background(AppColors.Surface)
+            .border(1.dp, AppColors.Border, shape)
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(icon, fontSize = 24.sp)
+        Text(icon, fontSize = 22.sp, color = AppColors.Heart)
         Spacer(Modifier.width(10.dp))
         Column {
-            Text(value, fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = AppColors.Text)
-            Text(label, color = AppColors.TextLight, fontSize = 13.sp)
+            Text(value, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = AppColors.Text, fontFamily = FontFamily.Monospace)
+            Text(label, color = AppColors.TextDim, fontSize = 13.sp)
         }
     }
 }
