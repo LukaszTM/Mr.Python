@@ -1,11 +1,11 @@
-# Program kursu Mr. Python – 365 lekcji
+# Program kursu Mr. Python – 369 lekcji
 
-Cel: jedna lekcja dziennie przez rok. Każda lekcja ma 7–8 zadań.
+Cel: jedna lekcja dziennie przez rok (365 dni, z zapasem). Każda lekcja ma 7–8 zadań.
 Moduł zwykle kończy się lekcją „Powtórka”.
 
 | Moduł | Temat | Lekcje |
 |---|---|---|
-| 1–11 | Podstawy: print, zmienne, warunki, pętle, listy, funkcje, napisy, słowniki, krotki i zbiory, błędy, klasy | 44 |
+| 1–11 | Podstawy: print, zmienne, warunki, pętle, listy, funkcje, napisy, słowniki, krotki i zbiory, błędy, klasy | 48 |
 | 12 | Formatowanie tekstu | 5 |
 | 13 | Wyrażenia listowe | 5 |
 | 14 | Struktury zagnieżdżone | 5 |
@@ -68,4 +68,4 @@ Moduł zwykle kończy się lekcją „Powtórka”.
 | 71 | Pythonowe idiomy | 5 |
 | 72 | Egzamin końcowy | 6 |
 | 73 | Wielki finał | 5 |
-| **Razem** | | **365** |
+| **Razem** | | **369** |

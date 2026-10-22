@@ -1,0 +1,208 @@
+package com.mrpython.app.data.course
+
+import com.mrpython.app.domain.CourseUnit
+
+internal val module13 = CourseUnit(
+    id = "u13",
+    title = "Wyrażenia listowe",
+    description = "Szybkie tworzenie list, słowników i zbiorów",
+    lessons = listOf(
+        lesson(
+            "u13l1", "Pierwsze wyrażenia listowe",
+            output("print([x * 2 for x in range(4)])", "[0, 2, 4, 6]", "Dla każdego x z range(4) do listy trafia x * 2."),
+            output("print([z.upper() for z in \"abc\"])", "['A', 'B', 'C']", "Można przechodzić po znakach napisu i wywoływać na nich metody."),
+            choice(
+                "Które wyrażenie listowe daje ten sam wynik co pętla?",
+                listOf("[x + 1 for x in range(3)]", "[for x in range(3): x + 1]", "[x + 1 in range(3)]", "[x + 1 if x in range(3)]"),
+                0,
+                "Schemat to [wyrażenie for zmienna in kolekcja].",
+                code = "wynik = []\nfor x in range(3):\n    wynik.append(x + 1)",
+            ),
+            fill(
+                "Uzupełnij wyrażenie listowe.",
+                "print([x * 10 ____ x in range(3)])",
+                listOf("for", "in", "if"),
+                "for",
+                "Wyrażenie listowe zawiera pętlę for wewnątrz nawiasów.",
+            ),
+            output(
+                "slowa = [\"ala\", \"ma\", \"kota\"]\nprint([len(s) for s in slowa])",
+                "[3, 2, 4]",
+                "Dla każdego słowa obliczamy jego długość.",
+            ),
+            output(
+                "def podwoj(n):\n    return n * 2\n\nprint([podwoj(x) for x in [1, 5]])",
+                "[2, 10]",
+                "W wyrażeniu listowym można wywoływać własne funkcje.",
+            ),
+            tiles(
+                "Utwórz listę kw z kwadratami liczb od 0 do 4",
+                listOf("kw", "=", "[x * x", "for x in", "range(5)]"),
+                listOf("in x for", "(x * x"),
+                "[x * x for x in range(5)] podnosi do kwadratu każdą liczbę.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("[3, 2, 1]", "[-3, 2, -1]", "[3, -2, 1]", "6"),
+                0,
+                "abs() zwraca wartość bezwzględną, czyli liczbę bez minusa.",
+                code = "print([abs(x) for x in [-3, 2, -1]])",
+            ),
+        ),
+        lesson(
+            "u13l2", "Warunki w wyrażeniach listowych",
+            output("print([x for x in range(10) if x % 3 == 0])", "[0, 3, 6, 9]", "if na końcu przepuszcza tylko liczby podzielne przez 3."),
+            output(
+                "zw = [\"kot\", \"pies\", \"mysz\"]\nprint([s for s in zw if len(s) > 3])",
+                "['pies', 'mysz']",
+                "Zostają tylko słowa dłuższe niż 3 litery.",
+            ),
+            output("print([x * 2 for x in range(5) if x > 2])", "[6, 8]", "Najpierw filtr (3 i 4), potem mnożenie przez 2."),
+            fill(
+                "Uzupełnij, aby zostawić tylko liczby parzyste.",
+                "print([x for x in range(6) ____ x % 2 == 0])",
+                listOf("if", "for", "else"),
+                "if",
+                "Warunek filtrujący zapisujemy po if na końcu wyrażenia.",
+            ),
+            output(
+                "print([\"T\" if x > 1 else \"N\" for x in range(3)])",
+                "['N', 'N', 'T']",
+                "a if warunek else b wybiera jedną z dwóch wartości dla każdego elementu.",
+            ),
+            output("print([0 if x < 0 else x for x in [4, -2, 3]])", "[4, 0, 3]", "Liczby ujemne zamieniamy na 0, resztę zostawiamy."),
+            choice(
+                "Co robi to wyrażenie?",
+                listOf("Zamienia liczby niedodatnie na 0", "Usuwa liczby ujemne z listy", "Zwraca tylko liczby dodatnie", "Powoduje błąd składni"),
+                0,
+                "if–else przed for zmienia wartość, ale niczego nie usuwa.",
+                code = "[x if x > 0 else 0 for x in liczby]",
+            ),
+            tiles(
+                "Wybierz z listy liczby elementy większe od 10",
+                listOf("duze", "=", "[x for x in liczby", "if x > 10]"),
+                listOf("if x < 10]", "else x]"),
+                "Filtr if na końcu zostawia tylko pasujące elementy.",
+            ),
+        ),
+        lesson(
+            "u13l3", "Zagnieżdżone wyrażenia listowe",
+            output("print([x * y for x in [1, 2] for y in [10, 20]])", "[10, 20, 20, 40]", "Dla każdego x przechodzimy po wszystkich y."),
+            output("m = [[1, 2], [3, 4]]\nprint([x for w in m for x in w])", "[1, 2, 3, 4]", "Dwa for-y spłaszczają listę list."),
+            output("print([[0] * 3 for _ in range(2)])", "[[0, 0, 0], [0, 0, 0]]", "Każdy obrót tworzy nowy wiersz z trzech zer."),
+            output(
+                "print([[i * j for j in range(3)]\n       for i in range(1, 3)])",
+                "[[0, 1, 2], [0, 2, 4]]",
+                "Wyrażenie wewnętrzne tworzy jeden wiersz dla każdego i.",
+            ),
+            choice(
+                "Która pętla jest zewnętrzna w [x for w in m for x in w]?",
+                listOf("for w in m", "for x in w", "Obie działają równocześnie", "Żadna"),
+                0,
+                "Pętle czytamy od lewej – pierwsza jest zewnętrzna, jak w zwykłym kodzie.",
+            ),
+            fill(
+                "Uzupełnij, aby spłaszczyć listę list.",
+                "m = [[1], [2, 3]]\nprint([x for w in m for x in ____])",
+                listOf("w", "m", "x"),
+                "w",
+                "Wewnętrzna pętla przechodzi po elementach bieżącego wiersza w.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("[1, 3]", "[1, 2]", "[[1], [3]]", "[2, 4]"),
+                0,
+                "w[0] to pierwszy element każdego wiersza.",
+                code = "m = [[1, 2], [3, 4]]\nprint([w[0] for w in m])",
+            ),
+            tiles(
+                "Utwórz macierz m 3×3 wypełnioną zerami",
+                listOf("m", "=", "[[0] * 3", "for _ in", "range(3)]"),
+                listOf("[0] * 9", "for _ in range(9)]"),
+                "Każdy z 3 obrotów tworzy nowy wiersz [0, 0, 0].",
+            ),
+        ),
+        lesson(
+            "u13l4", "Słowniki i zbiory z wyrażeń",
+            output("print({x: x * x for x in range(3)})", "{0: 0, 1: 1, 2: 4}", "klucz: wartość w klamrach tworzy słownik."),
+            output(
+                "slowa = [\"kot\", \"pies\"]\nprint({s: len(s) for s in slowa})",
+                "{'kot': 3, 'pies': 4}",
+                "Kluczem jest słowo, wartością jego długość.",
+            ),
+            output("print({x % 3 for x in range(10)})", "{0, 1, 2}", "Klamry bez dwukropka tworzą zbiór – powtórzenia znikają."),
+            output(
+                "ceny = {\"a\": 2, \"b\": 5}\nprint({k: v * 2 for k, v in ceny.items()})",
+                "{'a': 4, 'b': 10}",
+                "items() daje pary klucz–wartość, które przekształcamy.",
+            ),
+            choice(
+                "Co tworzy wyrażenie {x for x in dane}?",
+                listOf("Zbiór", "Słownik", "Listę", "Krotkę"),
+                0,
+                "Klamry bez dwukropka to zbiór.",
+            ),
+            fill(
+                "Uzupełnij, aby powstał słownik.",
+                "print({x____x * 10 for x in range(2)})",
+                listOf(":", ",", "="),
+                ":",
+                "W słowniku klucz od wartości oddziela dwukropek.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("3", "5", "2", "Błąd"),
+                0,
+                "W słowie „banan” są tylko 3 różne litery: b, a, n.",
+                code = "print(len({z for z in \"banan\"}))",
+            ),
+            tiles(
+                "Utwórz słownik kw: liczba → jej kwadrat dla liczb 1–3",
+                listOf("kw", "=", "{n: n * n", "for n in", "range(1, 4)}"),
+                listOf("[n: n * n", "range(1, 3)}"),
+                "range(1, 4) daje 1, 2 i 3, a {n: n * n ...} tworzy słownik.",
+            ),
+        ),
+        lesson(
+            "u13l5", "Powtórka: wyrażenia listowe",
+            output("print([x + 1 for x in range(3)])", "[1, 2, 3]", "Każda liczba z range(3) zwiększona o 1."),
+            output(
+                "print([z for z in \"a1b2\" if z in \"0123456789\"])",
+                "['1', '2']",
+                "Zostają tylko znaki będące cyframi.",
+            ),
+            output("print(sum([x for x in range(5) if x % 2 == 1]))", "4", "Nieparzyste liczby to 1 i 3, ich suma to 4."),
+            output(
+                "print({s[0]: s for s in [\"ala\", \"bob\"]})",
+                "{'a': 'ala', 'b': 'bob'}",
+                "Kluczem jest pierwsza litera, wartością całe słowo.",
+            ),
+            choice(
+                "Które wyrażenie tworzy zbiór?",
+                listOf("{x for x in dane}", "[x for x in dane]", "{x: x for x in dane}", "[{x} for x in dane]"),
+                0,
+                "Klamry bez dwukropka to zbiór.",
+            ),
+            fill(
+                "Uzupełnij, aby zamienić liczby na napisy.",
+                "print([____(x) for x in [1, 2]])",
+                listOf("str", "int", "len"),
+                "str",
+                "str() zamienia liczbę na napis, więc wynik to ['1', '2'].",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("3", "2", "[1, 2, 3]", "Błąd"),
+                0,
+                "Spłaszczona lista to [1, 2, 3], a ma ona 3 elementy.",
+                code = "m = [[1, 2], [3]]\nprint(len([x for w in m for x in w]))",
+            ),
+            tiles(
+                "Wybierz z listy slowa te, które zaczynają się na „a”",
+                listOf("a_slowa", "=", "[s for s in slowa", "if s[0] == \"a\"]"),
+                listOf("if s == \"a\"]", "for s]"),
+                "s[0] to pierwsza litera słowa.",
+            ),
+        ),
+    ),
+)

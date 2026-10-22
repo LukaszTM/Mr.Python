@@ -1,0 +1,130 @@
+package com.mrpython.app.data.course
+
+import com.mrpython.app.domain.CourseUnit
+
+internal val module51 = CourseUnit(
+    id = "u51",
+    title = "Wycinki i kopiowanie",
+    description = "Zaawansowane wycinki, przypisanie do wycinka i kopie list",
+    lessons = listOf(
+        lesson(
+            "u51l1", "Wycinki z ujemnym krokiem",
+            output("x = [0, 1, 2, 3, 4, 5]\nprint(x[::-2])", "[5, 3, 1]", "Krok -2 idzie od końca co drugi element."),
+            output("x = [0, 1, 2, 3, 4, 5]\nprint(x[4:1:-1])", "[4, 3, 2]", "Z ujemnym krokiem start jest większy od końca; koniec nie wchodzi."),
+            choice(
+                "Który wycinek zwraca trzy ostatnie elementy listy x?",
+                listOf("x[-3:]", "x[:-3]", "x[3:]", "x[::-3]"),
+                0,
+                "x[-3:] zaczyna od trzeciego od końca i idzie do końca listy.",
+            ),
+            output("x = [0, 1, 2, 3, 4, 5]\nprint(x[1:4:-1])", "[]", "Krok ujemny, a start mniejszy od końca – wycinek jest pusty."),
+            output("print(\"Python\"[-1:-4:-1])", "noh", "Od ostatniego znaku wstecz, bez indeksu -4."),
+            output("x = [0, 1, 2, 3, 4, 5]\nprint(x[:-1][::-1])", "[4, 3, 2, 1, 0]", "Najpierw bez ostatniego, potem odwrócenie."),
+            choice(
+                "Który wycinek zwróci elementy listy od końca, pomijając ostatni?",
+                listOf("x[-2::-1]", "x[::-1]", "x[:-1]", "x[-1::-2]"),
+                0,
+                "Start -2 to przedostatni element, a krok -1 idzie wstecz do początku.",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać napis od tyłu.",
+                "s = \"kajak\" + \"!\"\nprint(s[::____])",
+                listOf("-1", "1", "2"),
+                "-1",
+                "Krok -1 odwraca kolejność: !kajak.",
+            ),
+        ),
+        lesson(
+            "u51l2", "Przypisanie do wycinka i obiekty slice",
+            output("x = [1, 2, 3, 4]\nx[1:3] = [9]\nprint(x)", "[1, 9, 4]", "Wycinek można zastąpić listą innej długości."),
+            output("x = [1, 2, 3]\nx[1:1] = [7, 8]\nprint(x)", "[1, 7, 8, 2, 3]", "Pusty wycinek [1:1] pozwala wstawić elementy."),
+            output("x = [0, 1, 2, 3, 4]\ndel x[::2]\nprint(x)", "[1, 3]", "del usuwa wszystkie elementy z wycinka."),
+            output("x = [1, 2, 3]\nx[:] = []\nprint(x)", "[]", "x[:] = [] czyści listę w miejscu."),
+            output("s = slice(1, 3)\nprint([10, 20, 30, 40][s])", "[20, 30]", "Obiekt slice to zapisany wycinek [1:3]."),
+            choice(
+                "Co się stanie?",
+                listOf("ValueError – długości się nie zgadzają", "x to [0, 1, 0]", "x to [0, 2]", "x to [0, 0, 3]"),
+                0,
+                "Przy wycinku z krokiem trzeba podać dokładnie tyle elementów, ile zastępujemy.",
+                code = "x = [1, 2, 3]\nx[::2] = [0]",
+            ),
+            fill(
+                "Uzupełnij, aby usunąć dwa pierwsze elementy listy.",
+                "x = [5, 6, 7, 8]\n____ x[:2]\nprint(x)",
+                listOf("del", "pop", "remove"),
+                "del",
+                "del x[:2] usuwa wycinek; pop i remove to metody, a nie instrukcje.",
+            ),
+            tiles(
+                "Utwórz obiekt wycinka od 2 do końca co 2 i zapisz go w zmiennej w",
+                listOf("w", "=", "slice(2,", "None,", "2)"),
+                listOf("range(2,", "[2::2]"),
+                "slice(start, stop, step); None oznacza „do końca”.",
+            ),
+        ),
+        lesson(
+            "u51l3", "Kopiowanie a aliasy",
+            output("a = [1, 2]\nb = a\nb.append(3)\nprint(a)", "[1, 2, 3]", "b = a nie kopiuje – obie nazwy wskazują tę samą listę."),
+            output("a = [1, 2]\nb = a[:]\nb.append(3)\nprint(a)", "[1, 2]", "a[:] tworzy nową listę (kopię)."),
+            output("a = [1, 2]\nprint(a is a[:], a == a[:])", "False True", "Kopia jest równa, ale to inny obiekt."),
+            output("a = [1, 2]\nb = list(a)\nb[0] = 9\nprint(a, b)", "[1, 2] [9, 2]", "list(a) też tworzy kopię."),
+            output(
+                "a = [[1], [2]]\nb = a[:]\nb[0].append(9)\nprint(a)",
+                "[[1, 9], [2]]",
+                "Płytka kopia kopiuje tylko listę zewnętrzną; listy wewnętrzne są wspólne.",
+            ),
+            output(
+                "import copy\na = [[1], [2]]\nb = copy.deepcopy(a)\nb[0].append(9)\nprint(a)",
+                "[[1], [2]]",
+                "deepcopy() kopiuje również listy zagnieżdżone.",
+            ),
+            choice(
+                "Która instrukcja NIE tworzy kopii listy a?",
+                listOf("b = a", "b = a[:]", "b = list(a)", "b = a.copy()"),
+                0,
+                "Przypisanie tworzy tylko drugą nazwę (alias) dla tej samej listy.",
+            ),
+            fill(
+                "Uzupełnij, aby skopiować także listy wewnętrzne.",
+                "import copy\na = [[1, 2]]\nb = copy.____(a)\nb[0][0] = 0\nprint(a)",
+                listOf("deepcopy", "copy", "list"),
+                "deepcopy",
+                "copy.copy() to płytka kopia, więc a też by się zmieniło; copy.list nie istnieje.",
+            ),
+        ),
+        lesson(
+            "u51l4", "Powtórka: wycinki i kopie",
+            output("x = list(range(6))\nprint(x[5:0:-2])", "[5, 3, 1]", "Od 5 wstecz co 2, bez indeksu 0."),
+            output("x = [1, 2, 3]\nx[len(x):] = [4]\nprint(x)", "[1, 2, 3, 4]", "Przypisanie do pustego wycinka na końcu działa jak dopisanie."),
+            choice(
+                "Co zawiera x po wykonaniu kodu?",
+                listOf("[1, 4]", "[1, 2, 4]", "[4]", "[1, 3, 4]"),
+                0,
+                "del x[1:3] usuwa elementy o indeksach 1 i 2.",
+                code = "x = [1, 2, 3, 4]\ndel x[1:3]",
+            ),
+            output("a = [1]\nb = a\na = a + [2]\nprint(b)", "[1]", "a + [2] tworzy nową listę, więc b dalej wskazuje starą."),
+            output("a = [1]\nb = a\na += [2]\nprint(b)", "[1, 2]", "+= zmienia listę w miejscu, więc zmianę widać też przez b."),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("[2, 3]", "[1, 2]", "[1, 3]", "[3]"),
+                0,
+                "slice(1, None) to wycinek [1:].",
+                code = "s = slice(1, None)\nprint([1, 2, 3][s])",
+            ),
+            fill(
+                "Uzupełnij, aby zrobić płytką kopię listy.",
+                "a = [1, 2]\nb = a.____()\nb.append(3)\nprint(a)",
+                listOf("copy", "clear", "pop"),
+                "copy",
+                "copy() zwraca kopię; clear() i pop() zmieniają oryginał i nie zwracają listy.",
+            ),
+            tiles(
+                "Zastąp elementy o indeksach 1 i 2 listy x elementami listy nowe",
+                listOf("x[1:3]", "=", "nowe"),
+                listOf("x[1:2]", "=="),
+                "Przypisanie do wycinka podmienia jego zawartość.",
+            ),
+        ),
+    ),
+)
