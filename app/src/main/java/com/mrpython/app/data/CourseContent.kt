@@ -146,6 +146,79 @@ import com.mrpython.app.data.course.module70Practice
 import com.mrpython.app.data.course.module71Practice
 import com.mrpython.app.data.course.module72Practice
 import com.mrpython.app.data.course.module73Practice
+import com.mrpython.app.data.course.module1Intro
+import com.mrpython.app.data.course.module2Intro
+import com.mrpython.app.data.course.module3Intro
+import com.mrpython.app.data.course.module4Intro
+import com.mrpython.app.data.course.module5Intro
+import com.mrpython.app.data.course.module6Intro
+import com.mrpython.app.data.course.module7Intro
+import com.mrpython.app.data.course.module8Intro
+import com.mrpython.app.data.course.module9Intro
+import com.mrpython.app.data.course.module10Intro
+import com.mrpython.app.data.course.module11Intro
+import com.mrpython.app.data.course.module12Intro
+import com.mrpython.app.data.course.module13Intro
+import com.mrpython.app.data.course.module14Intro
+import com.mrpython.app.data.course.module15Intro
+import com.mrpython.app.data.course.module16Intro
+import com.mrpython.app.data.course.module17Intro
+import com.mrpython.app.data.course.module18Intro
+import com.mrpython.app.data.course.module19Intro
+import com.mrpython.app.data.course.module20Intro
+import com.mrpython.app.data.course.module21Intro
+import com.mrpython.app.data.course.module22Intro
+import com.mrpython.app.data.course.module23Intro
+import com.mrpython.app.data.course.module24Intro
+import com.mrpython.app.data.course.module25Intro
+import com.mrpython.app.data.course.module26Intro
+import com.mrpython.app.data.course.module27Intro
+import com.mrpython.app.data.course.module28Intro
+import com.mrpython.app.data.course.module29Intro
+import com.mrpython.app.data.course.module30Intro
+import com.mrpython.app.data.course.module31Intro
+import com.mrpython.app.data.course.module32Intro
+import com.mrpython.app.data.course.module33Intro
+import com.mrpython.app.data.course.module34Intro
+import com.mrpython.app.data.course.module35Intro
+import com.mrpython.app.data.course.module36Intro
+import com.mrpython.app.data.course.module37Intro
+import com.mrpython.app.data.course.module38Intro
+import com.mrpython.app.data.course.module39Intro
+import com.mrpython.app.data.course.module40Intro
+import com.mrpython.app.data.course.module41Intro
+import com.mrpython.app.data.course.module42Intro
+import com.mrpython.app.data.course.module43Intro
+import com.mrpython.app.data.course.module44Intro
+import com.mrpython.app.data.course.module45Intro
+import com.mrpython.app.data.course.module46Intro
+import com.mrpython.app.data.course.module47Intro
+import com.mrpython.app.data.course.module48Intro
+import com.mrpython.app.data.course.module49Intro
+import com.mrpython.app.data.course.module50Intro
+import com.mrpython.app.data.course.module51Intro
+import com.mrpython.app.data.course.module52Intro
+import com.mrpython.app.data.course.module53Intro
+import com.mrpython.app.data.course.module54Intro
+import com.mrpython.app.data.course.module55Intro
+import com.mrpython.app.data.course.module56Intro
+import com.mrpython.app.data.course.module57Intro
+import com.mrpython.app.data.course.module58Intro
+import com.mrpython.app.data.course.module59Intro
+import com.mrpython.app.data.course.module60Intro
+import com.mrpython.app.data.course.module61Intro
+import com.mrpython.app.data.course.module62Intro
+import com.mrpython.app.data.course.module63Intro
+import com.mrpython.app.data.course.module64Intro
+import com.mrpython.app.data.course.module65Intro
+import com.mrpython.app.data.course.module66Intro
+import com.mrpython.app.data.course.module67Intro
+import com.mrpython.app.data.course.module68Intro
+import com.mrpython.app.data.course.module69Intro
+import com.mrpython.app.data.course.module70Intro
+import com.mrpython.app.data.course.module71Intro
+import com.mrpython.app.data.course.module72Intro
+import com.mrpython.app.data.course.module73Intro
 import com.mrpython.app.domain.CourseUnit
 import com.mrpython.app.domain.Exercise
 import com.mrpython.app.domain.Lesson
@@ -171,7 +244,24 @@ object CourseContent {
         module71Practice, module72Practice, module73Practice,
     ).flatten().toMap()
 
-    /** The whole course: 73 modules, 369 lessons – one lesson a day for a year. */
+    /** Introduction lessons ("u<N>l0") that open each module, keyed by module id. */
+    private val intros: Map<String, Lesson> = listOf(
+        module1Intro, module2Intro, module3Intro, module4Intro, module5Intro, module6Intro,
+        module7Intro, module8Intro, module9Intro, module10Intro, module11Intro, module12Intro,
+        module13Intro, module14Intro, module15Intro, module16Intro, module17Intro, module18Intro,
+        module19Intro, module20Intro, module21Intro, module22Intro, module23Intro, module24Intro,
+        module25Intro, module26Intro, module27Intro, module28Intro, module29Intro, module30Intro,
+        module31Intro, module32Intro, module33Intro, module34Intro, module35Intro, module36Intro,
+        module37Intro, module38Intro, module39Intro, module40Intro, module41Intro, module42Intro,
+        module43Intro, module44Intro, module45Intro, module46Intro, module47Intro, module48Intro,
+        module49Intro, module50Intro, module51Intro, module52Intro, module53Intro, module54Intro,
+        module55Intro, module56Intro, module57Intro, module58Intro, module59Intro, module60Intro,
+        module61Intro, module62Intro, module63Intro, module64Intro, module65Intro, module66Intro,
+        module67Intro, module68Intro, module69Intro, module70Intro, module71Intro, module72Intro,
+        module73Intro,
+    ).associateBy { it.id.removeSuffix("l0") }
+
+    /** The whole course: 73 modules, each opened by an introduction, 442 lessons in total. */
     val units: List<CourseUnit> = listOf(
         module1, module2, module3, module4, module5, module6,
         module7, module8, module9, module10, module11, module12,
@@ -187,7 +277,8 @@ object CourseContent {
         module67, module68, module69, module70, module71, module72,
         module73,
     ).map { unit ->
-        unit.copy(lessons = unit.lessons.map { it.copy(practice = practicePools[it.id].orEmpty()) })
+        val lessons = unit.lessons.map { it.copy(practice = practicePools[it.id].orEmpty()) }
+        unit.copy(lessons = listOfNotNull(intros[unit.id]) + lessons)
     }
 
     val allLessons: List<Lesson> get() = units.flatMap { it.lessons }

@@ -23,6 +23,16 @@ class CourseContentTest {
     }
 
     @Test
+    fun everyModuleStartsWithAnIntroduction() {
+        CourseContent.units.forEach { unit ->
+            val first = unit.lessons.first()
+            assertEquals(unit.id, unit.id + "l0", first.id)
+            assertTrue(unit.id, first.isIntro)
+            assertTrue(unit.id, unit.lessons.drop(1).none { it.isIntro })
+        }
+    }
+
+    @Test
     fun everyLessonHasExercises() {
         CourseContent.allLessons.forEach { assertTrue(it.id, it.exercises.size >= 3) }
     }

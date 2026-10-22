@@ -3,7 +3,9 @@
 Cel: jedna lekcja dziennie przez rok (365 dni, z zapasem).
 Każda lekcja ma 7–8 zadań na pierwsze podejście i 15 dodatkowych do powtórek
 (razem ponad 8400 zadań).
-Moduł zwykle kończy się lekcją „Powtórka”.
+Każdy moduł zaczyna się od lekcji „Wprowadzenie” (4–5 kart z teorią i przykładami,
+potem 2–3 łatwe pytania), a zwykle kończy lekcją „Powtórka”.
+Liczby lekcji w tabeli nie obejmują wprowadzeń (73 dodatkowe lekcje, razem 442).
 
 | Moduł | Temat | Lekcje |
 |---|---|---|
