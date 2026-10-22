@@ -34,10 +34,11 @@ internal val module1Intro = lesson(
         output = "Działa!",
     ),
     choice(
-        "Która funkcja wypisuje tekst na ekranie?",
-        listOf("print()", "write()", "show()", "echo()"),
+        "Co pojawi się na ekranie jako pierwsze?",
+        listOf("Start", "Ukryte", "Koniec", "Nic"),
         0,
-        "W Pythonie do wypisywania służy print().",
+        "Python wykonuje linie od góry, a linię z # pomija – więc najpierw wypisze Start.",
+        code = "print(\"Start\")\n# print(\"Ukryte\")\nprint(\"Koniec\")",
     ),
     output(
         "print(\"Witaj\")\nprint(10 + 5)",
