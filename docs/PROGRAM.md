@@ -1,6 +1,8 @@
 # Program kursu Mr. Python – 369 lekcji
 
-Cel: jedna lekcja dziennie przez rok (365 dni, z zapasem). Każda lekcja ma 7–8 zadań.
+Cel: jedna lekcja dziennie przez rok (365 dni, z zapasem).
+Każda lekcja ma 7–8 zadań na pierwsze podejście i 15 dodatkowych do powtórek
+(razem ponad 8400 zadań).
 Moduł zwykle kończy się lekcją „Powtórka”.
 
 | Moduł | Temat | Lekcje |

@@ -4,7 +4,7 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 
 ## Funkcje
 
-- **Ścieżka nauki na cały rok** – 73 moduły, 369 lekcji, 2914 zadań: od `print()` przez
+- **Ścieżka nauki na cały rok** – 73 moduły, 369 lekcji, ponad 8400 zadań: od `print()` przez
   struktury danych, programowanie obiektowe, bibliotekę standardową, algorytmy i projekty
   po egzamin końcowy. Pełny program: [docs/PROGRAM.md](docs/PROGRAM.md).
   Każdy moduł kończy się lekcją-powtórką.
@@ -17,6 +17,11 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 - **Serca ❤️** – 5 serc, każdy błąd kosztuje jedno; serce odnawia się co 20 minut.
   Powtórka ukończonej lekcji nie kosztuje serc i oddaje jedno.
 - **Błędy wracają** – źle rozwiązane zadanie pojawia się ponownie na końcu lekcji.
+- **Powtórki za każdym razem inne** – pierwsze podejście to 7–8 zadań uczących tematu,
+  a każda powtórka losuje 10 zadań z puli ok. 23 zadań danej lekcji.
+- **Liga tygodniowa ze ścieżką kariery** – co tydzień rywalizujesz z 19 wirtualnymi
+  rywalami; trzy pierwsze miejsca awansują: Stażysta → Junior → Mid → Senior →
+  Tech Lead → Architekt → CTO.
 - **XP ⚡, seria dni 🔥 i cel dzienny 🎯** (30 XP).
 - **Kolorowanie składni** Pythona w przykładach kodu.
 - Profil ze statystykami i postępem w każdej części.
