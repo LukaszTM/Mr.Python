@@ -39,6 +39,8 @@ data class LessonResult(
     val accuracyPercent: Int,
     val streak: Int,
     val isPractice: Boolean,
+    /** A replay gave a heart back (only when hearts weren't already full). */
+    val heartRestored: Boolean = false,
 )
 
 data class AppUiState(
@@ -156,6 +158,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     accuracyPercent = if (attempts == 0) 100 else session.total * 100 / attempts,
                     streak = progress.streak,
                     isPractice = isPractice,
+                    heartRestored = progress.hearts > it.progress.hearts,
                 ),
             )
         }

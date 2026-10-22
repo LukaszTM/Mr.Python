@@ -58,7 +58,7 @@ fun LessonCompleteScreen(result: LessonResult, onContinue: () -> Unit) {
             color = AppColors.Text,
             textAlign = TextAlign.Center,
         )
-        if (result.isPractice) {
+        if (result.heartRestored) {
             Spacer(Modifier.height(4.dp))
             Text("Odzyskujesz jedno ♥", color = AppColors.Heart)
         }
