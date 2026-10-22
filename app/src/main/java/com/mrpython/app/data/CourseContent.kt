@@ -1,6 +1,7 @@
 package com.mrpython.app.data
 
 import com.mrpython.app.data.course.module1
+import com.mrpython.app.data.course.module1Cards
 import com.mrpython.app.data.course.module2
 import com.mrpython.app.data.course.module3
 import com.mrpython.app.data.course.module4
@@ -244,6 +245,11 @@ object CourseContent {
         module71Practice, module72Practice, module73Practice,
     ).flatten().toMap()
 
+    /** Theory cards shown at the start of lessons that introduce something new. */
+    private val lessonCards: Map<String, List<Exercise>> = listOf(
+        module1Cards,
+    ).flatten().toMap()
+
     /** Introduction lessons ("u<N>l0") that open each module, keyed by module id. */
     private val intros: Map<String, Lesson> = listOf(
         module1Intro, module2Intro, module3Intro, module4Intro, module5Intro, module6Intro,
@@ -277,7 +283,12 @@ object CourseContent {
         module67, module68, module69, module70, module71, module72,
         module73,
     ).map { unit ->
-        val lessons = unit.lessons.map { it.copy(practice = practicePools[it.id].orEmpty()) }
+        val lessons = unit.lessons.map {
+            it.copy(
+                exercises = lessonCards[it.id].orEmpty() + it.exercises,
+                practice = practicePools[it.id].orEmpty(),
+            )
+        }
         unit.copy(lessons = listOfNotNull(intros[unit.id]) + lessons)
     }
 

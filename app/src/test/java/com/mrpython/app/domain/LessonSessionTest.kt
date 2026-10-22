@@ -40,6 +40,17 @@ class LessonSessionTest {
     }
 
     @Test
+    fun lessonCardsComeFirstAndAreShownAgainOnReplay() {
+        val cards = listOf(Explanation("l-c1", "Karta", "Tekst"), Explanation("l-c2", "Karta 2", "Tekst"))
+        val withCards = Lesson("u1l3", "L", cards + (1..5).map { ex("$it") }, practice = (6..20).map { ex("$it") })
+        assertEquals(cards, LessonSession.start(withCards).queue.take(2))
+        val replay = LessonSession.start(withCards, replay = true, random = Random(3))
+        assertEquals(cards, replay.queue.take(2))
+        assertEquals(2 + LessonSession.REPLAY_SIZE, replay.total)
+        assertTrue(replay.queue.drop(2).none { it is Explanation })
+    }
+
+    @Test
     fun wrongAnswerIsRetriedAtTheEnd() {
         var s = LessonSession.start(lesson)
         s = s.afterAnswer(correct = false)

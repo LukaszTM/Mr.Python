@@ -79,8 +79,11 @@ data class Lesson(
 ) {
     val pool: List<Exercise> get() = exercises + practice
 
-    /** A module introduction: starts with theory cards. */
-    val isIntro: Boolean get() = exercises.firstOrNull() is Explanation
+    /** A module introduction ("u<N>l0"): theory cards followed by a few easy checks. */
+    val isIntro: Boolean get() = id.endsWith("l0")
+
+    /** Theory cards shown before the lesson's exercises. */
+    val cards: List<Exercise> get() = exercises.filterIsInstance<Explanation>()
 }
 
 data class CourseUnit(
