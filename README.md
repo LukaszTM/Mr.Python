@@ -4,7 +4,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 
 ## Funkcje
 
-- **Ścieżka nauki** – 6 modułów, 28 lekcji, 213 zadań (od `print()` po funkcje).
+- **Ścieżka nauki** – 11 modułów, 44 lekcje, 365 zadań: od `print()`, przez pętle, listy
+  i funkcje, po napisy, słowniki, zbiory, obsługę błędów i klasy.
   Każdy moduł kończy się lekcją-powtórką.
   Lekcje odblokowują się po kolei, a ścieżka wije się jak w Duolingo.
 - **4 typy zadań**
