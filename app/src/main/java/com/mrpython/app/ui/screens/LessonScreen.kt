@@ -215,6 +215,9 @@ private fun MultipleChoiceBody(
     // Options are shuffled for display; the answer still reports the original index.
     val order = remember(attemptKey) { exercise.options.indices.shuffled() }
     var selected by remember(attemptKey) { mutableStateOf<Int?>(null) }
+    // One font for all options of a question, so e.g. `printf Cześć` does not stand out
+    // among code answers: monospace when most of the options look like code.
+    val codeFont = exercise.options.count(::looksLikeCode) * 2 > exercise.options.size
 
     exercise.code?.let {
         CodeBlock(it)
@@ -240,7 +243,7 @@ private fun MultipleChoiceBody(
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(Modifier.width(14.dp))
-                    if (looksLikeCode(option)) {
+                    if (codeFont) {
                         CodeText(option, fontSize = 16)
                     } else {
                         Text(option, fontSize = 16.sp, color = AppColors.Text)
