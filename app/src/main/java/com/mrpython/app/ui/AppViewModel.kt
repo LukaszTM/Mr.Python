@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-enum class Tab { LEARN, PROFILE }
+enum class Tab { LEARN, LEAGUE, PROFILE }
 
 data class Feedback(
     val correct: Boolean,
@@ -56,7 +56,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _state = MutableStateFlow(
         AppUiState(
-            progress = Rules.refillHearts(repository.load(), System.currentTimeMillis()),
+            progress = Rules.rolloverLeague(
+                Rules.refillHearts(repository.load(), System.currentTimeMillis()),
+                LocalDate.now(),
+            ),
             nowMillis = System.currentTimeMillis(),
             today = LocalDate.now(),
         )
@@ -64,18 +67,22 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     val state: StateFlow<AppUiState> = _state.asStateFlow()
 
     init {
-        // Keeps the heart timer and streak up to date while the app is open.
+        persist()
+        // Keeps the heart timer, streak and league week up to date while the app is open.
         viewModelScope.launch {
             while (true) {
                 delay(1_000)
                 val now = System.currentTimeMillis()
+                val today = LocalDate.now()
+                val before = _state.value.progress
                 _state.update {
                     it.copy(
-                        progress = Rules.refillHearts(it.progress, now),
+                        progress = Rules.rolloverLeague(Rules.refillHearts(it.progress, now), today),
                         nowMillis = now,
-                        today = LocalDate.now(),
+                        today = today,
                     )
                 }
+                if (_state.value.progress.leagueWeekStartEpochDay != before.leagueWeekStartEpochDay) persist()
             }
         }
     }
@@ -92,7 +99,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         _state.update {
-            it.copy(lesson = ActiveLesson(LessonSession.start(lesson), isPractice), result = null)
+            it.copy(lesson = ActiveLesson(LessonSession.start(lesson, replay = isPractice), isPractice), result = null)
         }
     }
 
@@ -152,6 +159,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun dismissResult() = _state.update { it.copy(result = null) }
 
     fun dismissOutOfHearts() = _state.update { it.copy(outOfHearts = false) }
+
+    fun dismissWeekResult() {
+        _state.update { it.copy(progress = it.progress.copy(pendingWeekResult = null)) }
+        persist()
+    }
 
     fun resetProgress() {
         repository.reset()

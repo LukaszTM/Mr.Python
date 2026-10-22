@@ -33,10 +33,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
+import com.mrpython.app.ui.screens.LeagueScreen
 import com.mrpython.app.ui.screens.LessonCompleteScreen
 import com.mrpython.app.ui.screens.LessonScreen
 import com.mrpython.app.ui.screens.OutOfHeartsDialog
 import com.mrpython.app.ui.screens.ProfileScreen
+import com.mrpython.app.ui.screens.WeekResultDialog
 import com.mrpython.app.ui.theme.AppColors
 import com.mrpython.app.ui.theme.MrPythonTheme
 
@@ -79,6 +81,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 Box(Modifier.weight(1f)) {
                     when (state.tab) {
                         Tab.LEARN -> HomeScreen(state, onStartLesson = viewModel::startLesson)
+                        Tab.LEAGUE -> LeagueScreen(state)
                         Tab.PROFILE -> ProfileScreen(state, onReset = viewModel::resetProgress)
                     }
                 }
@@ -89,6 +92,11 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         if (state.outOfHearts) {
             OutOfHeartsDialog(state.progress, state.nowMillis, onDismiss = viewModel::dismissOutOfHearts)
         }
+
+        val weekResult = state.progress.pendingWeekResult
+        if (weekResult != null && lesson == null) {
+            WeekResultDialog(weekResult, onDismiss = viewModel::dismissWeekResult)
+        }
     }
 }
 
@@ -98,6 +106,7 @@ private fun BottomBar(selected: Tab, onSelect: (Tab) -> Unit) {
         HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
         Row(Modifier.fillMaxWidth().padding(8.dp)) {
             BottomBarItem("</>", "Nauka", selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
+            BottomBarItem("#1", "Liga", selected == Tab.LEAGUE, Modifier.weight(1f)) { onSelect(Tab.LEAGUE) }
             BottomBarItem("~/", "Profil", selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
         }
     }

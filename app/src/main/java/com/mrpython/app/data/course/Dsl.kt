@@ -12,6 +12,10 @@ internal typealias ExerciseFactory = (id: String) -> Exercise
 internal fun lesson(id: String, title: String, vararg exercises: ExerciseFactory) =
     Lesson(id, title, exercises.mapIndexed { i, make -> make("$id-e${i + 1}") })
 
+/** Extra practice exercises for the lesson [lessonId]; their ids are "<lessonId>-p<n>". */
+internal fun practice(lessonId: String, vararg exercises: ExerciseFactory): Pair<String, List<Exercise>> =
+    lessonId to exercises.mapIndexed { i, make -> make("$lessonId-p${i + 1}") }
+
 internal fun choice(
     instruction: String,
     options: List<String>,

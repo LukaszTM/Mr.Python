@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
+import com.mrpython.app.domain.Tier
+import com.mrpython.app.domain.WeekResult
 
 /** Stores [Progress] in SharedPreferences. */
 class ProgressRepository(context: Context) {
@@ -19,10 +21,21 @@ class ProgressRepository(context: Context) {
         lastActiveEpochDay = prefs.getLongOrNull(KEY_LAST_ACTIVE),
         xpToday = prefs.getInt(KEY_XP_TODAY, 0),
         xpTodayEpochDay = prefs.getLongOrNull(KEY_XP_TODAY_DAY),
+        leagueTier = Tier.entries.getOrElse(prefs.getInt(KEY_TIER, 0)) { Tier.INTERN },
+        leagueWeekStartEpochDay = prefs.getLongOrNull(KEY_WEEK_START),
+        weekXp = prefs.getInt(KEY_WEEK_XP, 0),
+        pendingWeekResult = if (prefs.contains(KEY_RESULT_RANK)) {
+            WeekResult(
+                rank = prefs.getInt(KEY_RESULT_RANK, 0),
+                promotedTo = Tier.entries.getOrNull(prefs.getInt(KEY_RESULT_TIER, -1)),
+            )
+        } else {
+            null
+        },
     )
 
     fun save(p: Progress) {
-        prefs.edit()
+        val editor = prefs.edit()
             .putStringSet(KEY_COMPLETED, p.completedLessons)
             .putInt(KEY_XP, p.totalXp)
             .putInt(KEY_HEARTS, p.hearts)
@@ -31,7 +44,16 @@ class ProgressRepository(context: Context) {
             .putLongOrRemove(KEY_LAST_ACTIVE, p.lastActiveEpochDay)
             .putInt(KEY_XP_TODAY, p.xpToday)
             .putLongOrRemove(KEY_XP_TODAY_DAY, p.xpTodayEpochDay)
-            .apply()
+            .putInt(KEY_TIER, p.leagueTier.ordinal)
+            .putLongOrRemove(KEY_WEEK_START, p.leagueWeekStartEpochDay)
+            .putInt(KEY_WEEK_XP, p.weekXp)
+        val result = p.pendingWeekResult
+        if (result == null) {
+            editor.remove(KEY_RESULT_RANK).remove(KEY_RESULT_TIER)
+        } else {
+            editor.putInt(KEY_RESULT_RANK, result.rank).putInt(KEY_RESULT_TIER, result.promotedTo?.ordinal ?: -1)
+        }
+        editor.apply()
     }
 
     fun reset() {
@@ -53,5 +75,10 @@ class ProgressRepository(context: Context) {
         const val KEY_LAST_ACTIVE = "last_active_day"
         const val KEY_XP_TODAY = "xp_today"
         const val KEY_XP_TODAY_DAY = "xp_today_day"
+        const val KEY_TIER = "league_tier"
+        const val KEY_WEEK_START = "league_week_start"
+        const val KEY_WEEK_XP = "league_week_xp"
+        const val KEY_RESULT_RANK = "league_result_rank"
+        const val KEY_RESULT_TIER = "league_result_tier"
     }
 }

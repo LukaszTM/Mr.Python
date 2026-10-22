@@ -63,6 +63,7 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
         ) { Text("🐍", fontSize = 56.sp) }
         Spacer(Modifier.height(12.dp))
         Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = AppColors.Text)
+        Text(p.leagueTier.title, color = p.leagueTier.color(), fontWeight = FontWeight.Bold, fontSize = 16.sp)
         Text("import wiedza  # uczę się Pythona", color = AppColors.TextDim, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
         Spacer(Modifier.height(24.dp))
 

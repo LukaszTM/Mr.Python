@@ -12,7 +12,7 @@ import org.junit.Test
 
 class CourseContentTest {
 
-    private val exercises = CourseContent.allLessons.flatMap { it.exercises }
+    private val exercises = CourseContent.allLessons.flatMap { it.pool }
 
     @Test
     fun idsAreUnique() {

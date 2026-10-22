@@ -53,11 +53,18 @@ data class PredictOutput(
     override val explanation: String,
 ) : Exercise
 
+/**
+ * [exercises] are the core exercises shown, in order, the first time the lesson is taken.
+ * [practice] holds extra exercises on the same topic; replays draw from both.
+ */
 data class Lesson(
     val id: String,
     val title: String,
     val exercises: List<Exercise>,
-)
+    val practice: List<Exercise> = emptyList(),
+) {
+    val pool: List<Exercise> get() = exercises + practice
+}
 
 data class CourseUnit(
     val id: String,

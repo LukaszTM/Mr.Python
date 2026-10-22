@@ -13,6 +13,12 @@ data class Progress(
     val lastActiveEpochDay: Long? = null,
     val xpToday: Int = 0,
     val xpTodayEpochDay: Long? = null,
+    val leagueTier: Tier = Tier.INTERN,
+    /** Monday of the league week that [weekXp] belongs to. */
+    val leagueWeekStartEpochDay: Long? = null,
+    val weekXp: Int = 0,
+    /** Result of the last finished week, until the learner has seen it. */
+    val pendingWeekResult: WeekResult? = null,
 )
 
 object Rules {
@@ -73,6 +79,26 @@ object Rules {
         else -> XP_PER_LESSON
     }
 
+    /**
+     * Closes the league week once a new one has started: the top
+     * [League.PROMOTION_SLOTS] of the finished week move one tier up.
+     * Weeks without any XP don't count and show no result.
+     */
+    fun rolloverLeague(p: Progress, today: LocalDate): Progress {
+        val currentWeek = League.weekStart(today)
+        val storedDay = p.leagueWeekStartEpochDay
+            ?: return p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (storedDay >= currentWeek.toEpochDay()) return p
+        val fresh = p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (p.weekXp <= 0) return fresh
+        val rank = League.finalRank(LocalDate.ofEpochDay(storedDay), p.leagueTier, p.weekXp)
+        val promotedTo = if (rank <= League.PROMOTION_SLOTS) p.leagueTier.next else null
+        return fresh.copy(
+            leagueTier = promotedTo ?: p.leagueTier,
+            pendingWeekResult = WeekResult(rank, promotedTo),
+        )
+    }
+
     fun completeLesson(
         p: Progress,
         lessonId: String,
@@ -87,9 +113,11 @@ object Rules {
             day - 1 -> p.streak + 1
             else -> 1
         }
-        val updated = p.copy(
+        val league = rolloverLeague(p, today)
+        val updated = league.copy(
             completedLessons = p.completedLessons + lessonId,
             totalXp = p.totalXp + xp,
+            weekXp = league.weekXp + xp,
             streak = streak,
             lastActiveEpochDay = day,
             xpToday = visibleXpToday(p, today) + xp,
