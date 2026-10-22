@@ -3,6 +3,7 @@ package com.mrpython.app.data
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
 import com.mrpython.app.domain.ArrangeTiles
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.MultipleChoice
 import com.mrpython.app.domain.PredictOutput
@@ -41,6 +42,7 @@ class CourseContentTest {
                     assertTrue(e.id, e.tiles.size > e.solution.size)
                 }
                 is PredictOutput -> assertTrue(e.id, e.accepted.isNotEmpty())
+                is Explanation -> assertTrue(e.id, e.text.isNotBlank())
             }
         }
     }
@@ -53,6 +55,7 @@ class CourseContentTest {
                 is FillInBlank -> Answer.Choice(e.options.indexOf(e.correct))
                 is ArrangeTiles -> Answer.Tiles(e.solution)
                 is PredictOutput -> Answer.Text(AnswerChecker.correctAnswerText(e))
+                is Explanation -> Answer.Seen
             }
             assertTrue(e.id, AnswerChecker.isCorrect(e, answer))
         }

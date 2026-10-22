@@ -40,7 +40,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -49,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.ArrangeTiles
 import com.mrpython.app.domain.Exercise
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.MultipleChoice
 import com.mrpython.app.domain.PredictOutput
@@ -125,7 +129,11 @@ fun LessonScreen(
         ) {
             // Wrongly answered exercises are appended to the queue, so after the first
             // pass through the lesson everything left is a retry.
-            val label = if (session.solved + session.mistakes >= session.total) "# poprawka" else "# zadanie"
+            val label = when {
+                exercise is Explanation -> "# teoria"
+                session.solved + session.mistakes >= session.total -> "# poprawka"
+                else -> "# zadanie"
+            }
             Text(
                 label,
                 color = if (label == "# poprawka") AppColors.Streak else AppColors.TextFaint,
@@ -153,11 +161,15 @@ fun LessonScreen(
         if (feedback == null) {
             HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
             Box(Modifier.padding(16.dp)) {
-                PrimaryButton(
-                    text = "▶  Sprawdź",
-                    onClick = { pending?.let(onSubmit) },
-                    enabled = pending != null,
-                )
+                if (exercise is Explanation) {
+                    PrimaryButton(text = "Dalej  →", onClick = { onSubmit(Answer.Seen) })
+                } else {
+                    PrimaryButton(
+                        text = "▶  Sprawdź",
+                        onClick = { pending?.let(onSubmit) },
+                        enabled = pending != null,
+                    )
+                }
             }
         }
         AnimatedVisibility(visible = feedback != null, enter = slideInVertically { it }) {
@@ -199,6 +211,45 @@ private fun ExerciseBody(
         is FillInBlank -> FillInBlankBody(exercise, attemptKey, enabled, onAnswerChange)
         is ArrangeTiles -> ArrangeTilesBody(exercise, attemptKey, enabled, onAnswerChange)
         is PredictOutput -> PredictOutputBody(exercise, attemptKey, enabled, onAnswerChange)
+        is Explanation -> ExplanationBody(exercise)
+    }
+}
+
+/** `backticks` in theory text are shown as inline code. */
+private fun inlineCode(text: String) = buildAnnotatedString {
+    text.split('`').forEachIndexed { i, part ->
+        if (i % 2 == 1) {
+            withStyle(SpanStyle(fontFamily = FontFamily.Monospace, color = AppColors.Yellow, background = AppColors.CodeBackground)) {
+                append(part)
+            }
+        } else {
+            append(part)
+        }
+    }
+}
+
+@Composable
+private fun ExplanationBody(card: Explanation) {
+    Text(inlineCode(card.text), color = AppColors.Text, fontSize = 17.sp, lineHeight = 26.sp)
+    card.code?.let {
+        Spacer(Modifier.height(20.dp))
+        CodeBlock(it)
+    }
+    card.output?.let {
+        Spacer(Modifier.height(12.dp))
+        val shape = RoundedCornerShape(12.dp)
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clip(shape)
+                .background(AppColors.CodeBackground)
+                .border(1.dp, AppColors.Border, shape)
+                .padding(14.dp)
+        ) {
+            Text("$ python main.py", color = AppColors.TextFaint, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
+            Spacer(Modifier.height(6.dp))
+            CodeText(it, color = AppColors.Success, fontSize = 15)
+        }
     }
 }
 

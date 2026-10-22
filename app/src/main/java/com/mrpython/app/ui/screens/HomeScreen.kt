@@ -332,9 +332,11 @@ private fun LessonCard(
     ) {
         Column(Modifier.weight(1f)) {
             Text(lesson.title, color = AppColors.Text, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
-            val subtitle = when (status) {
-                LessonStatus.DONE -> "ukończona · powtórka +${Rules.XP_PRACTICE} XP"
-                LessonStatus.LOCKED -> "zablokowana"
+            val subtitle = when {
+                lesson.isIntro && status == LessonStatus.LOCKED -> "📖 wprowadzenie · zablokowane"
+                lesson.isIntro -> "📖 wprowadzenie · teoria i przykłady"
+                status == LessonStatus.DONE -> "ukończona · powtórka +${Rules.XP_PRACTICE} XP"
+                status == LessonStatus.LOCKED -> "zablokowana"
                 else -> "${lesson.exercises.size} zadań · +${Rules.XP_PER_LESSON} XP"
             }
             Text(subtitle, color = AppColors.TextDim, fontSize = 13.sp, fontFamily = FontFamily.Monospace)
@@ -387,6 +389,8 @@ private fun LessonDialog(
             Spacer(Modifier.height(10.dp))
             val description = when {
                 !isUnlocked -> "Ukończ poprzednie lekcje, aby odblokować tę."
+                lesson.isIntro -> "Krótkie wprowadzenie do modułu: teoria, przykłady kodu i kilka " +
+                    "pytań na rozgrzewkę. Możesz do niego wracać w każdej chwili."
                 isDone -> "Powtórka: ${lesson.exercises.size} zadań. Nie tracisz serc, " +
                     "a za ukończenie odzyskasz jedno ♥."
                 else -> "${lesson.exercises.size} zadań. Uważaj – każdy błąd kosztuje jedno ♥."

@@ -32,6 +32,14 @@ class LessonSessionTest {
     }
 
     @Test
+    fun introIsAlwaysReadInOrder() {
+        val cards = (1..4).map { Explanation("c$it", "Karta $it", "Tekst") }
+        val intro = Lesson("u1l0", "Wprowadzenie", cards + ex("q"))
+        assertTrue(intro.isIntro)
+        assertEquals(intro.exercises, LessonSession.start(intro, replay = true, random = Random(7)).queue)
+    }
+
+    @Test
     fun wrongAnswerIsRetriedAtTheEnd() {
         var s = LessonSession.start(lesson)
         s = s.afterAnswer(correct = false)

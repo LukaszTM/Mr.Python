@@ -7,6 +7,7 @@ import com.mrpython.app.data.CourseContent
 import com.mrpython.app.data.ProgressRepository
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
@@ -107,6 +108,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val active = _state.value.lesson ?: return
         if (active.feedback != null) return
         val exercise = active.session.current ?: return
+        if (exercise is Explanation) {
+            // Theory cards have no right or wrong answer: just move on.
+            advance(active, active.session.afterAnswer(correct = true))
+            return
+        }
         val correct = AnswerChecker.isCorrect(exercise, answer)
         val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation)
         _state.update {
@@ -124,10 +130,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         val active = s.lesson ?: return
         val feedback = active.feedback ?: return
-        val session = active.session.afterAnswer(feedback.correct)
+        advance(active, active.session.afterAnswer(feedback.correct))
+    }
 
+    private fun advance(active: ActiveLesson, session: LessonSession) {
         when {
-            !active.isPractice && s.progress.hearts <= 0 -> _state.update {
+            !active.isPractice && _state.value.progress.hearts <= 0 -> _state.update {
                 it.copy(lesson = null, outOfHearts = true)
             }
             session.isFinished -> finishLesson(session, active.isPractice)

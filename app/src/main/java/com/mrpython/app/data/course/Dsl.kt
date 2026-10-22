@@ -2,6 +2,7 @@ package com.mrpython.app.data.course
 
 import com.mrpython.app.domain.ArrangeTiles
 import com.mrpython.app.domain.Exercise
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.Lesson
 import com.mrpython.app.domain.MultipleChoice
@@ -15,6 +16,14 @@ internal fun lesson(id: String, title: String, vararg exercises: ExerciseFactory
 /** Extra practice exercises for the lesson [lessonId]; their ids are "<lessonId>-p<n>". */
 internal fun practice(lessonId: String, vararg exercises: ExerciseFactory): Pair<String, List<Exercise>> =
     lessonId to exercises.mapIndexed { i, make -> make("$lessonId-p${i + 1}") }
+
+/** A theory card for a module introduction. */
+internal fun explain(
+    title: String,
+    text: String,
+    code: String? = null,
+    output: String? = null,
+): ExerciseFactory = { id -> Explanation(id, title, text, code, output) }
 
 internal fun choice(
     instruction: String,
