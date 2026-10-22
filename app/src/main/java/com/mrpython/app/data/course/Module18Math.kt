@@ -1,0 +1,231 @@
+package com.mrpython.app.data.course
+
+import com.mrpython.app.domain.CourseUnit
+
+internal val module18 = CourseUnit(
+    id = "u18",
+    title = "Moduł math i import",
+    description = "import, from … import, as i funkcje matematyczne",
+    lessons = listOf(
+        lesson(
+            "u18l1", "Instrukcja import",
+            output("import math\nprint(math.sqrt(16))", "4.0", "math.sqrt liczy pierwiastek i zwraca liczbę float."),
+            choice(
+                "Co robi instrukcja import math?",
+                listOf(
+                    "Wczytuje moduł math, by używać jego funkcji",
+                    "Tworzy nową zmienną liczbową",
+                    "Instaluje Pythona od nowa",
+                    "Wypisuje wszystkie funkcje math",
+                ),
+                0,
+                "Po imporcie funkcje modułu są dostępne jako math.nazwa.",
+            ),
+            fill(
+                "Uzupełnij, aby zaimportować moduł math.",
+                "____ math\nprint(math.floor(2.5))",
+                listOf("import", "include", "using"),
+                "import",
+                "W Pythonie moduły wczytujemy słowem import.",
+            ),
+            output("import math\nprint(math.floor(7.9))", "7", "floor zaokrągla w dół do liczby całkowitej."),
+            choice(
+                "Co się stanie po uruchomieniu tego kodu?",
+                listOf("NameError – trzeba napisać math.sqrt", "Wypisze 3.0", "Wypisze 3", "SyntaxError"),
+                0,
+                "Po import math funkcje wywołujemy z przedrostkiem math.",
+                code = "import math\nprint(sqrt(9))",
+            ),
+            tiles(
+                "Wypisz pierwiastek z 25 (moduł math jest już zaimportowany).",
+                listOf("print(", "math.sqrt(", "25", "))"),
+                listOf("sqrt.math(", "import"),
+                "Najpierw nazwa modułu, potem kropka i nazwa funkcji.",
+            ),
+            output("import math\nx = math.ceil(4.1)\nprint(x + 1)", "6", "ceil zaokrągla w górę: 4.1 → 5, a 5 + 1 = 6."),
+            output("import math\nprint(math.pi > 3)", "True", "math.pi to około 3.14159, więc jest większe od 3."),
+        ),
+        lesson(
+            "u18l2", "from … import i as",
+            output("from math import sqrt\nprint(sqrt(49))", "7.0", "Po from math import sqrt piszemy samo sqrt."),
+            choice(
+                "Jak wywołasz funkcję po from math import floor?",
+                listOf("floor(2.5)", "math.floor(2.5)", "import.floor(2.5)", "from.floor(2.5)"),
+                0,
+                "from … import wczytuje samą nazwę – bez przedrostka math.",
+            ),
+            fill(
+                "Uzupełnij, aby zaimportować tylko funkcję ceil.",
+                "____ math import ceil\nprint(ceil(1.2))",
+                listOf("from", "import", "in"),
+                "from",
+                "Składnia to from moduł import nazwa.",
+            ),
+            output("import math as m\nprint(m.floor(3.99))", "3", "as nadaje modułowi krótszą nazwę m."),
+            fill(
+                "Uzupełnij, aby nadać modułowi krótszą nazwę m.",
+                "import math ____ m\nprint(m.ceil(2.1))",
+                listOf("as", "is", "to"),
+                "as",
+                "import moduł as skrót tworzy alias.",
+            ),
+            output(
+                "from math import pi, sqrt\nprint(round(pi, 2))\nprint(sqrt(4))",
+                "3.14\n2.0",
+                "Można zaimportować kilka nazw naraz, oddzielając je przecinkami.",
+            ),
+            tiles(
+                "Zaimportuj z modułu math funkcje sqrt i floor.",
+                listOf("from", "math", "import", "sqrt,", "floor"),
+                listOf("as", "include"),
+                "Po import wymieniamy nazwy oddzielone przecinkami.",
+            ),
+            choice(
+                "Co się stanie po uruchomieniu tego kodu?",
+                listOf("NameError – dostępna jest tylko nazwa m", "Wypisze 3.141592653589793", "Wypisze m", "SyntaxError"),
+                0,
+                "Po import math as m moduł jest widoczny tylko pod nazwą m.",
+                code = "import math as m\nprint(math.pi)",
+            ),
+        ),
+        lesson(
+            "u18l3", "Funkcje modułu math",
+            output("import math\nprint(math.floor(2.7))\nprint(math.ceil(2.1))", "2\n3", "floor zaokrągla w dół, ceil w górę."),
+            output("import math\nprint(math.pow(2, 3))", "8.0", "math.pow zawsze zwraca liczbę float."),
+            output("import math\nprint(math.gcd(12, 18))", "6", "gcd to największy wspólny dzielnik – dla 12 i 18 jest to 6."),
+            choice(
+                "Co zwraca math.ceil(5.0)?",
+                listOf("5", "6", "5.5", "4"),
+                0,
+                "5.0 jest już całkowite, więc ceil zwraca 5.",
+            ),
+            output(
+                "import math\nprint(0.1 + 0.2 == 0.3)\nprint(math.isclose(0.1 + 0.2, 0.3))",
+                "False\nTrue",
+                "Liczby float mają drobne błędy zaokrągleń – isclose porównuje je z tolerancją.",
+            ),
+            fill(
+                "Uzupełnij, aby zaokrąglić 4.2 w górę do 5.",
+                "import math\nprint(math.____(4.2))",
+                listOf("ceil", "floor", "sqrt"),
+                "ceil",
+                "ceil (sufit) zaokrągla w górę.",
+            ),
+            choice(
+                "Co zwraca math.floor(-2.5)?",
+                listOf("-3", "-2", "-2.5", "2"),
+                0,
+                "floor zaokrągla w dół, czyli w stronę mniejszych liczb: do -3.",
+            ),
+            output(
+                "import math\nr = 2\npole = math.pi * r ** 2\nprint(round(pole, 1))",
+                "12.6",
+                "Pole koła to π·r², czyli około 12.566.",
+            ),
+        ),
+        lesson(
+            "u18l4", "Czym jest moduł",
+            choice(
+                "Czym jest moduł w Pythonie?",
+                listOf(
+                    "Plikiem .py z kodem, który można zaimportować",
+                    "Rodzajem pętli",
+                    "Typem liczby",
+                    "Komentarzem w kodzie",
+                ),
+                0,
+                "Każdy plik .py jest modułem, który inne pliki mogą zaimportować.",
+            ),
+            choice(
+                "Masz plik pomocnik.py z funkcją witaj(). Jak ją zaimportować w pliku obok?",
+                listOf(
+                    "from pomocnik import witaj",
+                    "import witaj from pomocnik",
+                    "from pomocnik.py import witaj",
+                    "include pomocnik",
+                ),
+                0,
+                "Nazwa modułu to nazwa pliku bez końcówki .py.",
+            ),
+            tiles(
+                "Zaimportuj moduł math pod nazwą m.",
+                listOf("import", "math", "as", "m"),
+                listOf("from", "is"),
+                "import moduł as alias.",
+            ),
+            output("import math\nprint(type(math.pi))", "<class 'float'>", "math.pi to zwykła stała typu float."),
+            choice(
+                "Dlaczego warto dzielić program na moduły?",
+                listOf(
+                    "Kod jest uporządkowany i można go używać ponownie",
+                    "Program zawsze działa szybciej",
+                    "Moduły same usuwają błędy",
+                    "Python tego wymaga",
+                ),
+                0,
+                "Moduły porządkują kod i pozwalają używać go w wielu miejscach.",
+            ),
+            choice(
+                "Co oznacza from math import *?",
+                listOf(
+                    "Importuje wszystkie publiczne nazwy z math",
+                    "Mnoży moduł math",
+                    "Importuje tylko pi",
+                    "To błąd składni",
+                ),
+                0,
+                "Gwiazdka importuje wszystko, ale łatwo wtedy o konflikt nazw – lepiej jej unikać.",
+            ),
+            output(
+                "import math\nimport math\nprint(math.gcd(8, 12))",
+                "4",
+                "Drugi import tego samego modułu nic nie zmienia – moduł wczytuje się raz.",
+            ),
+            choice(
+                "Co się stanie po import matematyka, jeśli taki moduł nie istnieje?",
+                listOf("ModuleNotFoundError", "NameError", "Nic się nie stanie", "ValueError"),
+                0,
+                "Gdy Python nie znajdzie modułu, zgłasza ModuleNotFoundError.",
+            ),
+        ),
+        lesson(
+            "u18l5", "Powtórka: math i import",
+            output("from math import floor, ceil\nx = 3.5\nprint(floor(x) + ceil(x))", "7", "floor(3.5) to 3, ceil(3.5) to 4."),
+            output("import math as m\nprint(m.sqrt(81) + 1)", "10.0", "sqrt zwraca float 9.0, więc wynik to 10.0."),
+            fill(
+                "Uzupełnij, aby obliczyć NWD liczb 20 i 8.",
+                "import math\nprint(math.____(20, 8))",
+                listOf("gcd", "pow", "floor"),
+                "gcd",
+                "gcd to największy wspólny dzielnik.",
+            ),
+            choice(
+                "Który zapis pozwala pisać sqrt(2) bez przedrostka?",
+                listOf("from math import sqrt", "import math", "import math as sqrt", "import sqrt"),
+                0,
+                "from … import wczytuje nazwę bezpośrednio.",
+            ),
+            output(
+                "import math\nboki = [3, 4]\nc = math.sqrt(boki[0]**2 + boki[1]**2)\nprint(c)",
+                "5.0",
+                "Z twierdzenia Pitagorasa: √(9 + 16) = 5.",
+            ),
+            tiles(
+                "Zaokrąglij 9.8 w dół (masz już from math import floor).",
+                listOf("print(", "floor(", "9.8", "))"),
+                listOf("ceil(", "round("),
+                "floor zaokrągla w dół – wynik to 9.",
+            ),
+            output(
+                "import math\nprint(math.isclose(1.0, 1.0000000001))",
+                "True",
+                "Różnica jest tak mała, że isclose uznaje liczby za równe.",
+            ),
+            output(
+                "import math\nliczby = [1.2, 2.7, 3.5]\nprint([math.ceil(x) for x in liczby])",
+                "[2, 3, 4]",
+                "ceil zaokrągla każdą liczbę w górę.",
+            ),
+        ),
+    ),
+)

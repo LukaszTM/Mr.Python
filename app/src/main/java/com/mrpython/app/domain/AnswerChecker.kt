@@ -10,6 +10,7 @@ object AnswerChecker {
             (listOf(exercise.solution) + exercise.alternatives).any { it == answer.tiles }
         is PredictOutput -> answer is Answer.Text &&
             exercise.accepted.any { normalizeOutput(it) == normalizeOutput(answer.value) }
+        is Explanation -> true
     }
 
     /** The answer shown to the learner after a mistake. */
@@ -18,6 +19,7 @@ object AnswerChecker {
         is FillInBlank -> exercise.correct
         is ArrangeTiles -> exercise.solution.joinToString(" ")
         is PredictOutput -> exercise.accepted.first()
+        is Explanation -> ""
     }
 
     /**

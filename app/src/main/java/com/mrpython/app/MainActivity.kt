@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,20 +33,22 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
+import com.mrpython.app.ui.screens.LeagueScreen
 import com.mrpython.app.ui.screens.LessonCompleteScreen
 import com.mrpython.app.ui.screens.LessonScreen
 import com.mrpython.app.ui.screens.OutOfHeartsDialog
 import com.mrpython.app.ui.screens.ProfileScreen
+import com.mrpython.app.ui.screens.WeekResultDialog
 import com.mrpython.app.ui.theme.AppColors
 import com.mrpython.app.ui.theme.MrPythonTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val white = Color.White.toArgb()
+        val background = AppColors.Background.toArgb()
         enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(white, white),
-            navigationBarStyle = SystemBarStyle.light(white, white),
+            statusBarStyle = SystemBarStyle.dark(background),
+            navigationBarStyle = SystemBarStyle.dark(background),
         )
         setContent {
             MrPythonTheme { MrPythonApp() }
@@ -60,7 +63,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
     Box(
         Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(AppColors.Background)
             .safeDrawingPadding()
     ) {
         val lesson = state.lesson
@@ -78,6 +81,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 Box(Modifier.weight(1f)) {
                     when (state.tab) {
                         Tab.LEARN -> HomeScreen(state, onStartLesson = viewModel::startLesson)
+                        Tab.LEAGUE -> LeagueScreen(state)
                         Tab.PROFILE -> ProfileScreen(state, onReset = viewModel::resetProgress)
                     }
                 }
@@ -88,16 +92,22 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         if (state.outOfHearts) {
             OutOfHeartsDialog(state.progress, state.nowMillis, onDismiss = viewModel::dismissOutOfHearts)
         }
+
+        val weekResult = state.progress.pendingWeekResult
+        if (weekResult != null && lesson == null) {
+            WeekResultDialog(weekResult, onDismiss = viewModel::dismissWeekResult)
+        }
     }
 }
 
 @Composable
 private fun BottomBar(selected: Tab, onSelect: (Tab) -> Unit) {
     Column {
-        HorizontalDivider(color = AppColors.Gray, thickness = 2.dp)
+        HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
         Row(Modifier.fillMaxWidth().padding(8.dp)) {
-            BottomBarItem("🏠", "Nauka", selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
-            BottomBarItem("👤", "Profil", selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
+            BottomBarItem("</>", "Nauka", selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
+            BottomBarItem("#1", "Liga", selected == Tab.LEAGUE, Modifier.weight(1f)) { onSelect(Tab.LEAGUE) }
+            BottomBarItem("~/", "Profil", selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
         }
     }
 }
@@ -107,17 +117,13 @@ private fun BottomBarItem(icon: String, label: String, active: Boolean, modifier
     Column(
         modifier
             .clip(RoundedCornerShape(12.dp))
-            .background(if (active) AppColors.BlueLight else Color.Transparent)
+            .background(if (active) AppColors.Surface else Color.Transparent)
             .clickable(onClick = onClick)
             .padding(vertical = 6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(icon, fontSize = 22.sp)
-        Text(
-            label,
-            color = if (active) AppColors.Blue else AppColors.GrayDark,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 12.sp,
-        )
+        val color = if (active) AppColors.Yellow else AppColors.TextFaint
+        Text(icon, fontSize = 18.sp, color = color, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold)
+        Text(label, color = color, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
     }
 }

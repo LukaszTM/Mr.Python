@@ -3,6 +3,7 @@ package com.mrpython.app.data
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
 import com.mrpython.app.domain.ArrangeTiles
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.MultipleChoice
 import com.mrpython.app.domain.PredictOutput
@@ -12,13 +13,23 @@ import org.junit.Test
 
 class CourseContentTest {
 
-    private val exercises = CourseContent.allLessons.flatMap { it.exercises }
+    private val exercises = CourseContent.allLessons.flatMap { it.pool }
 
     @Test
     fun idsAreUnique() {
         assertEquals(CourseContent.units.size, CourseContent.units.map { it.id }.toSet().size)
         assertEquals(CourseContent.allLessons.size, CourseContent.allLessons.map { it.id }.toSet().size)
         assertEquals(exercises.size, exercises.map { it.id }.toSet().size)
+    }
+
+    @Test
+    fun everyModuleStartsWithAnIntroduction() {
+        CourseContent.units.forEach { unit ->
+            val first = unit.lessons.first()
+            assertEquals(unit.id, unit.id + "l0", first.id)
+            assertTrue(unit.id, first.isIntro)
+            assertTrue(unit.id, unit.lessons.drop(1).none { it.isIntro })
+        }
     }
 
     @Test
@@ -41,6 +52,7 @@ class CourseContentTest {
                     assertTrue(e.id, e.tiles.size > e.solution.size)
                 }
                 is PredictOutput -> assertTrue(e.id, e.accepted.isNotEmpty())
+                is Explanation -> assertTrue(e.id, e.text.isNotBlank())
             }
         }
     }
@@ -53,6 +65,7 @@ class CourseContentTest {
                 is FillInBlank -> Answer.Choice(e.options.indexOf(e.correct))
                 is ArrangeTiles -> Answer.Tiles(e.solution)
                 is PredictOutput -> Answer.Text(AnswerChecker.correctAnswerText(e))
+                is Explanation -> Answer.Seen
             }
             assertTrue(e.id, AnswerChecker.isCorrect(e, answer))
         }

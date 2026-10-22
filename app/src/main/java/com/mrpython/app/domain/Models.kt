@@ -53,11 +53,38 @@ data class PredictOutput(
     override val explanation: String,
 ) : Exercise
 
+/**
+ * A theory card from a module introduction: nothing to answer, the learner reads it
+ * and taps "Dalej". [instruction] is the card title; [code] and its [output] are optional.
+ */
+data class Explanation(
+    override val id: String,
+    override val instruction: String,
+    val text: String,
+    val code: String? = null,
+    val output: String? = null,
+) : Exercise {
+    override val explanation: String get() = ""
+}
+
+/**
+ * [exercises] are the core exercises shown, in order, the first time the lesson is taken.
+ * [practice] holds extra exercises on the same topic; replays draw from both.
+ */
 data class Lesson(
     val id: String,
     val title: String,
     val exercises: List<Exercise>,
-)
+    val practice: List<Exercise> = emptyList(),
+) {
+    val pool: List<Exercise> get() = exercises + practice
+
+    /** A module introduction ("u<N>l0"): theory cards followed by a few easy checks. */
+    val isIntro: Boolean get() = id.endsWith("l0")
+
+    /** Theory cards shown before the lesson's exercises. */
+    val cards: List<Exercise> get() = exercises.filterIsInstance<Explanation>()
+}
 
 data class CourseUnit(
     val id: String,
@@ -71,4 +98,7 @@ sealed interface Answer {
     data class Choice(val index: Int) : Answer
     data class Text(val value: String) : Answer
     data class Tiles(val tiles: List<String>) : Answer
+
+    /** A theory card was read. */
+    data object Seen : Answer
 }

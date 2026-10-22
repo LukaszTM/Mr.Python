@@ -47,6 +47,13 @@ class AnswerCheckerTest {
     }
 
     @Test
+    fun theoryCardIsAlwaysAccepted() {
+        val card = Explanation("x", "Tytuł", "Tekst", code = "print(1)", output = "1")
+        assertTrue(AnswerChecker.isCorrect(card, Answer.Seen))
+        assertEquals("", card.explanation)
+    }
+
+    @Test
     fun correctAnswerText() {
         assertEquals("b", AnswerChecker.correctAnswerText(choice))
         assertEquals("x = 1", AnswerChecker.correctAnswerText(tiles))

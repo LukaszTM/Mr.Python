@@ -13,6 +13,12 @@ data class Progress(
     val lastActiveEpochDay: Long? = null,
     val xpToday: Int = 0,
     val xpTodayEpochDay: Long? = null,
+    val leagueTier: Tier = Tier.INTERN,
+    /** Monday of the league week that [weekXp] belongs to. */
+    val leagueWeekStartEpochDay: Long? = null,
+    val weekXp: Int = 0,
+    /** Result of the last finished week, until the learner has seen it. */
+    val pendingWeekResult: WeekResult? = null,
 )
 
 object Rules {
@@ -73,6 +79,26 @@ object Rules {
         else -> XP_PER_LESSON
     }
 
+    /**
+     * Closes the league week once a new one has started: the top
+     * [League.PROMOTION_SLOTS] of the finished week move one tier up.
+     * Weeks without any XP don't count and show no result.
+     */
+    fun rolloverLeague(p: Progress, today: LocalDate): Progress {
+        val currentWeek = League.weekStart(today)
+        val storedDay = p.leagueWeekStartEpochDay
+            ?: return p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (storedDay >= currentWeek.toEpochDay()) return p
+        val fresh = p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (p.weekXp <= 0) return fresh
+        val rank = League.finalRank(LocalDate.ofEpochDay(storedDay), p.leagueTier, p.weekXp)
+        val promotedTo = if (rank <= League.PROMOTION_SLOTS) p.leagueTier.next else null
+        return fresh.copy(
+            leagueTier = promotedTo ?: p.leagueTier,
+            pendingWeekResult = WeekResult(rank, promotedTo),
+        )
+    }
+
     fun completeLesson(
         p: Progress,
         lessonId: String,
@@ -87,9 +113,11 @@ object Rules {
             day - 1 -> p.streak + 1
             else -> 1
         }
-        val updated = p.copy(
+        val league = rolloverLeague(p, today)
+        val updated = league.copy(
             completedLessons = p.completedLessons + lessonId,
             totalXp = p.totalXp + xp,
+            weekXp = league.weekXp + xp,
             streak = streak,
             lastActiveEpochDay = day,
             xpToday = visibleXpToday(p, today) + xp,
@@ -99,12 +127,15 @@ object Rules {
         return if (isPractice) gainHeart(updated) else updated
     }
 
-    /** Lessons unlock in order: the next one opens once the previous one is done. */
+    /**
+     * Lessons unlock in order: the next one opens once the previous one is done.
+     * A finished lesson stays open even if new lessons were added before it.
+     */
     fun isUnlocked(course: List<CourseUnit>, lessonId: String, completed: Set<String>): Boolean {
         val ordered = course.flatMap { it.lessons }
         val index = ordered.indexOfFirst { it.id == lessonId }
         if (index < 0) return false
-        return index == 0 || ordered[index - 1].id in completed
+        return index == 0 || lessonId in completed || ordered[index - 1].id in completed
     }
 
     /** The first lesson that is unlocked but not finished yet, if any. */

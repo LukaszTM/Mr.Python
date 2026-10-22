@@ -7,6 +7,7 @@ import com.mrpython.app.data.CourseContent
 import com.mrpython.app.data.ProgressRepository
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
@@ -18,7 +19,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-enum class Tab { LEARN, PROFILE }
+enum class Tab { LEARN, LEAGUE, PROFILE }
 
 data class Feedback(
     val correct: Boolean,
@@ -38,6 +39,8 @@ data class LessonResult(
     val accuracyPercent: Int,
     val streak: Int,
     val isPractice: Boolean,
+    /** A replay gave a heart back (only when hearts weren't already full). */
+    val heartRestored: Boolean = false,
 )
 
 data class AppUiState(
@@ -56,7 +59,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _state = MutableStateFlow(
         AppUiState(
-            progress = Rules.refillHearts(repository.load(), System.currentTimeMillis()),
+            progress = Rules.rolloverLeague(
+                Rules.refillHearts(repository.load(), System.currentTimeMillis()),
+                LocalDate.now(),
+            ),
             nowMillis = System.currentTimeMillis(),
             today = LocalDate.now(),
         )
@@ -64,18 +70,22 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     val state: StateFlow<AppUiState> = _state.asStateFlow()
 
     init {
-        // Keeps the heart timer and streak up to date while the app is open.
+        persist()
+        // Keeps the heart timer, streak and league week up to date while the app is open.
         viewModelScope.launch {
             while (true) {
                 delay(1_000)
                 val now = System.currentTimeMillis()
+                val today = LocalDate.now()
+                val before = _state.value.progress
                 _state.update {
                     it.copy(
-                        progress = Rules.refillHearts(it.progress, now),
+                        progress = Rules.rolloverLeague(Rules.refillHearts(it.progress, now), today),
                         nowMillis = now,
-                        today = LocalDate.now(),
+                        today = today,
                     )
                 }
+                if (_state.value.progress.leagueWeekStartEpochDay != before.leagueWeekStartEpochDay) persist()
             }
         }
     }
@@ -92,7 +102,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         _state.update {
-            it.copy(lesson = ActiveLesson(LessonSession.start(lesson), isPractice), result = null)
+            it.copy(lesson = ActiveLesson(LessonSession.start(lesson, replay = isPractice), isPractice), result = null)
         }
     }
 
@@ -100,6 +110,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val active = _state.value.lesson ?: return
         if (active.feedback != null) return
         val exercise = active.session.current ?: return
+        if (exercise is Explanation) {
+            // Theory cards have no right or wrong answer: just move on.
+            advance(active, active.session.afterAnswer(correct = true))
+            return
+        }
         val correct = AnswerChecker.isCorrect(exercise, answer)
         val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation)
         _state.update {
@@ -117,10 +132,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         val active = s.lesson ?: return
         val feedback = active.feedback ?: return
-        val session = active.session.afterAnswer(feedback.correct)
+        advance(active, active.session.afterAnswer(feedback.correct))
+    }
 
+    private fun advance(active: ActiveLesson, session: LessonSession) {
         when {
-            !active.isPractice && s.progress.hearts <= 0 -> _state.update {
+            !active.isPractice && _state.value.progress.hearts <= 0 -> _state.update {
                 it.copy(lesson = null, outOfHearts = true)
             }
             session.isFinished -> finishLesson(session, active.isPractice)
@@ -141,6 +158,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     accuracyPercent = if (attempts == 0) 100 else session.total * 100 / attempts,
                     streak = progress.streak,
                     isPractice = isPractice,
+                    heartRestored = progress.hearts > it.progress.hearts,
                 ),
             )
         }
@@ -152,6 +170,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun dismissResult() = _state.update { it.copy(result = null) }
 
     fun dismissOutOfHearts() = _state.update { it.copy(outOfHearts = false) }
+
+    fun dismissWeekResult() {
+        _state.update { it.copy(progress = it.progress.copy(pendingWeekResult = null)) }
+        persist()
+    }
 
     fun resetProgress() {
         repository.reset()
