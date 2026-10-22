@@ -1,7 +1,6 @@
 package com.mrpython.app.data
 
 import com.mrpython.app.data.course.module1
-import com.mrpython.app.data.course.module1Cards
 import com.mrpython.app.data.course.module2
 import com.mrpython.app.data.course.module3
 import com.mrpython.app.data.course.module4
@@ -220,6 +219,78 @@ import com.mrpython.app.data.course.module70Intro
 import com.mrpython.app.data.course.module71Intro
 import com.mrpython.app.data.course.module72Intro
 import com.mrpython.app.data.course.module73Intro
+import com.mrpython.app.data.course.module1Cards
+import com.mrpython.app.data.course.module2Cards
+import com.mrpython.app.data.course.module3Cards
+import com.mrpython.app.data.course.module4Cards
+import com.mrpython.app.data.course.module5Cards
+import com.mrpython.app.data.course.module6Cards
+import com.mrpython.app.data.course.module7Cards
+import com.mrpython.app.data.course.module8Cards
+import com.mrpython.app.data.course.module9Cards
+import com.mrpython.app.data.course.module10Cards
+import com.mrpython.app.data.course.module11Cards
+import com.mrpython.app.data.course.module12Cards
+import com.mrpython.app.data.course.module13Cards
+import com.mrpython.app.data.course.module14Cards
+import com.mrpython.app.data.course.module15Cards
+import com.mrpython.app.data.course.module16Cards
+import com.mrpython.app.data.course.module17Cards
+import com.mrpython.app.data.course.module18Cards
+import com.mrpython.app.data.course.module19Cards
+import com.mrpython.app.data.course.module20Cards
+import com.mrpython.app.data.course.module21Cards
+import com.mrpython.app.data.course.module22Cards
+import com.mrpython.app.data.course.module23Cards
+import com.mrpython.app.data.course.module24Cards
+import com.mrpython.app.data.course.module25Cards
+import com.mrpython.app.data.course.module26Cards
+import com.mrpython.app.data.course.module27Cards
+import com.mrpython.app.data.course.module28Cards
+import com.mrpython.app.data.course.module29Cards
+import com.mrpython.app.data.course.module30Cards
+import com.mrpython.app.data.course.module31Cards
+import com.mrpython.app.data.course.module32Cards
+import com.mrpython.app.data.course.module33Cards
+import com.mrpython.app.data.course.module34Cards
+import com.mrpython.app.data.course.module35Cards
+import com.mrpython.app.data.course.module36Cards
+import com.mrpython.app.data.course.module37Cards
+import com.mrpython.app.data.course.module38Cards
+import com.mrpython.app.data.course.module39Cards
+import com.mrpython.app.data.course.module40Cards
+import com.mrpython.app.data.course.module41Cards
+import com.mrpython.app.data.course.module42Cards
+import com.mrpython.app.data.course.module43Cards
+import com.mrpython.app.data.course.module44Cards
+import com.mrpython.app.data.course.module45Cards
+import com.mrpython.app.data.course.module46Cards
+import com.mrpython.app.data.course.module47Cards
+import com.mrpython.app.data.course.module48Cards
+import com.mrpython.app.data.course.module49Cards
+import com.mrpython.app.data.course.module50Cards
+import com.mrpython.app.data.course.module51Cards
+import com.mrpython.app.data.course.module52Cards
+import com.mrpython.app.data.course.module53Cards
+import com.mrpython.app.data.course.module54Cards
+import com.mrpython.app.data.course.module55Cards
+import com.mrpython.app.data.course.module56Cards
+import com.mrpython.app.data.course.module58Cards
+import com.mrpython.app.data.course.module59Cards
+import com.mrpython.app.data.course.module60Cards
+import com.mrpython.app.data.course.module61Cards
+import com.mrpython.app.data.course.module62Cards
+import com.mrpython.app.data.course.module63Cards
+import com.mrpython.app.data.course.module64Cards
+import com.mrpython.app.data.course.module65Cards
+import com.mrpython.app.data.course.module66Cards
+import com.mrpython.app.data.course.module67Cards
+import com.mrpython.app.data.course.module68Cards
+import com.mrpython.app.data.course.module69Cards
+import com.mrpython.app.data.course.module70Cards
+import com.mrpython.app.data.course.module71Cards
+import com.mrpython.app.data.course.module72Cards
+import com.mrpython.app.data.course.module73Cards
 import com.mrpython.app.domain.CourseUnit
 import com.mrpython.app.domain.Exercise
 import com.mrpython.app.domain.Lesson
@@ -247,7 +318,18 @@ object CourseContent {
 
     /** Theory cards shown at the start of lessons that introduce something new. */
     private val lessonCards: Map<String, List<Exercise>> = listOf(
-        module1Cards,
+        module1Cards, module2Cards, module3Cards, module4Cards, module5Cards, module6Cards,
+        module7Cards, module8Cards, module9Cards, module10Cards, module11Cards, module12Cards,
+        module13Cards, module14Cards, module15Cards, module16Cards, module17Cards, module18Cards,
+        module19Cards, module20Cards, module21Cards, module22Cards, module23Cards, module24Cards,
+        module25Cards, module26Cards, module27Cards, module28Cards, module29Cards, module30Cards,
+        module31Cards, module32Cards, module33Cards, module34Cards, module35Cards, module36Cards,
+        module37Cards, module38Cards, module39Cards, module40Cards, module41Cards, module42Cards,
+        module43Cards, module44Cards, module45Cards, module46Cards, module47Cards, module48Cards,
+        module49Cards, module50Cards, module51Cards, module52Cards, module53Cards, module54Cards,
+        module55Cards, module56Cards, module58Cards, module59Cards, module60Cards, module61Cards,
+        module62Cards, module63Cards, module64Cards, module65Cards, module66Cards, module67Cards,
+        module68Cards, module69Cards, module70Cards, module71Cards, module72Cards, module73Cards,
     ).flatten().toMap()
 
     /** Introduction lessons ("u<N>l0") that open each module, keyed by module id. */
