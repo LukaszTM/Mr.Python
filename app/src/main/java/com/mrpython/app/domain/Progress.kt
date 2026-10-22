@@ -99,12 +99,15 @@ object Rules {
         return if (isPractice) gainHeart(updated) else updated
     }
 
-    /** Lessons unlock in order: the next one opens once the previous one is done. */
+    /**
+     * Lessons unlock in order: the next one opens once the previous one is done.
+     * A finished lesson stays open even if new lessons were added before it.
+     */
     fun isUnlocked(course: List<CourseUnit>, lessonId: String, completed: Set<String>): Boolean {
         val ordered = course.flatMap { it.lessons }
         val index = ordered.indexOfFirst { it.id == lessonId }
         if (index < 0) return false
-        return index == 0 || ordered[index - 1].id in completed
+        return index == 0 || lessonId in completed || ordered[index - 1].id in completed
     }
 
     /** The first lesson that is unlocked but not finished yet, if any. */

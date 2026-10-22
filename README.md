@@ -4,7 +4,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 
 ## Funkcje
 
-- **Ścieżka nauki** – 6 części, 14 lekcji, 72 zadania (od `print()` po funkcje).
+- **Ścieżka nauki** – 6 modułów, 28 lekcji, 213 zadań (od `print()` po funkcje).
+  Każdy moduł kończy się lekcją-powtórką.
   Lekcje odblokowują się po kolei, a ścieżka wije się jak w Duolingo.
 - **4 typy zadań**
   - wybór jednej odpowiedzi,
@@ -30,7 +31,7 @@ minSdk 26 (Android 8.0), targetSdk 35.
 ```
 app/src/main/java/com/mrpython/app/
 ├── domain/   # czysta logika: modele, sprawdzanie odpowiedzi, serca/XP/seria, lekcja, kolorowanie
-├── data/     # treść kursu (CourseContent.kt) i zapis postępu
+├── data/     # treść kursu (course/Module*.kt) i zapis postępu
 └── ui/       # ViewModel, motyw, komponenty i ekrany Compose
 ```
 
@@ -48,7 +49,9 @@ puszcza testy, buduje APK i udostępnia go jako artefakt `mr-python-debug-apk`.
 
 ## Dodawanie lekcji
 
-Cała treść jest w `app/src/main/java/com/mrpython/app/data/CourseContent.kt`.
+Treść jest w `app/src/main/java/com/mrpython/app/data/course/` – jeden plik na moduł.
+Nowe lekcje dodawaj na końcu modułu i nie zmieniaj identyfikatorów istniejących,
+bo na nich opiera się zapisany postęp.
 Każde zadanie tworzy się jedną funkcją pomocniczą: `choice(...)`, `fill(...)`,
 `tiles(...)` lub `output(...)`. Test `CourseContentTest` sprawdza, czy
 identyfikatory są unikalne, a odpowiedzi poprawne.

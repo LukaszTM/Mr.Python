@@ -85,4 +85,17 @@ class RulesTest {
         assertEquals("b", Rules.currentLessonId(course, setOf("a")))
         assertNull(Rules.currentLessonId(course, setOf("a", "b", "c")))
     }
+
+    @Test
+    fun finishedLessonStaysOpenWhenNewLessonIsAddedBeforeIt() {
+        // "new" was added to the course after the learner had finished "a" and "c".
+        val course = listOf(
+            CourseUnit("u1", "", "", listOf(Lesson("a", "", emptyList()), Lesson("new", "", emptyList()))),
+            CourseUnit("u2", "", "", listOf(Lesson("c", "", emptyList()))),
+        )
+        val completed = setOf("a", "c")
+        assertTrue(Rules.isUnlocked(course, "new", completed))
+        assertTrue(Rules.isUnlocked(course, "c", completed))
+        assertEquals("new", Rules.currentLessonId(course, completed))
+    }
 }
