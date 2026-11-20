@@ -58,4 +58,30 @@ class AnswerCheckerTest {
         assertEquals("b", AnswerChecker.correctAnswerText(choice))
         assertEquals("x = 1", AnswerChecker.correctAnswerText(tiles))
     }
+
+    private fun typo(expected: String, typed: String): Boolean =
+        AnswerChecker.isTypo(PredictOutput("o", "?", "", listOf(expected), ""), Answer.Text(typed))
+
+    @Test
+    fun keyboardSlipsAreForgiven() {
+        assertTrue(typo("witaj", "Witaj"))
+        assertTrue(typo("To jest 'kot'", "To jest \u2019kot\u2019"))
+        assertTrue(typo("a - b", "a \u2013 b"))
+        assertTrue(typo("Hello World", "Hello Worle"))
+        assertTrue(typo("Hello World", "Hello Wrold"))
+        assertTrue(typo("raz\npython", "Raz\npyhton"))
+    }
+
+    @Test
+    fun whatALessonMayTestIsNotForgiven() {
+        assertFalse(typo("True", "true"))
+        assertFalse(typo("Witaj", "witaj"))
+        assertFalse(typo("HELLO", "Hello"))
+        assertFalse(typo("Pytho", "Python"))
+        assertFalse(typo("wynik: 12", "wynik: 13"))
+        assertFalse(typo("a b c d e f", "abcdef"))
+        assertFalse(typo("kot", "kat"))
+        assertFalse(typo("0\n1\n2", "0 1 2"))
+        assertFalse(typo("hello", "hello"))
+    }
 }

@@ -15,7 +15,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   - układanie kodu z kafelków (bank słów),
   - „Co wypisze ten program?” – wpisujesz wynik z konsoli.
 - **Serca ❤️** – 5 serc; w każdym zadaniu pierwsza pomyłka to darmowa poprawka, dopiero druga
-  kosztuje serce. Serce odnawia się co 20 minut.
+  kosztuje serce. Serce odnawia się co 20 minut. Drobna literówka we wpisywanej odpowiedzi
+  (np. wielka litera wstawiona przez klawiaturę) jest zaliczana z uwagą.
   Powtórka ukończonej lekcji nie kosztuje serc i oddaje jedno.
 - **Błędy wracają** – źle rozwiązane zadanie pojawia się ponownie na końcu lekcji.
 - **Wprowadzenie na początku każdego modułu** – jak w Duolingo: 4–5 kart z teorią, przykładem

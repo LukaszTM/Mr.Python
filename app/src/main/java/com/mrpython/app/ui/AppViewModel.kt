@@ -36,6 +36,8 @@ data class Feedback(
     val explanation: String,
     /** The first mistake in an exercise: the learner may fix the answer at no cost. */
     val retry: Boolean = false,
+    /** Accepted although mistyped: the panel also shows how the answer is spelled exactly. */
+    val typo: Boolean = false,
 )
 
 data class ActiveLesson(
@@ -142,14 +144,16 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             advance(active, active.session.afterAnswer(correct = true))
             return
         }
-        val correct = AnswerChecker.isCorrect(exercise, answer)
+        // A slip of the finger or of the phone's dictionary still counts as a correct answer.
+        val typo = AnswerChecker.isTypo(exercise, answer)
+        val correct = typo || AnswerChecker.isCorrect(exercise, answer)
         if (!correct && !active.retryUsed) {
             // Every exercise forgives one mistake: no heart lost, the answer stays hidden.
             val retry = Feedback(false, "", "", retry = true)
             _state.update { it.copy(lesson = active.copy(feedback = retry, retryUsed = true)) }
             return
         }
-        val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation)
+        val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation, typo = typo)
         _state.update {
             val progress = if (!correct && !active.isPractice) {
                 Rules.loseHeart(it.progress, System.currentTimeMillis())

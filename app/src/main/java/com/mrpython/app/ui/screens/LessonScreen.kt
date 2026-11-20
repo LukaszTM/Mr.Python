@@ -480,15 +480,19 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
         )
         Column(Modifier.padding(20.dp)) {
             Text(
-                if (feedback.correct) "✓ ${praise(feedback)}" else "✗ Niepoprawnie",
+                when {
+                    feedback.typo -> "✓ Zaliczone, mała literówka"
+                    feedback.correct -> "✓ ${praise(feedback)}"
+                    else -> "✗ Niepoprawnie"
+                },
                 color = accent,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 20.sp,
             )
-            if (!feedback.correct) {
+            if (!feedback.correct || feedback.typo) {
                 Spacer(Modifier.height(10.dp))
-                Text("Poprawna odpowiedź:", color = AppColors.TextDim, fontSize = 14.sp)
+                Text(if (feedback.typo) "Dokładny zapis:" else "Poprawna odpowiedź:", color = AppColors.TextDim, fontSize = 14.sp)
                 Spacer(Modifier.height(2.dp))
                 CodeText(feedback.correctAnswer, color = AppColors.Text)
             }
