@@ -58,7 +58,7 @@ private class Art(
 /** Accessories that have 3D artwork; the others are drawn in code. */
 private fun art(accessory: Accessory): Art? = when (accessory) {
     Accessory.CAP -> Art(R.drawable.acc_cap, 27.5f, -1f, 43f, aspect = 1.51f, rotation = -9f)
-    Accessory.HEADPHONES -> Art(R.drawable.acc_headphones, 20.5f, 14.5f, 57f, aspect = 1.543f)
+    Accessory.HEADPHONES -> Art(R.drawable.acc_headphones, 19.5f, 8.5f, 59f, aspect = 1.441f)
     else -> null
 }
 
