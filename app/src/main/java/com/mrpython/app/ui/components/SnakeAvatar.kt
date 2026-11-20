@@ -79,73 +79,74 @@ private fun DrawScope.drawAccessories(worn: List<Accessory>) {
 
     // Neck.
     if (Accessory.TIE in worn) {
-        shape(Color(0xFF2563EB), 48.7f to 53f, 44.5f to 57.5f, 48.7f to 76f, 52.9f to 57.5f)
-        shape(Color(0xFF1E40AF), 45.2f to 53f, 52.2f to 53f, 50.7f to 57.5f, 46.7f to 57.5f)
+        shape(Color(0xFF2563EB), 49f to 54.5f, 44.8f to 59f, 49f to 76f, 53.2f to 59f)
+        shape(Color(0xFF1E40AF), 45.5f to 54.5f, 52.5f to 54.5f, 51f to 59f, 47f to 59f)
     }
     if (Accessory.BOW_TIE in worn) {
-        shape(Red, 48.7f to 56f, 38.7f to 50.5f, 38.7f to 61.5f)
-        shape(Red, 48.7f to 56f, 58.7f to 50.5f, 58.7f to 61.5f)
-        dot(48.7f, 56f, 2.8f, DarkRed)
+        shape(Red, 49f to 57f, 39f to 51.5f, 39f to 62.5f)
+        shape(Red, 49f to 57f, 59f to 51.5f, 59f to 62.5f)
+        dot(49f, 57f, 2.8f, DarkRed)
     }
 
-    // Eyes (their centres are at 39.8 and 59.4, 30.2).
+    // Eyes (their centres are at 40.3 and 58.3, 34.6).
     if (Accessory.GLASSES in worn) {
-        ring(39.8f, 30.2f, 10.4f, Ink, 2.2f)
-        ring(59.4f, 30.2f, 10.4f, Ink, 2.2f)
+        ring(40.3f, 34.6f, 10f, Ink, 2.2f)
+        ring(58.3f, 34.6f, 10f, Ink, 2.2f)
     }
     if (Accessory.SUNGLASSES in worn) {
-        box(29.6f, 24f, 19f, 12.5f, 4.5f, Ink)
-        box(50.6f, 24f, 19f, 12.5f, 4.5f, Ink)
-        line(48f, 27.5f, 51f, 27.5f, Ink, 2.2f)
-        line(29.6f, 28f, 25.5f, 26.5f, Ink, 2.2f)
-        line(69.6f, 28f, 73.7f, 26.5f, Ink, 2.2f)
-        line(33f, 27f, 38f, 27f, Color.White, 1.4f, 0.6f)
+        box(30f, 28.5f, 18.6f, 12.5f, 4.5f, Ink)
+        box(50f, 28.5f, 18.6f, 12.5f, 4.5f, Ink)
+        line(48f, 32f, 51f, 32f, Ink, 2.2f)
+        line(30f, 32.5f, 26f, 31f, Ink, 2.2f)
+        line(68.6f, 32.5f, 72.6f, 31f, Ink, 2.2f)
+        line(33.5f, 31.5f, 38.5f, 31.5f, Color.White, 1.4f, 0.6f)
     }
     if (Accessory.MONOCLE in worn) {
-        ring(59.4f, 30.2f, 10.8f, Gold, 2.2f)
-        curve(68.5f, 36f, 72f, 46f, 67f, 54f, Gold, 1.2f)
+        ring(58.3f, 34.6f, 10.4f, Gold, 2.2f)
+        curve(67f, 40.5f, 70.5f, 50f, 66f, 57f, Gold, 1.2f)
     }
 
-    // Top of the head.
+    // Top of the head (it starts at y = 17).
     if (Accessory.CAP in worn) {
-        drawArc(Red, 180f, 180f, true, at(27.6f, 8f), Size(44 * u, 29 * u))
-        box(49f, 19.5f, 31f, 5.5f, 2.75f, DarkRed)
-        dot(49.6f, 8.6f, 2f, DarkRed)
+        drawArc(Red, 180f, 180f, true, at(27.2f, 11.5f), Size(44 * u, 30 * u))
+        box(48.6f, 23.5f, 31f, 5.5f, 2.75f, DarkRed)
+        dot(49.2f, 12f, 2f, DarkRed)
     }
     if (Accessory.BEANIE in worn) {
-        drawArc(Color(0xFF2563EB), 180f, 180f, true, at(26.6f, 7f), Size(46 * u, 32 * u))
-        box(24.6f, 18.5f, 50f, 7.5f, 3.75f, Color(0xFF93C5FD))
-        dot(49.6f, 5.5f, 5f, Color.White)
+        drawArc(Color(0xFF2563EB), 180f, 180f, true, at(26.2f, 10.5f), Size(46 * u, 33 * u))
+        box(24.2f, 22.5f, 50f, 7.5f, 3.75f, Color(0xFF93C5FD))
+        dot(49.2f, 9f, 5f, Color.White)
     }
     if (Accessory.HEADPHONES in worn) {
         drawArc(
-            HatBlack, 180f, 180f, false, at(23.6f, 9f), Size(52 * u, 48 * u),
+            HatBlack, 180f, 180f, false, at(23.2f, 12.5f), Size(52 * u, 49 * u),
             style = Stroke(4.5f * u, cap = StrokeCap.Round),
         )
-        box(17.6f, 26f, 10.5f, 19f, 5f, Cyan)
-        box(71.1f, 26f, 10.5f, 19f, 5f, Cyan)
+        box(17.2f, 30f, 10.5f, 19f, 5f, Cyan)
+        box(70.7f, 30f, 10.5f, 19f, 5f, Cyan)
     }
     if (Accessory.TOP_HAT in worn) {
-        box(35.6f, 0.8f, 28f, 18f, 2f, HatBlack)
-        box(35.6f, 12f, 28f, 4.2f, 0f, Red)
-        box(25.1f, 16.6f, 49f, 5.4f, 2.7f, HatBlack)
+        box(35.2f, 3f, 28f, 19f, 2f, HatBlack)
+        box(35.2f, 15f, 28f, 4.2f, 0f, Red)
+        box(24.7f, 20f, 49f, 5.4f, 2.7f, HatBlack)
     }
     if (Accessory.CROWN in worn) {
         shape(
-            Gold, 32.1f to 21f, 30.1f to 3.5f, 40.6f to 12.5f, 49.6f to 0.8f,
-            58.6f to 12.5f, 69.1f to 3.5f, 67.1f to 21f,
+            Gold, 31.7f to 24.5f, 29.7f to 7f, 40.2f to 16f, 49.2f to 4.3f,
+            58.2f to 16f, 68.7f to 7f, 66.7f to 24.5f,
         )
-        box(32.1f, 17.2f, 35f, 4.6f, 2f, Color(0xFFD9A400))
-        dot(49.6f, 9.5f, 2.2f, Red)
-        dot(37.6f, 13.8f, 1.6f, Cyan)
-        dot(61.6f, 13.8f, 1.6f, Cyan)
+        box(31.7f, 20.7f, 35f, 4.6f, 2f, Color(0xFFD9A400))
+        dot(49.2f, 13f, 2.2f, Red)
+        dot(37.2f, 17.3f, 1.6f, Cyan)
+        dot(61.2f, 17.3f, 1.6f, Cyan)
     }
 
+    // The mug stands on the left; the tail is on the right.
     if (Accessory.COFFEE in worn) {
-        box(80f, 76f, 14f, 15.5f, 3f, Color.White)
-        curve(94f, 79.5f, 99f, 83f, 94f, 87.5f, Color.White, 2.2f)
-        box(82f, 78f, 10f, 3.6f, 1.8f, Color(0xFF7C4A2D))
-        curve(84.5f, 72.5f, 86.3f, 69.8f, 84.5f, 67f, Color.White, 1.2f, 0.7f)
-        curve(89.5f, 72.5f, 91.3f, 69.8f, 89.5f, 67f, Color.White, 1.2f, 0.7f)
+        box(5f, 77f, 14f, 15.5f, 3f, Color.White)
+        curve(5f, 80.5f, 0f, 84f, 5f, 88.5f, Color.White, 2.2f)
+        box(7f, 79f, 10f, 3.6f, 1.8f, Color(0xFF7C4A2D))
+        curve(9.5f, 73.5f, 11.3f, 70.8f, 9.5f, 68f, Color.White, 1.2f, 0.7f)
+        curve(14.5f, 73.5f, 16.3f, 70.8f, 14.5f, 68f, Color.White, 1.2f, 0.7f)
     }
 }
