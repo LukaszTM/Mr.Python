@@ -1,5 +1,19 @@
 package com.mrpython.app.ui.screens
 
+import android.Manifest
+import android.content.Intent
+import android.os.Build
+import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import com.mrpython.app.notifications.ReminderScheduler
+import com.mrpython.app.ui.components.raised
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +54,12 @@ import com.mrpython.app.ui.components.ProgressBar
 import com.mrpython.app.ui.theme.AppColors
 
 @Composable
-fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
+fun ProfileScreen(
+    state: AppUiState,
+    onReset: () -> Unit,
+    onRemindersEnabled: (Boolean) -> Unit,
+    onReminderHour: (Int) -> Unit,
+) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
     val totalLessons = CourseContent.allLessons.size
@@ -77,6 +96,10 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
             StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
             StatCard("♥", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
         }
+        Spacer(Modifier.height(24.dp))
+
+        SectionTitle("Przypomnienia")
+        ReminderSettings(state, onRemindersEnabled, onReminderHour)
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Postęp kursu")
@@ -121,6 +144,112 @@ fun ProfileScreen(state: AppUiState, onReset: () -> Unit) {
     }
 }
 
+/** Daily reminder switch and hour; asks for the notification permission when needed. */
+@Composable
+private fun ReminderSettings(
+    state: AppUiState,
+    onEnabled: (Boolean) -> Unit,
+    onHour: (Int) -> Unit,
+) {
+    val context = LocalContext.current
+    val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
+    // Re-read on every recomposition (the screen refreshes each second), so it follows system settings.
+    val blocked = state.remindersEnabled && !ReminderScheduler.canNotify(context)
+    val shape = RoundedCornerShape(14.dp)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .raised(AppColors.Edge, 4.dp)
+            .clip(shape)
+            .background(AppColors.SurfaceHigh)
+            .border(1.5.dp, AppColors.Border, shape)
+            .padding(16.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("🔔 Codzienne przypomnienie", color = AppColors.Text, fontWeight = FontWeight.Bold)
+                Text(
+                    "Powiadomienie, gdy nie było jeszcze dziś lekcji, i ostrzeżenie o 22:00, gdy seria jest zagrożona.",
+                    color = AppColors.TextDim,
+                    fontSize = 13.sp,
+                    lineHeight = 17.sp,
+                )
+            }
+            Spacer(Modifier.width(8.dp))
+            Switch(
+                checked = state.remindersEnabled,
+                onCheckedChange = { enabled ->
+                    onEnabled(enabled)
+                    if (enabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                        !ReminderScheduler.canNotify(context)
+                    ) {
+                        permission.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                },
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = AppColors.OnYellow,
+                    checkedTrackColor = AppColors.Yellow,
+                    uncheckedThumbColor = AppColors.TextDim,
+                    uncheckedTrackColor = AppColors.Surface,
+                    uncheckedBorderColor = AppColors.Border,
+                ),
+            )
+        }
+        if (state.remindersEnabled) {
+            Spacer(Modifier.height(12.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Godzina", Modifier.weight(1f), color = AppColors.Text, fontWeight = FontWeight.SemiBold)
+                HourButton("−") { onHour(Math.floorMod(state.reminderHour - 1, 24)) }
+                Text(
+                    "%02d:00".format(state.reminderHour),
+                    Modifier.width(76.dp),
+                    color = AppColors.Yellow,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center,
+                )
+                HourButton("+") { onHour(Math.floorMod(state.reminderHour + 1, 24)) }
+            }
+        }
+        if (blocked) {
+            Spacer(Modifier.height(12.dp))
+            Text(
+                "Powiadomienia są zablokowane w ustawieniach telefonu, więc przypomnienia się nie pokażą.",
+                color = AppColors.Error,
+                fontSize = 13.sp,
+                lineHeight = 17.sp,
+            )
+            Spacer(Modifier.height(8.dp))
+            SecondaryButton(
+                text = "Otwórz ustawienia powiadomień",
+                onClick = {
+                    context.startActivity(
+                        Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                            .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                },
+            )
+        }
+    }
+}
+
+@Composable
+private fun HourButton(label: String, onClick: () -> Unit) {
+    val shape = RoundedCornerShape(10.dp)
+    Box(
+        Modifier
+            .raised(AppColors.Edge, 3.dp, radius = 10.dp)
+            .size(40.dp)
+            .clip(shape)
+            .background(AppColors.Surface)
+            .border(1.5.dp, AppColors.Border, shape)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) { Text(label, color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 20.sp) }
+}
+
 @Composable
 private fun SectionTitle(text: String) {
     Text(
@@ -137,12 +266,13 @@ private fun SectionTitle(text: String) {
 
 @Composable
 private fun StatCard(icon: String, value: String, label: String, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(14.dp)
     Row(
         modifier
+            .raised(AppColors.Edge, 4.dp)
             .clip(shape)
-            .background(AppColors.Surface)
-            .border(1.dp, AppColors.Border, shape)
+            .background(AppColors.SurfaceHigh)
+            .border(1.5.dp, AppColors.Border, shape)
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

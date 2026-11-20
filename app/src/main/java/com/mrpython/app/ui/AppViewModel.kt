@@ -5,19 +5,26 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.data.ProgressRepository
+import com.mrpython.app.data.SettingsRepository
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
+import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
+import com.mrpython.app.domain.XpEvent
+import com.mrpython.app.notifications.ReminderScheduler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 enum class Tab { LEARN, LEAGUE, PROFILE }
 
@@ -41,6 +48,8 @@ data class LessonResult(
     val isPractice: Boolean,
     /** A replay gave a heart back (only when hearts weren't already full). */
     val heartRestored: Boolean = false,
+    /** The XP event that multiplied this lesson's XP, if one was running. */
+    val event: XpEvent? = null,
 )
 
 data class AppUiState(
@@ -51,11 +60,20 @@ data class AppUiState(
     val lesson: ActiveLesson? = null,
     val result: LessonResult? = null,
     val outOfHearts: Boolean = false,
-)
+    val remindersEnabled: Boolean = true,
+    val reminderHour: Int = 19,
+) {
+    val now: LocalDateTime
+        get() = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
+
+    /** The XP event running right now, if any. */
+    val event: XpEvent? get() = Events.active(now)
+}
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ProgressRepository(application)
+    private val settings = SettingsRepository(application)
 
     private val _state = MutableStateFlow(
         AppUiState(
@@ -65,12 +83,15 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             ),
             nowMillis = System.currentTimeMillis(),
             today = LocalDate.now(),
+            remindersEnabled = settings.remindersEnabled,
+            reminderHour = settings.reminderHour,
         )
     )
     val state: StateFlow<AppUiState> = _state.asStateFlow()
 
     init {
         persist()
+        ReminderScheduler.schedule(application)
         // Keeps the heart timer, streak and league week up to date while the app is open.
         viewModelScope.launch {
             while (true) {
@@ -146,9 +167,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun finishLesson(session: LessonSession, isPractice: Boolean) {
+        val event = Events.active(LocalDateTime.now())
         _state.update {
             val today = LocalDate.now()
-            val progress = Rules.completeLesson(it.progress, session.lessonId, session.mistakes, today)
+            val progress = Rules.completeLesson(
+                it.progress, session.lessonId, session.mistakes, today, event?.multiplier ?: 1,
+            )
             val attempts = session.total + session.mistakes
             it.copy(
                 progress = progress,
@@ -159,10 +183,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     streak = progress.streak,
                     isPractice = isPractice,
                     heartRestored = progress.hearts > it.progress.hearts,
+                    event = event,
                 ),
             )
         }
         persist()
+        // Today's lesson is done, so a reminder still on screen is no longer needed.
+        ReminderScheduler.clearShown(getApplication<Application>())
     }
 
     fun quitLesson() = _state.update { it.copy(lesson = null) }
@@ -174,6 +201,28 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun dismissWeekResult() {
         _state.update { it.copy(progress = it.progress.copy(pendingWeekResult = null)) }
         persist()
+    }
+
+    fun setRemindersEnabled(enabled: Boolean) {
+        settings.remindersEnabled = enabled
+        _state.update { it.copy(remindersEnabled = enabled) }
+        ReminderScheduler.schedule(getApplication<Application>())
+    }
+
+    fun setReminderHour(hour: Int) {
+        settings.reminderHour = hour
+        _state.update { it.copy(reminderHour = hour) }
+        ReminderScheduler.schedule(getApplication<Application>())
+    }
+
+    /**
+     * True once, after the first finished lesson: the moment to show the system
+     * notification permission dialog (needed on Android 13+).
+     */
+    fun shouldAskForNotificationPermission(): Boolean {
+        if (settings.notificationPermissionAsked || !settings.remindersEnabled) return false
+        settings.notificationPermissionAsked = true
+        return !ReminderScheduler.canNotify(getApplication<Application>())
     }
 
     fun resetProgress() {

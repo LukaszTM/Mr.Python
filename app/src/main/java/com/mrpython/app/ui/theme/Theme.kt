@@ -15,6 +15,8 @@ object AppColors {
     val SurfaceHigh = Color(0xFF1E2B3C)
     val Border = Color(0xFF2B3B50)
     val CodeBackground = Color(0xFF0B121A)
+    /** Darker shade drawn under raised cards and buttons. */
+    val Edge = Color(0xFF080D14)
 
     val Text = Color(0xFFE3E9F1)
     val TextDim = Color(0xFF8A9AB0)
@@ -31,6 +33,8 @@ object AppColors {
     val ErrorBackground = Color(0xFF2A1418)
     val Streak = Color(0xFFF0883E)
     val Heart = Color(0xFFF2545B)
+    val EventStart = Color(0xFFFF8A00)
+    val EventEnd = Color(0xFFFF3D81)
 
     /** Accent colour of each course module on the learning path. */
     val unitColors = listOf(

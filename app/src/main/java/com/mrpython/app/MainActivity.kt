@@ -1,6 +1,13 @@
 package com.mrpython.app
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.border
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.graphics.Brush
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -60,10 +67,22 @@ class MainActivity : ComponentActivity() {
 fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    // Like Duolingo, ask for notifications right after the first finished lesson (Android 13+).
+    val notificationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
+    val lessonFinished = state.result != null
+    LaunchedEffect(lessonFinished) {
+        if (lessonFinished && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            viewModel.shouldAskForNotificationPermission()
+        ) {
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
     Box(
         Modifier
             .fillMaxSize()
             .background(AppColors.Background)
+            .background(Brush.verticalGradient(listOf(Color(0xFF16233A), AppColors.Background)))
             .safeDrawingPadding()
     ) {
         val lesson = state.lesson
@@ -72,6 +91,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             lesson != null -> LessonScreen(
                 lesson = lesson,
                 hearts = state.progress.hearts,
+                xpMultiplier = state.event?.multiplier ?: 1,
                 onSubmit = viewModel::submit,
                 onContinue = viewModel::continueLesson,
                 onQuit = viewModel::quitLesson,
@@ -82,7 +102,12 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                     when (state.tab) {
                         Tab.LEARN -> HomeScreen(state, onStartLesson = viewModel::startLesson)
                         Tab.LEAGUE -> LeagueScreen(state)
-                        Tab.PROFILE -> ProfileScreen(state, onReset = viewModel::resetProgress)
+                        Tab.PROFILE -> ProfileScreen(
+                            state,
+                            onReset = viewModel::resetProgress,
+                            onRemindersEnabled = viewModel::setRemindersEnabled,
+                            onReminderHour = viewModel::setReminderHour,
+                        )
                     }
                 }
                 BottomBar(state.tab, onSelect = viewModel::selectTab)
@@ -102,9 +127,9 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
 
 @Composable
 private fun BottomBar(selected: Tab, onSelect: (Tab) -> Unit) {
-    Column {
-        HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
-        Row(Modifier.fillMaxWidth().padding(8.dp)) {
+    Column(Modifier.background(AppColors.Surface)) {
+        HorizontalDivider(color = AppColors.Border, thickness = 2.dp)
+        Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)) {
             BottomBarItem("</>", "Nauka", selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
             BottomBarItem("#1", "Liga", selected == Tab.LEAGUE, Modifier.weight(1f)) { onSelect(Tab.LEAGUE) }
             BottomBarItem("~/", "Profil", selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
@@ -114,10 +139,13 @@ private fun BottomBar(selected: Tab, onSelect: (Tab) -> Unit) {
 
 @Composable
 private fun BottomBarItem(icon: String, label: String, active: Boolean, modifier: Modifier, onClick: () -> Unit) {
+    val shape = RoundedCornerShape(12.dp)
     Column(
         modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(if (active) AppColors.Surface else Color.Transparent)
+            .padding(horizontal = 4.dp)
+            .clip(shape)
+            .background(if (active) AppColors.Yellow.copy(alpha = 0.14f) else Color.Transparent)
+            .border(2.dp, if (active) AppColors.Yellow.copy(alpha = 0.7f) else Color.Transparent, shape)
             .clickable(onClick = onClick)
             .padding(vertical = 6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

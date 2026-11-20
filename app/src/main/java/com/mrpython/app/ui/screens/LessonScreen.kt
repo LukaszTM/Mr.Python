@@ -70,6 +70,8 @@ import com.mrpython.app.ui.theme.AppColors
 fun LessonScreen(
     lesson: ActiveLesson,
     hearts: Int,
+    /** Above 1 while an XP event is running. */
+    xpMultiplier: Int = 1,
     onSubmit: (Answer) -> Unit,
     onContinue: () -> Unit,
     onQuit: () -> Unit,
@@ -114,6 +116,10 @@ fun LessonScreen(
                 fontSize = 13.sp,
             )
             Spacer(Modifier.width(10.dp))
+            if (xpMultiplier > 1) {
+                StatPill("⚡", "×$xpMultiplier", AppColors.EventStart)
+                Spacer(Modifier.width(6.dp))
+            }
             if (lesson.isPractice) {
                 StatPill("↻", "", AppColors.BlueBright)
             } else {
@@ -397,10 +403,11 @@ private fun ArrangeTilesBody(
                 // Empty dashed-looking slot keeps the layout stable.
                 Box(
                     Modifier
-                        .clip(RoundedCornerShape(10.dp))
-                        .border(1.5.dp, AppColors.Border, RoundedCornerShape(10.dp))
+                        .padding(bottom = 4.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(AppColors.Edge)
                         .padding(horizontal = 14.dp, vertical = 12.dp)
-                ) { CodeText(tile, color = AppColors.Background) }
+                ) { CodeText(tile, color = AppColors.Edge) }
             } else {
                 OptionCard(enabled = enabled, onClick = { update(picked + index) }) { CodeText(tile) }
             }

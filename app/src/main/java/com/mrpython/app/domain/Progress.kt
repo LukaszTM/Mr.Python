@@ -104,9 +104,11 @@ object Rules {
         lessonId: String,
         mistakes: Int,
         today: LocalDate,
+        /** XP multiplier of the event running when the lesson was finished. */
+        multiplier: Int = 1,
     ): Progress {
         val isPractice = lessonId in p.completedLessons
-        val xp = xpForLesson(mistakes, isPractice)
+        val xp = xpForLesson(mistakes, isPractice) * multiplier
         val day = today.toEpochDay()
         val streak = when (p.lastActiveEpochDay) {
             day -> p.streak

@@ -23,6 +23,10 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   wyjaśniających to z przykładem, więc nie trzeba niczego zgadywać.
 - **Powtórki za każdym razem inne** – pierwsze podejście to 7–8 zadań uczących tematu,
   a każda powtórka losuje 10 zadań z puli ok. 23 zadań danej lekcji.
+- **Przypomnienia o lekcji** – codzienne powiadomienie o wybranej godzinie (gdy nie było
+  jeszcze dziś lekcji) i ostrzeżenie o 22:00, gdy seria jest zagrożona. Ustawienia w profilu.
+- **Eventy z mnożnikiem XP** – Happy hour (codziennie 19:00–21:00, XP ×2), Weekendowy
+  hackathon (sobota i niedziela, XP ×2) i Dzień wdrożenia (1. dzień miesiąca, XP ×3).
 - **Liga tygodniowa ze ścieżką kariery** – co tydzień rywalizujesz z 19 wirtualnymi
   rywalami; trzy pierwsze miejsca awansują: Stażysta → Junior → Mid → Senior →
   Tech Lead → Architekt → CTO.
@@ -31,6 +35,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
 - Profil ze statystykami i postępem w każdej części.
 - **Ciemny motyw w stylu edytora kodu** w kolorach Pythona – ścieżka lekcji jako oś czasu,
   przykłady w oknie edytora z numerami linii, odpowiedzi wpisywane jak w konsoli.
+  Wypukłe przyciski i karty, które wciskają się pod palcem, maskotka z podpowiedziami,
+  konfetti i licznik XP po lekcji.
 
 Postęp jest zapisywany lokalnie na urządzeniu (SharedPreferences).
 
