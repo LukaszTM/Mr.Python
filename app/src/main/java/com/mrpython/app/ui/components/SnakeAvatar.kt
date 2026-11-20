@@ -62,6 +62,9 @@ private fun art(accessory: Accessory): Art? = when (accessory) {
     Accessory.BEANIE -> Art(R.drawable.acc_beanie, 25.2f, 0f, 48f, aspect = 1.627f)
     Accessory.TOP_HAT -> Art(R.drawable.acc_top_hat, 29.7f, 0.5f, 39f, aspect = 1.53f, rotation = -7f)
     Accessory.CROWN -> Art(R.drawable.acc_crown, 31.2f, 5.5f, 36f, aspect = 1.714f, rotation = -6f)
+    Accessory.GLASSES -> Art(R.drawable.acc_glasses, 27.4f, 24f, 44f, aspect = 2.043f)
+    Accessory.SUNGLASSES -> Art(R.drawable.acc_sunglasses, 27.4f, 24.9f, 44f, aspect = 2.233f)
+    Accessory.MONOCLE -> Art(R.drawable.acc_monocle, 46.9f, 22.6f, 27f, aspect = 0.909f)
     else -> null
 }
 
