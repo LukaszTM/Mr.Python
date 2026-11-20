@@ -1,6 +1,8 @@
 package com.mrpython.app.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,23 +14,22 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import com.mrpython.app.R
 import com.mrpython.app.domain.Accessory
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.SnakeSkin
 
-/** Body, belly and spot colours of a snake. */
-private class SkinColors(val body: Color, val belly: Color, val spots: Color)
-
-private fun colors(skin: SnakeSkin) = when (skin) {
-    SnakeSkin.GREEN -> SkinColors(Color(0xFF4CC35B), Color(0xFFB9F2A1), Color(0xFF2E8B3D))
-    SnakeSkin.YELLOW -> SkinColors(Color(0xFFFFD43B), Color(0xFFFFF3B0), Color(0xFFD9A400))
-    SnakeSkin.BLUE -> SkinColors(Color(0xFF4B8BBE), Color(0xFFBFE0FA), Color(0xFF2F6594))
-    SnakeSkin.CORAL -> SkinColors(Color(0xFFF2545B), Color(0xFFFFE1A8), Color(0xFF1E1E24))
-    SnakeSkin.PURPLE -> SkinColors(Color(0xFFA78BFA), Color(0xFFE9DDFF), Color(0xFF6D4FD1))
-    SnakeSkin.MAMBA -> SkinColors(Color(0xFF465066), Color(0xFF5EEAD4), Color(0xFF1B202B))
-    SnakeSkin.GOLD -> SkinColors(Color(0xFFF5C542), Color(0xFFFFF6CF), Color(0xFFB8860B))
-    SnakeSkin.COSMIC -> SkinColors(Color(0xFF7C3AED), Color(0xFFF0ABFC), Color(0xFF22D3EE))
+private fun image(skin: SnakeSkin): Int = when (skin) {
+    SnakeSkin.GREEN -> R.drawable.snake_green
+    SnakeSkin.YELLOW -> R.drawable.snake_yellow
+    SnakeSkin.BLUE -> R.drawable.snake_blue
+    SnakeSkin.CORAL -> R.drawable.snake_coral
+    SnakeSkin.PURPLE -> R.drawable.snake_purple
+    SnakeSkin.MAMBA -> R.drawable.snake_mamba
+    SnakeSkin.GOLD -> R.drawable.snake_gold
+    SnakeSkin.COSMIC -> R.drawable.snake_cosmic
 }
 
 private val Ink = Color(0xFF12161C)
@@ -38,20 +39,23 @@ private val Gold = Color(0xFFF5C542)
 private val Cyan = Color(0xFF22D3EE)
 private val HatBlack = Color(0xFF2B3140)
 
-/** The learner's snake with its accessories, drawn on a 100×100 grid scaled to [size]. */
+/**
+ * The learner's snake with its accessories. The snake is a picture (all skins share one
+ * pose); accessories are drawn over it on a 100×100 grid scaled to [size].
+ */
 @Composable
 fun SnakeAvatar(avatar: Avatar, size: Dp, modifier: Modifier = Modifier) {
-    Canvas(modifier.size(size)) { drawSnake(avatar) }
+    Box(modifier.size(size)) {
+        Image(painterResource(image(avatar.skin)), contentDescription = null, modifier = Modifier.matchParentSize())
+        Canvas(Modifier.matchParentSize()) { drawAccessories(avatar.accessories) }
+    }
 }
 
-private fun DrawScope.drawSnake(avatar: Avatar) {
+private fun DrawScope.drawAccessories(worn: List<Accessory>) {
+    if (worn.isEmpty()) return
     val u = size.minDimension / 100f
-    val skin = colors(avatar.skin)
-    val worn = avatar.accessories
 
     fun at(x: Float, y: Float) = Offset(x * u, y * u)
-    fun oval(cx: Float, cy: Float, rx: Float, ry: Float, color: Color, alpha: Float = 1f) =
-        drawOval(color, at(cx - rx, cy - ry), Size(2 * rx * u, 2 * ry * u), alpha)
     fun dot(cx: Float, cy: Float, r: Float, color: Color, alpha: Float = 1f) =
         drawCircle(color, r * u, at(cx, cy), alpha)
     fun ring(cx: Float, cy: Float, r: Float, color: Color, width: Float) =
@@ -73,100 +77,75 @@ private fun DrawScope.drawSnake(avatar: Avatar) {
         drawPath(path, color, alpha, Stroke(width * u, cap = StrokeCap.Round))
     }
 
-    // Coiled body, tail and spots.
-    oval(50f, 83f, 34f, 15f, skin.body)
-    oval(50f, 86f, 22f, 7f, skin.belly)
-    curve(80f, 80f, 94f, 76f, 90f, 64f, skin.body, 6f)
-    for ((x, y) in listOf(24f to 80f, 36f to 74f, 64f to 74f, 76f to 80f)) dot(x, y, 2.6f, skin.spots)
-
     // Neck.
-    box(40f, 52f, 20f, 32f, 9f, skin.body)
-    box(45f, 62f, 10f, 22f, 5f, skin.belly)
-
     if (Accessory.TIE in worn) {
-        shape(Color(0xFF2563EB), 50f to 68f, 45f to 73f, 50f to 93f, 55f to 73f)
-        shape(Color(0xFF1E40AF), 46f to 68f, 54f to 68f, 52f to 73f, 48f to 73f)
+        shape(Color(0xFF2563EB), 48.7f to 53f, 44.5f to 57.5f, 48.7f to 76f, 52.9f to 57.5f)
+        shape(Color(0xFF1E40AF), 45.2f to 53f, 52.2f to 53f, 50.7f to 57.5f, 46.7f to 57.5f)
     }
     if (Accessory.BOW_TIE in worn) {
-        shape(Red, 50f to 72f, 39f to 66f, 39f to 78f)
-        shape(Red, 50f to 72f, 61f to 66f, 61f to 78f)
-        dot(50f, 72f, 3f, DarkRed)
+        shape(Red, 48.7f to 56f, 38.7f to 50.5f, 38.7f to 61.5f)
+        shape(Red, 48.7f to 56f, 58.7f to 50.5f, 58.7f to 61.5f)
+        dot(48.7f, 56f, 2.8f, DarkRed)
     }
 
-    // Forked tongue.
-    line(50f, 62f, 50f, 70f, Red, 1.8f)
-    line(50f, 70f, 47f, 73f, Red, 1.8f)
-    line(50f, 70f, 53f, 73f, Red, 1.8f)
-
-    // Head, muzzle and cheeks.
-    oval(50f, 45f, 27f, 22f, skin.body)
-    oval(50f, 54f, 15f, 9f, skin.belly)
-    dot(30f, 52f, 4f, Color(0xFFFF8FA3), 0.55f)
-    dot(70f, 52f, 4f, Color(0xFFFF8FA3), 0.55f)
-
-    // Eyes looking slightly inwards, and a smile.
-    dot(39f, 42f, 7.5f, Color.White)
-    dot(40f, 43f, 3.8f, Ink)
-    dot(41.2f, 41.5f, 1.3f, Color.White)
-    dot(61f, 42f, 7.5f, Color.White)
-    dot(60f, 43f, 3.8f, Ink)
-    dot(61.2f, 41.5f, 1.3f, Color.White)
-    curve(43f, 55f, 50f, 60f, 57f, 55f, Ink, 1.8f)
-
+    // Eyes (their centres are at 39.8 and 59.4, 30.2).
     if (Accessory.GLASSES in worn) {
-        ring(39f, 42f, 9.5f, Ink, 2.2f)
-        ring(61f, 42f, 9.5f, Ink, 2.2f)
-        line(48.5f, 42f, 51.5f, 42f, Ink, 2.2f)
+        ring(39.8f, 30.2f, 10.4f, Ink, 2.2f)
+        ring(59.4f, 30.2f, 10.4f, Ink, 2.2f)
     }
     if (Accessory.SUNGLASSES in worn) {
-        box(28f, 36f, 20f, 12f, 4f, Ink)
-        box(52f, 36f, 20f, 12f, 4f, Ink)
-        line(48f, 40f, 52f, 40f, Ink, 2.2f)
-        line(28f, 40f, 23f, 38f, Ink, 2.2f)
-        line(72f, 40f, 77f, 38f, Ink, 2.2f)
-        line(32f, 39f, 37f, 39f, Color.White, 1.4f, 0.6f)
+        box(29.6f, 24f, 19f, 12.5f, 4.5f, Ink)
+        box(50.6f, 24f, 19f, 12.5f, 4.5f, Ink)
+        line(48f, 27.5f, 51f, 27.5f, Ink, 2.2f)
+        line(29.6f, 28f, 25.5f, 26.5f, Ink, 2.2f)
+        line(69.6f, 28f, 73.7f, 26.5f, Ink, 2.2f)
+        line(33f, 27f, 38f, 27f, Color.White, 1.4f, 0.6f)
     }
     if (Accessory.MONOCLE in worn) {
-        ring(61f, 42f, 9.5f, Gold, 2.2f)
-        curve(69f, 47f, 74f, 58f, 70f, 68f, Gold, 1.2f)
+        ring(59.4f, 30.2f, 10.8f, Gold, 2.2f)
+        curve(68.5f, 36f, 72f, 46f, 67f, 54f, Gold, 1.2f)
     }
 
+    // Top of the head.
     if (Accessory.CAP in worn) {
-        drawArc(Red, 180f, 180f, true, at(26f, 12f), Size(48 * u, 40 * u))
-        box(50f, 29f, 34f, 6f, 3f, DarkRed)
-        dot(50f, 13f, 2.2f, DarkRed)
+        drawArc(Red, 180f, 180f, true, at(27.6f, 8f), Size(44 * u, 29 * u))
+        box(49f, 19.5f, 31f, 5.5f, 2.75f, DarkRed)
+        dot(49.6f, 8.6f, 2f, DarkRed)
     }
     if (Accessory.BEANIE in worn) {
-        drawArc(Color(0xFF2563EB), 180f, 180f, true, at(25f, 10f), Size(50 * u, 44 * u))
-        box(23f, 27f, 54f, 8f, 4f, Color(0xFF93C5FD))
-        dot(50f, 9f, 5.5f, Color.White)
+        drawArc(Color(0xFF2563EB), 180f, 180f, true, at(26.6f, 7f), Size(46 * u, 32 * u))
+        box(24.6f, 18.5f, 50f, 7.5f, 3.75f, Color(0xFF93C5FD))
+        dot(49.6f, 5.5f, 5f, Color.White)
     }
     if (Accessory.HEADPHONES in worn) {
         drawArc(
-            HatBlack, 180f, 180f, false, at(22f, 14f), Size(56 * u, 60 * u),
+            HatBlack, 180f, 180f, false, at(23.6f, 9f), Size(52 * u, 48 * u),
             style = Stroke(4.5f * u, cap = StrokeCap.Round),
         )
-        box(15f, 36f, 11f, 20f, 5f, Cyan)
-        box(74f, 36f, 11f, 20f, 5f, Cyan)
+        box(17.6f, 26f, 10.5f, 19f, 5f, Cyan)
+        box(71.1f, 26f, 10.5f, 19f, 5f, Cyan)
     }
     if (Accessory.TOP_HAT in worn) {
-        box(34f, 3f, 32f, 26f, 2f, HatBlack)
-        box(34f, 20f, 32f, 5f, 0f, Red)
-        box(22f, 26f, 56f, 6f, 3f, HatBlack)
+        box(35.6f, 0.8f, 28f, 18f, 2f, HatBlack)
+        box(35.6f, 12f, 28f, 4.2f, 0f, Red)
+        box(25.1f, 16.6f, 49f, 5.4f, 2.7f, HatBlack)
     }
     if (Accessory.CROWN in worn) {
-        shape(Gold, 30f to 31f, 28f to 10f, 40f to 21f, 50f to 6f, 60f to 21f, 72f to 10f, 70f to 31f)
-        box(30f, 27f, 40f, 5f, 2f, Color(0xFFD9A400))
-        dot(50f, 17f, 2.4f, Red)
-        dot(36f, 22f, 1.8f, Cyan)
-        dot(64f, 22f, 1.8f, Cyan)
+        shape(
+            Gold, 32.1f to 21f, 30.1f to 3.5f, 40.6f to 12.5f, 49.6f to 0.8f,
+            58.6f to 12.5f, 69.1f to 3.5f, 67.1f to 21f,
+        )
+        box(32.1f, 17.2f, 35f, 4.6f, 2f, Color(0xFFD9A400))
+        dot(49.6f, 9.5f, 2.2f, Red)
+        dot(37.6f, 13.8f, 1.6f, Cyan)
+        dot(61.6f, 13.8f, 1.6f, Cyan)
     }
 
     if (Accessory.COFFEE in worn) {
-        box(76f, 72f, 16f, 17f, 3f, Color.White)
-        curve(92f, 76f, 98f, 80f, 92f, 85f, Color.White, 2.4f)
-        box(78f, 74f, 12f, 4f, 2f, Color(0xFF7C4A2D))
-        curve(81f, 68f, 83f, 65f, 81f, 62f, Color.White, 1.3f, 0.7f)
-        curve(87f, 68f, 89f, 65f, 87f, 62f, Color.White, 1.3f, 0.7f)
+        box(80f, 76f, 14f, 15.5f, 3f, Color.White)
+        curve(94f, 79.5f, 99f, 83f, 94f, 87.5f, Color.White, 2.2f)
+        box(82f, 78f, 10f, 3.6f, 1.8f, Color(0xFF7C4A2D))
+        curve(84.5f, 72.5f, 86.3f, 69.8f, 84.5f, 67f, Color.White, 1.2f, 0.7f)
+        curve(89.5f, 72.5f, 91.3f, 69.8f, 89.5f, 67f, Color.White, 1.2f, 0.7f)
     }
 }
