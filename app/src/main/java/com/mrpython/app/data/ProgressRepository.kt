@@ -2,6 +2,7 @@ package com.mrpython.app.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.ApplicationInfo
 import com.mrpython.app.domain.Accessory
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.Avatars
@@ -15,6 +16,11 @@ import com.mrpython.app.domain.WeekResult
 class ProgressRepository(context: Context) {
 
     private val prefs = context.getSharedPreferences("progress", Context.MODE_PRIVATE)
+
+    init {
+        // Debug (test) builds unlock the whole avatar wardrobe; release builds keep the promotions.
+        Avatars.unlockAll = context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+    }
 
     private fun accessory(key: String): Accessory? =
         prefs.getString(key, null)?.let { name -> Accessory.entries.firstOrNull { it.name == name } }

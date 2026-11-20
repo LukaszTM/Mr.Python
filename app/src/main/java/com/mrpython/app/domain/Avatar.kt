@@ -59,9 +59,13 @@ data class Avatar(
 }
 
 object Avatars {
-    fun isUnlocked(skin: SnakeSkin, tier: Tier): Boolean = tier >= skin.requiredTier
+    /** Test builds switch this on, so every skin and accessory can be tried without promotions. */
+    @Volatile
+    var unlockAll: Boolean = false
 
-    fun isUnlocked(accessory: Accessory, tier: Tier): Boolean = tier >= accessory.requiredTier
+    fun isUnlocked(skin: SnakeSkin, tier: Tier): Boolean = unlockAll || tier >= skin.requiredTier
+
+    fun isUnlocked(accessory: Accessory, tier: Tier): Boolean = unlockAll || tier >= accessory.requiredTier
 
     fun accessories(slot: AccessorySlot): List<Accessory> = Accessory.entries.filter { it.slot == slot }
 
