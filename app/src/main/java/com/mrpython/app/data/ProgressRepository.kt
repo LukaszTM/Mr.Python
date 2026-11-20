@@ -2,7 +2,11 @@ package com.mrpython.app.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.mrpython.app.domain.Accessory
+import com.mrpython.app.domain.Avatar
+import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.Progress
+import com.mrpython.app.domain.SnakeSkin
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.Tier
 import com.mrpython.app.domain.WeekResult
@@ -11,6 +15,16 @@ import com.mrpython.app.domain.WeekResult
 class ProgressRepository(context: Context) {
 
     private val prefs = context.getSharedPreferences("progress", Context.MODE_PRIVATE)
+
+    private fun accessory(key: String): Accessory? =
+        prefs.getString(key, null)?.let { name -> Accessory.entries.firstOrNull { it.name == name } }
+
+    private fun loadAvatar(): Avatar = Avatar(
+        skin = SnakeSkin.entries.firstOrNull { it.name == prefs.getString(KEY_SKIN, null) } ?: SnakeSkin.GREEN,
+        head = accessory(KEY_AVATAR_HEAD),
+        eyes = accessory(KEY_AVATAR_EYES),
+        extra = accessory(KEY_AVATAR_EXTRA),
+    )
 
     fun load(): Progress = Progress(
         completedLessons = prefs.getStringSet(KEY_COMPLETED, emptySet())!!.toSet(),
@@ -32,7 +46,7 @@ class ProgressRepository(context: Context) {
         } else {
             null
         },
-    )
+    ).let { it.copy(avatar = Avatars.sanitize(loadAvatar(), it.leagueTier)) }
 
     fun save(p: Progress) {
         val editor = prefs.edit()
@@ -47,6 +61,10 @@ class ProgressRepository(context: Context) {
             .putInt(KEY_TIER, p.leagueTier.ordinal)
             .putLongOrRemove(KEY_WEEK_START, p.leagueWeekStartEpochDay)
             .putInt(KEY_WEEK_XP, p.weekXp)
+            .putString(KEY_SKIN, p.avatar.skin.name)
+            .putString(KEY_AVATAR_HEAD, p.avatar.head?.name)
+            .putString(KEY_AVATAR_EYES, p.avatar.eyes?.name)
+            .putString(KEY_AVATAR_EXTRA, p.avatar.extra?.name)
         val result = p.pendingWeekResult
         if (result == null) {
             editor.remove(KEY_RESULT_RANK).remove(KEY_RESULT_TIER)
@@ -80,5 +98,9 @@ class ProgressRepository(context: Context) {
         const val KEY_WEEK_XP = "league_week_xp"
         const val KEY_RESULT_RANK = "league_result_rank"
         const val KEY_RESULT_TIER = "league_result_tier"
+        const val KEY_SKIN = "avatar_skin"
+        const val KEY_AVATAR_HEAD = "avatar_head"
+        const val KEY_AVATAR_EYES = "avatar_eyes"
+        const val KEY_AVATAR_EXTRA = "avatar_extra"
     }
 }

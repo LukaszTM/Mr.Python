@@ -60,6 +60,7 @@ import com.mrpython.app.ui.components.EventBanner
 import com.mrpython.app.ui.components.PrimaryButton
 import com.mrpython.app.ui.components.ProgressBar
 import com.mrpython.app.ui.components.SecondaryButton
+import com.mrpython.app.ui.components.SnakeAvatar
 import com.mrpython.app.ui.components.StatPill
 import com.mrpython.app.ui.components.darker
 import com.mrpython.app.ui.components.lighter
@@ -212,12 +213,12 @@ private fun MascotCard(state: AppUiState) {
             Box(
                 Modifier
                     .graphicsLayer { translationY = lift * density }
-                    .size(60.dp)
+                    .size(68.dp)
                     .clip(CircleShape)
-                    .background(Brush.linearGradient(listOf(AppColors.Yellow, AppColors.Blue)))
-                    .border(3.dp, Color.White.copy(alpha = 0.25f), CircleShape),
+                    .background(AppColors.Background.copy(alpha = 0.6f))
+                    .border(3.dp, AppColors.Yellow.copy(alpha = 0.7f), CircleShape),
                 contentAlignment = Alignment.Center,
-            ) { Text("🐍", fontSize = 32.sp) }
+            ) { SnakeAvatar(state.progress.avatar, 58.dp) }
             Spacer(Modifier.width(12.dp))
             Text(
                 mascotLine(state),

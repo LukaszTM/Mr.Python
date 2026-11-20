@@ -30,12 +30,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.mrpython.app.domain.Avatar
+import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.League
 import com.mrpython.app.domain.Standing
 import com.mrpython.app.domain.Tier
 import com.mrpython.app.domain.WeekResult
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.BigEmoji
+import com.mrpython.app.ui.components.SnakeAvatar
 import com.mrpython.app.ui.components.PrimaryButton
 import com.mrpython.app.ui.theme.AppColors
 import java.time.Instant
@@ -68,7 +71,7 @@ fun LeagueScreen(state: AppUiState) {
     LazyColumn(Modifier.fillMaxSize()) {
         item { LeagueHeader(tier, weekStart, now) }
         items(table, key = { it.name }) { row ->
-            StandingRow(row, tier)
+            StandingRow(row, tier, p.avatar)
             if (row.rank == League.PROMOTION_SLOTS && tier.next != null) PromotionLine(tier.next!!)
         }
         item { Spacer(Modifier.height(24.dp)) }
@@ -139,7 +142,7 @@ private fun CareerLadder(current: Tier) {
 }
 
 @Composable
-private fun StandingRow(row: Standing, tier: Tier) {
+private fun StandingRow(row: Standing, tier: Tier, avatar: Avatar) {
     val promoted = row.rank <= League.PROMOTION_SLOTS && tier.next != null
     val shape = RoundedCornerShape(10.dp)
     Row(
@@ -163,14 +166,14 @@ private fun StandingRow(row: Standing, tier: Tier) {
             Modifier
                 .size(34.dp)
                 .clip(CircleShape)
-                .background(if (row.isPlayer) AppColors.Yellow else AppColors.SurfaceHigh),
+                .background(AppColors.SurfaceHigh),
             contentAlignment = Alignment.Center,
         ) {
-            Text(
-                if (row.isPlayer) "🐍" else row.name.first().uppercase(),
-                color = AppColors.Text,
-                fontWeight = FontWeight.Bold,
-            )
+            if (row.isPlayer) {
+                SnakeAvatar(avatar, 30.dp)
+            } else {
+                Text(row.name.first().uppercase(), color = AppColors.Text, fontWeight = FontWeight.Bold)
+            }
         }
         Spacer(Modifier.width(12.dp))
         Text(
@@ -251,6 +254,17 @@ fun WeekResultDialog(result: WeekResult, onDismiss: () -> Unit) {
                 Spacer(Modifier.height(4.dp))
                 Text("Nowe stanowisko:", color = AppColors.TextDim)
                 Text(promoted.title, color = promoted.color(), fontWeight = FontWeight.Bold, fontSize = 22.sp)
+                val unlocked = Avatars.unlockedAt(promoted)
+                if (unlocked.isNotEmpty()) {
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        "🎁 Nowości dla awatara: ${unlocked.joinToString(", ")}. Znajdziesz je w profilu.",
+                        color = AppColors.Text,
+                        textAlign = TextAlign.Center,
+                        fontSize = 14.sp,
+                        lineHeight = 19.sp,
+                    )
+                }
             } else {
                 Spacer(Modifier.height(4.dp))
                 Text(

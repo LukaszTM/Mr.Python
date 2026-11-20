@@ -11,7 +11,16 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.ui.draw.alpha
+import com.mrpython.app.domain.AccessorySlot
+import com.mrpython.app.domain.Avatar
+import com.mrpython.app.domain.Avatars
+import com.mrpython.app.domain.SnakeSkin
+import com.mrpython.app.domain.Tier
 import com.mrpython.app.notifications.ReminderScheduler
+import com.mrpython.app.ui.components.SnakeAvatar
+import com.mrpython.app.ui.components.darker
 import com.mrpython.app.ui.components.raised
 
 import androidx.compose.foundation.background
@@ -59,6 +68,7 @@ fun ProfileScreen(
     onReset: () -> Unit,
     onRemindersEnabled: (Boolean) -> Unit,
     onReminderHour: (Int) -> Unit,
+    onAvatar: (Avatar) -> Unit,
 ) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
@@ -74,12 +84,12 @@ fun ProfileScreen(
     ) {
         Box(
             Modifier
-                .size(110.dp)
+                .size(140.dp)
                 .clip(CircleShape)
                 .background(AppColors.SurfaceHigh)
-                .border(3.dp, AppColors.Yellow, CircleShape),
+                .border(4.dp, p.leagueTier.color(), CircleShape),
             contentAlignment = Alignment.Center,
-        ) { Text("🐍", fontSize = 56.sp) }
+        ) { SnakeAvatar(p.avatar, 120.dp) }
         Spacer(Modifier.height(12.dp))
         Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = AppColors.Text)
         Text(p.leagueTier.title, color = p.leagueTier.color(), fontWeight = FontWeight.Bold, fontSize = 16.sp)
@@ -96,6 +106,10 @@ fun ProfileScreen(
             StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
             StatCard("♥", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
         }
+        Spacer(Modifier.height(24.dp))
+
+        SectionTitle("Awatar")
+        AvatarEditor(p.avatar, p.leagueTier, onAvatar)
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Przypomnienia")
@@ -141,6 +155,114 @@ fun ProfileScreen(
             titleContentColor = AppColors.Text,
             textContentColor = AppColors.TextDim,
         )
+    }
+}
+
+/** Pick a snake and one accessory per slot; locked items show the tier that unlocks them. */
+@Composable
+private fun AvatarEditor(avatar: Avatar, tier: Tier, onAvatar: (Avatar) -> Unit) {
+    Column(Modifier.fillMaxWidth()) {
+        AvatarRowLabel("Wąż")
+        Row(
+            Modifier.horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            SnakeSkin.entries.forEach { skin ->
+                AvatarTile(
+                    preview = Avatar(skin),
+                    title = skin.title,
+                    selected = avatar.skin == skin,
+                    lockedUntil = skin.requiredTier.takeIf { !Avatars.isUnlocked(skin, tier) },
+                    onClick = { onAvatar(avatar.copy(skin = skin)) },
+                )
+            }
+        }
+        AccessorySlot.entries.forEach { slot ->
+            Spacer(Modifier.height(14.dp))
+            AvatarRowLabel(slot.title)
+            Row(
+                Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                AvatarTile(
+                    preview = Avatar(avatar.skin),
+                    title = "Brak",
+                    selected = avatar.accessory(slot) == null,
+                    lockedUntil = null,
+                    onClick = { onAvatar(avatar.with(slot, null)) },
+                )
+                Avatars.accessories(slot).forEach { item ->
+                    AvatarTile(
+                        preview = Avatar(avatar.skin).with(slot, item),
+                        title = item.title,
+                        selected = avatar.accessory(slot) == item,
+                        lockedUntil = item.requiredTier.takeIf { !Avatars.isUnlocked(item, tier) },
+                        onClick = { onAvatar(avatar.with(slot, item)) },
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AvatarRowLabel(text: String) {
+    Text(
+        text,
+        Modifier.padding(bottom = 8.dp),
+        color = AppColors.Text,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 15.sp,
+    )
+}
+
+/** One choice in the avatar editor: a preview, its name and a lock when not yet unlocked. */
+@Composable
+private fun AvatarTile(
+    preview: Avatar,
+    title: String,
+    selected: Boolean,
+    lockedUntil: Tier?,
+    onClick: () -> Unit,
+) {
+    val shape = RoundedCornerShape(14.dp)
+    val locked = lockedUntil != null
+    Column(
+        Modifier
+            .width(96.dp)
+            .raised(if (selected) AppColors.Yellow.darker(0.5f) else AppColors.Edge, 4.dp)
+            .clip(shape)
+            .background(if (selected) AppColors.Yellow.copy(alpha = 0.14f) else AppColors.SurfaceHigh)
+            .border(2.dp, if (selected) AppColors.Yellow else AppColors.Border, shape)
+            .clickable(enabled = !locked, onClick = onClick)
+            .padding(horizontal = 6.dp, vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            SnakeAvatar(preview, 64.dp, Modifier.alpha(if (locked) 0.3f else 1f))
+            if (locked) Text("🔒", fontSize = 22.sp)
+        }
+        Spacer(Modifier.height(4.dp))
+        Text(
+            title,
+            color = if (locked) AppColors.TextFaint else AppColors.Text,
+            fontSize = 11.sp,
+            lineHeight = 13.sp,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            minLines = 2,
+        )
+        if (lockedUntil != null) {
+            Text(
+                lockedUntil.title.substringBefore(" "),
+                color = lockedUntil.color(),
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+            )
+        } else {
+            Text(if (selected) "✓ wybrane" else " ", color = AppColors.Yellow, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+        }
     }
 }
 

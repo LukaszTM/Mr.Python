@@ -19,6 +19,7 @@ data class Progress(
     val weekXp: Int = 0,
     /** Result of the last finished week, until the learner has seen it. */
     val pendingWeekResult: WeekResult? = null,
+    val avatar: Avatar = Avatar(),
 )
 
 object Rules {

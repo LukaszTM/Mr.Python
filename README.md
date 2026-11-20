@@ -27,6 +27,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   jeszcze dziś lekcji) i ostrzeżenie o 22:00, gdy seria jest zagrożona. Ustawienia w profilu.
 - **Eventy z mnożnikiem XP** – Happy hour (codziennie 19:00–21:00, XP ×2), Weekendowy
   hackathon (sobota i niedziela, XP ×2) i Dzień wdrożenia (1. dzień miesiąca, XP ×3).
+- **Awatar do personalizacji** – 8 węży i 11 akcesoriów (na głowę, okulary, dodatek);
+  kolejne odblokowują się z awansami w lidze. Awatar widać w profilu, na ekranie głównym i w lidze.
 - **Liga tygodniowa ze ścieżką kariery** – co tydzień rywalizujesz z 19 wirtualnymi
   rywalami; trzy pierwsze miejsca awansują: Stażysta → Junior → Mid → Senior →
   Tech Lead → Architekt → CTO.

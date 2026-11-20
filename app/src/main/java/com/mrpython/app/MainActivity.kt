@@ -107,6 +107,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                             onReset = viewModel::resetProgress,
                             onRemindersEnabled = viewModel::setRemindersEnabled,
                             onReminderHour = viewModel::setReminderHour,
+                            onAvatar = viewModel::setAvatar,
                         )
                     }
                 }

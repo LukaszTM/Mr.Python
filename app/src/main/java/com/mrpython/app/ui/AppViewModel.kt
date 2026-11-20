@@ -8,6 +8,8 @@ import com.mrpython.app.data.ProgressRepository
 import com.mrpython.app.data.SettingsRepository
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
+import com.mrpython.app.domain.Avatar
+import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
@@ -203,6 +205,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         persist()
     }
 
+    /** Changes the avatar; parts not unlocked at the current league tier are ignored. */
+    fun setAvatar(avatar: Avatar) {
+        if (!Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
+        _state.update { it.copy(progress = it.progress.copy(avatar = avatar)) }
+        persist()
+    }
+
     fun setRemindersEnabled(enabled: Boolean) {
         settings.remindersEnabled = enabled
         _state.update { it.copy(remindersEnabled = enabled) }
@@ -228,6 +237,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun resetProgress() {
         repository.reset()
         _state.update { it.copy(progress = Progress(), lesson = null, result = null) }
+        persist()
     }
 
     private fun persist() = repository.save(_state.value.progress)
