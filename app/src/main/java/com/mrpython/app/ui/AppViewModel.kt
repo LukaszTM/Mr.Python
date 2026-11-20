@@ -34,6 +34,8 @@ data class Feedback(
     val correct: Boolean,
     val correctAnswer: String,
     val explanation: String,
+    /** The first mistake in an exercise: the learner may fix the answer at no cost. */
+    val retry: Boolean = false,
 )
 
 data class ActiveLesson(
@@ -41,6 +43,8 @@ data class ActiveLesson(
     /** Practice = replaying a finished lesson: no hearts lost, one heart gained. */
     val isPractice: Boolean,
     val feedback: Feedback? = null,
+    /** The free correction for the current exercise has been used up. */
+    val retryUsed: Boolean = false,
 )
 
 data class LessonResult(
@@ -139,6 +143,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         val correct = AnswerChecker.isCorrect(exercise, answer)
+        if (!correct && !active.retryUsed) {
+            // Every exercise forgives one mistake: no heart lost, the answer stays hidden.
+            val retry = Feedback(false, "", "", retry = true)
+            _state.update { it.copy(lesson = active.copy(feedback = retry, retryUsed = true)) }
+            return
+        }
         val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation)
         _state.update {
             val progress = if (!correct && !active.isPractice) {
@@ -155,6 +165,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         val active = s.lesson ?: return
         val feedback = active.feedback ?: return
+        if (feedback.retry) {
+            _state.update { it.copy(lesson = active.copy(feedback = null)) }
+            return
+        }
         advance(active, active.session.afterAnswer(feedback.correct))
     }
 
@@ -164,7 +178,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 it.copy(lesson = null, outOfHearts = true)
             }
             session.isFinished -> finishLesson(session, active.isPractice)
-            else -> _state.update { it.copy(lesson = active.copy(session = session, feedback = null)) }
+            else -> _state.update { it.copy(lesson = active.copy(session = session, feedback = null, retryUsed = false)) }
         }
     }
 

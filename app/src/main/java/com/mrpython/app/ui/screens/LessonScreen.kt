@@ -462,6 +462,10 @@ private fun PredictOutputBody(
 
 @Composable
 private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
+    if (feedback.retry) {
+        RetryPanel(onContinue)
+        return
+    }
     val accent = if (feedback.correct) AppColors.Success else AppColors.Error
     Column(
         Modifier
@@ -501,6 +505,47 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
                 text = if (feedback.correct) "Dalej  →" else "Rozumiem  →",
                 onClick = onContinue,
                 color = accent,
+                contentColor = AppColors.Background,
+            )
+        }
+    }
+}
+
+/** Shown after the first mistake in an exercise: one free correction. */
+@Composable
+private fun RetryPanel(onRetry: () -> Unit) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(AppColors.SurfaceHigh)
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(AppColors.Streak)
+        )
+        Column(Modifier.padding(20.dp)) {
+            Text(
+                "✗ Jeszcze nie to",
+                color = AppColors.Streak,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 20.sp,
+            )
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "# Masz jedną darmową poprawkę. Sprawdź literówki i spróbuj ponownie, serce zostaje.",
+                color = AppColors.TextDim,
+                fontSize = 14.sp,
+                fontFamily = FontFamily.Monospace,
+                lineHeight = 20.sp,
+            )
+            Spacer(Modifier.height(16.dp))
+            PrimaryButton(
+                text = "↺  Popraw odpowiedź",
+                onClick = onRetry,
+                color = AppColors.Streak,
                 contentColor = AppColors.Background,
             )
         }
