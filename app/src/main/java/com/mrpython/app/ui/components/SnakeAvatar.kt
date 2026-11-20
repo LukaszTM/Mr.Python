@@ -3,9 +3,11 @@ package com.mrpython.app.ui.components
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -40,15 +42,52 @@ private val Cyan = Color(0xFF22D3EE)
 private val HatBlack = Color(0xFF2B3140)
 
 /**
+ * A picture of an accessory and where it goes on the 100×100 grid. [behind] ones are
+ * drawn under the snake, so only the parts sticking out from behind the head show.
+ */
+private class Art(
+    val image: Int,
+    val x: Float,
+    val y: Float,
+    val width: Float,
+    val aspect: Float,
+    val behind: Boolean = false,
+    val rotation: Float = 0f,
+)
+
+/** Accessories that have 3D artwork; the others are drawn in code. */
+private fun art(accessory: Accessory): Art? = when (accessory) {
+    Accessory.CAP -> Art(R.drawable.acc_cap, 27.5f, -1f, 43f, aspect = 1.51f, rotation = -9f)
+    Accessory.HEADPHONES -> Art(R.drawable.acc_headphones, 15.2f, 6.5f, 68f, aspect = 1.115f, behind = true)
+    else -> null
+}
+
+/**
  * The learner's snake with its accessories. The snake is a picture (all skins share one
- * pose); accessories are drawn over it on a 100×100 grid scaled to [size].
+ * pose); accessories are pictures or drawings laid over a 100×100 grid scaled to [size].
  */
 @Composable
 fun SnakeAvatar(avatar: Avatar, size: Dp, modifier: Modifier = Modifier) {
+    val pictures = avatar.accessories.mapNotNull { art(it) }
     Box(modifier.size(size)) {
+        pictures.filter { it.behind }.forEach { ArtLayer(it, size) }
         Image(painterResource(image(avatar.skin)), contentDescription = null, modifier = Modifier.matchParentSize())
-        Canvas(Modifier.matchParentSize()) { drawAccessories(avatar.accessories) }
+        Canvas(Modifier.matchParentSize()) { drawAccessories(avatar.accessories.filter { art(it) == null }) }
+        pictures.filterNot { it.behind }.forEach { ArtLayer(it, size) }
     }
+}
+
+@Composable
+private fun ArtLayer(art: Art, size: Dp) {
+    val unit = size / 100f
+    Image(
+        painterResource(art.image),
+        contentDescription = null,
+        modifier = Modifier
+            .offset(x = unit * art.x, y = unit * art.y)
+            .size(width = unit * art.width, height = unit * (art.width / art.aspect))
+            .rotate(art.rotation),
+    )
 }
 
 private fun DrawScope.drawAccessories(worn: List<Accessory>) {
