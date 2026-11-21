@@ -13,13 +13,29 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
+    }
+
+    // The upload key never lives in the repository: CI (or your own machine) passes it in
+    // through environment variables. Without them the release build is simply left unsigned.
+    val keystoreFile = System.getenv("MRPYTHON_KEYSTORE_FILE")
+    signingConfigs {
+        if (!keystoreFile.isNullOrBlank()) {
+            create("release") {
+                storeFile = file(keystoreFile)
+                storePassword = System.getenv("MRPYTHON_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("MRPYTHON_KEY_ALIAS")
+                keyPassword = System.getenv("MRPYTHON_KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("release")
         }
     }
     compileOptions {

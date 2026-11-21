@@ -28,3 +28,24 @@ jobs:
         with:
           name: mr-python-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # The Google Play bundle. It is signed only when the upload key is stored in the
+      # repository secrets (see docs/play-store/CHECKLIST.md); otherwise it is built
+      # unsigned, which still proves that the release build works.
+      - name: Build release bundle
+        env:
+          KEYSTORE_BASE64: ${{ secrets.MRPYTHON_KEYSTORE_BASE64 }}
+          MRPYTHON_KEYSTORE_PASSWORD: ${{ secrets.MRPYTHON_KEYSTORE_PASSWORD }}
+          MRPYTHON_KEY_ALIAS: ${{ secrets.MRPYTHON_KEY_ALIAS }}
+          MRPYTHON_KEY_PASSWORD: ${{ secrets.MRPYTHON_KEY_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+            export MRPYTHON_KEYSTORE_FILE="$RUNNER_TEMP/upload.jks"
+          fi
+          ./gradlew bundleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mr-python-release-bundle
+          path: app/build/outputs/bundle/release/app-release.aab
