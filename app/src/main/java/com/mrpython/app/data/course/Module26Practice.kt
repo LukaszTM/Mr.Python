@@ -417,7 +417,7 @@ internal val module26Practice = listOf(
             "Co wypisze ten kod?",
             listOf("Bob", "Ala", "Cyp", "Błąd"),
             0,
-            "Sortowanie stabilne: przy remisie Bob był przed Cyp, a Ala ma więcej punktów.",
+            "Sortowanie stabilne: przy remisie Bob był przed Cyp, a Ala ma mniej punktów.",
             code = "g = [(\"Ala\", 1), (\"Bob\", 2), (\"Cyp\", 2)]\ng.sort(key=lambda x: x[1], reverse=True)\nprint(g[0][0])",
         ),
         fill(
