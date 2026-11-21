@@ -1,6 +1,7 @@
 package com.mrpython.app.ads
 
 import android.app.Activity
+import android.content.pm.ApplicationInfo
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -36,19 +37,23 @@ object AdsManager {
     fun start(activity: Activity) {
         if (started) return
         started = true
+        // Google's sample ad IDs have no consent message behind them, so in the EU the consent
+        // request fails and no ad would ever load. Test builds therefore show their test ads
+        // regardless; release builds always wait for a real answer.
+        val testAds = activity.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         val consent = UserMessagingPlatform.getConsentInformation(activity)
         consent.requestConsentInfoUpdate(
             activity,
             ConsentRequestParameters.Builder().build(),
             {
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) {
-                    if (consent.canRequestAds()) initialize(activity)
+                    if (consent.canRequestAds() || testAds) initialize(activity)
                 }
             },
             {
                 // Usually no connection. Use an earlier consent if there is one, and try again
                 // the next time an ad is due.
-                if (consent.canRequestAds()) initialize(activity) else started = false
+                if (consent.canRequestAds() || testAds) initialize(activity) else started = false
             },
         )
         // A consent given in an earlier session lets ads load without waiting for the update.
