@@ -36,14 +36,6 @@ class RemindersTest {
     }
 
     @Test
-    fun dailyReminderAnnouncesARunningEvent() {
-        val happyHour = now.withHour(19)
-        val message = Reminders.message(Progress(), ReminderKind.DAILY, happyHour)!!
-        assertTrue(message.title.contains("Happy hour"))
-        assertTrue(message.title.contains("×2"))
-    }
-
-    @Test
     fun streakRescueOnlyWhenThereIsAStreakToLose() {
         val late = now.withHour(22)
         assertNull(Reminders.message(Progress(), ReminderKind.STREAK_RESCUE, late))

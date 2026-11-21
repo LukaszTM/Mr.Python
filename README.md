@@ -32,8 +32,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   a każda powtórka losuje 10 zadań z puli ok. 23 zadań danej lekcji.
 - **Przypomnienia o lekcji** – codzienne powiadomienie o wybranej godzinie (gdy nie było
   jeszcze dziś lekcji) i ostrzeżenie o 22:00, gdy seria jest zagrożona. Ustawienia w profilu.
-- **Eventy z mnożnikiem XP** – Happy hour (codziennie 19:00–21:00, XP ×2), Weekendowy
-  hackathon (sobota i niedziela, XP ×2) i Dzień wdrożenia (1. dzień miesiąca, XP ×3).
+- **Bonusy XP** – XP ×2 przez 30 minut po pierwszym uruchomieniu, a potem bonus na 30 minut
+  za każde 5 dni serii: ×1,5 (5, 15, 25…), ×2 (10, 20…) i ×3 (30, 60…).
 - **Awatar do personalizacji** – 8 węży i 11 akcesoriów (na głowę, okulary, dodatek);
   kolejne odblokowują się z awansami w lidze. Awatar widać w profilu, na ekranie głównym i w lidze.
 - **Liga tygodniowa ze ścieżką kariery** – co tydzień rywalizujesz z 19 wirtualnymi

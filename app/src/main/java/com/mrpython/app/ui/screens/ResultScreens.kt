@@ -94,6 +94,15 @@ fun LessonCompleteScreen(result: LessonResult, onContinue: () -> Unit) {
                 Spacer(Modifier.height(4.dp))
                 Text("Odzyskujesz jedno ♥", color = AppColors.Heart, fontWeight = FontWeight.Bold)
             }
+            result.earned?.let { earned ->
+                Spacer(Modifier.height(14.dp))
+                Text(
+                    "🎁 ${earned.title}! Przez 30 minut XP ×${earned.multiplier}",
+                    color = AppColors.Yellow,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                )
+            }
             result.event?.let { event ->
                 Spacer(Modifier.height(14.dp))
                 Text(

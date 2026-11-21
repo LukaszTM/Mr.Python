@@ -70,8 +70,8 @@ import com.mrpython.app.ui.theme.AppColors
 fun LessonScreen(
     lesson: ActiveLesson,
     hearts: Int,
-    /** Above 1 while an XP event is running. */
-    xpMultiplier: Int = 1,
+    /** The multiplier of the running XP bonus ("2", "1,5"), if there is one. */
+    xpMultiplier: String? = null,
     onSubmit: (Answer) -> Unit,
     onContinue: () -> Unit,
     onQuit: () -> Unit,
@@ -116,7 +116,7 @@ fun LessonScreen(
                 fontSize = 13.sp,
             )
             Spacer(Modifier.width(10.dp))
-            if (xpMultiplier > 1) {
+            if (xpMultiplier != null) {
                 StatPill("⚡", "×$xpMultiplier", AppColors.EventStart)
                 Spacer(Modifier.width(6.dp))
             }

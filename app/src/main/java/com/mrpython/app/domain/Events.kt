@@ -1,78 +1,66 @@
 package com.mrpython.app.domain
 
-import java.time.DayOfWeek
+import java.time.Instant
 import java.time.LocalDateTime
-import java.time.LocalTime
+import java.time.ZoneId
 
-/** A time-limited event that multiplies the XP earned for lessons. */
+/** A running XP bonus as the screens show it. */
 data class XpEvent(
     val title: String,
     val description: String,
-    val multiplier: Int,
+    /** 150 means XP ×1.5. */
+    val percent: Int,
     val endsAt: LocalDateTime,
-)
+) {
+    /** The multiplier as text: "2", "1,5". */
+    val multiplier: String get() = Events.label(percent)
+}
 
-data class UpcomingEvent(val title: String, val multiplier: Int, val startsAt: LocalDateTime)
+/** A time-limited XP bonus the learner has earned; stored with the progress. */
+data class Boost(val title: String, val percent: Int, val untilMillis: Long)
 
 /**
- * Recurring XP events. They follow the calendar, so they need no server:
- * - "Dzień wdrożenia": the 1st day of every month, XP ×3;
- * - "Weekendowy hackathon": every Saturday and Sunday, XP ×2;
- * - "Happy hour": every day from 19:00 to 21:00, XP ×2.
+ * XP bonuses are rewards, not a daily routine:
+ * - a welcome bonus right after the first launch,
+ * - a bonus each time the streak reaches another 5 days; bigger for round numbers.
+ * Each lasts [DURATION_MILLIS] from the moment it is granted.
  */
 object Events {
-    val HAPPY_HOUR_START: LocalTime = LocalTime.of(19, 0)
-    val HAPPY_HOUR_END: LocalTime = LocalTime.of(21, 0)
+    const val DURATION_MILLIS = 30 * 60 * 1000L
+    const val STREAK_STEP = 5
 
-    private fun isWeekend(day: DayOfWeek) = day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY
+    fun welcome(nowMillis: Long): Boost = Boost("Bonus na start", 200, nowMillis + DURATION_MILLIS)
 
-    /** The event running at [now]; when several overlap, the biggest multiplier wins. */
-    fun active(now: LocalDateTime): XpEvent? {
-        val date = now.toLocalDate()
-        val running = mutableListOf<XpEvent>()
-        if (date.dayOfMonth == 1) {
-            running += XpEvent(
-                "Dzień wdrożenia",
-                "Pierwszy dzień miesiąca: każda lekcja daje potrójne XP.",
-                3,
-                date.plusDays(1).atStartOfDay(),
-            )
-        }
-        if (isWeekend(date.dayOfWeek)) {
-            val monday = date.plusDays(if (date.dayOfWeek == DayOfWeek.SATURDAY) 2 else 1)
-            running += XpEvent(
-                "Weekendowy hackathon",
-                "Przez cały weekend każda lekcja daje podwójne XP.",
-                2,
-                monday.atStartOfDay(),
-            )
-        }
-        val time = now.toLocalTime()
-        if (time >= HAPPY_HOUR_START && time < HAPPY_HOUR_END) {
-            running += XpEvent(
-                "Happy hour",
-                "Codziennie od 19:00 do 21:00 każda lekcja daje podwójne XP.",
-                2,
-                date.atTime(HAPPY_HOUR_END),
-            )
-        }
-        return running.sortedWith(compareByDescending<XpEvent> { it.multiplier }.thenByDescending { it.endsAt })
-            .firstOrNull()
+    /** XP percent for reaching [streak] days, or null when it is not a milestone. */
+    fun streakPercent(streak: Int): Int? = when {
+        streak <= 0 || streak % STREAK_STEP != 0 -> null
+        streak % 30 == 0 -> 300
+        streak % 10 == 0 -> 200
+        else -> 150
     }
 
-    fun multiplier(now: LocalDateTime): Int = active(now)?.multiplier ?: 1
+    /** The bonus for reaching [streak] days, or null when it is not a milestone. */
+    fun forStreak(streak: Int, nowMillis: Long): Boost? =
+        streakPercent(streak)?.let { Boost("Seria ${Moods.days(streak)}", it, nowMillis + DURATION_MILLIS) }
 
-    /** The next event to start after [now]. */
-    fun next(now: LocalDateTime): UpcomingEvent {
-        val date = now.toLocalDate()
-        val happyHourDay = if (now.toLocalTime() < HAPPY_HOUR_START) date else date.plusDays(1)
-        var saturday = date.plusDays(1)
-        while (saturday.dayOfWeek != DayOfWeek.SATURDAY) saturday = saturday.plusDays(1)
-        val firstOfMonth = date.plusMonths(1).withDayOfMonth(1)
-        return listOf(
-            UpcomingEvent("Happy hour", 2, happyHourDay.atTime(HAPPY_HOUR_START)),
-            UpcomingEvent("Weekendowy hackathon", 2, saturday.atStartOfDay()),
-            UpcomingEvent("Dzień wdrożenia", 3, firstOfMonth.atStartOfDay()),
-        ).minBy { it.startsAt }
+    /** The next streak length that brings a bonus. */
+    fun nextMilestone(streak: Int): Int = (streak / STREAK_STEP + 1) * STREAK_STEP
+
+    /** The bonus running at [nowMillis], if any. */
+    fun active(progress: Progress, nowMillis: Long, zone: ZoneId = ZoneId.systemDefault()): XpEvent? {
+        val boost = progress.boost ?: return null
+        if (nowMillis >= boost.untilMillis) return null
+        return XpEvent(
+            boost.title,
+            "Każda lekcja daje teraz XP ×${label(boost.percent)}.",
+            boost.percent,
+            LocalDateTime.ofInstant(Instant.ofEpochMilli(boost.untilMillis), zone),
+        )
     }
+
+    /** XP after the bonus, rounded to the nearest whole point. */
+    fun apply(xp: Int, percent: Int): Int = (xp * percent + 50) / 100
+
+    fun label(percent: Int): String =
+        if (percent % 100 == 0) "${percent / 100}" else "${percent / 100},${percent % 100 / 10}"
 }

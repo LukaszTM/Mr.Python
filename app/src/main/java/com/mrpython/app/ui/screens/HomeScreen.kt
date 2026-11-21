@@ -54,6 +54,7 @@ import androidx.compose.ui.window.Dialog
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Lesson
+import com.mrpython.app.domain.Moods
 import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.ui.AppUiState
@@ -181,7 +182,7 @@ private fun mascotLine(state: AppUiState): String {
     val event = state.event
     return when {
         Rules.visibleXpToday(p, state.today) >= Rules.DAILY_GOAL_XP -> "Cel na dziś zrobiony. Świetna robota!"
-        event != null -> "Trwa ${event.title}! Każda lekcja daje teraz XP ×${event.multiplier}."
+        event != null -> "${event.title}: każda lekcja daje teraz XP ×${event.multiplier}!"
         streak > 0 && !doneToday -> "Twoja seria: $streak dni. Jedna lekcja i dziś też się liczy!"
         doneToday -> "Dobra passa! Jeszcze trochę i cel dzienny będzie Twój."
         state.now.hour < 12 -> "Dzień dobry! Kawa, klawiatura i jedna lekcja?"
@@ -261,9 +262,11 @@ private fun MascotCard(state: AppUiState) {
 
 @Composable
 private fun NextEventLine(state: AppUiState) {
-    val next = Events.next(state.now)
+    val streak = Rules.visibleStreak(state.progress, state.today)
+    val milestone = Events.nextMilestone(streak)
+    val bonus = Events.label(Events.streakPercent(milestone) ?: 100)
     Text(
-        "⚡ Następny event: ${next.title} (XP ×${next.multiplier}) za ${timeLeft(state.now, next.startsAt)}",
+        "⚡ Bonus XP ×$bonus za serię ${Moods.days(milestone)} (jeszcze ${Moods.days(milestone - streak)})",
         Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 6.dp),

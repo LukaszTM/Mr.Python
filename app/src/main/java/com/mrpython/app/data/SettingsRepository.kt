@@ -27,7 +27,13 @@ class SettingsRepository(context: Context) {
         get() = prefs.getBoolean(KEY_FULL_COURSE, false)
         set(value) = prefs.edit().putBoolean(KEY_FULL_COURSE, value).apply()
 
+    /** The welcome XP bonus is handed out once, on the first launch. */
+    var welcomeBoostGiven: Boolean
+        get() = prefs.getBoolean(KEY_WELCOME_BOOST, false)
+        set(value) = prefs.edit().putBoolean(KEY_WELCOME_BOOST, value).apply()
+
     private companion object {
+        const val KEY_WELCOME_BOOST = "welcome_boost_given"
         const val KEY_FULL_COURSE = "full_course"
         const val KEY_REMINDERS = "reminders_enabled"
         const val KEY_HOUR = "reminder_hour"

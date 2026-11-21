@@ -44,12 +44,7 @@ object Reminders {
                 )
             }
             ReminderKind.DAILY -> {
-                val event = Events.active(now)
                 when {
-                    event != null -> ReminderMessage(
-                        "${event.title}: XP ×${event.multiplier} ⚡",
-                        "Właśnie trwa event. Zrób lekcję teraz i zgarnij więcej punktów!",
-                    )
                     streak > 0 -> ReminderMessage(
                         "Utrzymaj serię $streak dni 🔥",
                         "Zrób dziś jedną lekcję, żeby seria rosła dalej.",

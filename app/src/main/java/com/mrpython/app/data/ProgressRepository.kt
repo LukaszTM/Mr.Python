@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo
 import com.mrpython.app.domain.Accessory
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.Avatars
+import com.mrpython.app.domain.Boost
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.SnakeSkin
 import com.mrpython.app.domain.Rules
@@ -52,6 +53,9 @@ class ProgressRepository(context: Context) {
         } else {
             null
         },
+        boost = prefs.getString(KEY_BOOST_TITLE, null)?.let { title ->
+            Boost(title, prefs.getInt(KEY_BOOST_PERCENT, 100), prefs.getLong(KEY_BOOST_UNTIL, 0))
+        },
     ).let { it.copy(avatar = Avatars.sanitize(loadAvatar(), it.leagueTier)) }
 
     fun save(p: Progress) {
@@ -71,6 +75,9 @@ class ProgressRepository(context: Context) {
             .putString(KEY_AVATAR_HEAD, p.avatar.head?.name)
             .putString(KEY_AVATAR_EYES, p.avatar.eyes?.name)
             .putString(KEY_AVATAR_EXTRA, p.avatar.extra?.name)
+            .putString(KEY_BOOST_TITLE, p.boost?.title)
+            .putInt(KEY_BOOST_PERCENT, p.boost?.percent ?: 100)
+            .putLong(KEY_BOOST_UNTIL, p.boost?.untilMillis ?: 0)
         val result = p.pendingWeekResult
         if (result == null) {
             editor.remove(KEY_RESULT_RANK).remove(KEY_RESULT_TIER)
@@ -108,5 +115,8 @@ class ProgressRepository(context: Context) {
         const val KEY_AVATAR_HEAD = "avatar_head"
         const val KEY_AVATAR_EYES = "avatar_eyes"
         const val KEY_AVATAR_EXTRA = "avatar_extra"
+        const val KEY_BOOST_TITLE = "boost_title"
+        const val KEY_BOOST_PERCENT = "boost_percent"
+        const val KEY_BOOST_UNTIL = "boost_until"
     }
 }

@@ -20,6 +20,8 @@ data class Progress(
     /** Result of the last finished week, until the learner has seen it. */
     val pendingWeekResult: WeekResult? = null,
     val avatar: Avatar = Avatar(),
+    /** The last XP bonus earned; it may already be over. */
+    val boost: Boost? = null,
 )
 
 object Rules {
@@ -105,11 +107,12 @@ object Rules {
         lessonId: String,
         mistakes: Int,
         today: LocalDate,
-        /** XP multiplier of the event running when the lesson was finished. */
-        multiplier: Int = 1,
+        /** XP percent of the bonus running when the lesson was finished (100 = none). */
+        xpPercent: Int = 100,
+        nowMillis: Long = 0,
     ): Progress {
         val isPractice = lessonId in p.completedLessons
-        val xp = xpForLesson(mistakes, isPractice) * multiplier
+        val xp = Events.apply(xpForLesson(mistakes, isPractice), xpPercent)
         val day = today.toEpochDay()
         val streak = when (p.lastActiveEpochDay) {
             day -> p.streak
@@ -125,6 +128,8 @@ object Rules {
             lastActiveEpochDay = day,
             xpToday = visibleXpToday(p, today) + xp,
             xpTodayEpochDay = day,
+            // A streak that has just grown to a milestone earns a bonus for the next lessons.
+            boost = (if (streak != p.streak) Events.forStreak(streak, nowMillis) else null) ?: p.boost,
         )
         // Practising an old lesson earns a heart back, as in Duolingo.
         return if (isPractice) gainHeart(updated) else updated

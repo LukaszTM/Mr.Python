@@ -34,7 +34,7 @@ Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lek
 • seria dni, punkty XP i cel dzienny
 • serca: pierwsza pomyłka w zadaniu to darmowa poprawka
 • literówki z klawiatury telefonu nie psują dobrej odpowiedzi
-• eventy z mnożnikiem XP: happy hour, weekendowy hackathon i dzień wdrożenia
+• bonusy XP: ×2 na start, a potem za serię 5, 10, 15… dni
 
 🏆 LIGA TYGODNIOWA
 • rywalizuj co tydzień i awansuj jak w branży IT: Stażysta → Junior → Mid → Senior → Tech Lead → Architekt → CTO

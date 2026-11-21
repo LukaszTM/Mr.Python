@@ -61,8 +61,10 @@ data class LessonResult(
     val isPractice: Boolean,
     /** A replay gave a heart back (only when hearts weren't already full). */
     val heartRestored: Boolean = false,
-    /** The XP event that multiplied this lesson's XP, if one was running. */
+    /** The XP bonus that multiplied this lesson's XP, if one was running. */
     val event: XpEvent? = null,
+    /** A bonus this lesson has just earned (a streak milestone); it applies to the next lessons. */
+    val earned: XpEvent? = null,
 )
 
 data class AppUiState(
@@ -87,8 +89,8 @@ data class AppUiState(
     val now: LocalDateTime
         get() = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
 
-    /** The XP event running right now, if any. */
-    val event: XpEvent? get() = Events.active(now)
+    /** The XP bonus running right now, if any. */
+    val event: XpEvent? get() = Events.active(progress, nowMillis)
 }
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
@@ -123,6 +125,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     init {
+        if (!settings.welcomeBoostGiven) {
+            settings.welcomeBoostGiven = true
+            _state.update { it.copy(progress = it.progress.copy(boost = Events.welcome(System.currentTimeMillis()))) }
+        }
         persist()
         ReminderScheduler.schedule(application)
         billing.refresh()
@@ -217,11 +223,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun finishLesson(session: LessonSession, isPractice: Boolean) {
-        val event = Events.active(LocalDateTime.now())
+        val nowMillis = System.currentTimeMillis()
         _state.update {
             val today = LocalDate.now()
+            val event = Events.active(it.progress, nowMillis)
             val progress = Rules.completeLesson(
-                it.progress, session.lessonId, session.mistakes, today, event?.multiplier ?: 1,
+                it.progress, session.lessonId, session.mistakes, today, event?.percent ?: 100, nowMillis,
             )
             val attempts = session.total + session.mistakes
             it.copy(
@@ -234,6 +241,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     isPractice = isPractice,
                     heartRestored = progress.hearts > it.progress.hearts,
                     event = event,
+                    earned = if (progress.boost != it.progress.boost) Events.active(progress, nowMillis) else null,
                 ),
             )
         }
