@@ -6,6 +6,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -72,6 +73,7 @@ fun ProfileScreen(
 ) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
+    var editingAvatar by remember { mutableStateOf(false) }
     val totalLessons = CourseContent.allLessons.size
     val done = CourseContent.allLessons.count { it.id in p.completedLessons }
 
@@ -94,6 +96,19 @@ fun ProfileScreen(
         Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = AppColors.Text)
         Text(p.leagueTier.title, color = p.leagueTier.color(), fontWeight = FontWeight.Bold, fontSize = 16.sp)
         Text("import wiedza  # uczę się Pythona", color = AppColors.TextDim, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
+        Spacer(Modifier.height(14.dp))
+        // The wardrobe stays folded away until asked for, right under the avatar it changes.
+        SecondaryButton(
+            text = if (editingAvatar) "✓  Gotowe" else "✎  Edytuj awatara",
+            onClick = { editingAvatar = !editingAvatar },
+            color = if (editingAvatar) AppColors.Success else AppColors.Yellow,
+        )
+        AnimatedVisibility(visible = editingAvatar) {
+            Column {
+                Spacer(Modifier.height(16.dp))
+                AvatarEditor(p.avatar, p.leagueTier, onAvatar)
+            }
+        }
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Statystyki")
@@ -106,10 +121,6 @@ fun ProfileScreen(
             StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
             StatCard("♥", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
         }
-        Spacer(Modifier.height(24.dp))
-
-        SectionTitle("Awatar")
-        AvatarEditor(p.avatar, p.leagueTier, onAvatar)
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Przypomnienia")
