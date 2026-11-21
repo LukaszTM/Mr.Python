@@ -1,0 +1,357 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+
+internal val module47Practice = listOf(
+    practice(
+        "u47l1",
+        output(
+            "line = \"Anna,Miller,40\"\nfirst, last, age = line.split(\",\")\nprint(last)",
+            "Miller",
+            "Fields from split() can be unpacked straight into variables.",
+        ),
+        output(
+            "fields = \"bread,4.50\".split(\",\")\nprint(float(fields[1]) * 2)",
+            "9.0",
+            "We convert the price to float before multiplying.",
+        ),
+        output(
+            "line = \"a,b,c\\n\"\nprint(len(line.split(\",\")[2]))",
+            "2",
+            "Without strip() the last field is \"c\\n\" – two characters.",
+        ),
+        output(
+            "text = \"Amy,5\\nJohn,3\\nEve,4\"\nfor row in text.splitlines():\n    name, grade = row.split(\",\")\n    print(name, int(grade) + 1)",
+            "Amy 6\nJohn 4\nEve 5",
+            "We split each row separately and convert the grade to int.",
+        ),
+        output(
+            "print(\"a,,c\".split(\",\"))",
+            "['a', '', 'c']",
+            "Two commas next to each other give an empty field.",
+        ),
+        output(
+            "row = \" Amy , 25 \"\nfields = [p.strip() for p in row.split(\",\")]\nprint(fields)",
+            "['Amy', '25']",
+            "strip() removes the spaces around each field.",
+        ),
+        output(
+            "text = \"x,1\\ny,2\\nz,3\"\ntotal = 0\nfor row in text.splitlines():\n    total += int(row.split(\",\")[1])\nprint(total)",
+            "6",
+            "We sum the second column of all the rows.",
+        ),
+        output(
+            "fields = [\"Amy\", \"25\", \"Boston\"]\nprint(\",\".join(fields))",
+            "Amy,25,Boston",
+            "join() glues the fields into one CSV row.",
+        ),
+        choice(
+            "What type are the fields after \"John,30\".split(\",\")?",
+            listOf("All of them are strings (str)", "John is a str, 30 is an int", "All of them are numbers", "It's a tuple"),
+            0,
+            "split() always returns a list of strings.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("4", "3", "2", "Error"),
+            0,
+            "A comma inside quotes also splits the string.",
+            code = "row = 'John,\"5 Main St, Apt 2\",Boston'\nprint(len(row.split(\",\")))",
+        ),
+        choice(
+            "Which method splits the whole text of a file into rows?",
+            listOf("splitlines()", "split(\",\")", "join()", "strip()"),
+            0,
+            "splitlines() splits the text at newline characters.",
+        ),
+        fill(
+            "Fill in the separator to print \"b\".",
+            "line = \"a|b|c\"\nprint(line.split(\"____\")[1])",
+            listOf("|", ",", ";"),
+            "|",
+            "The fields are separated by a vertical bar; other separators won't split the string and will give an IndexError.",
+        ),
+        fill(
+            "Fill in the blank to remove the newline character before splitting.",
+            "line = \"1,2\\n\"\nprint(line.____().split(\",\"))",
+            listOf("strip", "upper", "lower"),
+            "strip",
+            "strip() removes \\n; upper() and lower() would leave \"2\\n\" in the last field.",
+        ),
+        tiles(
+            "Split the row line at the semicolons and store the result in the variable fields",
+            listOf("fields", "=", "line.split(\";\")"),
+            listOf("line.split(\",\")", "\";\".join(line)"),
+            "The separator is a semicolon.",
+        ),
+        tiles(
+            "Remove the newline character from the row and split it at the commas",
+            listOf("fields", "=", "line.strip()", ".split(\",\")"),
+            listOf(".join(\",\")", "line.split()"),
+            "First strip(), then split(\",\").",
+        ),
+    ),
+    practice(
+        "u47l2",
+        output(
+            "import csv, io\nf = io.StringIO(\"name,city\\nAmy,Boston\\n\")\nrows = list(csv.reader(f))\nprint(len(rows), rows[1][1])",
+            "2 Boston",
+            "list() collects all the rows; each one is a list of fields.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO('\"Miller, Anna\",33,\"Dallas\"')\nrow = next(csv.reader(f))\nprint(row[0])",
+            "Miller, Anna",
+            "A comma inside quotes doesn't split the field.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"a|b|c\")\nprint(next(csv.reader(f, delimiter=\"|\")))",
+            "['a', 'b', 'c']",
+            "delimiter=\"|\" sets the vertical bar as the separator.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"x,1\\ny,2\\n\")\nr = csv.reader(f)\nnext(r)\nprint(next(r))",
+            "['y', '2']",
+            "The first next() skips a row, the second returns the next one.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO()\nw = csv.writer(f)\nw.writerow([\"a\", \"b\"])\nw.writerow([1, 2])\nprint(f.getvalue().splitlines())",
+            "['a,b', '1,2']",
+            "Each writerow() adds one row.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f, delimiter=\";\").writerow([\"x\", \"y\"])\nprint(f.getvalue().strip())",
+            "x;y",
+            "delimiter works when writing too.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f).writerows([[1, 2], [3, 4]])\nprint(f.getvalue().split())",
+            "['1,2', '3,4']",
+            "writerows() writes many rows at once.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f).writerow([\"Smith, John\", 5])\nprint(f.getvalue().strip())",
+            "\"Smith, John\",5",
+            "The writer wraps a field containing a comma in quotes.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"1,2,3\\n4,5,6\\n\")\nfor row in csv.reader(f):\n    print(sum(int(x) for x in row))",
+            "6\n15",
+            "We sum the fields of each row after converting them to int.",
+        ),
+        choice(
+            "What does csv.reader return for each row?",
+            listOf("A list of strings", "A dictionary", "A tuple of numbers", "A single string"),
+            0,
+            "Each row is a list of fields as strings.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("['a;b']", "['a', 'b']", "['a', ';', 'b']", "Error"),
+            0,
+            "Without delimiter=\";\" the reader splits only at commas.",
+            code = "import csv, io\nf = io.StringIO(\"a;b\")\nprint(next(csv.reader(f)))",
+        ),
+        fill(
+            "Fill in the blank to write several rows at once.",
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f).____([[\"a\"], [\"b\"]])\nprint(f.getvalue().split())",
+            listOf("writerows", "writerow", "write"),
+            "writerows",
+            "writerows() writes two rows; writerow() would treat the lists as fields, and write doesn't exist.",
+        ),
+        fill(
+            "Fill in the blank to read columns separated by a tab.",
+            "import csv, io\nf = io.StringIO(\"a\\tb\")\nprint(next(csv.reader(f, ____=\"\\t\")))",
+            listOf("delimiter", "sep", "split"),
+            "delimiter",
+            "The separator parameter is delimiter; sep and split would raise a TypeError.",
+        ),
+        tiles(
+            "Create an object that writes CSV to the file f and store it in the variable w",
+            listOf("w", "=", "csv.writer(", "f)"),
+            listOf("csv.reader(", "f.writer("),
+            "csv.writer(file) returns an object with a writerow() method.",
+        ),
+        tiles(
+            "Print all the text written to the io.StringIO object f",
+            listOf("print(", "f.getvalue()", ")"),
+            listOf("f.read_all()", "csv.getvalue("),
+            "getvalue() returns the entire contents of the buffer.",
+        ),
+    ),
+    practice(
+        "u47l3",
+        output(
+            "import csv, io\nf = io.StringIO(\"country,capital\\nFrance,Paris\")\nfor r in csv.DictReader(f):\n    print(r[\"capital\"])",
+            "Paris",
+            "The header determines the dictionary keys.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"x,y\\n1,2\\n3,4\")\nprint(len(list(csv.DictReader(f))))",
+            "2",
+            "The header isn't counted as a data row.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"id,name\\n7,cat\")\nr = next(csv.DictReader(f))\nprint(r[\"id\"] + r[\"name\"])",
+            "7cat",
+            "The values are strings, so + joins them.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"p,q,r\\n1,2,3\")\nprint(csv.DictReader(f).fieldnames)",
+            "['p', 'q', 'r']",
+            "fieldnames holds the column names.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"w\\n10\\n30\\n20\")\nw = [int(r[\"w\"]) for r in csv.DictReader(f)]\nprint(max(w) - min(w))",
+            "20",
+            "The range is the difference between the largest and the smallest value.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"t,c\\na,1.5\\nb,2.5\")\ns = sum(float(r[\"c\"]) for r in csv.DictReader(f))\nprint(s)",
+            "4.0",
+            "Values with a decimal point are converted to float.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"name,pts\\nAmy,7\\nJohn,9\\nEve,8\")\nbest = max(csv.DictReader(f), key=lambda r: int(r[\"pts\"]))\nprint(best[\"name\"])",
+            "John",
+            "max with key picks the row with the most points.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"k\\na\\nb\\na\")\ncount = {}\nfor r in csv.DictReader(f):\n    count[r[\"k\"]] = count.get(r[\"k\"], 0) + 1\nprint(count)",
+            "{'a': 2, 'b': 1}",
+            "We count how many times each value appears in column k.",
+        ),
+        choice(
+            "What is each row returned by csv.DictReader?",
+            listOf("A dictionary: column name → value", "A list of numbers", "A tuple of strings", "A single string"),
+            0,
+            "The keys come from the header row.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("1020", "30", "TypeError", "10"),
+            0,
+            "Values from CSV are strings, so + joins them.",
+            code = "import csv, io\nf = io.StringIO(\"a,b\\n10,20\")\nr = next(csv.DictReader(f))\nprint(r[\"a\"] + r[\"b\"])",
+        ),
+        choice(
+            "Where does DictReader get the dictionary keys from?",
+            listOf("From the first row of the file (the header)", "From the column numbers", "From the file name", "You always have to provide them by hand"),
+            0,
+            "The first row is the header with the column names.",
+        ),
+        fill(
+            "Fill in the blank to compute the average (result 3.0).",
+            "import csv, io\nf = io.StringIO(\"n\\n2\\n4\")\nd = [int(r[\"n\"]) for r in csv.DictReader(f)]\nprint(sum(d) / ____(d))",
+            listOf("len", "max", "sum"),
+            "len",
+            "The average is the sum divided by the number of items; max would give 1.5, and sum 1.0.",
+        ),
+        fill(
+            "Fill in the blank to print the column names.",
+            "import csv, io\nf = io.StringIO(\"a,b\\n1,2\")\nprint(csv.DictReader(f).____)",
+            listOf("fieldnames", "keys", "header"),
+            "fieldnames",
+            "The fieldnames attribute holds the header; keys and header don't exist.",
+        ),
+        tiles(
+            "Create a list of row dictionaries from the file f",
+            listOf("rows", "=", "list(", "csv.DictReader(", "f))"),
+            listOf("csv.reader(", "dict("),
+            "list() collects all the rows from DictReader.",
+        ),
+        tiles(
+            "Add the value of the price column from row r to total as a number",
+            listOf("total", "+=", "int(", "r[\"price\"]", ")"),
+            listOf("r.price", "str("),
+            "A value from CSV has to be converted to int.",
+        ),
+    ),
+    practice(
+        "u47l4",
+        output(
+            "print(\"Amy;20;Omaha\".split(\";\")[2])",
+            "Omaha",
+            "The third field has index 2.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO('1,\"a,b,c\",2')\nprint(next(csv.reader(f))[1])",
+            "a,b,c",
+            "A quoted field keeps its commas.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"n,v\\na,3\\nb,4\")\nprint(sum(int(r[\"v\"]) for r in csv.DictReader(f)))",
+            "7",
+            "We sum column v after converting to int.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f).writerow([\"Amy\", 5, \"ok\"])\nprint(f.getvalue().strip())",
+            "Amy,5,ok",
+            "The writer turns a list into a CSV row.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"a;b\\n1;2\")\nfor row in csv.reader(f, delimiter=\";\"):\n    print(row[1])",
+            "b\n2",
+            "Without DictReader the header is just an ordinary row.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"name,age\\nAmy,30\\nJohn,20\")\nd = {r[\"name\"]: int(r[\"age\"]) for r in csv.DictReader(f)}\nprint(d[\"John\"])",
+            "20",
+            "A name → age dictionary built from CSV rows.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"o\\n5\\n3\\n4\")\no = sorted(int(r[\"o\"]) for r in csv.DictReader(f))\nprint(o)",
+            "[3, 4, 5]",
+            "A column can be sorted after converting it to numbers.",
+        ),
+        output(
+            "import csv, io\nf = io.StringIO(\"x\\n1\\n2\")\nr = csv.DictReader(f)\nprint(r.fieldnames, next(r)[\"x\"])",
+            "['x'] 1",
+            "fieldnames is the header, and the first data row has x = '1'.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("['a', 'b', 'c']", "['a,b,c']", "['a', 'b,c']", "Error"),
+            0,
+            "Without quotes every comma splits a field.",
+            code = "import csv, io\nf = io.StringIO(\"a,b,c\")\nprint(next(csv.reader(f)))",
+        ),
+        choice(
+            "Which class should you choose to refer to columns by name?",
+            listOf("csv.DictReader", "csv.reader", "csv.writer", "io.StringIO"),
+            0,
+            "DictReader returns dictionaries with keys from the header.",
+        ),
+        choice(
+            "What do you have to do to add up the values of a CSV column?",
+            listOf("Convert them to numbers, e.g. with int()", "Nothing – they are already numbers", "Use json.loads()", "Sort them"),
+            0,
+            "The csv module returns all fields as strings.",
+        ),
+        fill(
+            "Fill in the blank to write one CSV row.",
+            "import csv, io\nf = io.StringIO()\ncsv.writer(f).____([\"x\", 1])\nprint(f.getvalue().strip())",
+            listOf("writerow", "write", "append"),
+            "writerow",
+            "A writer object has a writerow() method; write and append don't exist.",
+        ),
+        fill(
+            "Fill in the blank to read rows as dictionaries.",
+            "import csv, io\nf = io.StringIO(\"price\\n12\")\nfor r in csv.____(f):\n    print(int(r[\"price\"]) * 2)",
+            listOf("DictReader", "reader", "writer"),
+            "DictReader",
+            "A plain reader gives lists, so r[\"price\"] would raise an error.",
+        ),
+        tiles(
+            "Create a CSV reader with the separator ; for the file f",
+            listOf("r", "=", "csv.reader(", "f,", "delimiter=\";\")"),
+            listOf("sep=\";\")", "csv.writer("),
+            "We set the separator with the delimiter parameter.",
+        ),
+        tiles(
+            "Split the string line into fields at the commas",
+            listOf("fields", "=", "line.split(", "\",\"", ")"),
+            listOf("line.join(", "split(line"),
+            "split(\",\") splits a string into a list of fields.",
+        ),
+    ),
+)

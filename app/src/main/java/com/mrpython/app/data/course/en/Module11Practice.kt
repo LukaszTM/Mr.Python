@@ -1,0 +1,351 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+
+internal val module11Practice = listOf(
+    practice(
+        "u11l1",
+        output(
+            "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc = Car(\"Ford\")\nprint(c.brand)",
+            "Ford",
+            "The argument \"Ford\" goes into the brand attribute.",
+        ),
+        output(
+            "class Bird:\n    def __init__(self, species, weight):\n        self.species = species\n        self.weight = weight\n\nb = Bird(\"sparrow\", 30)\nprint(b.weight + 5)",
+            "35",
+            "The weight attribute has the value 30.",
+        ),
+        output(
+            "class Player:\n    def __init__(self, nick):\n        self.nick = nick\n        self.points = 0\n\np = Player(\"Zed\")\nprint(p.nick, p.points)",
+            "Zed 0",
+            "An attribute can have a fixed starting value, even without a parameter.",
+        ),
+        output(
+            "class Box:\n    def __init__(self, x):\n        self.x = x\n\na = Box(1)\nb = Box(2)\na.x = 9\nprint(a.x, b.x)",
+            "9 2",
+            "Changing one object's attribute doesn't affect another object.",
+        ),
+        output(
+            "class Color:\n    def __init__(self, name):\n        print(\"Creating\", name)\n        self.name = name\n\nc = Color(\"green\")",
+            "Creating green",
+            "__init__ runs automatically when an object is created.",
+        ),
+        output(
+            "class Student:\n    def __init__(self, name):\n        self.name = name.upper()\n\nprint(Student(\"kate\").name)",
+            "KATE",
+            "In __init__ you can process a value before storing it.",
+        ),
+        output("class Cat:\n    pass\n\nc = Cat()\nc.name = \"Felix\"\nprint(c.name)", "Felix", "You can add an attribute to an object after it's been created, too."),
+        output(
+            "class Shelf:\n    def __init__(self):\n        self.items = []\n\ns = Shelf()\ns.items.append(4)\nprint(s.items)",
+            "[4]",
+            "An attribute can be a list, which we then change.",
+        ),
+        choice(
+            "How do you create an object of the Car class?",
+            listOf("c = Car()", "c = new Car()", "c = class Car", "c = Car.create"),
+            0,
+            "We create an object by calling the class like a function.",
+        ),
+        choice(
+            "What will happen?",
+            listOf("An error – the name argument is missing", "d.name will equal None", "d.name will be an empty string", "Nothing will happen"),
+            0,
+            "__init__ requires a name, and none was given.",
+            code = "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nd = Dog()",
+        ),
+        choice(
+            "What do we call a value stored in an object, like self.name?",
+            listOf("An attribute", "A method", "A class", "A module"),
+            0,
+            "An object's data are its attributes.",
+        ),
+        fill(
+            "Fill in the blank to create the Bike class.",
+            "____ Bike:\n    pass\n\nb = Bike()\nprint(\"done\")",
+            listOf("class", "def", "new"),
+            "class",
+            "We define a class with the class keyword.",
+        ),
+        fill(
+            "Fill in the name of the method that sets the attributes of a new object.",
+            "class House:\n    def ____(self, floors):\n        self.floors = floors\n\nprint(House(2).floors)",
+            listOf("__init__", "init", "__str__"),
+            "__init__",
+            "Only __init__ is called automatically when an object is created.",
+        ),
+        tiles(
+            "Create an object of the Point class with coordinates 3 and 4 in the variable p",
+            listOf("p", "=", "Point(", "3,", "4", ")"),
+            listOf("new", "self,"),
+            "We pass the arguments in parentheses, without self.",
+        ),
+        tiles(
+            "In __init__, store the value of the age parameter in the age attribute",
+            listOf("self.age", "=", "age"),
+            listOf("self", "age.self"),
+            "self.attribute = parameter stores the value in the object.",
+        ),
+    ),
+    practice(
+        "u11l2",
+        output(
+            "class Cat:\n    def meow(self, times):\n        return \"meow\" * times\n\nprint(Cat().meow(2))",
+            "meowmeow",
+            "The method gets the argument times, and Python supplies self itself.",
+        ),
+        output(
+            "class Circle:\n    def __init__(self, r):\n        self.r = r\n    def diameter(self):\n        return 2 * self.r\n\nprint(Circle(5).diameter())",
+            "10",
+            "The method uses the attribute r: 2 * 5.",
+        ),
+        output(
+            "class Counter:\n    def __init__(self):\n        self.n = 10\n    def subtract(self, k):\n        self.n -= k\n        return self.n\n\nc = Counter()\nc.subtract(3)\nprint(c.subtract(3))",
+            "4",
+            "10 - 3 - 3 = 4 – the object's state changes between calls.",
+        ),
+        output(
+            "class Person:\n    def __init__(self, name):\n        self.name = name\n    def introduce(self):\n        print(\"I am\", self.name)\n\nPerson(\"John\").introduce()",
+            "I am John",
+            "A method can print text itself.",
+        ),
+        output(
+            "class Lamp:\n    def __init__(self):\n        self.is_on = False\n    def toggle(self):\n        self.is_on = not self.is_on\n\nl = Lamp()\nl.toggle()\nl.toggle()\nl.toggle()\nprint(l.is_on)",
+            "True",
+            "Three toggles starting from False give True.",
+        ),
+        output(
+            "class Rectangle:\n    def __init__(self, a, b):\n        self.a = a\n        self.b = b\n    def perimeter(self):\n        return 2 * (self.a + self.b)\n\nprint(Rectangle(2, 3).perimeter())",
+            "10",
+            "2 * (2 + 3) = 10.",
+        ),
+        output(
+            "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n    def deposit(self, amount):\n        self.balance += amount\n\na = Account(10)\nb = Account(10)\na.deposit(5)\nprint(a.balance, b.balance)",
+            "15 10",
+            "A method changes only the object it was called on.",
+        ),
+        output(
+            "class Calc:\n    def add(self, a, b):\n        return a + b\n    def times2(self, x):\n        return self.add(x, x)\n\nprint(Calc().times2(7))",
+            "14",
+            "A method can call another method through self.",
+        ),
+        output(
+            "class Vector:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def length2(self):\n        return self.x ** 2 + self.y ** 2\n\nprint(Vector(3, 4).length2())",
+            "25",
+            "9 + 16 = 25.",
+        ),
+        choice(
+            "What's wrong with the last line?",
+            listOf("The parentheses are missing – the method won't be called", "Nothing, it prints Woof", "self is missing in the call", "Dog has no bark method"),
+            0,
+            "Without () we print the method itself instead of calling it.",
+            code = "class Dog:\n    def bark(self):\n        return \"Woof\"\n\nd = Dog()\nprint(d.bark)",
+        ),
+        choice(
+            "A method has the header def set(self, x). How many arguments do we pass in the call c.set(...)?",
+            listOf("One – Python passes self itself", "Two", "Zero", "Three"),
+            0,
+            "The object before the dot becomes self.",
+        ),
+        choice(
+            "How is a method different from a regular function?",
+            listOf("It's defined in a class and works on an object", "It can't return a value", "It can't have parameters", "It isn't"),
+            0,
+            "We call a method on an object, like obj.method().",
+        ),
+        fill(
+            "Fill in the blank so the method reads the object's attribute.",
+            "class Cat:\n    def __init__(self, name):\n        self.name = name\n    def introduce(self):\n        return \"I am \" + ____.name\n\nprint(Cat(\"Tom\").introduce())",
+            listOf("self", "Cat", "name"),
+            "self",
+            "The object's attributes are available through self.",
+        ),
+        fill(
+            "Fill in the blank to call the increment method.",
+            "class Counter:\n    def __init__(self):\n        self.n = 0\n    def increment(self):\n        self.n += 1\n\nc = Counter()\nc____increment()\nprint(c.n)",
+            listOf(".", ",", "-"),
+            ".",
+            "We call a method with a dot: obj.method().",
+        ),
+        tiles(
+            "Build the header of the greet method with the parameter name",
+            listOf("def", "greet(", "self,", "name", ")", ":"),
+            listOf("class", "self"),
+            "The first parameter of a method is self, then the others.",
+        ),
+    ),
+    practice(
+        "u11l3",
+        output(
+            "class Point:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def __str__(self):\n        return f\"({self.x}, {self.y})\"\n\nprint(Point(1, 2))",
+            "(1, 2)",
+            "print() uses the string returned by __str__.",
+        ),
+        output(
+            "class Book:\n    def __init__(self, title):\n        self.title = title\n    def __str__(self):\n        return \"Book: \" + self.title\n\nb = Book(\"Moby Dick\")\nprint(str(b).upper())",
+            "BOOK: MOBY DICK",
+            "str(obj) uses __str__ too.",
+        ),
+        output(
+            "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n\nclass Bike(Vehicle):\n    pass\n\nprint(Bike(2).wheels)",
+            "2",
+            "Bike also inherits __init__ from the Vehicle class.",
+        ),
+        output(
+            "class Animal:\n    def introduce(self):\n        return \"I am \" + self.name()\n    def name(self):\n        return \"an animal\"\n\nclass Dog(Animal):\n    def name(self):\n        return \"a dog\"\n\nprint(Dog().introduce())",
+            "I am a dog",
+            "self is a Dog, so the overridden name method is called.",
+        ),
+        output(
+            "class A:\n    def hi(self):\n        return \"A\"\n\nclass B(A):\n    pass\n\nclass C(B):\n    pass\n\nprint(C().hi())",
+            "A",
+            "Inheritance passes through several levels.",
+        ),
+        output(
+            "class Animal:\n    pass\n\nclass Cat(Animal):\n    pass\n\nprint(isinstance(Animal(), Cat))",
+            "False",
+            "Every Cat is an Animal, but not every Animal is a Cat.",
+        ),
+        output(
+            "class Person:\n    def __init__(self, name):\n        self.name = name\n\nclass Student(Person):\n    def __init__(self, name, grade):\n        super().__init__(name)\n        self.grade = grade\n\ns = Student(\"Kate\", 3)\nprint(s.name, s.grade)",
+            "Kate 3",
+            "super().__init__ sets the name, and Student adds the grade.",
+        ),
+        output(
+            "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, a):\n        self.a = a\n    def area(self):\n        return self.a ** 2\n\nprint(Square(4).area(), Shape().area())",
+            "16 0",
+            "Square overrides area(), and Shape has its own version.",
+        ),
+        output(
+            "class Cat:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return self.name + \"!\"\n\ncats = [Cat(\"Tom\"), Cat(\"Bob\")]\nfor c in cats:\n    print(c)",
+            "Tom!\nBob!",
+            "For each object, print() calls __str__.",
+        ),
+        choice(
+            "What should the __str__ method return?",
+            listOf("The string that print() will show", "A number", "A new object", "None"),
+            0,
+            "__str__ returns a text description of the object.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("Cat Fluffy", "Fluffy", "Cat", "An error"),
+            0,
+            "print() uses __str__, which puts \"Cat \" in front of the name.",
+            code = "class Cat:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return \"Cat \" + self.name\n\nprint(Cat(\"Fluffy\"))",
+        ),
+        choice(
+            "What is super().__init__() for in a child class?",
+            listOf("It calls the base class's __init__", "It creates a new class", "It deletes the object", "It calls __str__"),
+            0,
+            "This way the base class sets its attributes.",
+        ),
+        fill(
+            "Fill in the blank so print() prints: Car Ford",
+            "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n    def ____(self):\n        return \"Car \" + self.brand\n\nprint(Car(\"Ford\"))",
+            listOf("__str__", "__init__", "str"),
+            "__str__",
+            "print() looks for the __str__ method.",
+        ),
+        fill(
+            "Fill in the blank to call the base class's __init__.",
+            "class A:\n    def __init__(self):\n        self.x = 5\n\nclass B(A):\n    def __init__(self):\n        ____().__init__()\n\nprint(B().x)",
+            listOf("super", "self", "A"),
+            "super",
+            "super() gives access to the base class's methods for this object.",
+        ),
+        tiles(
+            "Build the header of the Cat class that inherits from the Animal class",
+            listOf("class", "Cat(", "Animal", ")", ":"),
+            listOf("def", "self"),
+            "The base class goes in the parentheses.",
+        ),
+    ),
+    practice(
+        "u11l4",
+        output(
+            "class Thermometer:\n    def __init__(self, c):\n        self.c = c\n    def to_f(self):\n        return self.c * 9 / 5 + 32\n\nprint(Thermometer(100).to_f())",
+            "212.0",
+            "100 * 9 / 5 + 32 = 212.0.",
+        ),
+        output(
+            "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, x):\n        self.items.append(x)\n    def take(self):\n        return self.items.pop()\n\ns = Stack()\ns.push(1)\ns.push(2)\nprint(s.take())",
+            "2",
+            "pop() takes off the element that was pushed last.",
+        ),
+        output(
+            "class Player:\n    def __init__(self, name, lives=3):\n        self.name = name\n        self.lives = lives\n\np = Player(\"Amy\")\np.lives -= 1\nprint(p.lives)",
+            "2",
+            "There are 3 lives by default, then one is lost.",
+        ),
+        output(
+            "class Animal:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return self.name\n\nclass Dog(Animal):\n    pass\n\nprint(Dog(\"Rex\"))",
+            "Rex",
+            "Dog inherits __init__ and __str__.",
+        ),
+        output(
+            "class Side:\n    def __init__(self, n):\n        self.n = n\n\nsides = [Side(3), Side(4), Side(5)]\ntotal = 0\nfor s in sides:\n    total += s.n\nprint(total)",
+            "12",
+            "You can keep objects in a list and loop over them.",
+        ),
+        output(
+            "class Grade:\n    def __init__(self, v):\n        self.v = v\n    def passed(self):\n        return self.v >= 3\n\nfor g in [Grade(2), Grade(5)]:\n    print(g.passed())",
+            "False\nTrue",
+            "2 < 3, and 5 >= 3.",
+        ),
+        output(
+            "class A:\n    def who(self):\n        return \"A\"\n\nclass B(A):\n    def who(self):\n        return \"B\" + super().who()\n\nprint(B().who())",
+            "BA",
+            "An overridden method can call the base class's version.",
+        ),
+        output(
+            "class Counter:\n    def __init__(self):\n        self.n = 0\n    def click(self):\n        self.n += 1\n        return self\n\nc = Counter()\nc.click().click()\nprint(c.n)",
+            "2",
+            "click() returns the same object, so you can call it again.",
+        ),
+        output(
+            "class Rectangle:\n    def __init__(self, a, b):\n        self.a = a\n        self.b = b\n    def is_square(self):\n        return self.a == self.b\n\nprint(Rectangle(2, 2).is_square(), Rectangle(2, 3).is_square())",
+            "True False",
+            "Only the first rectangle has equal sides.",
+        ),
+        choice(
+            "Which line correctly defines a method in a class?",
+            listOf("def describe(self):", "def self.describe():", "method describe(self):", "describe(self) ="),
+            0,
+            "A method is a def inside a class with self as the first parameter.",
+        ),
+        choice(
+            "What will happen?",
+            listOf("An error – the object has no age attribute", "It prints None", "It prints 0", "It prints Tom"),
+            0,
+            "Reading an attribute that doesn't exist raises an AttributeError.",
+            code = "class Cat:\n    def __init__(self):\n        self.name = \"Tom\"\n\nc = Cat()\nprint(c.age)",
+        ),
+        choice(
+            "What does a child class get from its base class?",
+            listOf("Its methods, which it can also override", "Only its name", "Nothing", "Only the __str__ method"),
+            0,
+            "A child class inherits all the methods of the base class.",
+        ),
+        fill(
+            "Fill in the blank to create an object and print its attribute.",
+            "class Car:\n    def __init__(self, brand):\n        self.brand = brand\n\nc = ____(\"Honda\")\nprint(c.brand)",
+            listOf("Car", "self", "class"),
+            "Car",
+            "We create an object by calling the name of the class.",
+        ),
+        fill(
+            "Fill in the blank so the method increases the object's points.",
+            "class Player:\n    def __init__(self):\n        self.points = 0\n    def score(self):\n        ____ += 10\n\np = Player()\np.score()\nprint(p.points)",
+            listOf("self.points", "points", "Player.points"),
+            "self.points",
+            "We change an object's attribute through self.",
+        ),
+        tiles(
+            "Call the add method of the object cart with the argument \"bread\"",
+            listOf("cart.add(", "\"bread\"", ")"),
+            listOf("self,", "add(cart,"),
+            "obj.method(argument) – Python supplies self.",
+        ),
+    ),
+)

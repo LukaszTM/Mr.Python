@@ -70,4 +70,18 @@ class CourseContentTest {
             assertTrue(e.id, AnswerChecker.isCorrect(e, answer))
         }
     }
+
+    @Test
+    fun englishCourseMirrorsThePolishOne() {
+        val pl = CoursePl.units
+        val en = CourseEn.units
+        assertEquals(pl.map { it.id }, en.map { it.id })
+        pl.zip(en).forEach { (a, b) ->
+            assertEquals(a.id, a.lessons.map { it.id }, b.lessons.map { it.id })
+            a.lessons.zip(b.lessons).forEach { (x, y) ->
+                // Same exercises in the same order, so progress and replays work in both languages.
+                assertEquals(x.id, x.pool.map { it.id to it::class }, y.pool.map { it.id to it::class })
+            }
+        }
+    }
 }

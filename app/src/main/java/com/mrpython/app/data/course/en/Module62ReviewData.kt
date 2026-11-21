@@ -1,0 +1,362 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+import com.mrpython.app.domain.CourseUnit
+
+internal val module62 = CourseUnit(
+    id = "u62",
+    title = "Review week: data structures",
+    description = "Daily reviews: lists, tuples, sets, dictionaries and the collections module",
+    lessons = listOf(
+        lesson(
+            "u62l1", "Day 1: lists",
+            output(
+                "a = [5, 3, 8]\na.insert(1, 0)\nprint(a)",
+                "[5, 0, 3, 8]",
+                "insert(1, 0) puts 0 at index 1.",
+            ),
+            output(
+                "a = [1, 2, 3, 2]\na.remove(2)\nprint(a)",
+                "[1, 3, 2]",
+                "remove() deletes only the first occurrence.",
+            ),
+            output(
+                "a = [1, 2, 3, 4, 5]\nprint(a[1:4][::-1])",
+                "[4, 3, 2]",
+                "First the slice [2, 3, 4], then the reversal.",
+            ),
+            output(
+                "a = [1, 2, 3]\na[1:2] = [7, 8, 9]\nprint(a)",
+                "[1, 7, 8, 9, 3]",
+                "Assigning to a slice can change the length of the list.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("[1, 2, 3, 3]", "[1, 2, 3, 1, 2, 3]", "[1, 2, 6]", "[1, 2, [3, 3]]"),
+                0,
+                "Multiplication takes precedence over addition.",
+                code = "print([1, 2] + [3] * 2)",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("[3, 1, 2]", "[1, 2, 3]", "None", "[3, 2, 1]"),
+                0,
+                "sorted() returns a new list and doesn't change the original.",
+                code = "a = [3, 1, 2]\nb = sorted(a)\nprint(a)",
+            ),
+            fill(
+                "Fill in the blank so the program prints 2.",
+                "print([\"a\", \"b\", \"c\"].____(\"c\"))",
+                listOf("index", "find", "count"),
+                "index",
+                "index() returns the position of an element in the list.",
+            ),
+            tiles(
+                "Add the number 10 to the end of the list numbers",
+                listOf("numbers", ".append(", "10)"),
+                listOf(".add(", ".insert("),
+                "append() adds an element to the end of a list.",
+            ),
+        ),
+        lesson(
+            "u62l2", "Day 2: tuples",
+            output(
+                "t = (1, 2, 3)\na, *b = t\nprint(b)",
+                "[2, 3]",
+                "The star collects the rest of the elements into a list.",
+            ),
+            output(
+                "t = (5,)\nprint(len(t), type(t).__name__)",
+                "1 tuple",
+                "The comma creates a one-element tuple.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("int", "tuple", "Error", "list"),
+                0,
+                "Parentheses alone, without a comma, don't create a tuple.",
+                code = "print(type((5)).__name__)",
+            ),
+            output(
+                "t = (1, [2])\nt[1].append(3)\nprint(t)",
+                "(1, [2, 3])",
+                "A tuple is immutable, but the list inside it is not.",
+            ),
+            output(
+                "print((1, 2) < (1, 3), (2,) > (1, 9))",
+                "True True",
+                "Tuples are compared element by element, from the left.",
+            ),
+            choice(
+                "What happens?",
+                listOf("TypeError", "t will equal (5, 2)", "IndexError", "Nothing"),
+                0,
+                "A tuple can't be changed.",
+                code = "t = (1, 2)\nt[0] = 5",
+            ),
+            fill(
+                "Fill in the blank so the program prints 2 1.",
+                "a, b = 1, 2\n____ = b, a\nprint(a, b)",
+                listOf("a, b", "b, a", "a"),
+                "a, b",
+                "Unpacking a tuple swaps the values.",
+            ),
+            tiles(
+                "Unpack the tuple point into the variables x and y",
+                listOf("x,", "y", "=", "point"),
+                listOf("point[0]", "=="),
+                "The number of variables on the left must match the length of the tuple.",
+            ),
+        ),
+        lesson(
+            "u62l3", "Day 3: sets",
+            output(
+                "print(len({1, 2, 2, 3, 3, 3}))",
+                "3",
+                "A set stores only unique elements.",
+            ),
+            output(
+                "a = {1, 2, 3}\nb = {2, 3, 4}\nprint(a & b)",
+                "{2, 3}",
+                "& is the intersection of sets.",
+            ),
+            output(
+                "print({1, 2, 3} - {2})",
+                "{1, 3}",
+                "Difference removes the elements of the second set.",
+            ),
+            output(
+                "print(sorted({3, 1, 2} | {5}))",
+                "[1, 2, 3, 5]",
+                "| joins the sets, and sorted() returns a sorted list.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("{1, 3}", "{2}", "{1, 2, 3}", "{1, 2, 2, 3}"),
+                0,
+                "^ keeps the elements that are in only one of the sets.",
+                code = "print({1, 2} ^ {2, 3})",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("dict", "set", "list", "tuple"),
+                0,
+                "Empty curly braces are an empty dictionary; an empty set is set().",
+                code = "print(type({}).__name__)",
+            ),
+            fill(
+                "Fill in the blank so the program prints {1, 2}.",
+                "s = {1}\ns.____(2)\nprint(s)",
+                listOf("add", "append", "extend"),
+                "add",
+                "You add an element to a set with the add() method.",
+            ),
+            tiles(
+                "Create a set unique from the elements of the list items",
+                listOf("unique", "=", "set(items)"),
+                listOf("list(set)", "{items}"),
+                "set() creates a set from any sequence of elements.",
+            ),
+        ),
+        lesson(
+            "u62l4", "Day 4: dictionaries",
+            output(
+                "d = {\"a\": 1, \"b\": 2}\nd.pop(\"a\")\nprint(d)",
+                "{'b': 2}",
+                "pop() removes the key together with its value.",
+            ),
+            output(
+                "d = {\"a\": 1}\nd.update({\"a\": 5, \"c\": 3})\nprint(d)",
+                "{'a': 5, 'c': 3}",
+                "update() overwrites existing keys and adds new ones.",
+            ),
+            output(
+                "d = {\"x\": 3, \"y\": 1}\nprint(min(d, key=d.get))",
+                "y",
+                "min() compares the values but returns the key.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("3 True False", "3 True True", "3 False False", "Error"),
+                0,
+                "in checks the keys, not the values.",
+                code = "d = {\"a\": 1, \"b\": 2}\nprint(sum(d.values()), \"a\" in d, 1 in d)",
+            ),
+            output(
+                "d = {}\nd[(1, 2)] = \"p\"\nprint(d[1, 2])",
+                "p",
+                "A tuple can be a key, and d[1, 2] is the same as d[(1, 2)].",
+            ),
+            choice(
+                "What happens?",
+                listOf("KeyError", "It prints None", "It prints 0", "IndexError"),
+                0,
+                "Using [] with a missing key raises KeyError.",
+                code = "d = {\"a\": 1}\nprint(d[\"b\"])",
+            ),
+            fill(
+                "Fill in the blank so the program prints a 1.",
+                "d = {\"a\": 1}\nfor k, v in d.____():\n    print(k, v)",
+                listOf("items", "keys", "values"),
+                "items",
+                "items() gives (key, value) pairs.",
+            ),
+            tiles(
+                "Assign the value 5 to the key \"key\" in the dictionary d",
+                listOf("d[", "\"key\"]", "=", "5"),
+                listOf("d.", "=="),
+                "You add a new pair by assigning to d[key].",
+            ),
+        ),
+        lesson(
+            "u62l5", "Day 5: nested structures",
+            choice(
+                "What does this code print?",
+                listOf("6", "5", "2", "Error"),
+                0,
+                "Row 1, column 2.",
+                code = "m = [[1, 2, 3], [4, 5, 6]]\nprint(m[1][2])",
+            ),
+            output(
+                "m = [[1, 2], [3, 4]]\nprint([r[0] for r in m])",
+                "[1, 3]",
+                "From each row we take the first element – the first column.",
+            ),
+            output(
+                "data = {\"amy\": {\"age\": 20}}\nprint(data[\"amy\"][\"age\"] + 1)",
+                "21",
+                "First Amy's dictionary, then her age.",
+            ),
+            output(
+                "u = [{\"n\": \"a\", \"p\": 3}, {\"n\": \"b\", \"p\": 5}]\nbest = max(u, key=lambda x: x[\"p\"])\nprint(best[\"n\"])",
+                "b",
+                "max() picks the dictionary with the largest p.",
+            ),
+            output(
+                "m = [[1, 2], [3, 4]]\nprint(list(zip(*m)))",
+                "[(1, 3), (2, 4)]",
+                "zip(*m) transposes the matrix.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("10", "[3, 7]", "4", "Error"),
+                0,
+                "We add up the row sums: 3 + 7.",
+                code = "m = [[1, 2], [3, 4]]\nprint(sum(sum(r) for r in m))",
+            ),
+            fill(
+                "Fill in the blank so the program prints {'amy': [4, 5]}.",
+                "d = {\"amy\": [4]}\nd[\"amy\"].____(5)\nprint(d)",
+                listOf("append", "add", "update"),
+                "append",
+                "There's a list under the key, so we use append().",
+            ),
+            tiles(
+                "Write the header of a loop over the rows of the list matrix",
+                listOf("for", "row", "in", "matrix:"),
+                listOf("range(", "of"),
+                "Looping over a list of lists gives you the rows one by one.",
+            ),
+        ),
+        lesson(
+            "u62l6", "Day 6: comprehensions",
+            output(
+                "print({x: x * x for x in range(3)})",
+                "{0: 0, 1: 1, 2: 4}",
+                "A dictionary comprehension creates key: value pairs.",
+            ),
+            output(
+                "print([s[0] for s in \"cats eat fish\".split()])",
+                "['c', 'e', 'f']",
+                "We take the first letter of each word.",
+            ),
+            output(
+                "print(sum(x for x in range(10) if x % 3 == 0))",
+                "18",
+                "0 + 3 + 6 + 9 = 18.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("{1, 2}", "{1, 2, 2}", "[1, 2, 2]", "{3}"),
+                0,
+                "The set removes the repeated length 2.",
+                code = "print({len(s) for s in [\"a\", \"bb\", \"cc\"]})",
+            ),
+            output(
+                "print([x if x > 0 else 0 for x in [-1, 2, -3]])",
+                "[0, 2, 0]",
+                "Negative numbers are replaced with 0.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("6", "5", "3", "2"),
+                0,
+                "For each of the 3 values of x there are 2 values of y: 3 * 2 = 6.",
+                code = "a = [x for x in range(3) for y in range(2)]\nprint(len(a))",
+            ),
+            fill(
+                "Fill in the blank so the program prints {'a': 1, 'b': 2}.",
+                "pairs = [(\"a\", 1), (\"b\", 2)]\nprint({k: ____ for k, v in pairs})",
+                listOf("v", "k", "(k, v)"),
+                "v",
+                "The value in the dictionary should be v.",
+            ),
+            tiles(
+                "Pick only the even numbers from the list numbers",
+                listOf("evens =", "[x", "for x in numbers", "if x % 2 == 0]"),
+                listOf("else", "while"),
+                "The filtering condition goes at the end of a list comprehension.",
+            ),
+        ),
+        lesson(
+            "u62l7", "Day 7: the collections module",
+            output(
+                "from collections import Counter\nc = Counter(\"mississippi\")\nprint(c[\"s\"], c[\"z\"])",
+                "4 0",
+                "Counter returns 0 for missing elements.",
+            ),
+            output(
+                "from collections import defaultdict\nd = defaultdict(list)\nd[\"a\"].append(1)\nd[\"b\"]\nprint(len(d))",
+                "2",
+                "Just reading d[\"b\"] creates the key with an empty list.",
+            ),
+            output(
+                "from collections import deque\nq = deque([1, 2, 3])\nq.appendleft(0)\nq.pop()\nprint(list(q))",
+                "[0, 1, 2]",
+                "appendleft adds to the front, pop() removes from the end.",
+            ),
+            output(
+                "from collections import namedtuple\nP = namedtuple(\"P\", \"x y\")\np = P(1, 2)\nprint(p.x + p[1])",
+                "3",
+                "You can access namedtuple fields by name or by index.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("[3, 4]", "[0, 1]", "[0, 1, 2, 3, 4]", "Error"),
+                0,
+                "With maxlen=2, old elements drop off the other end.",
+                code = "from collections import deque\nq = deque(maxlen=2)\nfor i in range(5):\n    q.append(i)\nprint(list(q))",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("Counter({'a': 2, 'b': 2})", "Counter({'a': 2, 'b': 1})", "Counter({'b': 2, 'a': 2, 'c': 0})", "Error"),
+                0,
+                "Adding Counters sums the counts.",
+                code = "from collections import Counter\nprint(Counter(\"aab\") + Counter(\"b\"))",
+            ),
+            fill(
+                "Fill in the blank so the program prints 2.",
+                "from collections import defaultdict\nd = defaultdict(____)\nfor ch in \"aba\":\n    d[ch] += 1\nprint(d[\"a\"])",
+                listOf("int", "list", "str"),
+                "int",
+                "int() gives 0, so you can add 1 right away.",
+            ),
+            tiles(
+                "Import the Counter class from the collections module",
+                listOf("from", "collections", "import", "Counter"),
+                listOf("Counter()", "include"),
+                "The syntax is: from module import name.",
+            ),
+        ),
+    ),
+)

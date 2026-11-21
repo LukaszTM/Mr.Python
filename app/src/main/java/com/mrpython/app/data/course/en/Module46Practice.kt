@@ -1,0 +1,357 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+
+internal val module46Practice = listOf(
+    practice(
+        "u46l1",
+        output(
+            "import json\nprint(json.dumps({\"name\": \"Amy\", \"age\": 25}))",
+            "{\"name\": \"Amy\", \"age\": 25}",
+            "The dictionary becomes a JSON object with double quotes.",
+        ),
+        output(
+            "import json\nprint(json.dumps([False, None, 1.5]))",
+            "[false, null, 1.5]",
+            "False is false, None is null, numbers stay unchanged.",
+        ),
+        output(
+            "import json\nprint(json.dumps(\"yes\"))",
+            "\"yes\"",
+            "A string in JSON always has double quotes.",
+        ),
+        output(
+            "import json\nprint(json.dumps(42) + \"!\")",
+            "42!",
+            "dumps() returns a string, so you can join it with another string.",
+        ),
+        output(
+            "import json\nprint(json.dumps({\"a\": (1, 2)}))",
+            "{\"a\": [1, 2]}",
+            "A tuple inside a dictionary becomes an array too.",
+        ),
+        output(
+            "import json\nprint(len(json.dumps([1, 2])))",
+            "6",
+            "The text \"[1, 2]\" has 6 characters.",
+        ),
+        output(
+            "import json\nprint(json.dumps({5: \"x\"}))",
+            "{\"5\": \"x\"}",
+            "The keys of a JSON object are always strings.",
+        ),
+        output(
+            "import json\nprint(json.dumps({\"x\": None, \"y\": True}))",
+            "{\"x\": null, \"y\": true}",
+            "None is null, and True is true.",
+        ),
+        choice(
+            "What type is the result of json.dumps([1, 2])?",
+            listOf("str", "list", "dict", "bytes"),
+            0,
+            "dumps() always returns a string.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("TypeError – a set is not a JSON type", "[1, 2]", "{\"s\": [1, 2]}", "null"),
+            0,
+            "A set can't be written as JSON without converting it to a list.",
+            code = "import json\nprint(json.dumps({\"s\": {1, 2}}))",
+        ),
+        choice(
+            "How is the Python value None written in JSON?",
+            listOf("null", "None", "nil", "\"\""),
+            0,
+            "JSON uses the word null.",
+        ),
+        fill(
+            "Complete the code to convert the list to JSON text.",
+            "import json\nt = json.____([1, None])\nprint(t)",
+            listOf("dumps", "loads", "dump"),
+            "dumps",
+            "dumps() returns a string; loads() expects text, and dump() a file.",
+        ),
+        fill(
+            "Fill in the module so the code prints {\"ok\": true}.",
+            "import ____\nprint(json.dumps({\"ok\": True}))",
+            listOf("json", "csv", "re"),
+            "json",
+            "The dumps function comes from the json module; without importing it you get a NameError.",
+        ),
+        tiles(
+            "Print the dictionary d as JSON text",
+            listOf("print(", "json.dumps(", "d", "))"),
+            listOf("json.loads(", "d.dumps("),
+            "json.dumps(d) returns JSON text.",
+        ),
+        tiles(
+            "Import the json module",
+            listOf("import", "json"),
+            listOf("from", "JSON"),
+            "The module is called json, in lowercase.",
+        ),
+    ),
+    practice(
+        "u46l2",
+        output(
+            "import json\nd = json.loads('{\"city\": \"Paris\", \"code\": 75}')\nprint(d[\"city\"], d[\"code\"] + 1)",
+            "Paris 76",
+            "A number from JSON is of type int right away.",
+        ),
+        output(
+            "import json\nx = json.loads(\"[1, 2, 3]\")\nprint(sum(x))",
+            "6",
+            "A JSON array is loaded as a list.",
+        ),
+        output(
+            "import json\nprint(json.loads(\"false\"), json.loads(\"null\"))",
+            "False None",
+            "false is False, null is None.",
+        ),
+        output(
+            "import json\nprint(type(json.loads(\"3.5\")).__name__)",
+            "float",
+            "A number with a decimal point is loaded as a float.",
+        ),
+        output(
+            "import json\nprint(json.loads('\"amy\"').upper())",
+            "AMY",
+            "A JSON string in quotes becomes an ordinary str.",
+        ),
+        output(
+            "import json\nd = json.loads('{\"a\": 1, \"b\": 2}')\nprint(list(d.keys()))",
+            "['a', 'b']",
+            "The result is an ordinary dictionary with the keys a and b.",
+        ),
+        output(
+            "import json\nt = '{\"x\": [10, 20]}'\nprint(json.loads(t)[\"x\"][-1])",
+            "20",
+            "We access the loaded list with an index.",
+        ),
+        output(
+            "import json\ndata = [1, \"a\", None]\nprint(json.loads(json.dumps(data)) == data)",
+            "True",
+            "A list passes through JSON both ways unchanged.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("JSONDecodeError – True is not valid JSON", "True", "[True]", "None"),
+            0,
+            "In JSON we write true in lowercase.",
+            code = "import json\nprint(json.loads(\"[True]\"))",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("False", "True", "An error", "None"),
+            0,
+            "On its trip through JSON, the key 1 becomes the string \"1\".",
+            code = "import json\nd = {1: \"a\"}\nprint(json.loads(json.dumps(d)) == d)",
+        ),
+        choice(
+            "What Python type does json.loads() turn a JSON object { } into?",
+            listOf("dict", "list", "set", "tuple"),
+            0,
+            "A JSON object is a dictionary.",
+        ),
+        fill(
+            "Complete the code to load JSON text.",
+            "import json\nd = json.____('{\"n\": 3}')\nprint(d[\"n\"] * 2)",
+            listOf("loads", "dumps", "load"),
+            "loads",
+            "loads() reads a string; dumps() would return a string, and load() expects a file.",
+        ),
+        fill(
+            "Fill in the key to print \"Amy\".",
+            "import json\nd = json.loads('{\"name\": \"Amy\", \"age\": 7}')\nprint(d[\"____\"])",
+            listOf("name", "age", "Amy"),
+            "name",
+            "The key name points to \"Amy\"; age gives 7, and Amy raises a KeyError.",
+        ),
+        tiles(
+            "Load JSON text from the string t and print the result",
+            listOf("print(", "json.loads(", "t", "))"),
+            listOf("json.dumps(", "t.loads("),
+            "loads() converts JSON text to Python objects.",
+        ),
+        output(
+            "import json\nprint(json.loads(\"[[1], [2, 3]]\")[1])",
+            "[2, 3]",
+            "Nested arrays become lists of lists.",
+        ),
+    ),
+    practice(
+        "u46l3",
+        output(
+            "import json\nd = json.loads('{\"a\": {\"b\": {\"c\": 5}}}')\nprint(d[\"a\"][\"b\"][\"c\"])",
+            "5",
+            "We go deeper with one key after another.",
+        ),
+        output(
+            "import json\nt = '[{\"n\": \"Amy\"}, {\"n\": \"John\"}]'\nfor person in json.loads(t):\n    print(person[\"n\"])",
+            "Amy\nJohn",
+            "A list of JSON objects is a list of dictionaries.",
+        ),
+        output(
+            "import json\nt = '{\"grades\": [5, 4, 3]}'\nd = json.loads(t)\nprint(len(d[\"grades\"]))",
+            "3",
+            "Under the key grades there is a list of three numbers.",
+        ),
+        output(
+            "import json\nprint(json.dumps([1, 2], indent=1))",
+            "[\n 1,\n 2\n]",
+            "indent=1 puts the items on separate lines with a 1-space indentation.",
+        ),
+        output(
+            "import json\nprint(json.dumps({\"z\": 1, \"a\": 2, \"m\": 3}, sort_keys=True))",
+            "{\"a\": 2, \"m\": 3, \"z\": 1}",
+            "sort_keys=True puts the keys in alphabetical order.",
+        ),
+        output(
+            "import json\nprint(json.dumps(\"piñata\"))",
+            "\"pi\\u00f1ata\"",
+            "By default the letter ñ is written as the code \\u00f1.",
+        ),
+        output(
+            "import json\nprint(json.dumps({\"name\": \"Zoë\"}, ensure_ascii=False))",
+            "{\"name\": \"Zoë\"}",
+            "ensure_ascii=False keeps accented letters.",
+        ),
+        output(
+            "import json\nt = json.dumps({\"a\": 1}, indent=2)\nprint(len(t.splitlines()))",
+            "3",
+            "With indentation the JSON takes 3 lines: {, \"a\": 1 and }.",
+        ),
+        output(
+            "import json\nd = {\"team\": [{\"pts\": 3}, {\"pts\": 7}]}\nprint(max(x[\"pts\"] for x in d[\"team\"]))",
+            "7",
+            "We go through the list of dictionaries and look for the maximum.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("{\"b\": 1, \"a\": 2}", "{\"a\": 2, \"b\": 1}", "{'b': 1, 'a': 2}", "An error"),
+            0,
+            "Without sort_keys the key order stays the same as in the dictionary.",
+            code = "import json\nprint(json.dumps({\"b\": 1, \"a\": 2}))",
+        ),
+        choice(
+            "What is ensure_ascii=False used for?",
+            listOf("So that characters like é or ñ aren't replaced with \\u codes", "To sort the keys", "To add indentation", "To make the JSON half as long"),
+            0,
+            "By default, non-ASCII characters are replaced with \\u sequences.",
+        ),
+        fill(
+            "Complete the code so the keys in the result are sorted.",
+            "import json\nd = {\"y\": 1, \"x\": 2}\nprint(json.dumps(d, ____=True))",
+            listOf("sort_keys", "ensure_ascii", "sorted"),
+            "sort_keys",
+            "sort_keys=True sorts the keys; ensure_ascii won't change the order, and sorted is not a valid parameter.",
+        ),
+        fill(
+            "Complete the code to get to the number 9.",
+            "import json\nd = json.loads('{\"data\": {\"items\": [8, 9]}}')\nprint(d[\"data\"][\"items\"][____])",
+            listOf("1", "0", "2"),
+            "1",
+            "9 is the second item of the list, so its index is 1.",
+        ),
+        tiles(
+            "Print the dictionary d as JSON with a 2-space indentation",
+            listOf("print(", "json.dumps(", "d,", "indent=2", "))"),
+            listOf("sort_keys=2", "json.loads("),
+            "The indent parameter sets the indentation.",
+        ),
+        tiles(
+            "Convert the dictionary d to JSON with readable accented letters",
+            listOf("t", "=", "json.dumps(", "d,", "ensure_ascii=False)"),
+            listOf("ensure_ascii=True)", "json.loads("),
+            "ensure_ascii=False preserves accented characters.",
+        ),
+    ),
+    practice(
+        "u46l4",
+        output(
+            "import json\nprint(json.dumps({\"items\": [True, None]}))",
+            "{\"items\": [true, null]}",
+            "True is true, None is null.",
+        ),
+        output(
+            "import json\nd = json.loads('{\"x\": 2, \"y\": 3}')\nprint(d[\"x\"] * d[\"y\"])",
+            "6",
+            "The loaded values are numbers, so you can multiply them.",
+        ),
+        output(
+            "import json\nprint(json.loads(json.dumps((7, 8))))",
+            "[7, 8]",
+            "After passing through JSON, a tuple comes back as a list.",
+        ),
+        output(
+            "import json\nprint(json.dumps({\"c\": 1, \"b\": 2}, sort_keys=True))",
+            "{\"b\": 2, \"c\": 1}",
+            "sort_keys=True sorts the keys.",
+        ),
+        output(
+            "import json\nprint(json.dumps(\"jalapeño\", ensure_ascii=False))",
+            "\"jalapeño\"",
+            "With ensure_ascii=False the letter ñ stays.",
+        ),
+        output(
+            "import json\nd = json.loads('{\"a\": [{\"b\": \"ok\"}]}')\nprint(d[\"a\"][0][\"b\"])",
+            "ok",
+            "The key a, the first item of the list, the key b.",
+        ),
+        output(
+            "import json\nt = json.dumps({\"n\": 1})\nprint(type(t).__name__, type(json.loads(t)).__name__)",
+            "str dict",
+            "dumps() gives a string, loads() a dictionary again.",
+        ),
+        output(
+            "import json\nprint(json.loads('{\"2\": \"b\"}')[\"2\"])",
+            "b",
+            "The key in JSON is the string \"2\", so we access it with a string.",
+        ),
+        choice(
+            "Which function converts JSON text to Python objects?",
+            listOf("json.loads()", "json.dumps()", "json.text()", "json.parse()"),
+            0,
+            "loads – \"load string\", meaning load from a string.",
+        ),
+        choice(
+            "What will this code print?",
+            listOf("JSONDecodeError", "{'a': 1}", "a", "1"),
+            0,
+            "Single quotes aren't valid in JSON.",
+            code = "import json\nprint(json.loads(\"{'a': 1}\"))",
+        ),
+        choice(
+            "Which Python object can NOT be written directly with json.dumps()?",
+            listOf("The set {1, 2}", "The list [1, 2]", "The dictionary {\"a\": 1}", "The number 3.5"),
+            0,
+            "JSON has no set type.",
+        ),
+        fill(
+            "Complete the code to print the Python boolean True.",
+            "import json\nprint(json.loads(\"____\"))",
+            listOf("true", "True", "TRUE"),
+            "true",
+            "In JSON, true is written in lowercase; the other spellings raise an error.",
+        ),
+        fill(
+            "Complete the code to convert data to a JSON string.",
+            "import json\ndata = {\"x\": [1, 2]}\nprint(json.____(data))",
+            listOf("dumps", "loads", "load"),
+            "dumps",
+            "dumps() converts an object to a string; loads() and load() work the other way.",
+        ),
+        tiles(
+            "Load JSON from the string t into the variable d",
+            listOf("d", "=", "json.loads(", "t)"),
+            listOf("json.dumps(", "json.load"),
+            "loads() loads JSON from a string.",
+        ),
+        tiles(
+            "Convert the list results to JSON with sorted keys and store it in t",
+            listOf("t", "=", "json.dumps(", "results,", "sort_keys=True)"),
+            listOf("indent=True)", "json.loads("),
+            "sort_keys=True sorts the keys of dictionaries.",
+        ),
+    ),
+)
