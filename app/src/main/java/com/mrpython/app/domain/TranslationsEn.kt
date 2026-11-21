@@ -229,4 +229,10 @@ internal val translationsEn: Map<String, String> = mapOf(
     "bonusy XP za serię dni" to "XP bonuses for your streak",
     "edycja awatara: 8 węży i 11 akcesoriów" to "avatar editing: 8 snakes and 11 accessories",
     "Kup pełną wersję" to "Buy the full version",
+    "Akcesoria dla węża są dostępne w pełnej wersji." to "Snake accessories come with the full version.",
+    "🔒 Kolor węża zmienisz za darmo. Akcesoria są w pełnej wersji." to "🔒 Changing your snake's color is free. Accessories come with the full version.",
+    "Bez reklam, serca bez limitu, bonusy XP za serię i akcesoria dla węża. Płacisz raz, bez subskrypcji." to "No ads, unlimited hearts, streak XP bonuses and accessories for your snake. Pay once, no subscription.",
+    "żadnych reklam" to "no ads",
+    "serca bez limitu" to "unlimited hearts",
+    "11 akcesoriów dla Twojego węża" to "11 accessories for your snake",
 )

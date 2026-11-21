@@ -53,10 +53,10 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
                 Spacer(Modifier.height(12.dp))
             }
             listOf(
-                "nowe lekcje bez dziennego limitu".t(),
+                "żadnych reklam".t(),
+                "serca bez limitu".t(),
                 "bonusy XP za serię dni".t(),
-                "edycja awatara: 8 węży i 11 akcesoriów".t(),
-                "serca bez limitu i żadnych reklam".t(),
+                "11 akcesoriów dla Twojego węża".t(),
                 "płacisz raz, bez subskrypcji".t(),
                 "zakup jest przypisany do Twojego konta Google".t(),
             ).forEach { line ->

@@ -18,7 +18,6 @@ import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.Language
 import com.mrpython.app.domain.LessonSession
-import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.XpEvent
@@ -176,10 +175,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         if (!Rules.isUnlocked(CourseContent.units, lessonId, s.progress.completedLessons)) return
         val isPractice = lessonId in s.progress.completedLessons
-        if (!s.fullCourse && Paywall.blocksStart(s.progress, lessonId, LocalDate.now())) {
-            showPaywall("Dzisiejsza nowa lekcja już za Tobą. Wróć jutro, powtórz starsze lekcje albo odblokuj pełną wersję.".t())
-            return
-        }
         // The full course also lifts the hearts limit.
         if (!isPractice && !s.fullCourse && s.progress.hearts <= 0) {
             billing.refresh()
@@ -293,8 +288,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showPaywall() = showPaywall(null)
 
-    /** Avatar editing belongs to the full version. */
-    fun showAvatarPaywall() = showPaywall("Edycja awatara jest dostępna w pełnej wersji.".t())
+    /** Accessories belong to the full version; the snake's colour is free. */
+    fun showAvatarPaywall() = showPaywall("Akcesoria dla węża są dostępne w pełnej wersji.".t())
 
     private fun showPaywall(reason: String?) {
         billing.refresh()
@@ -360,7 +355,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     /** Changes the avatar; parts not unlocked at the current league tier are ignored. */
     fun setAvatar(avatar: Avatar) {
-        if (!_state.value.fullCourse || !Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
+        val s = _state.value
+        // The free version may change the snake but not dress it up (taking things off is fine).
+        val added = avatar.accessories - s.progress.avatar.accessories.toSet()
+        if (!s.fullCourse && added.isNotEmpty()) {
+            showAvatarPaywall()
+            return
+        }
+        if (!Avatars.isAllowed(avatar, s.progress.leagueTier)) return
         _state.update { it.copy(progress = it.progress.copy(avatar = avatar)) }
         persist()
     }

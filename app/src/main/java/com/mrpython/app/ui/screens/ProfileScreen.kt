@@ -105,17 +105,21 @@ fun ProfileScreen(
         Spacer(Modifier.height(14.dp))
         // The wardrobe stays folded away until asked for, right under the avatar it changes.
         SecondaryButton(
-            text = when {
-                !state.fullCourse -> "🔒  Edytuj awatara".t()
-                editingAvatar -> "✓  Gotowe".t()
-                else -> "✎  Edytuj awatara".t()
-            },
-            onClick = { if (state.fullCourse) editingAvatar = !editingAvatar else onAvatarLocked() },
+            text = if (editingAvatar) "✓  Gotowe".t() else "✎  Edytuj awatara".t(),
+            onClick = { editingAvatar = !editingAvatar },
             color = if (editingAvatar) AppColors.Success else AppColors.Yellow,
         )
-        AnimatedVisibility(visible = editingAvatar && state.fullCourse) {
+        AnimatedVisibility(visible = editingAvatar) {
             Column {
                 Spacer(Modifier.height(16.dp))
+                if (!state.fullCourse) {
+                    Text(
+                        "🔒 Kolor węża zmienisz za darmo. Akcesoria są w pełnej wersji.".t(),
+                        Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                        color = AppColors.Yellow,
+                        fontSize = 14.sp,
+                    )
+                }
                 AvatarEditor(p.avatar, p.leagueTier, onAvatar)
             }
         }

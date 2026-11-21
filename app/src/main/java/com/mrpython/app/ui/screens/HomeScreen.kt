@@ -477,7 +477,7 @@ private fun FullCourseCard(onClick: () -> Unit) {
         Text("⭐ Pełna wersja".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
         Spacer(Modifier.height(6.dp))
         Text(
-            "Wersja bezpłatna: jedna nowa lekcja dziennie i reklamy. Pełna wersja: lekcje bez limitu, bonusy XP, edycja awatara, serca bez limitu i zero reklam. Płacisz raz.".t(),
+            "Bez reklam, serca bez limitu, bonusy XP za serię i akcesoria dla węża. Płacisz raz, bez subskrypcji.".t(),
             color = AppColors.Text,
             lineHeight = 20.sp,
         )

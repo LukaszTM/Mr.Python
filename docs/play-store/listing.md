@@ -20,8 +20,8 @@ Naucz się Pythona od zera. Jedna krótka lekcja dziennie, jak w grze.
 Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lekcjami, które zrobisz w kilka minut dziennie. Bez zakładania konta i bez subskrypcji.
 
 🎁 ZACZNIJ ZA DARMO
-• cały kurs jest dostępny bezpłatnie: jedna nowa lekcja dziennie i powtórki bez limitu
-• pełna wersja to jednorazowy zakup: lekcje bez dziennego limitu, bonusy XP, edycja awatara i serca bez limitu
+• cały kurs jest dostępny bezpłatnie, bez dziennych limitów
+• pełna wersja to jednorazowy zakup: bez reklam, serca bez limitu, bonusy XP za serię i akcesoria dla węża
 • zakup wyłącza też reklamy wyświetlane w wersji bezpłatnej
 
 🐍 KURS NA CAŁY ROK
