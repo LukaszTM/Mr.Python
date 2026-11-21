@@ -37,17 +37,18 @@ object AnswerChecker {
 
     /**
      * True when a typed answer misses only by what a phone keyboard does on its own or by a
-     * slip of the finger: typographic quotes and dashes, a first letter capitalised by the
-     * keyboard, or one wrong letter (or two swapped ones) in a longer line. Such answers are
-     * accepted with a remark. Anything a lesson may be testing still has to match: digits,
-     * spaces, the length of each line and the case of every other letter.
+     * slip of the finger: typographic quotes and dashes, wrong letter case, or one wrong letter
+     * (or two swapped ones) in a longer line. Such answers are accepted with a remark.
+     * Anything a lesson may be testing still has to match: digits, spaces and the length of
+     * each line, and also letter case when the program itself changes case (`upper()` etc.).
      */
     fun isTypo(exercise: Exercise, answer: Answer): Boolean {
         if (exercise !is PredictOutput || answer !is Answer.Text || isCorrect(exercise, answer)) return false
         val typed = loosen(answer.value).lines()
         return exercise.accepted.any { accepted ->
             val expected = loosen(accepted).lines()
-            expected.size == typed.size && expected.zip(typed).all { (x, y) -> nearlySame(x, y) }
+            expected.size == typed.size &&
+                expected.zip(typed).all { (x, y) -> nearlySame(x, y, caseIsTheLesson(exercise.code)) }
         }
     }
 
@@ -61,9 +62,16 @@ object AnswerChecker {
                 .replace("\u2026", "...")
         )
 
-    private fun nearlySame(expected: String, typed: String): Boolean {
+    /** Programs that change letter case are about case, so there it has to be typed exactly. */
+    private fun caseIsTheLesson(code: String): Boolean = caseMethods.any { it in code }
+
+    private val caseMethods =
+        listOf(".upper(", ".lower(", ".title(", ".capitalize(", ".swapcase(", ".casefold(", ".isupper(", ".islower(", ".istitle(")
+
+    private fun nearlySame(expected: String, typed: String, caseMatters: Boolean): Boolean {
         if (expected == typed) return true
         if (expected.length != typed.length) return false
+        if (!caseMatters && expected.equals(typed, ignoreCase = true)) return true
         // The keyboard capitalises the first letter of a line by itself.
         val fixed = if (typed.first().isUpperCase() && expected.first() == typed.first().lowercaseChar()) {
             expected.first() + typed.drop(1)

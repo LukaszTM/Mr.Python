@@ -51,7 +51,6 @@ Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lek
 🔒 PRYWATNOŚĆ
 • bez konta i logowania, lekcje działają offline
 • postęp nauki nie opuszcza Twojego telefonu
-• postęp zapisuje się tylko na Twoim telefonie
 
 Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, niezwiązany z Python Software Foundation.
 ```
