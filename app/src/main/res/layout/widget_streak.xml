@@ -3,10 +3,21 @@
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_background"
+    android:background="@drawable/widget_bg_bored"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="10dp">
+
+    <TextView
+        android:id="@+id/widget_streak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:maxLines="1"
+        android:text="🔥 0 dni"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/widget_snake"
@@ -18,17 +29,6 @@
         android:src="@drawable/snake_green" />
 
     <TextView
-        android:id="@+id/widget_streak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:maxLines="1"
-        android:text="🔥 0 dni"
-        android:textColor="#FFD43B"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/widget_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +36,6 @@
         android:gravity="center"
         android:maxLines="2"
         android:text="Zacznij pierwszą lekcję!"
-        android:textColor="#C9D4E3"
+        android:textColor="#F2F5FA"
         android:textSize="12sp" />
 </LinearLayout>

@@ -21,6 +21,7 @@ import com.mrpython.app.domain.SnakeSkin
 import com.mrpython.app.domain.Tier
 import com.mrpython.app.notifications.ReminderScheduler
 import com.mrpython.app.ui.components.SnakeAvatar
+import com.mrpython.app.widget.StreakWidget
 import com.mrpython.app.ui.components.darker
 import com.mrpython.app.ui.components.raised
 
@@ -125,6 +126,15 @@ fun ProfileScreen(
 
         SectionTitle("Przypomnienia")
         ReminderSettings(state, onRemindersEnabled, onReminderHour)
+        val widgetContext = LocalContext.current
+        if (StreakWidget.canPin(widgetContext)) {
+            Spacer(Modifier.height(12.dp))
+            SecondaryButton(
+                text = "▦  Dodaj widżet na ekran główny",
+                onClick = { StreakWidget.requestPin(widgetContext) },
+                color = AppColors.BlueBright,
+            )
+        }
         Spacer(Modifier.height(24.dp))
 
         SectionTitle("Postęp kursu")

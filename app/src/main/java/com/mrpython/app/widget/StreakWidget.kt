@@ -48,8 +48,26 @@ class StreakWidget : AppWidgetProvider() {
                 setImageViewResource(R.id.widget_snake, snakeImage(progress.avatar.skin))
                 setTextViewText(R.id.widget_streak, "${icon(state.mood)} ${Moods.days(state.streak)}")
                 setTextViewText(R.id.widget_text, state.text)
+                setInt(R.id.widget_root, "setBackgroundResource", background(state.mood))
                 setOnClickPendingIntent(R.id.widget_root, open)
             }
+        }
+
+        /** Asks the launcher to place the widget, like Duolingo does; false when it cannot. */
+        fun requestPin(context: Context): Boolean {
+            val manager = AppWidgetManager.getInstance(context) ?: return false
+            if (!manager.isRequestPinAppWidgetSupported) return false
+            return manager.requestPinAppWidget(ComponentName(context, StreakWidget::class.java), null, null)
+        }
+
+        fun canPin(context: Context): Boolean =
+            AppWidgetManager.getInstance(context)?.isRequestPinAppWidgetSupported == true
+
+        private fun background(mood: SnakeMood): Int = when (mood) {
+            SnakeMood.HAPPY -> R.drawable.widget_bg_happy
+            SnakeMood.BORED -> R.drawable.widget_bg_bored
+            SnakeMood.WORRIED -> R.drawable.widget_bg_worried
+            SnakeMood.SAD -> R.drawable.widget_bg_sad
         }
 
         private fun icon(mood: SnakeMood): String = when (mood) {
