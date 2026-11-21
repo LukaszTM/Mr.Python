@@ -14,6 +14,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   - uzupełnianie luki w kodzie,
   - układanie kodu z kafelków (bank słów),
   - „Co wypisze ten program?” – wpisujesz wynik z konsoli.
+- **Widżet na ekran główny** – wąż, seria dni i komunikat zależny od nastroju węża
+  (zadowolony po lekcji, znudzony w ciągu dnia, zmartwiony wieczorem, smutny po utracie serii).
 - **Serca ❤️** – 5 serc; w każdym zadaniu pierwsza pomyłka to darmowa poprawka, dopiero druga
   kosztuje serce. Serce odnawia się co 20 minut. Drobna literówka we wpisywanej odpowiedzi
   (np. wielka litera wstawiona przez klawiaturę) jest zaliczana z uwagą.

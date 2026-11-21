@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mr. Python</string>
+    <string name="widget_description">Seria dni i nastrój węża: przypomina o dzisiejszej lekcji.</string>
 </resources>

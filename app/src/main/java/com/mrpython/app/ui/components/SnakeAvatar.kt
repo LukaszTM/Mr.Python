@@ -14,7 +14,8 @@ import com.mrpython.app.domain.Accessory
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.SnakeSkin
 
-private fun image(skin: SnakeSkin): Int = when (skin) {
+/** The picture of a snake skin; also used by the home screen widget. */
+fun snakeImage(skin: SnakeSkin): Int = when (skin) {
     SnakeSkin.GREEN -> R.drawable.snake_green
     SnakeSkin.YELLOW -> R.drawable.snake_yellow
     SnakeSkin.BLUE -> R.drawable.snake_blue
@@ -63,7 +64,7 @@ fun SnakeAvatar(avatar: Avatar, size: Dp, modifier: Modifier = Modifier) {
     val pictures = avatar.accessories.map { art(it) }
     Box(modifier.size(size)) {
         pictures.filter { it.behind }.forEach { ArtLayer(it, size) }
-        Image(painterResource(image(avatar.skin)), contentDescription = null, modifier = Modifier.matchParentSize())
+        Image(painterResource(snakeImage(avatar.skin)), contentDescription = null, modifier = Modifier.matchParentSize())
         pictures.filterNot { it.behind }.forEach { ArtLayer(it, size) }
     }
 }

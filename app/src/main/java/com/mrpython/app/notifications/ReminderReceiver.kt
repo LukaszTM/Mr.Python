@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.mrpython.app.domain.ReminderKind
+import com.mrpython.app.widget.StreakWidget
 
 /**
  * Fires when a reminder alarm goes off, and after a reboot or an app update
@@ -15,5 +16,6 @@ class ReminderReceiver : BroadcastReceiver() {
             ?.let { name -> ReminderKind.entries.firstOrNull { it.name == name } }
         if (kind != null) ReminderScheduler.show(context, kind)
         ReminderScheduler.schedule(context)
+        StreakWidget.refresh(context)
     }
 }

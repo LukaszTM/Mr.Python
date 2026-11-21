@@ -17,6 +17,7 @@ import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.XpEvent
 import com.mrpython.app.notifications.ReminderScheduler
+import com.mrpython.app.widget.StreakWidget
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -258,5 +259,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         persist()
     }
 
-    private fun persist() = repository.save(_state.value.progress)
+    private fun persist() {
+        repository.save(_state.value.progress)
+        // The home screen widget shows the streak and the avatar, so it follows every change.
+        StreakWidget.refresh(getApplication<Application>())
+    }
 }
