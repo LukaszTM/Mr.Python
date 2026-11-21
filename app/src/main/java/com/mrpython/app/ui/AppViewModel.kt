@@ -16,6 +16,7 @@ import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.Boost
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
+import com.mrpython.app.domain.Language
 import com.mrpython.app.domain.LessonSession
 import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Progress
@@ -91,6 +92,7 @@ data class AppUiState(
     val purchaseMessage: String? = null,
     /** Debug build: the purchase is simulated, no money is involved. */
     val testBuild: Boolean = false,
+    val language: Language = Language.PL,
 ) {
     val now: LocalDateTime
         get() = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
@@ -115,6 +117,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             remindersEnabled = settings.remindersEnabled,
             reminderHour = settings.reminderHour,
             fullCourse = settings.fullCourse,
+            language = settings.language,
             testBuild = application.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0,
         )
     )
@@ -173,7 +176,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             showPaywall()
             return
         }
-        if (!isPractice && s.progress.hearts <= 0) {
+        // The full course also lifts the hearts limit.
+        if (!isPractice && !s.fullCourse && s.progress.hearts <= 0) {
             billing.refresh()
             _state.update { it.copy(outOfHearts = true, purchaseMessage = null) }
             return
@@ -203,7 +207,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         }
         val feedback = Feedback(correct, AnswerChecker.correctAnswerText(exercise), exercise.explanation, typo = typo)
         _state.update {
-            val progress = if (!correct && !active.isPractice) {
+            val progress = if (!correct && !active.isPractice && !it.fullCourse) {
                 Rules.loseHeart(it.progress, System.currentTimeMillis())
             } else {
                 it.progress
@@ -226,7 +230,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun advance(active: ActiveLesson, session: LessonSession) {
         when {
-            !active.isPractice && _state.value.progress.hearts <= 0 -> _state.update {
+            !active.isPractice && !_state.value.fullCourse && _state.value.progress.hearts <= 0 -> _state.update {
                 it.copy(lesson = null, outOfHearts = true)
             }
             session.isFinished -> finishLesson(session, active.isPractice)
@@ -341,6 +345,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         if (!Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
         _state.update { it.copy(progress = it.progress.copy(avatar = avatar)) }
         persist()
+    }
+
+    /** Switches the language of the app and of the course; progress is shared between languages. */
+    fun setLanguage(language: Language) {
+        settings.language = language
+        _state.update { it.copy(language = language, lesson = null, result = null) }
+        StreakWidget.refresh(getApplication<Application>())
     }
 
     fun setRemindersEnabled(enabled: Boolean) {

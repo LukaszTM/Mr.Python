@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.alpha
 import com.mrpython.app.domain.AccessorySlot
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.Avatars
+import com.mrpython.app.domain.Language
 import com.mrpython.app.domain.SnakeSkin
 import com.mrpython.app.domain.Tier
 import com.mrpython.app.notifications.ReminderScheduler
@@ -72,6 +73,7 @@ fun ProfileScreen(
     onReminderHour: (Int) -> Unit,
     onAvatar: (Avatar) -> Unit,
     onShowPaywall: () -> Unit = {},
+    onLanguage: (Language) -> Unit = {},
 ) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
@@ -121,7 +123,7 @@ fun ProfileScreen(
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
-            StatCard("♥", "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
+            StatCard("♥", if (state.fullCourse) "∞" else "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
         }
         Spacer(Modifier.height(24.dp))
 
@@ -135,6 +137,19 @@ fun ProfileScreen(
                 onClick = { StreakWidget.requestPin(widgetContext) },
                 color = AppColors.BlueBright,
             )
+        }
+        Spacer(Modifier.height(24.dp))
+
+        SectionTitle("Język")
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Language.entries.forEach { language ->
+                SecondaryButton(
+                    text = language.label,
+                    onClick = { onLanguage(language) },
+                    modifier = Modifier.weight(1f),
+                    color = if (language == state.language) AppColors.Yellow else AppColors.TextDim,
+                )
+            }
         }
         Spacer(Modifier.height(24.dp))
 

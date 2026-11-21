@@ -54,7 +54,8 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
             listOf(
                 "$modules kolejnych modułów i $lessons lekcji",
                 "funkcje, klasy, pliki, wyjątki i więcej",
-                "płacisz raz, bez subskrypcji i bez reklam",
+                "serca bez limitu i żadnych reklam",
+                "płacisz raz, bez subskrypcji",
                 "zakup jest przypisany do Twojego konta Google",
             ).forEach { line ->
                 Text(

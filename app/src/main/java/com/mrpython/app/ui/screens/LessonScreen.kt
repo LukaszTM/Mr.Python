@@ -69,7 +69,8 @@ import com.mrpython.app.ui.theme.AppColors
 @Composable
 fun LessonScreen(
     lesson: ActiveLesson,
-    hearts: Int,
+    /** Null when hearts are unlimited (full course). */
+    hearts: Int?,
     /** The multiplier of the running XP bonus ("2", "1,5"), if there is one. */
     xpMultiplier: String? = null,
     onSubmit: (Answer) -> Unit,
@@ -123,7 +124,7 @@ fun LessonScreen(
             if (lesson.isPractice) {
                 StatPill("↻", "", AppColors.BlueBright)
             } else {
-                StatPill("♥", "$hearts", AppColors.Heart)
+                StatPill("♥", hearts?.toString() ?: "∞", AppColors.Heart)
             }
         }
 

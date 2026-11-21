@@ -27,6 +27,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrpython.app.ads.AdsManager
+import com.mrpython.app.domain.Rules
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
@@ -89,6 +91,8 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         if (showAds && activity != null) AdsManager.start(activity)
     }
 
+    // A new language rebuilds every screen, so no text of the old one stays behind.
+    key(state.language) {
     Box(
         Modifier
             .fillMaxSize()
@@ -101,7 +105,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         when {
             lesson != null -> LessonScreen(
                 lesson = lesson,
-                hearts = state.progress.hearts,
+                hearts = if (state.fullCourse) null else state.progress.hearts,
                 xpMultiplier = state.event?.multiplier,
                 onSubmit = viewModel::submit,
                 onContinue = viewModel::continueLesson,
@@ -109,7 +113,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             )
             result != null -> LessonCompleteScreen(
                 result,
-                hearts = state.progress.hearts,
+                hearts = if (state.fullCourse) Rules.MAX_HEARTS else state.progress.hearts,
                 onTakeHearts = viewModel::takeHeartsInsteadOfBonus,
                 onContinue = {
                     if (showAds) AdsManager.showThen(activity, viewModel::dismissResult) else viewModel.dismissResult()
@@ -131,6 +135,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                             onReminderHour = viewModel::setReminderHour,
                             onAvatar = viewModel::setAvatar,
                             onShowPaywall = viewModel::showPaywall,
+                            onLanguage = viewModel::setLanguage,
                         )
                     }
                 }
@@ -166,6 +171,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         if (weekResult != null && lesson == null) {
             WeekResultDialog(weekResult, onDismiss = viewModel::dismissWeekResult)
         }
+    }
     }
 }
 

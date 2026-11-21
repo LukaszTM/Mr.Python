@@ -169,7 +169,7 @@ private fun TopBar(state: AppUiState) {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             StatPill("🔥", "$streak", if (streak > 0) AppColors.Streak else AppColors.TextFaint)
             StatPill("⚡", "${p.totalXp}", AppColors.Yellow)
-            StatPill("♥", "${p.hearts}", AppColors.Heart)
+            StatPill("♥", if (state.fullCourse) "∞" else "${p.hearts}", AppColors.Heart)
         }
     }
 }
