@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.material3.TextButton
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.ui.LessonResult
@@ -50,7 +51,12 @@ import com.mrpython.app.ui.components.SecondaryButton
 import com.mrpython.app.ui.theme.AppColors
 
 @Composable
-fun LessonCompleteScreen(result: LessonResult, onContinue: () -> Unit) {
+fun LessonCompleteScreen(
+    result: LessonResult,
+    onContinue: () -> Unit,
+    hearts: Int = Rules.MAX_HEARTS,
+    onTakeHearts: () -> Unit = {},
+) {
     BackHandler(onBack = onContinue)
     // Trophy pops in with a bounce, and the XP counts up from zero.
     val pop = remember { Animatable(0.3f) }
@@ -102,6 +108,16 @@ fun LessonCompleteScreen(result: LessonResult, onContinue: () -> Unit) {
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                 )
+                // The reward can be swapped: hearts are worth more when few are left.
+                if (hearts < Rules.MAX_HEARTS) {
+                    TextButton(onClick = onTakeHearts) {
+                        Text("Wolę pełne serca ♥ zamiast bonusu", color = AppColors.Heart, fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+            if (result.heartsTaken) {
+                Spacer(Modifier.height(14.dp))
+                Text("♥ Serca uzupełnione do pełna", color = AppColors.Heart, fontWeight = FontWeight.Bold)
             }
             result.event?.let { event ->
                 Spacer(Modifier.height(14.dp))
@@ -164,7 +180,14 @@ private fun ResultCard(label: String, value: String, color: Color, modifier: Mod
 }
 
 @Composable
-fun OutOfHeartsDialog(progress: Progress, nowMillis: Long, onDismiss: () -> Unit) {
+fun OutOfHeartsDialog(
+    progress: Progress,
+    nowMillis: Long,
+    onDismiss: () -> Unit,
+    buyLabel: String? = null,
+    message: String? = null,
+    onBuy: () -> Unit = {},
+) {
     Dialog(onDismissRequest = onDismiss) {
         val shape = RoundedCornerShape(16.dp)
         Column(
@@ -196,6 +219,14 @@ fun OutOfHeartsDialog(progress: Progress, nowMillis: Long, onDismiss: () -> Unit
                 lineHeight = 20.sp,
             )
             Spacer(Modifier.height(20.dp))
+            if (buyLabel != null && progress.hearts < Rules.MAX_HEARTS) {
+                PrimaryButton(buyLabel, onClick = onBuy, color = AppColors.Heart, contentColor = Color.White)
+                message?.let {
+                    Spacer(Modifier.height(8.dp))
+                    Text(it, color = AppColors.Streak, fontSize = 14.sp, lineHeight = 19.sp)
+                }
+                Spacer(Modifier.height(10.dp))
+            }
             SecondaryButton("OK", onClick = onDismiss)
         }
     }

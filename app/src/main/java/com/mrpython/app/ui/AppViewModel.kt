@@ -13,6 +13,7 @@ import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.AnswerChecker
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.Avatars
+import com.mrpython.app.domain.Boost
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
@@ -65,6 +66,10 @@ data class LessonResult(
     val event: XpEvent? = null,
     /** A bonus this lesson has just earned (a streak milestone); it applies to the next lessons. */
     val earned: XpEvent? = null,
+    /** The bonus held before [earned]; it comes back if the learner takes hearts instead. */
+    val boostBefore: Boost? = null,
+    /** The learner swapped the earned XP bonus for full hearts. */
+    val heartsTaken: Boolean = false,
 )
 
 data class AppUiState(
@@ -81,6 +86,7 @@ data class AppUiState(
     val fullCourse: Boolean = false,
     /** Localized price from Google Play, once it is known. */
     val fullCoursePrice: String? = null,
+    val heartsPrice: String? = null,
     val paywall: Boolean = false,
     val purchaseMessage: String? = null,
     /** Debug build: the purchase is simulated, no money is involved. */
@@ -120,7 +126,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         application,
         // A test build has no real purchase, so Google Play's "not owned" must not undo the simulated one.
         onOwned = { owned -> if (owned || !testBuild) setFullCourse(owned) },
-        onPrice = { price -> _state.update { it.copy(fullCoursePrice = price) } },
+        onHearts = ::grantHearts,
+        onPrice = { product, price ->
+            _state.update {
+                if (product == BillingManager.HEARTS_REFILL) it.copy(heartsPrice = price) else it.copy(fullCoursePrice = price)
+            }
+        },
         onMessage = { message -> _state.update { it.copy(purchaseMessage = message) } },
     )
 
@@ -163,7 +174,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         if (!isPractice && s.progress.hearts <= 0) {
-            _state.update { it.copy(outOfHearts = true) }
+            billing.refresh()
+            _state.update { it.copy(outOfHearts = true, purchaseMessage = null) }
             return
         }
         _state.update {
@@ -242,6 +254,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     heartRestored = progress.hearts > it.progress.hearts,
                     event = event,
                     earned = if (progress.boost != it.progress.boost) Events.active(progress, nowMillis) else null,
+                    boostBefore = it.progress.boost,
                 ),
             )
         }
@@ -254,7 +267,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun dismissResult() = _state.update { it.copy(result = null) }
 
-    fun dismissOutOfHearts() = _state.update { it.copy(outOfHearts = false) }
+    fun dismissOutOfHearts() = _state.update { it.copy(outOfHearts = false, purchaseMessage = null) }
 
     fun dismissWeekResult() {
         _state.update { it.copy(progress = it.progress.copy(pendingWeekResult = null)) }
@@ -270,7 +283,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     /** Opens the Google Play purchase sheet for the full course. */
     fun buyFullCourse(activity: Activity) {
-        if (billing.buy(activity)) return
+        if (billing.buy(activity, BillingManager.FULL_COURSE)) return
         if (testBuild) {
             setFullCourse(true)
         } else {
@@ -278,6 +291,36 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.")
             }
         }
+    }
+
+    /** Opens the Google Play purchase sheet for a full hearts refill. */
+    fun buyHearts(activity: Activity) {
+        if (billing.buy(activity, BillingManager.HEARTS_REFILL)) return
+        if (testBuild) {
+            grantHearts()
+        } else {
+            _state.update {
+                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.")
+            }
+        }
+    }
+
+    private fun grantHearts() {
+        _state.update { it.copy(progress = Rules.fillHearts(it.progress), outOfHearts = false, purchaseMessage = null) }
+        persist()
+    }
+
+    /** On the result screen: give up the XP bonus just earned and take full hearts instead. */
+    fun takeHeartsInsteadOfBonus() {
+        val result = _state.value.result ?: return
+        if (result.earned == null) return
+        _state.update {
+            it.copy(
+                progress = Rules.fillHearts(it.progress.copy(boost = result.boostBefore)),
+                result = result.copy(earned = null, heartsTaken = true),
+            )
+        }
+        persist()
     }
 
     /** Asks Google Play again what the account owns (after a reinstall or on a new phone). */

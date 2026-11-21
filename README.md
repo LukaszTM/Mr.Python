@@ -32,6 +32,8 @@ Aplikacja na Androida do nauki Pythona, inspirowana Duolingo.
   a każda powtórka losuje 10 zadań z puli ok. 23 zadań danej lekcji.
 - **Przypomnienia o lekcji** – codzienne powiadomienie o wybranej godzinie (gdy nie było
   jeszcze dziś lekcji) i ostrzeżenie o 22:00, gdy seria jest zagrożona. Ustawienia w profilu.
+- **Serca na żądanie** – gdy serca się skończą, można dokupić pełne (zakup w Google Play),
+  a nagrodę za próg serii zamienić z bonusu XP na pełne serca.
 - **Bonusy XP** – XP ×2 przez 30 minut po pierwszym uruchomieniu, a potem bonus na 30 minut
   za każde 5 dni serii: ×1,5 (5, 15, 25…), ×2 (10, 20…) i ×3 (30, 60…).
 - **Awatar do personalizacji** – 8 węży i 11 akcesoriów (na głowę, okulary, dodatek);

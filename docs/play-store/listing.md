@@ -32,7 +32,7 @@ Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lek
 
 🔥 NAUKA, KTÓRA WCIĄGA
 • seria dni, punkty XP i cel dzienny
-• serca: pierwsza pomyłka w zadaniu to darmowa poprawka
+• serca: pierwsza pomyłka w zadaniu to darmowa poprawka, a serca można odzyskać za powtórki, za serię albo dokupić
 • literówki z klawiatury telefonu nie psują dobrej odpowiedzi
 • bonusy XP: ×2 na start, a potem za serię 5, 10, 15… dni
 
@@ -64,7 +64,7 @@ Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, 
 | Tagi | Programowanie, Nauka, Edukacja |
 | Cena | Bezpłatna (pobranie) |
 | Reklamy | Tak, zawiera reklamy (wersja bezpłatna) |
-| Zakupy w aplikacji | Tak: produkt jednorazowy `full_course` („Pełny kurs”), 14,99 zł, na start 9,99 zł |
+| Zakupy w aplikacji | Tak: `full_course` („Pełny kurs”, jednorazowo, 14,99 zł, na start 9,99 zł) i `hearts_refill` („Pełne serca”, wielokrotnie, np. 1,99 zł) |
 | Kraje | Polska (lub wszystkie – aplikacja jest tylko po polsku) |
 | E-mail kontaktowy | adres, który będzie publicznie widoczny w sklepie |
 | Polityka prywatności | adres URL strony z `docs/polityka-prywatnosci.md` |

@@ -109,6 +109,8 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             )
             result != null -> LessonCompleteScreen(
                 result,
+                hearts = state.progress.hearts,
+                onTakeHearts = viewModel::takeHeartsInsteadOfBonus,
                 onContinue = {
                     if (showAds) AdsManager.showThen(activity, viewModel::dismissResult) else viewModel.dismissResult()
                 },
@@ -137,7 +139,18 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         }
 
         if (state.outOfHearts) {
-            OutOfHeartsDialog(state.progress, state.nowMillis, onDismiss = viewModel::dismissOutOfHearts)
+            OutOfHeartsDialog(
+                state.progress,
+                state.nowMillis,
+                onDismiss = viewModel::dismissOutOfHearts,
+                buyLabel = when {
+                    state.heartsPrice != null -> "♥  Kup pełne serca za ${state.heartsPrice}"
+                    state.testBuild -> "♥  Pełne serca (wersja testowa, bez płatności)"
+                    else -> "♥  Kup pełne serca"
+                },
+                message = state.purchaseMessage,
+                onBuy = { activity?.let(viewModel::buyHearts) },
+            )
         }
 
         if (state.paywall && lesson == null) {

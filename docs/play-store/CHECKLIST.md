@@ -76,6 +76,9 @@ Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij 
    - nazwa: „Pełny kurs”, opis: „Wszystkie moduły kursu Pythona. Płatność jednorazowa.”,
    - cena: 9,99 zł na start; po promocji zmień na 14,99 zł,
    - aktywuj produkt.
+   Drugi produkt, tak samo: identyfikator dokładnie `hearts_refill`, nazwa „Pełne serca”,
+   opis „Uzupełnia wszystkie serca.”, cena np. 1,99 zł. To produkt wielokrotnego zakupu:
+   aplikacja sama „zużywa” go po każdej płatności, więc w Konsoli nic więcej nie ustawiasz.
 4. Konfiguracja → Testowanie licencji: dodaj swój adres Gmail. Zakupy z tego konta będą
    wtedy testowe i bezpłatne.
 5. Zainstaluj aplikację z testu wewnętrznego (nie z pliku APK z GitHuba) i sprawdź zakup,

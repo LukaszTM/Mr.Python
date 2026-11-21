@@ -59,6 +59,9 @@ object Rules {
         )
     }
 
+    /** A paid refill or a streak reward: all hearts back at once. */
+    fun fillHearts(p: Progress): Progress = p.copy(hearts = MAX_HEARTS, heartsRefillStartMillis = null)
+
     fun gainHeart(p: Progress): Progress {
         val hearts = (p.hearts + 1).coerceAtMost(MAX_HEARTS)
         return p.copy(
