@@ -84,7 +84,32 @@ Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij 
 Wersja testowa z GitHuba (APK debug) nie łączy się ze sklepem: przycisk zakupu odblokowuje
 w niej kurs od razu, bez płatności, żeby dało się testować dalsze moduły.
 
-## Krok 7. Testy i publikacja
+## Krok 7. Reklamy w wersji bezpłatnej (AdMob)
+
+Aplikacja ma wbudowane testowe identyfikatory Google: pokazują reklamy próbne i nic nie
+zarabiają. Żeby zarabiać:
+
+1. Załóż konto na https://admob.google.com i dodaj aplikację (Android).
+2. Utwórz jednostkę reklamową typu **reklama pełnoekranowa (interstitial)**.
+3. Prywatność i wiadomości → utwórz **komunikat o zgodzie RODO** (bez niego reklamy w UE
+   praktycznie się nie wyświetlają; aplikacja pokazuje go sama przy starcie).
+4. Dodaj w GitHubie dwa sekrety:
+
+| Sekret | Wartość |
+|---|---|
+| `MRPYTHON_ADMOB_APP_ID` | identyfikator aplikacji, np. `ca-app-pub-123…~456…` |
+| `MRPYTHON_ADMOB_INTERSTITIAL_ID` | identyfikator jednostki, np. `ca-app-pub-123…/789…` |
+
+5. Po publikacji w sklepie połącz w AdMob aplikację z jej kartą w Google Play i dodaj plik
+   `app-ads.txt` na stronie dewelopera podanej w sklepie (AdMob pokaże jego treść).
+
+Prawdziwe identyfikatory trafiają tylko do wersji produkcyjnej. Wersja testowa zawsze używa
+reklam próbnych – nie klikaj własnych prawdziwych reklam, bo AdMob blokuje za to konta.
+
+Reklama pojawia się po ukończonej lekcji, nie częściej niż raz na 3 minuty, i tylko u osób
+bez pełnego kursu.
+
+## Krok 8. Testy i publikacja
 
 1. Testy → Test wewnętrzny → utwórz wydanie → wgraj `app-release.aab` → sprawdź na telefonie.
 2. Test zamknięty: 12 testerów, 14 dni (wymóg dla nowych kont osobistych).

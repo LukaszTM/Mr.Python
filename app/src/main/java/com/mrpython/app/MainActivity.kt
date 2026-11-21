@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mrpython.app.ads.AdsManager
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
@@ -81,6 +82,13 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         }
     }
 
+    // Ads are only for the free version; buying the full course switches them off for good.
+    val activity = LocalContext.current as? Activity
+    val showAds = !state.fullCourse
+    LaunchedEffect(showAds, activity) {
+        if (showAds && activity != null) AdsManager.start(activity)
+    }
+
     Box(
         Modifier
             .fillMaxSize()
@@ -99,7 +107,12 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 onContinue = viewModel::continueLesson,
                 onQuit = viewModel::quitLesson,
             )
-            result != null -> LessonCompleteScreen(result, onContinue = viewModel::dismissResult)
+            result != null -> LessonCompleteScreen(
+                result,
+                onContinue = {
+                    if (showAds) AdsManager.showThen(activity, viewModel::dismissResult) else viewModel.dismissResult()
+                },
+            )
             else -> Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f)) {
                     when (state.tab) {
@@ -127,7 +140,6 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             OutOfHeartsDialog(state.progress, state.nowMillis, onDismiss = viewModel::dismissOutOfHearts)
         }
 
-        val activity = LocalContext.current as? Activity
         if (state.paywall && lesson == null) {
             PaywallDialog(
                 state = state,

@@ -38,6 +38,8 @@ jobs:
           MRPYTHON_KEYSTORE_PASSWORD: ${{ secrets.MRPYTHON_KEYSTORE_PASSWORD }}
           MRPYTHON_KEY_ALIAS: ${{ secrets.MRPYTHON_KEY_ALIAS }}
           MRPYTHON_KEY_PASSWORD: ${{ secrets.MRPYTHON_KEY_PASSWORD }}
+          MRPYTHON_ADMOB_APP_ID: ${{ secrets.MRPYTHON_ADMOB_APP_ID }}
+          MRPYTHON_ADMOB_INTERSTITIAL_ID: ${{ secrets.MRPYTHON_ADMOB_INTERSTITIAL_ID }}
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
             echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
