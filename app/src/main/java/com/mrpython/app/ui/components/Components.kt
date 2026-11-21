@@ -63,6 +63,7 @@ import androidx.compose.ui.unit.sp
 import com.mrpython.app.domain.PythonHighlighter
 import com.mrpython.app.domain.TokenType
 import com.mrpython.app.domain.XpEvent
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.theme.AppColors
 import com.mrpython.app.ui.theme.CodeColors
 import java.time.Duration
@@ -383,7 +384,7 @@ fun EventBanner(event: XpEvent, now: LocalDateTime, modifier: Modifier = Modifie
             Text(event.description, color = Color.White.copy(alpha = 0.92f), fontSize = 13.sp, lineHeight = 17.sp)
             Spacer(Modifier.height(4.dp))
             Text(
-                "do końca: ${timeLeft(now, event.endsAt)}",
+                "do końca: {0}".t(timeLeft(now, event.endsAt)),
                 color = Color.White,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,

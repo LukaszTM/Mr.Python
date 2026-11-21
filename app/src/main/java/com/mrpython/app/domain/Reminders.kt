@@ -18,6 +18,7 @@ object Reminders {
     const val DEFAULT_HOUR = 19
     const val STREAK_RESCUE_HOUR = 22
 
+    /** Kept in Polish; [message] translates the one it picks. */
     private val daily = listOf(
         "Czas na Pythona! 🐍" to "Jedna krótka lekcja i cel dzienny będzie bliżej.",
         "print(\"Wracaj do nauki!\")" to "Twoja dzisiejsza lekcja czeka. To tylko kilka minut.",
@@ -39,18 +40,18 @@ object Reminders {
                 null
             } else {
                 ReminderMessage(
-                    "Twoja seria $streak dni zaraz przepadnie! 🔥",
-                    "Zostało niewiele czasu do północy. Jedna lekcja wystarczy, żeby ją uratować.",
+                    "Twoja seria {0} dni zaraz przepadnie! 🔥".t(streak),
+                    "Zostało niewiele czasu do północy. Jedna lekcja wystarczy, żeby ją uratować.".t(),
                 )
             }
             ReminderKind.DAILY -> {
                 when {
                     streak > 0 -> ReminderMessage(
-                        "Utrzymaj serię $streak dni 🔥",
-                        "Zrób dziś jedną lekcję, żeby seria rosła dalej.",
+                        "Utrzymaj serię {0} dni 🔥".t(streak),
+                        "Zrób dziś jedną lekcję, żeby seria rosła dalej.".t(),
                     )
                     else -> daily[Math.floorMod(today.toEpochDay(), daily.size.toLong()).toInt()]
-                        .let { (title, text) -> ReminderMessage(title, text) }
+                        .let { (title, text) -> ReminderMessage(title.t(), text.t()) }
                 }
             }
         }

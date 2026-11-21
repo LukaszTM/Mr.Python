@@ -17,6 +17,7 @@ import com.mrpython.app.data.ProgressRepository
 import com.mrpython.app.data.SettingsRepository
 import com.mrpython.app.domain.ReminderKind
 import com.mrpython.app.domain.Reminders
+import com.mrpython.app.domain.t
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -78,8 +79,8 @@ object ReminderScheduler {
         val message = Reminders.message(progress, kind, LocalDateTime.now()) ?: return
         val manager = context.getSystemService(NotificationManager::class.java) ?: return
         manager.createNotificationChannel(
-            NotificationChannel(CHANNEL_ID, "Przypomnienia o lekcji", NotificationManager.IMPORTANCE_DEFAULT)
-                .apply { description = "Codzienne przypomnienie o nauce i ostrzeżenie o utracie serii" }
+            NotificationChannel(CHANNEL_ID, "Przypomnienia o lekcji".t(), NotificationManager.IMPORTANCE_DEFAULT)
+                .apply { description = "Codzienne przypomnienie o nauce i ostrzeżenie o utracie serii".t() }
         )
         val openApp = PendingIntent.getActivity(
             context,

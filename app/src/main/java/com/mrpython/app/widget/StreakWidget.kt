@@ -10,6 +10,7 @@ import android.widget.RemoteViews
 import com.mrpython.app.MainActivity
 import com.mrpython.app.R
 import com.mrpython.app.data.ProgressRepository
+import com.mrpython.app.data.SettingsRepository
 import com.mrpython.app.domain.Moods
 import com.mrpython.app.domain.SnakeMood
 import com.mrpython.app.ui.components.snakeImage
@@ -35,6 +36,8 @@ class StreakWidget : AppWidgetProvider() {
         }
 
         private fun views(context: Context): RemoteViews {
+            // Reading the settings switches the texts to the learner's language, also when only the widget is running.
+            SettingsRepository(context)
             val progress = ProgressRepository(context).load()
             val state = Moods.state(progress, LocalDateTime.now())
             val open = PendingIntent.getActivity(

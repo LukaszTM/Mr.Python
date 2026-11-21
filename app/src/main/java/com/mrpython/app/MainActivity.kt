@@ -42,6 +42,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrpython.app.ads.AdsManager
 import com.mrpython.app.domain.Rules
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
@@ -149,9 +150,9 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 state.nowMillis,
                 onDismiss = viewModel::dismissOutOfHearts,
                 buyLabel = when {
-                    state.heartsPrice != null -> "♥  Kup pełne serca za ${state.heartsPrice}"
-                    state.testBuild -> "♥  Pełne serca (wersja testowa, bez płatności)"
-                    else -> "♥  Kup pełne serca"
+                    state.heartsPrice != null -> "♥  Kup pełne serca za {0}".t(state.heartsPrice)
+                    state.testBuild -> "♥  Pełne serca (wersja testowa, bez płatności)".t()
+                    else -> "♥  Kup pełne serca".t()
                 },
                 message = state.purchaseMessage,
                 onBuy = { activity?.let(viewModel::buyHearts) },
@@ -180,9 +181,9 @@ private fun BottomBar(selected: Tab, onSelect: (Tab) -> Unit) {
     Column(Modifier.background(AppColors.Surface)) {
         HorizontalDivider(color = AppColors.Border, thickness = 2.dp)
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)) {
-            BottomBarItem("</>", "Nauka", selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
-            BottomBarItem("#1", "Liga", selected == Tab.LEAGUE, Modifier.weight(1f)) { onSelect(Tab.LEAGUE) }
-            BottomBarItem("~/", "Profil", selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
+            BottomBarItem("</>", "Nauka".t(), selected == Tab.LEARN, Modifier.weight(1f)) { onSelect(Tab.LEARN) }
+            BottomBarItem("#1", "Liga".t(), selected == Tab.LEAGUE, Modifier.weight(1f)) { onSelect(Tab.LEAGUE) }
+            BottomBarItem("~/", "Profil".t(), selected == Tab.PROFILE, Modifier.weight(1f)) { onSelect(Tab.PROFILE) }
         }
     }
 }

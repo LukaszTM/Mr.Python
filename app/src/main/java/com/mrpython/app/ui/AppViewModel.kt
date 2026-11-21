@@ -22,6 +22,7 @@ import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.XpEvent
+import com.mrpython.app.domain.t
 import com.mrpython.app.notifications.ReminderScheduler
 import com.mrpython.app.widget.StreakWidget
 import kotlinx.coroutines.delay
@@ -292,7 +293,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             setFullCourse(true)
         } else {
             _state.update {
-                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.")
+                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.".t())
             }
         }
     }
@@ -304,7 +305,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             grantHearts()
         } else {
             _state.update {
-                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.")
+                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.".t())
             }
         }
     }
@@ -330,7 +331,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     /** Asks Google Play again what the account owns (after a reinstall or on a new phone). */
     fun restorePurchase() {
         billing.refresh()
-        _state.update { it.copy(purchaseMessage = "Sprawdzam zakupy na Twoim koncie Google…") }
+        _state.update { it.copy(purchaseMessage = "Sprawdzam zakupy na Twoim koncie Google…".t()) }
     }
 
     private fun setFullCourse(owned: Boolean) {

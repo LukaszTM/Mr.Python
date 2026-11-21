@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.domain.Paywall
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.PrimaryButton
 import com.mrpython.app.ui.theme.AppColors
@@ -41,22 +42,22 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "pip install pelny-kurs",
+                "pip install pelny-kurs".t(),
                 color = AppColors.TextFaint,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 13.sp,
             )
             Spacer(Modifier.height(6.dp))
-            Text("Pełny kurs Pythona", color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 24.sp)
+            Text("Pełny kurs Pythona".t(), color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 24.sp)
             Spacer(Modifier.height(12.dp))
             val modules = CourseContent.units.size - Paywall.FREE_UNITS
             val lessons = Paywall.paidLessons(CourseContent.units)
             listOf(
-                "$modules kolejnych modułów i $lessons lekcji",
-                "funkcje, klasy, pliki, wyjątki i więcej",
-                "serca bez limitu i żadnych reklam",
-                "płacisz raz, bez subskrypcji",
-                "zakup jest przypisany do Twojego konta Google",
+                "{0} kolejnych modułów i {1} lekcji".t(modules, lessons),
+                "funkcje, klasy, pliki, wyjątki i więcej".t(),
+                "serca bez limitu i żadnych reklam".t(),
+                "płacisz raz, bez subskrypcji".t(),
+                "zakup jest przypisany do Twojego konta Google".t(),
             ).forEach { line ->
                 Text(
                     "✓ $line",
@@ -71,9 +72,9 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
             val price = state.fullCoursePrice
             PrimaryButton(
                 text = when {
-                    price != null -> "Kup za $price"
-                    state.testBuild -> "Odblokuj (wersja testowa, bez płatności)"
-                    else -> "Kup pełny kurs"
+                    price != null -> "Kup za {0}".t(price)
+                    state.testBuild -> "Odblokuj (wersja testowa, bez płatności)".t()
+                    else -> "Kup pełny kurs".t()
                 },
                 onClick = onBuy,
             )
@@ -82,8 +83,8 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
                 Text(message, color = AppColors.Streak, textAlign = TextAlign.Center, fontSize = 14.sp, lineHeight = 19.sp)
             }
             Spacer(Modifier.height(4.dp))
-            TextButton(onClick = onRestore) { Text("Przywróć zakup", color = AppColors.BlueBright) }
-            TextButton(onClick = onDismiss) { Text("Nie teraz", color = AppColors.TextDim) }
+            TextButton(onClick = onRestore) { Text("Przywróć zakup".t(), color = AppColors.BlueBright) }
+            TextButton(onClick = onDismiss) { Text("Nie teraz".t(), color = AppColors.TextDim) }
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.mrpython.app.domain
 
 /** Snake colour variants; each league tier unlocks more of them. */
-enum class SnakeSkin(val title: String, val requiredTier: Tier) {
+enum class SnakeSkin(private val titlePl: String, val requiredTier: Tier) {
     GREEN("Zielony pyton", Tier.INTERN),
     YELLOW("Żółty pyton", Tier.INTERN),
     BLUE("Niebieski pyton", Tier.JUNIOR),
@@ -9,17 +9,23 @@ enum class SnakeSkin(val title: String, val requiredTier: Tier) {
     PURPLE("Fioletowa żmija", Tier.SENIOR),
     MAMBA("Czarna mamba", Tier.TECH_LEAD),
     GOLD("Złoty pyton", Tier.ARCHITECT),
-    COSMIC("Kosmiczny wąż", Tier.CTO),
+    COSMIC("Kosmiczny wąż", Tier.CTO);
+
+    /** The name in the current language. */
+    val title: String get() = titlePl.t()
 }
 
-enum class AccessorySlot(val title: String) {
+enum class AccessorySlot(private val titlePl: String) {
     HEAD("Na głowę"),
     EYES("Okulary"),
-    EXTRA("Dodatek"),
+    EXTRA("Dodatek");
+
+    /** The name in the current language. */
+    val title: String get() = titlePl.t()
 }
 
 /** Things the snake can wear, one per [slot]. */
-enum class Accessory(val title: String, val slot: AccessorySlot, val requiredTier: Tier) {
+enum class Accessory(private val titlePl: String, val slot: AccessorySlot, val requiredTier: Tier) {
     CAP("Czapka z daszkiem", AccessorySlot.HEAD, Tier.INTERN),
     HEADPHONES("Słuchawki", AccessorySlot.HEAD, Tier.JUNIOR),
     BEANIE("Czapka zimowa", AccessorySlot.HEAD, Tier.MID),
@@ -32,7 +38,10 @@ enum class Accessory(val title: String, val slot: AccessorySlot, val requiredTie
 
     COFFEE("Kubek kawy", AccessorySlot.EXTRA, Tier.JUNIOR),
     BOW_TIE("Muszka", AccessorySlot.EXTRA, Tier.SENIOR),
-    TIE("Krawat", AccessorySlot.EXTRA, Tier.ARCHITECT),
+    TIE("Krawat", AccessorySlot.EXTRA, Tier.ARCHITECT);
+
+    /** The name in the current language. */
+    val title: String get() = titlePl.t()
 }
 
 /** The learner's avatar: a snake and at most one accessory per slot. */

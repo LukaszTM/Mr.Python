@@ -14,6 +14,7 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import com.mrpython.app.domain.t
 
 /**
  * Purchases through Google Play Billing: the one-time "full course" and the repeatable
@@ -40,7 +41,7 @@ class BillingManager(
             BillingClient.BillingResponseCode.OK -> handle(purchases.orEmpty(), authoritative = false)
             BillingClient.BillingResponseCode.USER_CANCELED -> Unit
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> refresh()
-            else -> onMessage("Zakup się nie powiódł. Spróbuj ponownie za chwilę.")
+            else -> onMessage("Zakup się nie powiódł. Spróbuj ponownie za chwilę.".t())
         }
     }
 
@@ -131,7 +132,7 @@ class BillingManager(
                 onOwned(true)
             }
             purchases.any { it.purchaseState == Purchase.PurchaseState.PENDING } ->
-                onMessage("Płatność oczekuje na potwierdzenie. Zakup pojawi się, gdy tylko zostanie zaksięgowana.")
+                onMessage("Płatność oczekuje na potwierdzenie. Zakup pojawi się, gdy tylko zostanie zaksięgowana.".t())
             authoritative -> onOwned(false)
         }
     }

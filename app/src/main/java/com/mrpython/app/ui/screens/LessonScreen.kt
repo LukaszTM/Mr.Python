@@ -56,6 +56,7 @@ import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.MultipleChoice
 import com.mrpython.app.domain.PredictOutput
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.ActiveLesson
 import com.mrpython.app.ui.Feedback
 import com.mrpython.app.ui.components.CodeBlock
@@ -137,13 +138,13 @@ fun LessonScreen(
             // Wrongly answered exercises are appended to the queue, so after the first
             // pass through the lesson everything left is a retry.
             val label = when {
-                exercise is Explanation -> "# teoria"
-                session.solved + session.mistakes >= session.total -> "# poprawka"
-                else -> "# zadanie"
+                exercise is Explanation -> "# teoria".t()
+                session.solved + session.mistakes >= session.total -> "# poprawka".t()
+                else -> "# zadanie".t()
             }
             Text(
                 label,
-                color = if (label == "# poprawka") AppColors.Streak else AppColors.TextFaint,
+                color = if (label == "# poprawka".t()) AppColors.Streak else AppColors.TextFaint,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 13.sp,
             )
@@ -169,10 +170,10 @@ fun LessonScreen(
             HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
             Box(Modifier.padding(16.dp)) {
                 if (exercise is Explanation) {
-                    PrimaryButton(text = "Dalej  →", onClick = { onSubmit(Answer.Seen) })
+                    PrimaryButton(text = "Dalej  →".t(), onClick = { onSubmit(Answer.Seen) })
                 } else {
                     PrimaryButton(
-                        text = "▶  Sprawdź",
+                        text = "▶  Sprawdź".t(),
                         onClick = { pending?.let(onSubmit) },
                         enabled = pending != null,
                     )
@@ -187,16 +188,16 @@ fun LessonScreen(
     if (confirmQuit) {
         AlertDialog(
             onDismissRequest = { confirmQuit = false },
-            title = { Text("Przerwać lekcję?") },
-            text = { Text("Jeśli wyjdziesz teraz, stracisz postęp w tej lekcji.") },
+            title = { Text("Przerwać lekcję?".t()) },
+            text = { Text("Jeśli wyjdziesz teraz, stracisz postęp w tej lekcji.".t()) },
             confirmButton = {
                 TextButton(onClick = { confirmQuit = false; onQuit() }) {
-                    Text("Wyjdź", color = AppColors.Error, fontWeight = FontWeight.Bold)
+                    Text("Wyjdź".t(), color = AppColors.Error, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { confirmQuit = false }) {
-                    Text("Ucz się dalej", color = AppColors.Yellow, fontWeight = FontWeight.Bold)
+                    Text("Ucz się dalej".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold)
                 }
             },
             containerColor = AppColors.Surface,
@@ -443,7 +444,7 @@ private fun PredictOutputBody(
         modifier = Modifier.fillMaxWidth(),
         minLines = 2,
         placeholder = {
-            Text("wpisz, co wypisze program…", fontFamily = FontFamily.Monospace, color = AppColors.TextFaint)
+            Text("wpisz, co wypisze program…".t(), fontFamily = FontFamily.Monospace, color = AppColors.TextFaint)
         },
         textStyle = TextStyle(fontFamily = FontFamily.Monospace, fontSize = 16.sp, color = AppColors.Text),
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
@@ -482,9 +483,9 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
         Column(Modifier.padding(20.dp)) {
             Text(
                 when {
-                    feedback.typo -> "✓ Zaliczone, mała literówka"
+                    feedback.typo -> "✓ Zaliczone, mała literówka".t()
                     feedback.correct -> "✓ ${praise(feedback)}"
-                    else -> "✗ Niepoprawnie"
+                    else -> "✗ Niepoprawnie".t()
                 },
                 color = accent,
                 fontWeight = FontWeight.Bold,
@@ -493,7 +494,7 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
             )
             if (!feedback.correct || feedback.typo) {
                 Spacer(Modifier.height(10.dp))
-                Text(if (feedback.typo) "Dokładny zapis:" else "Poprawna odpowiedź:", color = AppColors.TextDim, fontSize = 14.sp)
+                Text(if (feedback.typo) "Dokładny zapis:".t() else "Poprawna odpowiedź:".t(), color = AppColors.TextDim, fontSize = 14.sp)
                 Spacer(Modifier.height(2.dp))
                 CodeText(feedback.correctAnswer, color = AppColors.Text)
             }
@@ -507,7 +508,7 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
             )
             Spacer(Modifier.height(16.dp))
             PrimaryButton(
-                text = if (feedback.correct) "Dalej  →" else "Rozumiem  →",
+                text = if (feedback.correct) "Dalej  →".t() else "Rozumiem  →".t(),
                 onClick = onContinue,
                 color = accent,
                 contentColor = AppColors.Background,
@@ -532,7 +533,7 @@ private fun RetryPanel(onRetry: () -> Unit) {
         )
         Column(Modifier.padding(20.dp)) {
             Text(
-                "✗ Jeszcze nie to",
+                "✗ Jeszcze nie to".t(),
                 color = AppColors.Streak,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.Monospace,
@@ -540,7 +541,7 @@ private fun RetryPanel(onRetry: () -> Unit) {
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                "# Masz jedną darmową poprawkę. Sprawdź literówki i spróbuj ponownie, serce zostaje.",
+                "# Masz jedną darmową poprawkę. Sprawdź literówki i spróbuj ponownie, serce zostaje.".t(),
                 color = AppColors.TextDim,
                 fontSize = 14.sp,
                 fontFamily = FontFamily.Monospace,
@@ -548,7 +549,7 @@ private fun RetryPanel(onRetry: () -> Unit) {
             )
             Spacer(Modifier.height(16.dp))
             PrimaryButton(
-                text = "↺  Popraw odpowiedź",
+                text = "↺  Popraw odpowiedź".t(),
                 onClick = onRetry,
                 color = AppColors.Streak,
                 contentColor = AppColors.Background,
@@ -557,6 +558,7 @@ private fun RetryPanel(onRetry: () -> Unit) {
     }
 }
 
+/** Kept in Polish; [praise] translates the one it picks. */
 private val praises = listOf("Świetnie!", "Dokładnie tak!", "Brawo!", "Tak trzymaj!", "Działa!")
 
-private fun praise(feedback: Feedback) = praises[Math.floorMod(feedback.explanation.hashCode(), praises.size)]
+private fun praise(feedback: Feedback) = praises[Math.floorMod(feedback.explanation.hashCode(), praises.size)].t()

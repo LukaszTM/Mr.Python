@@ -17,18 +17,21 @@ object Moods {
         val streak = Rules.visibleStreak(progress, today)
         return when {
             progress.lastActiveEpochDay == today.toEpochDay() ->
-                WidgetState(SnakeMood.HAPPY, streak, "Dzisiejsza lekcja zaliczona!")
+                WidgetState(SnakeMood.HAPPY, streak, "Dzisiejsza lekcja zaliczona!".t())
             streak > 0 && now.hour >= WORRY_HOUR ->
-                WidgetState(SnakeMood.WORRIED, streak, "Seria zagrożona! Zrób lekcję przed północą.")
+                WidgetState(SnakeMood.WORRIED, streak, "Seria zagrożona! Zrób lekcję przed północą.".t())
             streak > 0 ->
-                WidgetState(SnakeMood.BORED, streak, "Nudzę się… Czas na dzisiejszą lekcję.")
+                WidgetState(SnakeMood.BORED, streak, "Nudzę się… Czas na dzisiejszą lekcję.".t())
             progress.lastActiveEpochDay != null ->
-                WidgetState(SnakeMood.SAD, 0, "Seria przepadła. Zacznij nową!")
+                WidgetState(SnakeMood.SAD, 0, "Seria przepadła. Zacznij nową!".t())
             else ->
-                WidgetState(SnakeMood.BORED, 0, "Zacznij pierwszą lekcję!")
+                WidgetState(SnakeMood.BORED, 0, "Zacznij pierwszą lekcję!".t())
         }
     }
 
-    /** "1 dzień", "5 dni". */
-    fun days(count: Int): String = if (count == 1) "1 dzień" else "$count dni"
+    /** "1 dzień", "5 dni"; in English "1 day", "5 days". */
+    fun days(count: Int): String = when (I18n.language) {
+        Language.EN -> if (count == 1) "1 day" else "$count days"
+        Language.PL -> if (count == 1) "1 dzień" else "$count dni"
+    }
 }

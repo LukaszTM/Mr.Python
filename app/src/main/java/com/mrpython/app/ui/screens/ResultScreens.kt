@@ -44,6 +44,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.material3.TextButton
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.LessonResult
 import com.mrpython.app.ui.components.BigEmoji
 import com.mrpython.app.ui.components.PrimaryButton
@@ -84,7 +85,7 @@ fun LessonCompleteScreen(
             ) { BigEmoji(if (result.accuracyPercent == 100) "🏆" else "🐍", size = 88) }
             Spacer(Modifier.height(12.dp))
             Text(
-                if (result.isPractice) "Powtórka zaliczona!" else "Lekcja ukończona!",
+                if (result.isPractice) "Powtórka zaliczona!".t() else "Lekcja ukończona!".t(),
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Black,
                 color = AppColors.Yellow,
@@ -92,18 +93,18 @@ fun LessonCompleteScreen(
             )
             Spacer(Modifier.height(6.dp))
             Text(
-                if (result.accuracyPercent == 100) "Bezbłędnie! Tak trzymaj." else "Dobra robota, kolejny krok za Tobą.",
+                if (result.accuracyPercent == 100) "Bezbłędnie! Tak trzymaj.".t() else "Dobra robota, kolejny krok za Tobą.".t(),
                 color = AppColors.TextDim,
                 textAlign = TextAlign.Center,
             )
             if (result.heartRestored) {
                 Spacer(Modifier.height(4.dp))
-                Text("Odzyskujesz jedno ♥", color = AppColors.Heart, fontWeight = FontWeight.Bold)
+                Text("Odzyskujesz jedno ♥".t(), color = AppColors.Heart, fontWeight = FontWeight.Bold)
             }
             result.earned?.let { earned ->
                 Spacer(Modifier.height(14.dp))
                 Text(
-                    "🎁 ${earned.title}! Przez 30 minut XP ×${earned.multiplier}",
+                    "🎁 {0}! Przez 30 minut XP ×{1}".t(earned.title, earned.multiplier),
                     color = AppColors.Yellow,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
@@ -111,13 +112,13 @@ fun LessonCompleteScreen(
                 // The reward can be swapped: hearts are worth more when few are left.
                 if (hearts < Rules.MAX_HEARTS) {
                     TextButton(onClick = onTakeHearts) {
-                        Text("Wolę pełne serca ♥ zamiast bonusu", color = AppColors.Heart, fontWeight = FontWeight.Bold)
+                        Text("Wolę pełne serca ♥ zamiast bonusu".t(), color = AppColors.Heart, fontWeight = FontWeight.Bold)
                     }
                 }
             }
             if (result.heartsTaken) {
                 Spacer(Modifier.height(14.dp))
-                Text("♥ Serca uzupełnione do pełna", color = AppColors.Heart, fontWeight = FontWeight.Bold)
+                Text("♥ Serca uzupełnione do pełna".t(), color = AppColors.Heart, fontWeight = FontWeight.Bold)
             }
             result.event?.let { event ->
                 Spacer(Modifier.height(14.dp))
@@ -133,12 +134,12 @@ fun LessonCompleteScreen(
             }
             Spacer(Modifier.height(28.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                ResultCard("ZDOBYTE XP", "⚡ $xp", AppColors.Yellow, Modifier.weight(1f))
-                ResultCard("DOKŁADNOŚĆ", "${result.accuracyPercent}%", AppColors.Success, Modifier.weight(1f))
-                ResultCard("SERIA", "🔥 ${result.streak}", AppColors.Streak, Modifier.weight(1f))
+                ResultCard("ZDOBYTE XP".t(), "⚡ $xp", AppColors.Yellow, Modifier.weight(1f))
+                ResultCard("DOKŁADNOŚĆ".t(), "${result.accuracyPercent}%", AppColors.Success, Modifier.weight(1f))
+                ResultCard("SERIA".t(), "🔥 ${result.streak}", AppColors.Streak, Modifier.weight(1f))
             }
             Spacer(Modifier.weight(1f))
-            PrimaryButton("Dalej  →", onClick = onContinue)
+            PrimaryButton("Dalej  →".t(), onClick = onContinue)
         }
         Confetti()
     }
@@ -199,7 +200,7 @@ fun OutOfHeartsDialog(
                 .padding(24.dp),
         ) {
             Text(
-                "MemoryError: brak serc",
+                "MemoryError: brak serc".t(),
                 color = AppColors.Error,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
@@ -209,12 +210,12 @@ fun OutOfHeartsDialog(
             val wait = Rules.millisToNextHeart(progress, nowMillis)
             val timer = wait?.let {
                 val seconds = it / 1000
-                "Następne ♥ za %d:%02d.".format(seconds / 60, seconds % 60)
-            } ?: "Twoje serca są już pełne!"
+                "Następne ♥ za %d:%02d.".t().format(seconds / 60, seconds % 60)
+            } ?: "Twoje serca są już pełne!".t()
             Text(timer, color = AppColors.Text, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
             Spacer(Modifier.height(6.dp))
             Text(
-                "Możesz też powtórzyć ukończoną lekcję – nie kosztuje serc, a odda Ci jedno.",
+                "Możesz też powtórzyć ukończoną lekcję – nie kosztuje serc, a odda Ci jedno.".t(),
                 color = AppColors.TextDim,
                 lineHeight = 20.sp,
             )

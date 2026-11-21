@@ -57,6 +57,7 @@ import com.mrpython.app.domain.Lesson
 import com.mrpython.app.domain.Moods
 import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Rules
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.EventBanner
 import com.mrpython.app.ui.components.PrimaryButton
@@ -119,7 +120,7 @@ fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit, onShowPaywall
             }
             item {
                 Text(
-                    "# ciąg dalszy nastąpi…",
+                    "# ciąg dalszy nastąpi…".t(),
                     Modifier
                         .fillMaxWidth()
                         .padding(32.dp),
@@ -181,13 +182,13 @@ private fun mascotLine(state: AppUiState): String {
     val doneToday = p.lastActiveEpochDay == state.today.toEpochDay()
     val event = state.event
     return when {
-        Rules.visibleXpToday(p, state.today) >= Rules.DAILY_GOAL_XP -> "Cel na dziś zrobiony. Świetna robota!"
-        event != null -> "${event.title}: każda lekcja daje teraz XP ×${event.multiplier}!"
-        streak > 0 && !doneToday -> "Twoja seria: $streak dni. Jedna lekcja i dziś też się liczy!"
-        doneToday -> "Dobra passa! Jeszcze trochę i cel dzienny będzie Twój."
-        state.now.hour < 12 -> "Dzień dobry! Kawa, klawiatura i jedna lekcja?"
-        state.now.hour < 18 -> "Hej! Gotowy na dzisiejszą lekcję?"
-        else -> "Dobry wieczór! Zdążysz jeszcze z jedną lekcją."
+        Rules.visibleXpToday(p, state.today) >= Rules.DAILY_GOAL_XP -> "Cel na dziś zrobiony. Świetna robota!".t()
+        event != null -> "{0}: każda lekcja daje teraz XP ×{1}!".t(event.title, event.multiplier)
+        streak > 0 && !doneToday -> "Twoja seria: {0} dni. Jedna lekcja i dziś też się liczy!".t(streak)
+        doneToday -> "Dobra passa! Jeszcze trochę i cel dzienny będzie Twój.".t()
+        state.now.hour < 12 -> "Dzień dobry! Kawa, klawiatura i jedna lekcja?".t()
+        state.now.hour < 18 -> "Hej! Gotowy na dzisiejszą lekcję?".t()
+        else -> "Dobry wieczór! Zdążysz jeszcze z jedną lekcją.".t()
     }
 }
 
@@ -240,7 +241,7 @@ private fun MascotCard(state: AppUiState) {
         }
         Spacer(Modifier.height(14.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("🎯 Cel dzienny", color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            Text("🎯 Cel dzienny".t(), color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 15.sp)
             Spacer(Modifier.weight(1f))
             Text(
                 "$xpToday / $goal XP",
@@ -266,7 +267,7 @@ private fun NextEventLine(state: AppUiState) {
     val milestone = Events.nextMilestone(streak)
     val bonus = Events.label(Events.streakPercent(milestone) ?: 100)
     Text(
-        "⚡ Bonus XP ×$bonus za serię ${Moods.days(milestone)} (jeszcze ${Moods.days(milestone - streak)})",
+        "⚡ Bonus XP ×{0} za serię {1} (jeszcze {2})".t(bonus, Moods.days(milestone), Moods.days(milestone - streak)),
         Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 6.dp),
@@ -284,7 +285,7 @@ private fun ModuleHeader(number: Int, title: String, description: String, done: 
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                "MODUŁ %02d".format(number),
+                "MODUŁ %02d".t().format(number),
                 Modifier
                     .clip(RoundedCornerShape(8.dp))
                     .background(color)
@@ -430,11 +431,11 @@ private fun LessonCard(
         Column(Modifier.weight(1f)) {
             Text(lesson.title, color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp)
             val subtitle = when {
-                lesson.isIntro && status == LessonStatus.LOCKED -> "wprowadzenie · zablokowane"
-                lesson.isIntro -> "wprowadzenie · teoria i przykłady"
-                status == LessonStatus.DONE -> "ukończona · powtórka +${Rules.XP_PRACTICE} XP"
-                status == LessonStatus.LOCKED -> "zablokowana"
-                else -> "${lesson.exercises.size - lesson.cards.size} zadań · +${Rules.XP_PER_LESSON} XP"
+                lesson.isIntro && status == LessonStatus.LOCKED -> "wprowadzenie · zablokowane".t()
+                lesson.isIntro -> "wprowadzenie · teoria i przykłady".t()
+                status == LessonStatus.DONE -> "ukończona · powtórka +{0} XP".t(Rules.XP_PRACTICE)
+                status == LessonStatus.LOCKED -> "zablokowana".t()
+                else -> "{0} zadań · +{1} XP".t(lesson.exercises.size - lesson.cards.size, Rules.XP_PER_LESSON)
             }
             Text(subtitle, color = AppColors.TextDim, fontSize = 13.sp)
         }
@@ -470,16 +471,18 @@ private fun FullCourseCard(onClick: () -> Unit) {
             .border(2.dp, AppColors.Yellow.copy(alpha = 0.7f), shape)
             .padding(18.dp),
     ) {
-        Text("🔒 Pełny kurs", color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text("🔒 Pełny kurs".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
         Spacer(Modifier.height(6.dp))
         Text(
-            "Darmowa część kończy się tutaj. Dalej czeka ${CourseContent.units.size - Paywall.FREE_UNITS} modułów " +
-                "i ${Paywall.paidLessons(CourseContent.units)} lekcji. Płacisz raz, bez subskrypcji.",
+            "Darmowa część kończy się tutaj. Dalej czeka {0} modułów i {1} lekcji. Płacisz raz, bez subskrypcji.".t(
+                CourseContent.units.size - Paywall.FREE_UNITS,
+                Paywall.paidLessons(CourseContent.units),
+            ),
             color = AppColors.Text,
             lineHeight = 20.sp,
         )
         Spacer(Modifier.height(14.dp))
-        PrimaryButton(text = "Odblokuj pełny kurs  →", onClick = onClick)
+        PrimaryButton(text = "Odblokuj pełny kurs  →".t(), onClick = onClick)
     }
 }
 
@@ -502,7 +505,7 @@ private fun LessonDialog(
                 .padding(24.dp),
         ) {
             Text(
-                "lekcja.${lesson.id}",
+                "lekcja.{0}".t(lesson.id),
                 color = AppColors.TextFaint,
                 fontFamily = FontFamily.Monospace,
                 fontSize = 12.sp,
@@ -511,18 +514,16 @@ private fun LessonDialog(
             Text(lesson.title, fontWeight = FontWeight.Bold, fontSize = 22.sp, color = AppColors.Text)
             Spacer(Modifier.height(10.dp))
             val description = when {
-                !isUnlocked -> "Ukończ poprzednie lekcje, aby odblokować tę."
-                lesson.isIntro -> "Krótkie wprowadzenie do modułu: teoria, przykłady kodu i kilka " +
-                    "pytań na rozgrzewkę. Możesz do niego wracać w każdej chwili."
-                isDone -> "Powtórka: losowe zadania z tej lekcji. Nie tracisz serc, " +
-                    "a za ukończenie odzyskasz jedno ♥."
-                else -> "${lesson.exercises.size - lesson.cards.size} zadań. Uważaj – każdy błąd kosztuje jedno ♥."
+                !isUnlocked -> "Ukończ poprzednie lekcje, aby odblokować tę.".t()
+                lesson.isIntro -> "Krótkie wprowadzenie do modułu: teoria, przykłady kodu i kilka pytań na rozgrzewkę. Możesz do niego wracać w każdej chwili.".t()
+                isDone -> "Powtórka: losowe zadania z tej lekcji. Nie tracisz serc, a za ukończenie odzyskasz jedno ♥.".t()
+                else -> "{0} zadań. Uważaj – każdy błąd kosztuje jedno ♥.".t(lesson.exercises.size - lesson.cards.size)
             }
             Text(description, color = AppColors.TextDim, lineHeight = 20.sp)
             Spacer(Modifier.height(20.dp))
             if (isUnlocked) {
                 PrimaryButton(
-                    text = if (isDone) "↻  Powtórz  +${Rules.XP_PRACTICE} XP" else "▶  Uruchom  +${Rules.XP_PER_LESSON} XP",
+                    text = if (isDone) "↻  Powtórz  +{0} XP".t(Rules.XP_PRACTICE) else "▶  Uruchom  +{0} XP".t(Rules.XP_PER_LESSON),
                     onClick = onStart,
                 )
             } else {

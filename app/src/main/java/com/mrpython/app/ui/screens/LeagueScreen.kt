@@ -36,6 +36,7 @@ import com.mrpython.app.domain.League
 import com.mrpython.app.domain.Standing
 import com.mrpython.app.domain.Tier
 import com.mrpython.app.domain.WeekResult
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.BigEmoji
 import com.mrpython.app.ui.components.SnakeAvatar
@@ -82,7 +83,7 @@ fun LeagueScreen(state: AppUiState) {
 private fun LeagueHeader(tier: Tier, weekStart: LocalDate, now: LocalDateTime) {
     Column(Modifier.padding(16.dp)) {
         Text(
-            "LIGA TYGODNIOWA",
+            "LIGA TYGODNIOWA".t(),
             color = AppColors.TextFaint,
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Bold,
@@ -98,7 +99,7 @@ private fun LeagueHeader(tier: Tier, weekStart: LocalDate, now: LocalDateTime) {
         val days = left / (24 * 60)
         val hours = (left / 60) % 24
         Text(
-            "# koniec tygodnia za ${if (days > 0) "$days d " else ""}$hours h",
+            "# koniec tygodnia za {0}".t("${if (days > 0) "$days d " else ""}$hours h"),
             color = AppColors.TextDim,
             fontFamily = FontFamily.Monospace,
             fontSize = 13.sp,
@@ -106,9 +107,9 @@ private fun LeagueHeader(tier: Tier, weekStart: LocalDate, now: LocalDateTime) {
         val next = tier.next
         Text(
             if (next != null) {
-                "Trzy pierwsze miejsca awansują na: ${next.title}"
+                "Trzy pierwsze miejsca awansują na: {0}".t(next.title)
             } else {
-                "Jesteś na szczycie kariery. Broń swojej pozycji!"
+                "Jesteś na szczycie kariery. Broń swojej pozycji!".t()
             },
             color = AppColors.Text,
             fontSize = 15.sp,
@@ -207,7 +208,7 @@ private fun PromotionLine(next: Tier) {
                 .background(AppColors.Success)
         )
         Text(
-            "▲ awans: ${next.title}",
+            "▲ awans: {0}".t(next.title),
             color = AppColors.Success,
             fontFamily = FontFamily.Monospace,
             fontSize = 12.sp,
@@ -239,26 +240,26 @@ fun WeekResultDialog(result: WeekResult, onDismiss: () -> Unit) {
             BigEmoji(if (promoted != null) "🚀" else "📊", size = 64)
             Spacer(Modifier.height(12.dp))
             Text(
-                if (promoted != null) "Awans!" else "Tydzień zakończony",
+                if (promoted != null) "Awans!".t() else "Tydzień zakończony".t(),
                 color = AppColors.Text,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Twoje miejsce w lidze: ${result.rank}.",
+                "Twoje miejsce w lidze: {0}.".t(result.rank),
                 color = AppColors.TextDim,
                 textAlign = TextAlign.Center,
             )
             if (promoted != null) {
                 Spacer(Modifier.height(4.dp))
-                Text("Nowe stanowisko:", color = AppColors.TextDim)
+                Text("Nowe stanowisko:".t(), color = AppColors.TextDim)
                 Text(promoted.title, color = promoted.color(), fontWeight = FontWeight.Bold, fontSize = 22.sp)
                 val unlocked = Avatars.unlockedAt(promoted)
                 if (unlocked.isNotEmpty()) {
                     Spacer(Modifier.height(10.dp))
                     Text(
-                        "🎁 Nowości dla awatara: ${unlocked.joinToString(", ")}. Znajdziesz je w profilu.",
+                        "🎁 Nowości dla awatara: {0}. Znajdziesz je w profilu.".t(unlocked.joinToString(", ")),
                         color = AppColors.Text,
                         textAlign = TextAlign.Center,
                         fontSize = 14.sp,
@@ -268,13 +269,13 @@ fun WeekResultDialog(result: WeekResult, onDismiss: () -> Unit) {
             } else {
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "Do awansu potrzeba miejsca w pierwszej trójce. Powodzenia w tym tygodniu!",
+                    "Do awansu potrzeba miejsca w pierwszej trójce. Powodzenia w tym tygodniu!".t(),
                     color = AppColors.TextDim,
                     textAlign = TextAlign.Center,
                 )
             }
             Spacer(Modifier.height(20.dp))
-            PrimaryButton("Dalej  →", onClick = onDismiss)
+            PrimaryButton("Dalej  →".t(), onClick = onDismiss)
         }
     }
 }

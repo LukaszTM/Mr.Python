@@ -9,7 +9,7 @@ import kotlin.math.pow
 import kotlin.random.Random
 
 /** Career ladder used as league tiers. */
-enum class Tier(val title: String) {
+enum class Tier(private val titlePl: String) {
     INTERN("Stażysta"),
     JUNIOR("Junior Developer"),
     MID("Mid Developer"),
@@ -17,6 +17,9 @@ enum class Tier(val title: String) {
     TECH_LEAD("Tech Lead"),
     ARCHITECT("Architekt"),
     CTO("CTO");
+
+    /** The job title in the current language. */
+    val title: String get() = titlePl.t()
 
     val next: Tier? get() = entries.getOrNull(ordinal + 1)
 }
@@ -73,7 +76,7 @@ object League {
     fun standings(weekStart: LocalDate, tier: Tier, playerXp: Int, fraction: Double): List<Standing> {
         val rows = rivals(weekStart, tier).map {
             Triple(it.name, (it.finalXp * fraction.pow(it.pace)).toInt(), false)
-        } + Triple("Ty", playerXp, true)
+        } + Triple("Ty".t(), playerXp, true)
         return rows
             .sortedWith(compareByDescending<Triple<String, Int, Boolean>> { it.second }.thenByDescending { it.third })
             .mapIndexed { i, (name, xp, isPlayer) -> Standing(i + 1, name, xp, isPlayer) }

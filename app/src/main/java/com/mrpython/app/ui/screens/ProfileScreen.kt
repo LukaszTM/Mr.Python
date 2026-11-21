@@ -20,6 +20,7 @@ import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.Language
 import com.mrpython.app.domain.SnakeSkin
 import com.mrpython.app.domain.Tier
+import com.mrpython.app.domain.t
 import com.mrpython.app.notifications.ReminderScheduler
 import com.mrpython.app.ui.components.SnakeAvatar
 import com.mrpython.app.widget.StreakWidget
@@ -99,11 +100,11 @@ fun ProfileScreen(
         Spacer(Modifier.height(12.dp))
         Text("Mr. Python", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = AppColors.Text)
         Text(p.leagueTier.title, color = p.leagueTier.color(), fontWeight = FontWeight.Bold, fontSize = 16.sp)
-        Text("import wiedza  # uczę się Pythona", color = AppColors.TextDim, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
+        Text("import wiedza  # uczę się Pythona".t(), color = AppColors.TextDim, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
         Spacer(Modifier.height(14.dp))
         // The wardrobe stays folded away until asked for, right under the avatar it changes.
         SecondaryButton(
-            text = if (editingAvatar) "✓  Gotowe" else "✎  Edytuj awatara",
+            text = if (editingAvatar) "✓  Gotowe".t() else "✎  Edytuj awatara".t(),
             onClick = { editingAvatar = !editingAvatar },
             color = if (editingAvatar) AppColors.Success else AppColors.Yellow,
         )
@@ -115,32 +116,32 @@ fun ProfileScreen(
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Statystyki")
+        SectionTitle("Statystyki".t())
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            StatCard("🔥", "${Rules.visibleStreak(p, state.today)}", "Dni serii", Modifier.weight(1f))
-            StatCard("⚡", "${p.totalXp}", "Łącznie XP", Modifier.weight(1f))
+            StatCard("🔥", "${Rules.visibleStreak(p, state.today)}", "Dni serii".t(), Modifier.weight(1f))
+            StatCard("⚡", "${p.totalXp}", "Łącznie XP".t(), Modifier.weight(1f))
         }
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            StatCard("📚", "$done/$totalLessons", "Lekcje", Modifier.weight(1f))
-            StatCard("♥", if (state.fullCourse) "∞" else "${p.hearts}/${Rules.MAX_HEARTS}", "Serca", Modifier.weight(1f))
+            StatCard("📚", "$done/$totalLessons", "Lekcje".t(), Modifier.weight(1f))
+            StatCard("♥", if (state.fullCourse) "∞" else "${p.hearts}/${Rules.MAX_HEARTS}", "Serca".t(), Modifier.weight(1f))
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Przypomnienia")
+        SectionTitle("Przypomnienia".t())
         ReminderSettings(state, onRemindersEnabled, onReminderHour)
         val widgetContext = LocalContext.current
         if (StreakWidget.canPin(widgetContext)) {
             Spacer(Modifier.height(12.dp))
             SecondaryButton(
-                text = "▦  Dodaj widżet na ekran główny",
+                text = "▦  Dodaj widżet na ekran główny".t(),
                 onClick = { StreakWidget.requestPin(widgetContext) },
                 color = AppColors.BlueBright,
             )
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Język")
+        SectionTitle("Język".t())
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Language.entries.forEach { language ->
                 SecondaryButton(
@@ -153,20 +154,20 @@ fun ProfileScreen(
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Pełny kurs")
+        SectionTitle("Pełny kurs".t())
         if (state.fullCourse) {
             Text(
-                "✓ Odblokowany. Dziękujemy za wsparcie!",
+                "✓ Odblokowany. Dziękujemy za wsparcie!".t(),
                 Modifier.fillMaxWidth(),
                 color = AppColors.Success,
                 fontWeight = FontWeight.SemiBold,
             )
         } else {
-            SecondaryButton(text = "🔒  Odblokuj pełny kurs", onClick = onShowPaywall, color = AppColors.Yellow)
+            SecondaryButton(text = "🔒  Odblokuj pełny kurs".t(), onClick = onShowPaywall, color = AppColors.Yellow)
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Postęp kursu")
+        SectionTitle("Postęp kursu".t())
         CourseContent.units.forEachIndexed { i, unit ->
             val unitDone = unit.lessons.count { it.id in p.completedLessons }
             val color = AppColors.unitColors[i % AppColors.unitColors.size]
@@ -182,7 +183,7 @@ fun ProfileScreen(
         }
         Spacer(Modifier.height(32.dp))
         SecondaryButton(
-            text = "Zresetuj postęp",
+            text = "Zresetuj postęp".t(),
             onClick = { confirmReset = true },
             color = AppColors.Error,
         )
@@ -191,15 +192,15 @@ fun ProfileScreen(
     if (confirmReset) {
         AlertDialog(
             onDismissRequest = { confirmReset = false },
-            title = { Text("Zresetować postęp?") },
-            text = { Text("Stracisz wszystkie XP, serię i ukończone lekcje. Tego nie da się cofnąć.") },
+            title = { Text("Zresetować postęp?".t()) },
+            text = { Text("Stracisz wszystkie XP, serię i ukończone lekcje. Tego nie da się cofnąć.".t()) },
             confirmButton = {
                 TextButton(onClick = { confirmReset = false; onReset() }) {
-                    Text("Resetuj", color = AppColors.Error, fontWeight = FontWeight.Bold)
+                    Text("Resetuj".t(), color = AppColors.Error, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { confirmReset = false }) { Text("Anuluj", color = AppColors.Yellow) }
+                TextButton(onClick = { confirmReset = false }) { Text("Anuluj".t(), color = AppColors.Yellow) }
             },
             containerColor = AppColors.Surface,
             titleContentColor = AppColors.Text,
@@ -212,7 +213,7 @@ fun ProfileScreen(
 @Composable
 private fun AvatarEditor(avatar: Avatar, tier: Tier, onAvatar: (Avatar) -> Unit) {
     Column(Modifier.fillMaxWidth()) {
-        AvatarRowLabel("Wąż")
+        AvatarRowLabel("Wąż".t())
         Row(
             Modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -236,7 +237,7 @@ private fun AvatarEditor(avatar: Avatar, tier: Tier, onAvatar: (Avatar) -> Unit)
             ) {
                 AvatarTile(
                     preview = Avatar(avatar.skin),
-                    title = "Brak",
+                    title = "Brak".t(),
                     selected = avatar.accessory(slot) == null,
                     lockedUntil = null,
                     onClick = { onAvatar(avatar.with(slot, null)) },
@@ -311,7 +312,7 @@ private fun AvatarTile(
                 maxLines = 1,
             )
         } else {
-            Text(if (selected) "✓ wybrane" else " ", color = AppColors.Yellow, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+            Text(if (selected) "✓ wybrane".t() else " ", color = AppColors.Yellow, fontSize = 10.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -339,9 +340,9 @@ private fun ReminderSettings(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("🔔 Codzienne przypomnienie", color = AppColors.Text, fontWeight = FontWeight.Bold)
+                Text("🔔 Codzienne przypomnienie".t(), color = AppColors.Text, fontWeight = FontWeight.Bold)
                 Text(
-                    "Powiadomienie, gdy nie było jeszcze dziś lekcji, i ostrzeżenie o 22:00, gdy seria jest zagrożona.",
+                    "Powiadomienie, gdy nie było jeszcze dziś lekcji, i ostrzeżenie o 22:00, gdy seria jest zagrożona.".t(),
                     color = AppColors.TextDim,
                     fontSize = 13.sp,
                     lineHeight = 17.sp,
@@ -370,7 +371,7 @@ private fun ReminderSettings(
         if (state.remindersEnabled) {
             Spacer(Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Godzina", Modifier.weight(1f), color = AppColors.Text, fontWeight = FontWeight.SemiBold)
+                Text("Godzina".t(), Modifier.weight(1f), color = AppColors.Text, fontWeight = FontWeight.SemiBold)
                 HourButton("−") { onHour(Math.floorMod(state.reminderHour - 1, 24)) }
                 Text(
                     "%02d:00".format(state.reminderHour),
@@ -387,14 +388,14 @@ private fun ReminderSettings(
         if (blocked) {
             Spacer(Modifier.height(12.dp))
             Text(
-                "Powiadomienia są zablokowane w ustawieniach telefonu, więc przypomnienia się nie pokażą.",
+                "Powiadomienia są zablokowane w ustawieniach telefonu, więc przypomnienia się nie pokażą.".t(),
                 color = AppColors.Error,
                 fontSize = 13.sp,
                 lineHeight = 17.sp,
             )
             Spacer(Modifier.height(8.dp))
             SecondaryButton(
-                text = "Otwórz ustawienia powiadomień",
+                text = "Otwórz ustawienia powiadomień".t(),
                 onClick = {
                     context.startActivity(
                         Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
