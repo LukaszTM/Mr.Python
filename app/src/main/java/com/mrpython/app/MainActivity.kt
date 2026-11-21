@@ -152,7 +152,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 onDismiss = viewModel::dismissOutOfHearts,
                 buyLabel = when {
                     state.heartsPrice != null -> "♥  Kup pełne serca za {0}".t(state.heartsPrice)
-                    state.testBuild -> "♥  Pełne serca (wersja testowa, bez płatności)".t()
+                    state.testBuild -> "♥  Pełne serca (test, bez płatności)".t()
                     else -> "♥  Kup pełne serca".t()
                 },
                 message = state.purchaseMessage,

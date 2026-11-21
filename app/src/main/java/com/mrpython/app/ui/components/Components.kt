@@ -121,6 +121,9 @@ fun PrimaryButton(
             color = if (enabled) contentColor else AppColors.TextFaint,
             fontWeight = FontWeight.ExtraBold,
             fontSize = 17.sp,
+            // Long labels wrap; keep both lines centred with some air at the sides.
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 12.dp),
         )
     }
 }
@@ -149,7 +152,14 @@ fun SecondaryButton(
             .clickable(interactionSource = interaction, indication = null, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, color = color, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+        Text(
+            text,
+            Modifier.padding(horizontal = 12.dp),
+            color = color,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+        )
     }
 }
 

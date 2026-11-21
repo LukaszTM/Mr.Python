@@ -85,7 +85,7 @@ internal val translationsEn: Map<String, String> = mapOf(
     "Możesz też powtórzyć ukończoną lekcję – nie kosztuje serc, a odda Ci jedno." to
         "You can also review a completed lesson – it costs no hearts and gives you one back.",
     "♥  Kup pełne serca za {0}" to "♥  Refill hearts for {0}",
-    "♥  Pełne serca (wersja testowa, bez płatności)" to "♥  Refill hearts (test build, no payment)",
+    "♥  Pełne serca (test, bez płatności)" to "♥  Refill hearts (test, no payment)",
     "♥  Kup pełne serca" to "♥  Refill hearts",
 
     // League
@@ -175,7 +175,7 @@ internal val translationsEn: Map<String, String> = mapOf(
     "płacisz raz, bez subskrypcji" to "pay once, no subscription",
     "zakup jest przypisany do Twojego konta Google" to "the purchase is tied to your Google account",
     "Kup za {0}" to "Buy for {0}",
-    "Odblokuj (wersja testowa, bez płatności)" to "Unlock (test build, no payment)",
+    "Odblokuj (test, bez płatności)" to "Unlock (test, no payment)",
     "Kup pełny kurs" to "Buy the full course",
     "Przywróć zakup" to "Restore purchase",
     "Nie teraz" to "Not now",

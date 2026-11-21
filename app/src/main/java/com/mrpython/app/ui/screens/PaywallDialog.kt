@@ -74,7 +74,7 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
             PrimaryButton(
                 text = when {
                     price != null -> "Kup za {0}".t(price)
-                    state.testBuild -> "Odblokuj (wersja testowa, bez płatności)".t()
+                    state.testBuild -> "Odblokuj (test, bez płatności)".t()
                     else -> "Kup pełną wersję".t()
                 },
                 onClick = onBuy,
