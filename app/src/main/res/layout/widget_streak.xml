@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:maxLines="1"
-        android:text="🔥 0 dni"
+        android:text="🔥"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         android:textStyle="bold" />
@@ -35,7 +35,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
-        android:text="Zacznij pierwszą lekcję!"
+        android:text="Mr. Python"
         android:textColor="#F2F5FA"
         android:textSize="12sp" />
 </LinearLayout>

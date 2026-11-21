@@ -8,6 +8,7 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 import com.mrpython.app.R
@@ -44,7 +45,11 @@ object AdsManager {
                     if (consent.canRequestAds()) initialize(activity)
                 }
             },
-            { if (consent.canRequestAds()) initialize(activity) },
+            {
+                // Usually no connection. Use an earlier consent if there is one, and try again
+                // the next time an ad is due.
+                if (consent.canRequestAds()) initialize(activity) else started = false
+            },
         )
         // A consent given in an earlier session lets ads load without waiting for the update.
         if (consent.canRequestAds()) initialize(activity)
@@ -77,6 +82,16 @@ object AdsManager {
         )
     }
 
+    /** True where the law gives the learner the right to change the ad consent later (EU, UK). */
+    fun privacyOptionsRequired(activity: Activity): Boolean =
+        UserMessagingPlatform.getConsentInformation(activity).privacyOptionsRequirementStatus ==
+            ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+
+    /** Opens Google's form for changing the ad consent. */
+    fun showPrivacyOptions(activity: Activity) {
+        UserMessagingPlatform.showPrivacyOptionsForm(activity) { }
+    }
+
     /**
      * Shows an ad if one is ready and the last one was long enough ago, then calls [then].
      * [then] always runs exactly once, with or without an ad.
@@ -85,7 +100,7 @@ object AdsManager {
         val ready = ad
         val now = System.currentTimeMillis()
         if (activity == null || ready == null || now - lastShownMillis < MIN_GAP_MILLIS) {
-            activity?.let { load(it) }
+            activity?.let { if (initialized) load(it) else start(it) }
             then()
             return
         }

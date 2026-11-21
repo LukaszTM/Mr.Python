@@ -1,6 +1,7 @@
 package com.mrpython.app.ui.screens
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
@@ -14,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.ui.draw.alpha
+import com.mrpython.app.ads.AdsManager
 import com.mrpython.app.domain.AccessorySlot
 import com.mrpython.app.domain.Avatar
 import com.mrpython.app.domain.Avatars
@@ -162,6 +164,17 @@ fun ProfileScreen(
             }
         }
         Spacer(Modifier.height(24.dp))
+
+        // Where consent for ads is required by law, it can also be changed later.
+        val adsActivity = widgetContext as? Activity
+        if (!state.fullCourse && adsActivity != null && AdsManager.privacyOptionsRequired(adsActivity)) {
+            SecondaryButton(
+                text = "Ustawienia prywatności reklam".t(),
+                onClick = { AdsManager.showPrivacyOptions(adsActivity) },
+                color = AppColors.TextDim,
+            )
+            Spacer(Modifier.height(24.dp))
+        }
 
         SectionTitle("Pełna wersja".t())
         if (state.fullCourse) {
@@ -406,11 +419,14 @@ private fun ReminderSettings(
             SecondaryButton(
                 text = "Otwórz ustawienia powiadomień".t(),
                 onClick = {
-                    context.startActivity(
-                        Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                            .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    )
+                    // Some phones have no such screen; then the button simply does nothing.
+                    runCatching {
+                        context.startActivity(
+                            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                                .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        )
+                    }
                 },
             )
         }

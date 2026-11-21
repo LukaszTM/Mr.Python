@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mrpython.app.ads.AdsManager
-import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppViewModel
 import com.mrpython.app.ui.Tab
@@ -85,6 +84,9 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
         }
     }
 
+    // The phone's language may have changed while the app was in the background.
+    LaunchedEffect(Unit) { viewModel.syncLanguage() }
+
     // Ads are only for the free version; buying the full course switches them off for good.
     val activity = LocalContext.current as? Activity
     val showAds = !state.fullCourse
@@ -114,8 +116,6 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             )
             result != null -> LessonCompleteScreen(
                 result,
-                hearts = if (state.fullCourse) Rules.MAX_HEARTS else state.progress.hearts,
-                onTakeHearts = viewModel::takeHeartsInsteadOfBonus,
                 onContinue = {
                     if (showAds) AdsManager.showThen(activity, viewModel::dismissResult) else viewModel.dismissResult()
                 },

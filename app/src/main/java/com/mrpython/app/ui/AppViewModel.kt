@@ -67,10 +67,8 @@ data class LessonResult(
     val event: XpEvent? = null,
     /** A bonus this lesson has just earned (a streak milestone); it applies to the next lessons. */
     val earned: XpEvent? = null,
-    /** The bonus held before [earned]; it comes back if the learner takes hearts instead. */
-    val boostBefore: Boost? = null,
-    /** The learner swapped the earned XP bonus for full hearts. */
-    val heartsTaken: Boolean = false,
+    /** Free version: a streak milestone refilled the hearts instead of granting an XP bonus. */
+    val milestoneHearts: Boolean = false,
 )
 
 data class AppUiState(
@@ -128,10 +126,23 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private val testBuild get() = _state.value.testBuild
 
+    /** True between tapping "restore purchase" and Google Play's answer. */
+    @Volatile
+    private var restoring = false
+
     private val billing = BillingManager(
         application,
         // A test build has no real purchase, so Google Play's "not owned" must not undo the simulated one.
-        onOwned = { owned -> if (owned || !testBuild) setFullCourse(owned) },
+        onOwned = { owned ->
+            if (owned || !testBuild) setFullCourse(owned)
+            // "Restore purchase" must end with an answer, also when there is nothing to restore.
+            if (restoring) {
+                restoring = false
+                if (!owned && !_state.value.fullCourse) {
+                    _state.update { it.copy(purchaseMessage = "Na tym koncie Google nie ma zakupu pełnej wersji.".t()) }
+                }
+            }
+        },
         onHearts = ::grantHearts,
         onPrice = { product, price ->
             _state.update {
@@ -230,7 +241,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private fun advance(active: ActiveLesson, session: LessonSession) {
         when {
             !active.isPractice && !_state.value.fullCourse && _state.value.progress.hearts <= 0 -> _state.update {
-                it.copy(lesson = null, outOfHearts = true)
+                it.copy(lesson = null, outOfHearts = true, purchaseMessage = null)
             }
             session.isFinished -> finishLesson(session, active.isPractice)
             else -> _state.update { it.copy(lesson = active.copy(session = session, feedback = null, retryUsed = false)) }
@@ -262,11 +273,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     accuracyPercent = if (attempts == 0) 100 else session.total * 100 / attempts,
                     streak = progress.streak,
                     isPractice = isPractice,
-                    heartRestored = !(milestone && !it.fullCourse) && progress.hearts > it.progress.hearts,
+                    heartRestored = !it.fullCourse && !milestone && progress.hearts > it.progress.hearts,
                     event = event,
                     earned = if (milestone && it.fullCourse) Events.active(progress, nowMillis) else null,
-                    heartsTaken = milestone && !it.fullCourse,
-                    boostBefore = it.progress.boost,
+                    milestoneHearts = milestone && !it.fullCourse,
                 ),
             )
         }
@@ -327,23 +337,24 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         persist()
     }
 
-    /** On the result screen: give up the XP bonus just earned and take full hearts instead. */
-    fun takeHeartsInsteadOfBonus() {
-        val result = _state.value.result ?: return
-        if (result.earned == null) return
-        _state.update {
-            it.copy(
-                progress = Rules.fillHearts(it.progress.copy(boost = result.boostBefore)),
-                result = result.copy(earned = null, heartsTaken = true),
-            )
-        }
-        persist()
-    }
-
     /** Asks Google Play again what the account owns (after a reinstall or on a new phone). */
     fun restorePurchase() {
-        billing.refresh()
+        restoring = true
         _state.update { it.copy(purchaseMessage = "Sprawdzam zakupy na Twoim koncie Google…".t()) }
+        billing.refresh()
+    }
+
+    /** Follows the phone's language when the learner has not picked one in the profile. */
+    fun syncLanguage() {
+        val language = settings.language
+        if (language == _state.value.language) return
+        _state.update { it.copy(language = language, lesson = null, result = null) }
+        StreakWidget.refresh(getApplication<Application>())
+    }
+
+    override fun onCleared() {
+        billing.close()
+        super.onCleared()
     }
 
     private fun setFullCourse(owned: Boolean) {

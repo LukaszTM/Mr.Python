@@ -88,8 +88,9 @@ Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij 
 5. Zainstaluj aplikację z testu wewnętrznego (nie z pliku APK z GitHuba) i sprawdź zakup,
    a po reinstalacji przycisk „Przywróć zakup”.
 
-Wersja testowa z GitHuba (APK debug) nie łączy się ze sklepem: przycisk zakupu odblokowuje
-w niej kurs od razu, bez płatności, żeby dało się testować dalsze moduły.
+Wersja testowa z GitHuba (APK debug) nie łączy się ze sklepem: przyciski zakupu działają w niej
+od razu, bez płatności (pełna wersja: brak reklam, serca bez limitu, bonusy XP, akcesoria;
+serca: uzupełnienie), żeby dało się obejrzeć oba tryby. „Zresetuj postęp” cofa to odblokowanie.
 
 ## Krok 7. Reklamy w wersji bezpłatnej (AdMob)
 
@@ -110,7 +111,8 @@ zarabiają. Żeby zarabiać:
 5. Po publikacji w sklepie połącz w AdMob aplikację z jej kartą w Google Play i dodaj plik
    `app-ads.txt` na stronie dewelopera podanej w sklepie (AdMob pokaże jego treść).
 
-Prawdziwe identyfikatory trafiają tylko do wersji produkcyjnej. Wersja testowa zawsze używa
+Bez tych sekretów podpisana wersja produkcyjna też się zbuduje, ale z reklamami próbnymi –
+kompilacja wypisze wtedy ostrzeżenie. Prawdziwe identyfikatory trafiają tylko do wersji produkcyjnej. Wersja testowa zawsze używa
 reklam próbnych – nie klikaj własnych prawdziwych reklam, bo AdMob blokuje za to konta.
 
 Reklama pojawia się po ukończonej lekcji, nie częściej niż raz na 3 minuty, i tylko u osób

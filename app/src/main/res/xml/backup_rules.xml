@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Learning progress is backed up; device-specific settings (purchase cache, "permission
+     already asked", language) are worked out again on the new phone. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="settings.xml" />
+</full-backup-content>

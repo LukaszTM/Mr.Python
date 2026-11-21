@@ -136,6 +136,7 @@ fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit, onShowPaywall
             lesson = lesson,
             isDone = lesson.id in completed,
             isUnlocked = Rules.isUnlocked(CourseContent.units, lesson.id, completed),
+            unlimitedHearts = state.fullCourse,
             onStart = {
                 selected = null
                 onStartLesson(lesson.id)
@@ -461,7 +462,7 @@ private fun LessonCard(
     }
 }
 
-/** Sits between the free modules and the rest of the course until the full course is bought. */
+/** Shown at the top of the course in the free version: what the full version adds. */
 @Composable
 private fun FullCourseCard(onClick: () -> Unit) {
     val shape = RoundedCornerShape(16.dp)
@@ -491,6 +492,7 @@ private fun LessonDialog(
     lesson: Lesson,
     isDone: Boolean,
     isUnlocked: Boolean,
+    unlimitedHearts: Boolean,
     onStart: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -517,6 +519,7 @@ private fun LessonDialog(
                 !isUnlocked -> "Ukończ poprzednie lekcje, aby odblokować tę.".t()
                 lesson.isIntro -> "Krótkie wprowadzenie do modułu: teoria, przykłady kodu i kilka pytań na rozgrzewkę. Możesz do niego wracać w każdej chwili.".t()
                 isDone -> "Powtórka: losowe zadania z tej lekcji. Nie tracisz serc, a za ukończenie odzyskasz jedno ♥.".t()
+                unlimitedHearts -> "{0} zadań. Masz serca bez limitu, więc ucz się bez stresu.".t(lesson.exercises.size - lesson.cards.size)
                 else -> "{0} zadań. Uważaj – każdy błąd kosztuje jedno ♥.".t(lesson.exercises.size - lesson.cards.size)
             }
             Text(description, color = AppColors.TextDim, lineHeight = 20.sp)

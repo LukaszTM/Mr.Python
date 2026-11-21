@@ -42,6 +42,9 @@ android {
             signingConfig = signingConfigs.findByName("release")
             // The real AdMob IDs come from the environment (repository secrets in CI). Debug
             // builds keep the test IDs on purpose: clicking your own live ads gets accounts banned.
+            if (!keystoreFile.isNullOrBlank() && System.getenv("MRPYTHON_ADMOB_APP_ID").isNullOrBlank()) {
+                logger.warn("WARNING: signed release build without AdMob IDs: it will show Google's test ads and earn nothing.")
+            }
             System.getenv("MRPYTHON_ADMOB_APP_ID")?.takeIf { it.isNotBlank() }
                 ?.let { resValue("string", "admob_app_id", it) }
             System.getenv("MRPYTHON_ADMOB_INTERSTITIAL_ID")?.takeIf { it.isNotBlank() }

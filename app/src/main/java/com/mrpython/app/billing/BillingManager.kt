@@ -58,12 +58,19 @@ class BillingManager(
         }
         client.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(result: BillingResult) {
-                if (result.responseCode == BillingClient.BillingResponseCode.OK) query()
+                if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                    query()
+                } else {
+                    onMessage("Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.".t())
+                }
             }
 
             override fun onBillingServiceDisconnected() = Unit
         })
     }
+
+    /** Lets go of the connection to Google Play. */
+    fun close() = client.endConnection()
 
     /** Opens the Google Play purchase sheet for [productId]; returns false when the shop is not reachable. */
     fun buy(activity: Activity, productId: String): Boolean {
