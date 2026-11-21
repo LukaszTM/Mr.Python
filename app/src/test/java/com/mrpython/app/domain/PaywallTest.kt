@@ -4,23 +4,30 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.time.LocalDate
 
 class PaywallTest {
-    private val course = (1..7).map { u ->
-        CourseUnit("u$u", "Moduł $u", "", listOf(Lesson("u${u}l1", "a", emptyList()), Lesson("u${u}l2", "b", emptyList())))
+    private val today = LocalDate.of(2026, 3, 10)
+
+    @Test
+    fun oneNewLessonADay() {
+        val fresh = Progress()
+        assertFalse(Paywall.blocksStart(fresh, "u1l1", today))
+        val after = Rules.completeLesson(fresh, "u1l1", 0, today)
+        assertEquals(today.toEpochDay(), after.lastNewLessonEpochDay)
+        assertTrue(Paywall.blocksStart(after, "u1l2", today))
+        assertFalse(Paywall.blocksStart(after, "u1l2", today.plusDays(1)))
     }
 
     @Test
-    fun firstModulesAreFree() {
-        assertFalse(Paywall.isPaid(course, "u1l1"))
-        assertFalse(Paywall.isPaid(course, "u5l2"))
-        assertTrue(Paywall.isPaid(course, "u6l1"))
-        assertTrue(Paywall.isPaid(course, "u7l2"))
-        assertFalse(Paywall.isPaid(course, "nope"))
-    }
-
-    @Test
-    fun countsPaidLessons() {
-        assertEquals(4, Paywall.paidLessons(course))
+    fun replaysAndIntroductionsAreNeverLimited() {
+        val after = Rules.completeLesson(Progress(), "u1l1", 0, today)
+        assertFalse(Paywall.blocksStart(after, "u1l1", today))
+        assertFalse(Paywall.blocksStart(after, "u2l0", today))
+        // Neither of them uses up the day's lesson.
+        val intro = Rules.completeLesson(Progress(), "u1l0", 0, today)
+        assertEquals(null, intro.lastNewLessonEpochDay)
+        val replay = Rules.completeLesson(after, "u1l1", 0, today.plusDays(1))
+        assertEquals(today.toEpochDay(), replay.lastNewLessonEpochDay)
     }
 }

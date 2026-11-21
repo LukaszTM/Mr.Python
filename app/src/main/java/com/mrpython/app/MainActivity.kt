@@ -137,6 +137,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                             onAvatar = viewModel::setAvatar,
                             onShowPaywall = viewModel::showPaywall,
                             onLanguage = viewModel::setLanguage,
+                            onAvatarLocked = viewModel::showAvatarPaywall,
                         )
                     }
                 }

@@ -9,7 +9,8 @@
 - teksty karty sklepu, odpowiedzi do formularzy, ikona 512×512 i grafika główna: `listing.md`,
 - polityka prywatności: `../polityka-prywatnosci.md`,
 - odblokowanie wszystkich przedmiotów awatara działa tylko w wersji testowej, nie w produkcyjnej,
-- model sprzedaży: 5 pierwszych modułów za darmo, reszta po jednorazowym zakupie „Pełny kurs”
+- model sprzedaży: cały kurs za darmo z ograniczeniami (jedna nowa lekcja dziennie, limit serc,
+  bez bonusów XP i edycji awatara, reklamy); jednorazowy zakup „Pełna wersja” je znosi
   (Google Play Billing, identyfikator produktu `full_course`).
 
 ## Krok 1. Konto dewelopera
@@ -65,7 +66,7 @@ lub płatnego planu). Wcześniej uzupełnij w niej adres e-mail do kontaktu.
 Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij wszystko według
 `listing.md`. Zrzuty ekranu zrób na telefonie.
 
-## Krok 6. Sprzedaż pełnego kursu
+## Krok 6. Sprzedaż pełnej wersji
 
 1. Konsola Play → Konfiguracja → Profil płatności: uzupełnij dane do wypłat i podatków
    (bez tego nie da się utworzyć płatnych produktów).
@@ -73,7 +74,8 @@ Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij 
    Konsola zna wersję aplikacji z płatnościami).
 3. Zarabianie → Produkty → Produkty w aplikacji → Utwórz produkt:
    - identyfikator: dokładnie `full_course` (nie da się go potem zmienić),
-   - nazwa: „Pełny kurs”, opis: „Wszystkie moduły kursu Pythona. Płatność jednorazowa.”,
+   - nazwa: „Pełna wersja”, opis: „Lekcje bez limitu, bonusy XP, edycja awatara, serca bez
+     limitu i brak reklam. Płatność jednorazowa.”,
    - cena: 9,99 zł na start; po promocji zmień na 14,99 zł,
    - aktywuj produkt.
    Drugi produkt, tak samo: identyfikator dokładnie `hearts_refill`, nazwa „Pełne serca”,
@@ -110,7 +112,7 @@ Prawdziwe identyfikatory trafiają tylko do wersji produkcyjnej. Wersja testowa 
 reklam próbnych – nie klikaj własnych prawdziwych reklam, bo AdMob blokuje za to konta.
 
 Reklama pojawia się po ukończonej lekcji, nie częściej niż raz na 3 minuty, i tylko u osób
-bez pełnego kursu.
+bez pełnej wersji.
 
 ## Krok 8. Testy i publikacja
 

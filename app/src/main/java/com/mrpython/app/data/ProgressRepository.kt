@@ -53,6 +53,7 @@ class ProgressRepository(context: Context) {
         } else {
             null
         },
+        lastNewLessonEpochDay = prefs.getLongOrNull(KEY_LAST_NEW_LESSON),
         boost = prefs.getString(KEY_BOOST_TITLE, null)?.let { title ->
             Boost(title, prefs.getInt(KEY_BOOST_PERCENT, 100), prefs.getLong(KEY_BOOST_UNTIL, 0))
         },
@@ -76,6 +77,7 @@ class ProgressRepository(context: Context) {
             .putString(KEY_AVATAR_EYES, p.avatar.eyes?.name)
             .putString(KEY_AVATAR_EXTRA, p.avatar.extra?.name)
             .putString(KEY_BOOST_TITLE, p.boost?.title)
+            .putLongOrRemove(KEY_LAST_NEW_LESSON, p.lastNewLessonEpochDay)
             .putInt(KEY_BOOST_PERCENT, p.boost?.percent ?: 100)
             .putLong(KEY_BOOST_UNTIL, p.boost?.untilMillis ?: 0)
         val result = p.pendingWeekResult
@@ -116,6 +118,7 @@ class ProgressRepository(context: Context) {
         const val KEY_AVATAR_EYES = "avatar_eyes"
         const val KEY_AVATAR_EXTRA = "avatar_extra"
         const val KEY_BOOST_TITLE = "boost_title"
+        const val KEY_LAST_NEW_LESSON = "last_new_lesson_day"
         const val KEY_BOOST_PERCENT = "boost_percent"
         const val KEY_BOOST_UNTIL = "boost_until"
     }

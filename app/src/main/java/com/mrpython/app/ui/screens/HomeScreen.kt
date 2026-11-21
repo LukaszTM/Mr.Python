@@ -55,7 +55,6 @@ import com.mrpython.app.data.CourseContent
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Lesson
 import com.mrpython.app.domain.Moods
-import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppUiState
@@ -92,11 +91,11 @@ fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit, onShowPaywall
                     NextEventLine(state)
                 }
             }
+            if (!state.fullCourse) {
+                item(key = "paywall") { FullCourseCard(onShowPaywall) }
+            }
             CourseContent.units.forEachIndexed { unitIndex, unit ->
                 val color = AppColors.unitColors[unitIndex % AppColors.unitColors.size]
-                if (unitIndex == Paywall.FREE_UNITS && !state.fullCourse) {
-                    item(key = "paywall") { FullCourseCard(onShowPaywall) }
-                }
                 item(key = unit.id) {
                     val done = unit.lessons.count { it.id in completed }
                     ModuleHeader(unitIndex + 1, unit.title, unit.description, done, unit.lessons.size, color)
@@ -267,7 +266,11 @@ private fun NextEventLine(state: AppUiState) {
     val milestone = Events.nextMilestone(streak)
     val bonus = Events.label(Events.streakPercent(milestone) ?: 100)
     Text(
-        "⚡ Bonus XP ×{0} za serię {1} (jeszcze {2})".t(bonus, Moods.days(milestone), Moods.days(milestone - streak)),
+        if (state.fullCourse) {
+            "⚡ Bonus XP ×{0} za serię {1} (jeszcze {2})".t(bonus, Moods.days(milestone), Moods.days(milestone - streak))
+        } else {
+            "♥ Pełne serca za serię {0} (jeszcze {1})".t(Moods.days(milestone), Moods.days(milestone - streak))
+        },
         Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 6.dp),
@@ -471,18 +474,15 @@ private fun FullCourseCard(onClick: () -> Unit) {
             .border(2.dp, AppColors.Yellow.copy(alpha = 0.7f), shape)
             .padding(18.dp),
     ) {
-        Text("🔒 Pełny kurs".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Text("⭐ Pełna wersja".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
         Spacer(Modifier.height(6.dp))
         Text(
-            "Darmowa część kończy się tutaj. Dalej czeka {0} modułów i {1} lekcji. Płacisz raz, bez subskrypcji.".t(
-                CourseContent.units.size - Paywall.FREE_UNITS,
-                Paywall.paidLessons(CourseContent.units),
-            ),
+            "Wersja bezpłatna: jedna nowa lekcja dziennie i reklamy. Pełna wersja: lekcje bez limitu, bonusy XP, edycja awatara, serca bez limitu i zero reklam. Płacisz raz.".t(),
             color = AppColors.Text,
             lineHeight = 20.sp,
         )
         Spacer(Modifier.height(14.dp))
-        PrimaryButton(text = "Odblokuj pełny kurs  →".t(), onClick = onClick)
+        PrimaryButton(text = "Odblokuj pełną wersję  →".t(), onClick = onClick)
     }
 }
 

@@ -20,14 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.mrpython.app.data.CourseContent
-import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.t
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.PrimaryButton
 import com.mrpython.app.ui.theme.AppColors
 
-/** Offers the one-time purchase that opens every module after the free ones. */
+/** Offers the one-time purchase of the full version. */
 @Composable
 fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
@@ -48,13 +46,16 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
                 fontSize = 13.sp,
             )
             Spacer(Modifier.height(6.dp))
-            Text("Pełny kurs Pythona".t(), color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 24.sp)
+            Text("Pełna wersja".t(), color = AppColors.Text, fontWeight = FontWeight.Bold, fontSize = 24.sp)
             Spacer(Modifier.height(12.dp))
-            val modules = CourseContent.units.size - Paywall.FREE_UNITS
-            val lessons = Paywall.paidLessons(CourseContent.units)
+            state.paywallReason?.let { reason ->
+                Text(reason, color = AppColors.Yellow, textAlign = TextAlign.Center, lineHeight = 20.sp)
+                Spacer(Modifier.height(12.dp))
+            }
             listOf(
-                "{0} kolejnych modułów i {1} lekcji".t(modules, lessons),
-                "funkcje, klasy, pliki, wyjątki i więcej".t(),
+                "nowe lekcje bez dziennego limitu".t(),
+                "bonusy XP za serię dni".t(),
+                "edycja awatara: 8 węży i 11 akcesoriów".t(),
                 "serca bez limitu i żadnych reklam".t(),
                 "płacisz raz, bez subskrypcji".t(),
                 "zakup jest przypisany do Twojego konta Google".t(),
@@ -74,7 +75,7 @@ fun PaywallDialog(state: AppUiState, onBuy: () -> Unit, onRestore: () -> Unit, o
                 text = when {
                     price != null -> "Kup za {0}".t(price)
                     state.testBuild -> "Odblokuj (wersja testowa, bez płatności)".t()
-                    else -> "Kup pełny kurs".t()
+                    else -> "Kup pełną wersję".t()
                 },
                 onClick = onBuy,
             )

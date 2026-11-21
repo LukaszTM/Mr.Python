@@ -75,6 +75,7 @@ fun ProfileScreen(
     onAvatar: (Avatar) -> Unit,
     onShowPaywall: () -> Unit = {},
     onLanguage: (Language) -> Unit = {},
+    onAvatarLocked: () -> Unit = {},
 ) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
@@ -104,11 +105,15 @@ fun ProfileScreen(
         Spacer(Modifier.height(14.dp))
         // The wardrobe stays folded away until asked for, right under the avatar it changes.
         SecondaryButton(
-            text = if (editingAvatar) "✓  Gotowe".t() else "✎  Edytuj awatara".t(),
-            onClick = { editingAvatar = !editingAvatar },
+            text = when {
+                !state.fullCourse -> "🔒  Edytuj awatara".t()
+                editingAvatar -> "✓  Gotowe".t()
+                else -> "✎  Edytuj awatara".t()
+            },
+            onClick = { if (state.fullCourse) editingAvatar = !editingAvatar else onAvatarLocked() },
             color = if (editingAvatar) AppColors.Success else AppColors.Yellow,
         )
-        AnimatedVisibility(visible = editingAvatar) {
+        AnimatedVisibility(visible = editingAvatar && state.fullCourse) {
             Column {
                 Spacer(Modifier.height(16.dp))
                 AvatarEditor(p.avatar, p.leagueTier, onAvatar)
@@ -154,16 +159,16 @@ fun ProfileScreen(
         }
         Spacer(Modifier.height(24.dp))
 
-        SectionTitle("Pełny kurs".t())
+        SectionTitle("Pełna wersja".t())
         if (state.fullCourse) {
             Text(
-                "✓ Odblokowany. Dziękujemy za wsparcie!".t(),
+                "✓ Odblokowana. Dziękujemy za wsparcie!".t(),
                 Modifier.fillMaxWidth(),
                 color = AppColors.Success,
                 fontWeight = FontWeight.SemiBold,
             )
         } else {
-            SecondaryButton(text = "🔒  Odblokuj pełny kurs".t(), onClick = onShowPaywall, color = AppColors.Yellow)
+            SecondaryButton(text = "🔒  Odblokuj pełną wersję".t(), onClick = onShowPaywall, color = AppColors.Yellow)
         }
         Spacer(Modifier.height(24.dp))
 

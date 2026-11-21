@@ -22,6 +22,8 @@ data class Progress(
     val avatar: Avatar = Avatar(),
     /** The last XP bonus earned; it may already be over. */
     val boost: Boost? = null,
+    /** The day a lesson was last finished for the first time (the free version allows one a day). */
+    val lastNewLessonEpochDay: Long? = null,
 )
 
 object Rules {
@@ -129,6 +131,7 @@ object Rules {
             weekXp = league.weekXp + xp,
             streak = streak,
             lastActiveEpochDay = day,
+            lastNewLessonEpochDay = if (Paywall.countsTowardsLimit(lessonId, p.completedLessons)) day else p.lastNewLessonEpochDay,
             xpToday = visibleXpToday(p, today) + xp,
             xpTodayEpochDay = day,
             // A streak that has just grown to a milestone earns a bonus for the next lessons.

@@ -90,6 +90,8 @@ data class AppUiState(
     val fullCoursePrice: String? = null,
     val heartsPrice: String? = null,
     val paywall: Boolean = false,
+    /** Why the paywall opened, when a limit of the free version was hit. */
+    val paywallReason: String? = null,
     val purchaseMessage: String? = null,
     /** Debug build: the purchase is simulated, no money is involved. */
     val testBuild: Boolean = false,
@@ -99,7 +101,8 @@ data class AppUiState(
         get() = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
 
     /** The XP bonus running right now, if any. */
-    val event: XpEvent? get() = Events.active(progress, nowMillis)
+    val event: XpEvent?
+        get() = Events.active(progress, nowMillis)?.takeIf { fullCourse || Events.isWelcome(progress.boost) }
 }
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
@@ -173,8 +176,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         if (!Rules.isUnlocked(CourseContent.units, lessonId, s.progress.completedLessons)) return
         val isPractice = lessonId in s.progress.completedLessons
-        if (!s.fullCourse && !isPractice && Paywall.isPaid(CourseContent.units, lessonId)) {
-            showPaywall()
+        if (!s.fullCourse && Paywall.blocksStart(s.progress, lessonId, LocalDate.now())) {
+            showPaywall("Dzisiejsza nowa lekcja już za Tobą. Wróć jutro, powtórz starsze lekcje albo odblokuj pełną wersję.".t())
             return
         }
         // The full course also lifts the hearts limit.
@@ -244,9 +247,17 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         _state.update {
             val today = LocalDate.now()
             val event = Events.active(it.progress, nowMillis)
-            val progress = Rules.completeLesson(
+                ?.takeIf { _ -> it.fullCourse || Events.isWelcome(it.progress.boost) }
+            val finished = Rules.completeLesson(
                 it.progress, session.lessonId, session.mistakes, today, event?.percent ?: 100, nowMillis,
             )
+            // A streak milestone pays XP bonuses in the full version and full hearts in the free one.
+            val milestone = finished.boost != it.progress.boost
+            val progress = if (milestone && !it.fullCourse) {
+                Rules.fillHearts(finished.copy(boost = it.progress.boost))
+            } else {
+                finished
+            }
             val attempts = session.total + session.mistakes
             it.copy(
                 progress = progress,
@@ -256,9 +267,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     accuracyPercent = if (attempts == 0) 100 else session.total * 100 / attempts,
                     streak = progress.streak,
                     isPractice = isPractice,
-                    heartRestored = progress.hearts > it.progress.hearts,
+                    heartRestored = !(milestone && !it.fullCourse) && progress.hearts > it.progress.hearts,
                     event = event,
-                    earned = if (progress.boost != it.progress.boost) Events.active(progress, nowMillis) else null,
+                    earned = if (milestone && it.fullCourse) Events.active(progress, nowMillis) else null,
+                    heartsTaken = milestone && !it.fullCourse,
                     boostBefore = it.progress.boost,
                 ),
             )
@@ -279,12 +291,17 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         persist()
     }
 
-    fun showPaywall() {
+    fun showPaywall() = showPaywall(null)
+
+    /** Avatar editing belongs to the full version. */
+    fun showAvatarPaywall() = showPaywall("Edycja awatara jest dostępna w pełnej wersji.".t())
+
+    private fun showPaywall(reason: String?) {
         billing.refresh()
-        _state.update { it.copy(paywall = true, purchaseMessage = null) }
+        _state.update { it.copy(paywall = true, paywallReason = reason, purchaseMessage = null) }
     }
 
-    fun dismissPaywall() = _state.update { it.copy(paywall = false, purchaseMessage = null) }
+    fun dismissPaywall() = _state.update { it.copy(paywall = false, paywallReason = null, purchaseMessage = null) }
 
     /** Opens the Google Play purchase sheet for the full course. */
     fun buyFullCourse(activity: Activity) {
@@ -343,7 +360,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     /** Changes the avatar; parts not unlocked at the current league tier are ignored. */
     fun setAvatar(avatar: Avatar) {
-        if (!Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
+        if (!_state.value.fullCourse || !Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
         _state.update { it.copy(progress = it.progress.copy(avatar = avatar)) }
         persist()
     }

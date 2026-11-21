@@ -36,6 +36,9 @@ object Events {
     private const val WELCOME_TITLE = "Bonus na start"
     private val streakTitle = Regex("Seria (\\d+) dni")
 
+    /** The welcome bonus is a taste of the full version, so the free version gets it too. */
+    fun isWelcome(boost: Boost?): Boolean = boost?.title == WELCOME_TITLE
+
     fun welcome(nowMillis: Long): Boost = Boost(WELCOME_TITLE, 200, nowMillis + DURATION_MILLIS)
 
     /** XP percent for reaching [streak] days, or null when it is not a milestone. */

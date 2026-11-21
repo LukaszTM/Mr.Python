@@ -20,8 +20,8 @@ Naucz się Pythona od zera. Jedna krótka lekcja dziennie, jak w grze.
 Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lekcjami, które zrobisz w kilka minut dziennie. Bez zakładania konta i bez subskrypcji.
 
 🎁 ZACZNIJ ZA DARMO
-• 5 pierwszych modułów jest bezpłatnych
-• pełny kurs odblokujesz jednorazowym zakupem – płacisz raz i masz go na zawsze
+• cały kurs jest dostępny bezpłatnie: jedna nowa lekcja dziennie i powtórki bez limitu
+• pełna wersja to jednorazowy zakup: lekcje bez dziennego limitu, bonusy XP, edycja awatara i serca bez limitu
 • zakup wyłącza też reklamy wyświetlane w wersji bezpłatnej
 
 🐍 KURS NA CAŁY ROK
@@ -64,7 +64,7 @@ Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, 
 | Tagi | Programowanie, Nauka, Edukacja |
 | Cena | Bezpłatna (pobranie) |
 | Reklamy | Tak, zawiera reklamy (wersja bezpłatna) |
-| Zakupy w aplikacji | Tak: `full_course` („Pełny kurs”, jednorazowo, 14,99 zł, na start 9,99 zł) i `hearts_refill` („Pełne serca”, wielokrotnie, np. 1,99 zł) |
+| Zakupy w aplikacji | Tak: `full_course` („Pełna wersja”, jednorazowo, 14,99 zł, na start 9,99 zł) i `hearts_refill` („Pełne serca”, wielokrotnie, np. 1,99 zł) |
 | Kraje | Polska (lub wszystkie – aplikacja jest tylko po polsku) |
 | E-mail kontaktowy | adres, który będzie publicznie widoczny w sklepie |
 | Polityka prywatności | adres URL strony z `docs/polityka-prywatnosci.md` |

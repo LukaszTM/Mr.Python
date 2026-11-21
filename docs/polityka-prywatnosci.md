@@ -8,13 +8,13 @@ Mr. Python to aplikacja na Androida do nauki programowania w języku Python.
 
 Sama aplikacja nie zbiera żadnych danych i nie wymaga konta ani logowania. W bezpłatnej
 wersji wyświetlane są jednak reklamy Google AdMob, a ich dostawca przetwarza dane opisane
-w części „Reklamy”. Po zakupie pełnego kursu reklamy znikają i żadne dane reklamowe nie są
+w części „Reklamy”. Po zakupie pełnej wersji reklamy znikają i żadne dane reklamowe nie są
 już przetwarzane.
 
 Aplikacja:
 
 - nie wymaga konta ani logowania,
-- łączy się z internetem wyłącznie po to, żeby obsłużyć zakup pełnego kursu w Google Play
+- łączy się z internetem wyłącznie po to, żeby obsłużyć zakupy w Google Play
   i sprawdzić, czy jest on przypisany do Twojego konta Google,
 - nie zawiera własnych narzędzi analitycznych,
 - nie przekazuje nikomu Twojego postępu nauki.
@@ -43,18 +43,18 @@ reklamowy możesz też zresetować lub usunąć w ustawieniach Androida (Prywatn
 
 Szczegóły: https://policies.google.com/technologies/partner-sites
 
-Kupno pełnego kursu wyłącza reklamy na stałe.
+Kupno pełnej wersji wyłącza reklamy na stałe.
 
-## Zakup pełnego kursu
+## Zakupy w aplikacji
 
-Pełny kurs kupuje się jednorazowo przez Google Play. Płatność w całości obsługuje Google:
+Pełną wersję (jednorazowo) i uzupełnienie serc kupuje się przez Google Play. Płatność w całości obsługuje Google:
 aplikacja nie widzi i nie przechowuje danych karty ani innych danych płatniczych. Od Google
-dostaje jedynie informację, czy pełny kurs został kupiony, i zapisuje ją na urządzeniu.
+dostaje jedynie informację, co zostało kupione, i zapisuje ją na urządzeniu.
 Przetwarzanie danych przez Google opisuje Polityka prywatności Google.
 
 ## Uprawnienia
 
-- **Internet i płatności Google Play** – do zakupu pełnego kursu i jego przywracania oraz do
+- **Internet i płatności Google Play** – do zakupów i ich przywracania oraz do
   pobierania reklam w wersji bezpłatnej.
 - **Identyfikator reklamowy** – używany przez Google AdMob w wersji bezpłatnej.
 
