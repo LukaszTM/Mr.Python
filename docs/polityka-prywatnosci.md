@@ -22,7 +22,7 @@ Aplikacja:
 ## Co jest zapisywane na urządzeniu
 
 Postęp nauki (ukończone lekcje, punkty XP, seria dni, serca, szczebel w lidze, wygląd awatara)
-oraz ustawienia przypomnień są zapisywane wyłącznie w pamięci Twojego urządzenia. Jeśli masz
+oraz ustawienia (przypomnienia, język) są zapisywane wyłącznie w pamięci Twojego urządzenia. Jeśli masz
 włączoną systemową kopię zapasową Androida, dane te mogą trafić do Twojej prywatnej kopii
 zapasowej na koncie Google, którą zarządzasz samodzielnie w ustawieniach telefonu.
 

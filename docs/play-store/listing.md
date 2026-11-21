@@ -1,6 +1,7 @@
 # Karta aplikacji w Google Play (język: polski)
 
-Teksty do wklejenia w Konsoli Play → „Główna karta produktu”.
+Teksty do wklejenia w Konsoli Play → „Główna karta produktu”. Wersja angielska: `listing-en.md`
+(dodaj ją w Konsoli jako tłumaczenie karty: język angielski – en-US).
 
 ## Nazwa aplikacji (maks. 30 znaków)
 
@@ -19,22 +20,21 @@ Naucz się Pythona od zera. Jedna krótka lekcja dziennie, jak w grze.
 ```
 Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lekcjami, które zrobisz w kilka minut dziennie. Bez zakładania konta i bez subskrypcji.
 
-🎁 ZACZNIJ ZA DARMO
-• cały kurs jest dostępny bezpłatnie, bez dziennych limitów
+🎁 CAŁY KURS ZA DARMO
+• wszystkie lekcje są dostępne bezpłatnie, bez dziennych limitów
 • pełna wersja to jednorazowy zakup: bez reklam, serca bez limitu, bonusy XP za serię i akcesoria dla węża
-• zakup wyłącza też reklamy wyświetlane w wersji bezpłatnej
 
 🐍 KURS NA CAŁY ROK
-• 72 moduły i ponad 400 lekcji – od pierwszego print() po funkcje, klasy, pliki i wyjątki
+• 73 moduły i ponad 400 lekcji – od pierwszego print() po funkcje, klasy, pliki i wyjątki
 • ponad 8000 zadań: pytania, uzupełnianie kodu, układanie programu z klocków i przewidywanie, co wypisze program
 • każdy nowy temat zaczyna się od krótkiego wyjaśnienia z przykładem, więc nie zgadujesz w ciemno
 • powtórki ukończonych lekcji za każdym razem losują inne zadania
 
 🔥 NAUKA, KTÓRA WCIĄGA
 • seria dni, punkty XP i cel dzienny
-• serca: pierwsza pomyłka w zadaniu to darmowa poprawka, a serca można odzyskać za powtórki, za serię albo dokupić
+• pierwsza pomyłka w zadaniu to darmowa poprawka
 • literówki z klawiatury telefonu nie psują dobrej odpowiedzi
-• bonusy XP: ×2 na start, a potem za serię 5, 10, 15… dni
+• serca odzyskasz za powtórki i za serię dni
 
 🏆 LIGA TYGODNIOWA
 • rywalizuj co tydzień i awansuj jak w branży IT: Stażysta → Junior → Mid → Senior → Tech Lead → Architekt → CTO
@@ -52,7 +52,7 @@ Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lek
 • bez konta i logowania, lekcje działają offline
 • postęp nauki nie opuszcza Twojego telefonu
 
-Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, niezwiązany z Python Software Foundation.
+Aplikacja jest dostępna po polsku i po angielsku. Mr. Python to niezależny projekt edukacyjny, niezwiązany z Python Software Foundation.
 ```
 
 ## Pozostałe pola
@@ -65,9 +65,9 @@ Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, 
 | Cena | Bezpłatna (pobranie) |
 | Reklamy | Tak, zawiera reklamy (wersja bezpłatna) |
 | Zakupy w aplikacji | Tak: `full_course` („Pełna wersja”, jednorazowo, 14,99 zł, na start 9,99 zł) i `hearts_refill` („Pełne serca”, wielokrotnie, np. 1,99 zł) |
-| Kraje | Polska (lub wszystkie – aplikacja jest tylko po polsku) |
+| Kraje | Wszystkie (aplikacja jest po polsku i po angielsku) |
 | E-mail kontaktowy | adres, który będzie publicznie widoczny w sklepie |
-| Polityka prywatności | adres URL strony z `docs/polityka-prywatnosci.md` |
+| Polityka prywatności | adres URL strony z `docs/polityka-prywatnosci.md` (zawiera też wersję angielską: `docs/privacy-policy.md`) |
 
 ## Grafiki
 

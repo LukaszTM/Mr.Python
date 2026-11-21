@@ -7,7 +7,9 @@
 - podpisywanie kluczem przechowywanym w sekretach GitHuba (klucz nigdy nie trafia do repozytorium),
 - własna ikona aplikacji z maskotką,
 - teksty karty sklepu, odpowiedzi do formularzy, ikona 512×512 i grafika główna: `listing.md`,
-- polityka prywatności: `../polityka-prywatnosci.md`,
+- polityka prywatności po polsku i angielsku: `../polityka-prywatnosci.md`, `../privacy-policy.md`,
+- angielska karta sklepu i grafika główna: `listing-en.md`, `feature-graphic-1024x500-en.png`,
+- aplikacja w dwóch językach (polski, angielski): kurs i interfejs,
 - odblokowanie wszystkich przedmiotów awatara działa tylko w wersji testowej, nie w produkcyjnej,
 - model sprzedaży: cały kurs za darmo bez dziennych limitów, z reklamami i limitem serc;
   jednorazowy zakup „Pełna wersja” usuwa reklamy, znosi limit serc, dodaje bonusy XP i akcesoria
