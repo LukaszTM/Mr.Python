@@ -78,6 +78,21 @@ object Avatars {
 
     fun accessories(slot: AccessorySlot): List<Accessory> = Accessory.entries.filter { it.slot == slot }
 
+    /**
+     * The look of a simulated league rival: random, but always the same for the same name,
+     * and made only of what a learner at [tier] could really have unlocked.
+     */
+    fun forRival(name: String, tier: Tier): Avatar {
+        val random = kotlin.random.Random(name.hashCode() * 31 + tier.ordinal)
+        val skin = SnakeSkin.entries.filter { tier >= it.requiredTier }.random(random)
+        fun pick(slot: AccessorySlot): Accessory? {
+            val choices = accessories(slot).filter { tier >= it.requiredTier }
+            // About half of the rivals leave a slot empty, so they do not all look overdressed.
+            return if (choices.isEmpty() || random.nextBoolean()) null else choices.random(random)
+        }
+        return Avatar(skin, pick(AccessorySlot.HEAD), pick(AccessorySlot.EYES), pick(AccessorySlot.EXTRA))
+    }
+
     /** Titles of everything that a promotion to [tier] unlocks. */
     fun unlockedAt(tier: Tier): List<String> =
         SnakeSkin.entries.filter { it.requiredTier == tier }.map { it.title } +

@@ -173,7 +173,7 @@ private fun StandingRow(row: Standing, tier: Tier, avatar: Avatar) {
             if (row.isPlayer) {
                 SnakeAvatar(avatar, 30.dp)
             } else {
-                Text(row.name.first().uppercase(), color = AppColors.Text, fontWeight = FontWeight.Bold)
+                SnakeAvatar(Avatars.forRival(row.name, tier), 30.dp)
             }
         }
         Spacer(Modifier.width(12.dp))

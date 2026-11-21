@@ -8,6 +8,22 @@ import org.junit.Test
 class AvatarTest {
 
     @Test
+    fun rivalsLookTheSameEveryTimeAndWearOnlyWhatTheirTierUnlocks() {
+        val names = listOf("Ada", "Bartek", "Celina", "Dawid", "Ewa", "Filip", "Gosia", "Hubert")
+        Tier.entries.forEach { tier ->
+            names.forEach { name ->
+                val avatar = Avatars.forRival(name, tier)
+                assertEquals(avatar, Avatars.forRival(name, tier))
+                assertTrue(tier >= avatar.skin.requiredTier)
+                assertTrue(avatar.accessories.all { tier >= it.requiredTier })
+                assertEquals(avatar.head?.slot ?: AccessorySlot.HEAD, AccessorySlot.HEAD)
+            }
+        }
+        // Not everyone gets the same snake.
+        assertTrue(names.map { Avatars.forRival(it, Tier.SENIOR).skin }.toSet().size > 1)
+    }
+
+    @Test
     fun defaultAvatarIsAllowedFromTheStart() {
         assertTrue(Avatars.isAllowed(Avatar(), Tier.INTERN))
         assertTrue(SnakeSkin.entries.count { Avatars.isUnlocked(it, Tier.INTERN) } >= 2)
