@@ -71,6 +71,7 @@ fun ProfileScreen(
     onRemindersEnabled: (Boolean) -> Unit,
     onReminderHour: (Int) -> Unit,
     onAvatar: (Avatar) -> Unit,
+    onShowPaywall: () -> Unit = {},
 ) {
     val p = state.progress
     var confirmReset by remember { mutableStateOf(false) }
@@ -134,6 +135,19 @@ fun ProfileScreen(
                 onClick = { StreakWidget.requestPin(widgetContext) },
                 color = AppColors.BlueBright,
             )
+        }
+        Spacer(Modifier.height(24.dp))
+
+        SectionTitle("Pełny kurs")
+        if (state.fullCourse) {
+            Text(
+                "✓ Odblokowany. Dziękujemy za wsparcie!",
+                Modifier.fillMaxWidth(),
+                color = AppColors.Success,
+                fontWeight = FontWeight.SemiBold,
+            )
+        } else {
+            SecondaryButton(text = "🔒  Odblokuj pełny kurs", onClick = onShowPaywall, color = AppColors.Yellow)
         }
         Spacer(Modifier.height(24.dp))
 

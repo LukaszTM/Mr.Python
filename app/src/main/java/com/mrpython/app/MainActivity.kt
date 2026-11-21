@@ -1,6 +1,7 @@
 package com.mrpython.app
 
 import android.Manifest
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -44,6 +46,7 @@ import com.mrpython.app.ui.screens.LeagueScreen
 import com.mrpython.app.ui.screens.LessonCompleteScreen
 import com.mrpython.app.ui.screens.LessonScreen
 import com.mrpython.app.ui.screens.OutOfHeartsDialog
+import com.mrpython.app.ui.screens.PaywallDialog
 import com.mrpython.app.ui.screens.ProfileScreen
 import com.mrpython.app.ui.screens.WeekResultDialog
 import com.mrpython.app.ui.theme.AppColors
@@ -100,7 +103,11 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
             else -> Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f)) {
                     when (state.tab) {
-                        Tab.LEARN -> HomeScreen(state, onStartLesson = viewModel::startLesson)
+                        Tab.LEARN -> HomeScreen(
+                            state,
+                            onStartLesson = viewModel::startLesson,
+                            onShowPaywall = viewModel::showPaywall,
+                        )
                         Tab.LEAGUE -> LeagueScreen(state)
                         Tab.PROFILE -> ProfileScreen(
                             state,
@@ -108,6 +115,7 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                             onRemindersEnabled = viewModel::setRemindersEnabled,
                             onReminderHour = viewModel::setReminderHour,
                             onAvatar = viewModel::setAvatar,
+                            onShowPaywall = viewModel::showPaywall,
                         )
                     }
                 }
@@ -117,6 +125,16 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
 
         if (state.outOfHearts) {
             OutOfHeartsDialog(state.progress, state.nowMillis, onDismiss = viewModel::dismissOutOfHearts)
+        }
+
+        val activity = LocalContext.current as? Activity
+        if (state.paywall && lesson == null) {
+            PaywallDialog(
+                state = state,
+                onBuy = { activity?.let(viewModel::buyFullCourse) },
+                onRestore = viewModel::restorePurchase,
+                onDismiss = viewModel::dismissPaywall,
+            )
         }
 
         val weekResult = state.progress.pendingWeekResult

@@ -54,6 +54,7 @@ import androidx.compose.ui.window.Dialog
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Lesson
+import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.ui.AppUiState
 import com.mrpython.app.ui.components.EventBanner
@@ -71,7 +72,7 @@ import com.mrpython.app.ui.theme.AppColors
 private enum class LessonStatus { DONE, CURRENT, OPEN, LOCKED }
 
 @Composable
-fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit) {
+fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit, onShowPaywall: () -> Unit = {}) {
     val progress = state.progress
     val completed = progress.completedLessons
     val currentId = Rules.currentLessonId(CourseContent.units, completed)
@@ -91,6 +92,9 @@ fun HomeScreen(state: AppUiState, onStartLesson: (String) -> Unit) {
             }
             CourseContent.units.forEachIndexed { unitIndex, unit ->
                 val color = AppColors.unitColors[unitIndex % AppColors.unitColors.size]
+                if (unitIndex == Paywall.FREE_UNITS && !state.fullCourse) {
+                    item(key = "paywall") { FullCourseCard(onShowPaywall) }
+                }
                 item(key = unit.id) {
                     val done = unit.lessons.count { it.id in completed }
                     ModuleHeader(unitIndex + 1, unit.title, unit.description, done, unit.lessons.size, color)
@@ -447,6 +451,32 @@ private fun LessonCard(
             LessonStatus.DONE -> Text("↻", color = AppColors.TextDim, fontSize = 22.sp)
             else -> Unit
         }
+    }
+}
+
+/** Sits between the free modules and the rest of the course until the full course is bought. */
+@Composable
+private fun FullCourseCard(onClick: () -> Unit) {
+    val shape = RoundedCornerShape(16.dp)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .clip(shape)
+            .background(AppColors.Yellow.copy(alpha = 0.10f))
+            .border(2.dp, AppColors.Yellow.copy(alpha = 0.7f), shape)
+            .padding(18.dp),
+    ) {
+        Text("🔒 Pełny kurs", color = AppColors.Yellow, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Spacer(Modifier.height(6.dp))
+        Text(
+            "Darmowa część kończy się tutaj. Dalej czeka ${CourseContent.units.size - Paywall.FREE_UNITS} modułów " +
+                "i ${Paywall.paidLessons(CourseContent.units)} lekcji. Płacisz raz, bez subskrypcji.",
+            color = AppColors.Text,
+            lineHeight = 20.sp,
+        )
+        Spacer(Modifier.height(14.dp))
+        PrimaryButton(text = "Odblokuj pełny kurs  →", onClick = onClick)
     }
 }
 

@@ -17,7 +17,11 @@ Naucz się Pythona od zera. Jedna krótka lekcja dziennie, jak w grze.
 ## Pełny opis (maks. 4000 znaków)
 
 ```
-Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lekcjami, które zrobisz w kilka minut dziennie. Bez zakładania konta, bez reklam i bez internetu.
+Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lekcjami, które zrobisz w kilka minut dziennie. Bez zakładania konta, bez reklam i bez subskrypcji.
+
+🎁 ZACZNIJ ZA DARMO
+• 5 pierwszych modułów jest bezpłatnych
+• pełny kurs odblokujesz jednorazowym zakupem – płacisz raz i masz go na zawsze
 
 🐍 KURS NA CAŁY ROK
 • 72 moduły i ponad 400 lekcji – od pierwszego print() po funkcje, klasy, pliki i wyjątki
@@ -44,7 +48,8 @@ Mr. Python uczy programowania w Pythonie od zupełnych podstaw – krótkimi lek
 • widżet na ekran główny: seria dni i nastrój węża
 
 🔒 PRYWATNOŚĆ
-• aplikacja działa w całości offline i nie zbiera żadnych danych
+• aplikacja nie zbiera żadnych danych, a lekcje działają offline
+• internet jest potrzebny tylko do zakupu pełnego kursu w Google Play
 • postęp zapisuje się tylko na Twoim telefonie
 
 Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, niezwiązany z Python Software Foundation.
@@ -57,9 +62,9 @@ Aplikacja jest w języku polskim. Mr. Python to niezależny projekt edukacyjny, 
 | Typ | Aplikacja |
 | Kategoria | Edukacja |
 | Tagi | Programowanie, Nauka, Edukacja |
-| Cena | Bezpłatna |
+| Cena | Bezpłatna (pobranie) |
 | Reklamy | Nie zawiera reklam |
-| Zakupy w aplikacji | Brak |
+| Zakupy w aplikacji | Tak: produkt jednorazowy `full_course` („Pełny kurs”), 14,99 zł, na start 9,99 zł |
 | Kraje | Polska (lub wszystkie – aplikacja jest tylko po polsku) |
 | E-mail kontaktowy | adres, który będzie publicznie widoczny w sklepie |
 | Polityka prywatności | adres URL strony z `docs/polityka-prywatnosci.md` |
@@ -78,11 +83,11 @@ lekcji, liga, profil z edycją awatara, widżet na ekranie głównym.
 ## Formularze w Konsoli Play
 
 **Bezpieczeństwo danych:** aplikacja nie zbiera i nie udostępnia żadnych danych użytkownika
-(odpowiedź „Nie” na oba pytania). Nie ma kont, więc nie trzeba podawać sposobu usuwania konta.
+(odpowiedź „Nie” na oba pytania; płatności obsługuje Google Play, nie aplikacja). Nie ma kont, więc nie trzeba podawać sposobu usuwania konta.
 
 **Ocena treści (ankieta IARC):** kategoria „Edukacja/źródła informacji”; brak przemocy,
 treści seksualnych, wulgaryzmów, hazardu, substancji; brak komunikacji między użytkownikami;
-brak udostępniania lokalizacji; brak zakupów. Spodziewana ocena: PEGI 3.
+brak udostępniania lokalizacji; zakupy cyfrowe: tak (jednorazowe odblokowanie treści). Spodziewana ocena: PEGI 3.
 
 **Grupa docelowa:** zalecane 13 lat i więcej. Wybranie grup poniżej 13 lat włącza dodatkowe
 wymagania programu „Aplikacje dla rodzin”.

@@ -9,7 +9,8 @@ Mr. Python to aplikacja na Androida do nauki programowania w języku Python.
 Żadnych. Aplikacja:
 
 - nie wymaga konta ani logowania,
-- nie łączy się z internetem (nie ma nawet uprawnienia dostępu do sieci),
+- łączy się z internetem wyłącznie po to, żeby obsłużyć zakup pełnego kursu w Google Play
+  i sprawdzić, czy jest on przypisany do Twojego konta Google,
 - nie zawiera reklam, narzędzi analitycznych ani kodu firm trzecich, który zbierałby dane,
 - nie przekazuje nikomu żadnych informacji o użytkowniku.
 
@@ -23,7 +24,16 @@ zapasowej na koncie Google, którą zarządzasz samodzielnie w ustawieniach tele
 Dane usuniesz w każdej chwili: przyciskiem „Zresetuj postęp” w profilu, czyszcząc dane
 aplikacji w ustawieniach systemu albo odinstalowując aplikację.
 
+## Zakup pełnego kursu
+
+Pełny kurs kupuje się jednorazowo przez Google Play. Płatność w całości obsługuje Google:
+aplikacja nie widzi i nie przechowuje danych karty ani innych danych płatniczych. Od Google
+dostaje jedynie informację, czy pełny kurs został kupiony, i zapisuje ją na urządzeniu.
+Przetwarzanie danych przez Google opisuje Polityka prywatności Google.
+
 ## Uprawnienia
+
+- **Internet i płatności Google Play** – tylko do zakupu pełnego kursu i jego przywracania.
 
 - **Powiadomienia** – tylko do przypomnień o lekcji. Możesz je wyłączyć w profilu lub w
   ustawieniach systemu.

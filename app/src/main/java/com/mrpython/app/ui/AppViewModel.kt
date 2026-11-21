@@ -1,8 +1,11 @@
 package com.mrpython.app.ui
 
+import android.app.Activity
 import android.app.Application
+import android.content.pm.ApplicationInfo
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.mrpython.app.billing.BillingManager
 import com.mrpython.app.data.CourseContent
 import com.mrpython.app.data.ProgressRepository
 import com.mrpython.app.data.SettingsRepository
@@ -13,6 +16,7 @@ import com.mrpython.app.domain.Avatars
 import com.mrpython.app.domain.Events
 import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.LessonSession
+import com.mrpython.app.domain.Paywall
 import com.mrpython.app.domain.Progress
 import com.mrpython.app.domain.Rules
 import com.mrpython.app.domain.XpEvent
@@ -71,6 +75,14 @@ data class AppUiState(
     val outOfHearts: Boolean = false,
     val remindersEnabled: Boolean = true,
     val reminderHour: Int = 19,
+    /** The one-time purchase that opens every module after the free ones. */
+    val fullCourse: Boolean = false,
+    /** Localized price from Google Play, once it is known. */
+    val fullCoursePrice: String? = null,
+    val paywall: Boolean = false,
+    val purchaseMessage: String? = null,
+    /** Debug build: the purchase is simulated, no money is involved. */
+    val testBuild: Boolean = false,
 ) {
     val now: LocalDateTime
         get() = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
@@ -94,13 +106,26 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             today = LocalDate.now(),
             remindersEnabled = settings.remindersEnabled,
             reminderHour = settings.reminderHour,
+            fullCourse = settings.fullCourse,
+            testBuild = application.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0,
         )
     )
     val state: StateFlow<AppUiState> = _state.asStateFlow()
 
+    private val testBuild get() = _state.value.testBuild
+
+    private val billing = BillingManager(
+        application,
+        // A test build has no real purchase, so Google Play's "not owned" must not undo the simulated one.
+        onOwned = { owned -> if (owned || !testBuild) setFullCourse(owned) },
+        onPrice = { price -> _state.update { it.copy(fullCoursePrice = price) } },
+        onMessage = { message -> _state.update { it.copy(purchaseMessage = message) } },
+    )
+
     init {
         persist()
         ReminderScheduler.schedule(application)
+        billing.refresh()
         // Keeps the heart timer, streak and league week up to date while the app is open.
         viewModelScope.launch {
             while (true) {
@@ -127,6 +152,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val s = _state.value
         if (!Rules.isUnlocked(CourseContent.units, lessonId, s.progress.completedLessons)) return
         val isPractice = lessonId in s.progress.completedLessons
+        if (!s.fullCourse && !isPractice && Paywall.isPaid(CourseContent.units, lessonId)) {
+            showPaywall()
+            return
+        }
         if (!isPractice && s.progress.hearts <= 0) {
             _state.update { it.copy(outOfHearts = true) }
             return
@@ -224,6 +253,38 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         persist()
     }
 
+    fun showPaywall() {
+        billing.refresh()
+        _state.update { it.copy(paywall = true, purchaseMessage = null) }
+    }
+
+    fun dismissPaywall() = _state.update { it.copy(paywall = false, purchaseMessage = null) }
+
+    /** Opens the Google Play purchase sheet for the full course. */
+    fun buyFullCourse(activity: Activity) {
+        if (billing.buy(activity)) return
+        if (testBuild) {
+            setFullCourse(true)
+        } else {
+            _state.update {
+                it.copy(purchaseMessage = "Sklep Google Play jest teraz niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.")
+            }
+        }
+    }
+
+    /** Asks Google Play again what the account owns (after a reinstall or on a new phone). */
+    fun restorePurchase() {
+        billing.refresh()
+        _state.update { it.copy(purchaseMessage = "Sprawdzam zakupy na Twoim koncie Google…") }
+    }
+
+    private fun setFullCourse(owned: Boolean) {
+        settings.fullCourse = owned
+        _state.update {
+            it.copy(fullCourse = owned, paywall = it.paywall && !owned, purchaseMessage = if (owned) null else it.purchaseMessage)
+        }
+    }
+
     /** Changes the avatar; parts not unlocked at the current league tier are ignored. */
     fun setAvatar(avatar: Avatar) {
         if (!Avatars.isAllowed(avatar, _state.value.progress.leagueTier)) return
@@ -255,6 +316,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetProgress() {
         repository.reset()
+        if (testBuild) setFullCourse(false)
         _state.update { it.copy(progress = Progress(), lesson = null, result = null) }
         persist()
     }

@@ -22,7 +22,13 @@ class SettingsRepository(context: Context) {
         get() = prefs.getBoolean(KEY_ASKED, false)
         set(value) = prefs.edit().putBoolean(KEY_ASKED, value).apply()
 
+    /** Cached answer of Google Play, so the full course also opens without a connection. */
+    var fullCourse: Boolean
+        get() = prefs.getBoolean(KEY_FULL_COURSE, false)
+        set(value) = prefs.edit().putBoolean(KEY_FULL_COURSE, value).apply()
+
     private companion object {
+        const val KEY_FULL_COURSE = "full_course"
         const val KEY_REMINDERS = "reminders_enabled"
         const val KEY_HOUR = "reminder_hour"
         const val KEY_ASKED = "notification_permission_asked"

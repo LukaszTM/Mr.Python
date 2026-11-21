@@ -8,7 +8,9 @@
 - własna ikona aplikacji z maskotką,
 - teksty karty sklepu, odpowiedzi do formularzy, ikona 512×512 i grafika główna: `listing.md`,
 - polityka prywatności: `../polityka-prywatnosci.md`,
-- odblokowanie wszystkich przedmiotów awatara działa tylko w wersji testowej, nie w produkcyjnej.
+- odblokowanie wszystkich przedmiotów awatara działa tylko w wersji testowej, nie w produkcyjnej,
+- model sprzedaży: 5 pierwszych modułów za darmo, reszta po jednorazowym zakupie „Pełny kurs”
+  (Google Play Billing, identyfikator produktu `full_course`).
 
 ## Krok 1. Konto dewelopera
 
@@ -63,7 +65,26 @@ lub płatnego planu). Wcześniej uzupełnij w niej adres e-mail do kontaktu.
 Utwórz aplikację w Konsoli (język domyślny: polski, bezpłatna) i wypełnij wszystko według
 `listing.md`. Zrzuty ekranu zrób na telefonie.
 
-## Krok 6. Testy i publikacja
+## Krok 6. Sprzedaż pełnego kursu
+
+1. Konsola Play → Konfiguracja → Profil płatności: uzupełnij dane do wypłat i podatków
+   (bez tego nie da się utworzyć płatnych produktów).
+2. Wgraj pierwszy pakiet `.aab` do testu wewnętrznego (produkty można dodać dopiero, gdy
+   Konsola zna wersję aplikacji z płatnościami).
+3. Zarabianie → Produkty → Produkty w aplikacji → Utwórz produkt:
+   - identyfikator: dokładnie `full_course` (nie da się go potem zmienić),
+   - nazwa: „Pełny kurs”, opis: „Wszystkie moduły kursu Pythona. Płatność jednorazowa.”,
+   - cena: 9,99 zł na start; po promocji zmień na 14,99 zł,
+   - aktywuj produkt.
+4. Konfiguracja → Testowanie licencji: dodaj swój adres Gmail. Zakupy z tego konta będą
+   wtedy testowe i bezpłatne.
+5. Zainstaluj aplikację z testu wewnętrznego (nie z pliku APK z GitHuba) i sprawdź zakup,
+   a po reinstalacji przycisk „Przywróć zakup”.
+
+Wersja testowa z GitHuba (APK debug) nie łączy się ze sklepem: przycisk zakupu odblokowuje
+w niej kurs od razu, bez płatności, żeby dało się testować dalsze moduły.
+
+## Krok 7. Testy i publikacja
 
 1. Testy → Test wewnętrzny → utwórz wydanie → wgraj `app-release.aab` → sprawdź na telefonie.
 2. Test zamknięty: 12 testerów, 14 dni (wymóg dla nowych kont osobistych).
