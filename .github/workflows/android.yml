@@ -1,7 +1,10 @@
 name: Android CI
 
+# One run per change: pushes to main, and pull requests for everything else. Running both
+# for every commit doubled the downloads and got the build rate-limited by Maven Central.
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -17,6 +20,9 @@ jobs:
           java-version: 17
 
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          # Let pull request builds save the dependency cache too, so they stop re-downloading.
+          cache-read-only: false
 
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
