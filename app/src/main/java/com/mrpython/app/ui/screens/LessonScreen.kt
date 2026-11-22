@@ -498,6 +498,10 @@ private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
                 Spacer(Modifier.height(2.dp))
                 CodeText(feedback.correctAnswer, color = AppColors.Text)
             }
+            if (!feedback.correct) {
+                Spacer(Modifier.height(8.dp))
+                Text("Każdy błąd obniża XP za tę lekcję.".t(), color = AppColors.Error, fontSize = 13.sp)
+            }
             Spacer(Modifier.height(10.dp))
             Text(
                 "# ${feedback.explanation}",

@@ -519,7 +519,10 @@ private fun LessonDialog(
                 !isUnlocked -> "Ukończ poprzednie lekcje, aby odblokować tę.".t()
                 lesson.isIntro -> "Krótkie wprowadzenie do modułu: teoria, przykłady kodu i kilka pytań na rozgrzewkę. Możesz do niego wracać w każdej chwili.".t()
                 isDone -> "Powtórka: losowe zadania z tej lekcji. Nie tracisz serc, a za ukończenie odzyskasz jedno ♥.".t()
-                unlimitedHearts -> "{0} zadań. Masz serca bez limitu, więc ucz się bez stresu.".t(lesson.exercises.size - lesson.cards.size)
+                unlimitedHearts -> "{0} zadań. Serca masz bez limitu, ale {1} błędów kończy lekcję.".t(
+                    lesson.exercises.size - lesson.cards.size,
+                    Rules.MAX_MISTAKES_PER_LESSON,
+                )
                 else -> "{0} zadań. Uważaj – każdy błąd kosztuje jedno ♥.".t(lesson.exercises.size - lesson.cards.size)
             }
             Text(description, color = AppColors.TextDim, lineHeight = 20.sp)

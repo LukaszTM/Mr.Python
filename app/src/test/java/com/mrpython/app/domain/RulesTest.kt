@@ -9,6 +9,18 @@ import java.time.LocalDate
 
 class RulesTest {
 
+    @Test
+    fun everyMistakeCostsXp() {
+        assertEquals(15, Rules.xpForLesson(0, isPractice = false))
+        assertEquals(8, Rules.xpForLesson(1, isPractice = false))
+        assertEquals(6, Rules.xpForLesson(2, isPractice = false))
+        assertEquals(2, Rules.xpForLesson(4, isPractice = false))
+        assertEquals(2, Rules.xpForLesson(9, isPractice = false))
+        assertEquals(5, Rules.xpForLesson(0, isPractice = true))
+        assertEquals(4, Rules.xpForLesson(1, isPractice = true))
+        assertEquals(2, Rules.xpForLesson(7, isPractice = true))
+    }
+
     private val today = LocalDate.of(2026, 10, 22)
     private val minute = 60_000L
 

@@ -79,6 +79,8 @@ data class AppUiState(
     val lesson: ActiveLesson? = null,
     val result: LessonResult? = null,
     val outOfHearts: Boolean = false,
+    /** Full version: the lesson ended after too many mistakes and has to be started again. */
+    val lessonFailed: Boolean = false,
     val remindersEnabled: Boolean = true,
     val reminderHour: Int = 19,
     /** The one-time purchase that opens every module after the free ones. */
@@ -243,6 +245,11 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             !active.isPractice && !_state.value.fullCourse && _state.value.progress.hearts <= 0 -> _state.update {
                 it.copy(lesson = null, outOfHearts = true, purchaseMessage = null)
             }
+            // Unlimited hearts must not mean unlimited guessing.
+            !active.isPractice && _state.value.fullCourse && !session.isFinished &&
+                session.mistakes >= Rules.MAX_MISTAKES_PER_LESSON -> _state.update {
+                it.copy(lesson = null, lessonFailed = true)
+            }
             session.isFinished -> finishLesson(session, active.isPractice)
             else -> _state.update { it.copy(lesson = active.copy(session = session, feedback = null, retryUsed = false)) }
         }
@@ -288,6 +295,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun quitLesson() = _state.update { it.copy(lesson = null) }
 
     fun dismissResult() = _state.update { it.copy(result = null) }
+
+    fun dismissLessonFailed() = _state.update { it.copy(lessonFailed = false) }
 
     fun dismissOutOfHearts() = _state.update { it.copy(outOfHearts = false, purchaseMessage = null) }
 

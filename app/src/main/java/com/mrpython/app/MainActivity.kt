@@ -47,6 +47,7 @@ import com.mrpython.app.ui.Tab
 import com.mrpython.app.ui.screens.HomeScreen
 import com.mrpython.app.ui.screens.LeagueScreen
 import com.mrpython.app.ui.screens.LessonCompleteScreen
+import com.mrpython.app.ui.screens.LessonFailedDialog
 import com.mrpython.app.ui.screens.LessonScreen
 import com.mrpython.app.ui.screens.OutOfHeartsDialog
 import com.mrpython.app.ui.screens.PaywallDialog
@@ -143,6 +144,10 @@ fun MrPythonApp(viewModel: AppViewModel = viewModel()) {
                 }
                 BottomBar(state.tab, onSelect = viewModel::selectTab)
             }
+        }
+
+        if (state.lessonFailed) {
+            LessonFailedDialog(onDismiss = viewModel::dismissLessonFailed)
         }
 
         if (state.outOfHearts) {

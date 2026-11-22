@@ -28,6 +28,14 @@ object Rules {
     const val MAX_HEARTS = 5
     const val HEART_REFILL_MILLIS = 20 * 60 * 1000L
     const val XP_PER_LESSON = 10
+    const val XP_MISTAKE_PENALTY = 2
+    const val XP_MIN = 2
+
+    /**
+     * With unlimited hearts nothing else stops a lesson, so this many mistakes end it and it
+     * has to be started again. It equals [MAX_HEARTS]: the same patience the free version has.
+     */
+    const val MAX_MISTAKES_PER_LESSON = 5
     const val XP_PERFECT_BONUS = 5
     const val XP_PRACTICE = 5
     const val DAILY_GOAL_XP = 30
@@ -79,10 +87,14 @@ object Rules {
     fun visibleXpToday(p: Progress, today: LocalDate): Int =
         if (p.xpTodayEpochDay == today.toEpochDay()) p.xpToday else 0
 
+    /**
+     * Every mistake costs XP, so guessing never pays: a flawless lesson earns the bonus, and
+     * each mistake takes [XP_MISTAKE_PENALTY] off, down to [XP_MIN].
+     */
     fun xpForLesson(mistakes: Int, isPractice: Boolean): Int = when {
-        isPractice -> XP_PRACTICE
+        isPractice -> (XP_PRACTICE - mistakes).coerceAtLeast(XP_MIN)
         mistakes == 0 -> XP_PER_LESSON + XP_PERFECT_BONUS
-        else -> XP_PER_LESSON
+        else -> (XP_PER_LESSON - mistakes * XP_MISTAKE_PENALTY).coerceAtLeast(XP_MIN)
     }
 
     /**

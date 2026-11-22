@@ -223,6 +223,10 @@ internal val translationsEn: Map<String, String> = mapOf(
     "11 akcesoriów dla Twojego węża" to "11 accessories for your snake",
     "🎁 Seria {0}! Serca uzupełnione do pełna ♥" to "🎁 Streak: {0}! Hearts refilled ♥",
     "Na tym koncie Google nie ma zakupu pełnej wersji." to "This Google account has no full version purchase.",
-    "{0} zadań. Masz serca bez limitu, więc ucz się bez stresu." to "{0} exercises. Your hearts are unlimited, so learn without stress.",
     "Ustawienia prywatności reklam" to "Ad privacy settings",
+    "{0} zadań. Serca masz bez limitu, ale {1} błędów kończy lekcję." to "{0} exercises. Your hearts are unlimited, but {1} mistakes end the lesson.",
+    "RecursionError: za dużo błędów" to "RecursionError: too many mistakes",
+    "{0} błędów w jednej lekcji to znak, żeby zacząć ją od nowa." to "{0} mistakes in one lesson is a sign to start it over.",
+    "Przeczytaj jeszcze raz karty z teorią i spróbuj ponownie. Za tę próbę nie ma XP." to "Read the theory cards again and give it another go. This attempt earns no XP.",
+    "Każdy błąd obniża XP za tę lekcję." to "Every mistake lowers the XP for this lesson.",
 )

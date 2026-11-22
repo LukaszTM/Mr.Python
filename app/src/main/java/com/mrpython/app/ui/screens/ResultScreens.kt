@@ -229,3 +229,42 @@ fun OutOfHeartsDialog(
         }
     }
 }
+
+/** Full version: shown when a lesson was stopped after too many mistakes. */
+@Composable
+fun LessonFailedDialog(onDismiss: () -> Unit) {
+    Dialog(onDismissRequest = onDismiss) {
+        val shape = RoundedCornerShape(16.dp)
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clip(shape)
+                .background(AppColors.Surface)
+                .border(1.dp, AppColors.Border, shape)
+                .padding(24.dp),
+        ) {
+            Text(
+                "RecursionError: za dużo błędów".t(),
+                color = AppColors.Error,
+                fontFamily = FontFamily.Monospace,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+            )
+            Spacer(Modifier.height(12.dp))
+            Text(
+                "{0} błędów w jednej lekcji to znak, żeby zacząć ją od nowa.".t(Rules.MAX_MISTAKES_PER_LESSON),
+                color = AppColors.Text,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(Modifier.height(6.dp))
+            Text(
+                "Przeczytaj jeszcze raz karty z teorią i spróbuj ponownie. Za tę próbę nie ma XP.".t(),
+                color = AppColors.TextDim,
+                lineHeight = 20.sp,
+            )
+            Spacer(Modifier.height(20.dp))
+            SecondaryButton("OK", onClick = onDismiss)
+        }
+    }
+}
