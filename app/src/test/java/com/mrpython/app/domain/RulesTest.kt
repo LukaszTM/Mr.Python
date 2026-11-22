@@ -70,7 +70,8 @@ class RulesTest {
         var p = Rules.completeLesson(Progress(), "a", mistakes = 0, today = today)
         assertEquals(Rules.XP_PER_LESSON + Rules.XP_PERFECT_BONUS, p.totalXp)
         p = Rules.completeLesson(p, "b", mistakes = 2, today = today)
-        assertEquals(25, Rules.visibleXpToday(p, today))
+        // 15 for the flawless lesson, 6 for the one with two mistakes.
+        assertEquals(21, Rules.visibleXpToday(p, today))
         assertEquals(0, Rules.visibleXpToday(p, today.plusDays(1)))
         p = Rules.completeLesson(p, "c", mistakes = 0, today = today.plusDays(1))
         assertEquals(15, p.xpToday)
@@ -81,7 +82,7 @@ class RulesTest {
         val start = Progress(completedLessons = setOf("a"), hearts = 2, heartsRefillStartMillis = 0)
         val p = Rules.completeLesson(start, "a", mistakes = 1, today = today)
         assertEquals(3, p.hearts)
-        assertEquals(Rules.XP_PRACTICE, p.totalXp)
+        assertEquals(Rules.XP_PRACTICE - 1, p.totalXp)
     }
 
     @Test
