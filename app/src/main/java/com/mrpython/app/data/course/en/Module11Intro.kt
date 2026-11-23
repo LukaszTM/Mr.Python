@@ -28,7 +28,7 @@ internal val module11Intro = lesson(
     explain(
         "A readable description: __str__",
         "The `__str__` method returns the string that `print()` shows for the object. Without it you'll " +
-            "see a technical description that's hard to read.",
+            "see a technical description that's hard to read. `str(obj)` uses the same string.",
         code = "class Cat:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return \"Cat \" + self.name\nprint(Cat(\"Whiskers\"))",
         output = "Cat Whiskers",
     ),
@@ -41,7 +41,7 @@ internal val module11Intro = lesson(
     ),
     choice(
         "Which keyword creates a class?",
-        listOf("class", "def", "object", "new"),
+        listOf("class", "def", "object", "Class"),
         0,
         "We define classes with the class keyword.",
     ),
@@ -53,8 +53,8 @@ internal val module11Intro = lesson(
     fill(
         "Fill in the blank to store the name in the object.",
         "class Person:\n    def __init__(self, name):\n        ____.name = name\n\np = Person(\"Amy\")\nprint(p.name)",
-        listOf("self", "this", "name"),
+        listOf("self", "p", "name"),
         "self",
-        "We store the object's data through self.",
+        "We store the object's data through self – the variable p doesn't exist yet at that point.",
     ),
 )

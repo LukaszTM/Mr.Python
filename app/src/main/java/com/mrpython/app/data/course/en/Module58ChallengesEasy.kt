@@ -137,7 +137,7 @@ internal val module58 = CourseUnit(
                 "What does this code print?",
                 listOf("[0, 5, 0]", "[5, 5, 5]", "[0, 0, 0]", "[5, 0, 0]"),
                 0,
-                "Numbers are immutable, so changing a[1] affects only that one spot.",
+                "The assignment a[1] = 5 replaces only one element of the list.",
                 code = "a = [0] * 3\na[1] = 5\nprint(a)",
             ),
             fill(

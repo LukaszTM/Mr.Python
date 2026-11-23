@@ -73,7 +73,7 @@ internal val module29Cards = listOf(
         explain(
             "Powers of two",
             "Any number to the power of 0 gives 1. You can recognize a power of two by the fact that it can be " +
-                "divided by 2 all the way down to 1 – any other number gets stuck on an odd value.",
+                "divided by 2 all the way down to 1 – any other number gets stuck on an odd value greater than 1.",
             code = "n = 12\nwhile n % 2 == 0 and n > 1:\n    n //= 2\nprint(n, n == 1)\nprint(2 ** 0)",
             output = "3 False\n1",
         ),

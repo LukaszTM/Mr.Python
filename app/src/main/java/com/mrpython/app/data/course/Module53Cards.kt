@@ -53,7 +53,7 @@ internal val module53Cards = listOf(
         ),
         explain(
             "Ta sama lista dwa razy",
-            "`[wiersz, wiersz]` wkłada do siatki dwa razy tę samą listę – zmiana w jednym wierszu widać " +
+            "`[wiersz, wiersz]` wkłada do siatki dwa razy tę samą listę – zmianę w jednym wierszu widać " +
                 "w obu. Osobne wiersze tworzy wyrażenie listowe: `[[0] * 2 for _ in range(2)]`.",
             code = "siatka = [[0] * 2 for _ in range(2)]\nsiatka[0][0] = 1\nprint(siatka)",
             output = "[[1, 0], [0, 0]]",

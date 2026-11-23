@@ -11,7 +11,7 @@ internal val module11 = CourseUnit(
             "u11l1", "Pierwsza klasa",
             choice(
                 "Które słowo kluczowe tworzy klasę?",
-                listOf("class", "def", "object", "new"),
+                listOf("class", "def", "object", "Class"),
                 0,
                 "Klasę definiujemy słowem class.",
             ),
@@ -27,7 +27,7 @@ internal val module11 = CourseUnit(
             ),
             choice(
                 "Do czego służy __init__?",
-                listOf("Ustawia początkowy stan obiektu", "Usuwa obiekt", "Wypisuje obiekt", "Tworzy nową klasę"),
+                listOf("Ustawia dane nowego obiektu", "Usuwa obiekt z pamięci", "Wypisuje obiekt na ekranie", "Tworzy nową klasę"),
                 0,
                 "__init__ wywołuje się automatycznie przy tworzeniu obiektu.",
             ),
@@ -44,9 +44,9 @@ internal val module11 = CourseUnit(
             fill(
                 "Uzupełnij, aby zapisać imię w obiekcie.",
                 "class Uczen:\n    def __init__(self, imie):\n        ____.imie = imie\n\nu = Uczen(\"Ola\")\nprint(u.imie)",
-                listOf("self", "this", "obiekt"),
+                listOf("self", "u", "obiekt"),
                 "self",
-                "self oznacza tworzony obiekt.",
+                "self oznacza tworzony obiekt – zmiennej u jeszcze wtedy nie ma.",
             ),
         ),
         lesson(
@@ -170,7 +170,7 @@ internal val module11 = CourseUnit(
             tiles(
                 "Utwórz obiekt klasy Pies o imieniu \"Azor\" w zmiennej p",
                 listOf("p", "=", "Pies(", "\"Azor\"", ")"),
-                listOf("new", "class"),
+                listOf("self", "class"),
                 "Obiekt tworzymy, wywołując klasę jak funkcję.",
             ),
             output(

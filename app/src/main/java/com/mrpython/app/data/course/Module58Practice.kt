@@ -50,9 +50,9 @@ internal val module58Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("Pusty napis (pustą linię)", "IndexError", "n", "Python"),
+            listOf("Pusta linia", "IndexError", "n", "Python"),
             0,
-            "Wycinek poza zakresem nie zgłasza błędu, tylko daje pusty napis.",
+            "Wycinek poza zakresem nie zgłasza błędu, tylko daje pusty napis – print wypisze pustą linię.",
             code = "print(\"Python\"[10:])",
         ),
         choice(

@@ -49,8 +49,8 @@ internal val module60Intro = lesson(
         "Generator wyczerpuje się po pierwszym przejściu.",
     ),
     choice(
-        "Jak zalecane jest sprawdzanie, czy zmienna x to None?",
-        listOf("x is None", "x = None", "x === None", "x in None"),
+        "Jak zaleca się sprawdzać, czy zmienna x to None?",
+        listOf("x is None", "x = None", "x is \"None\"", "x in None"),
         0,
         "None to jeden obiekt, więc porównujemy go przez is.",
     ),

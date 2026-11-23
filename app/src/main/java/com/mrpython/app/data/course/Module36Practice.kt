@@ -45,22 +45,22 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Co oznacza self w metodzie wplac?",
-            listOf("Obiekt konta, na którym wywołano metodę", "Klasę Konto", "Kwotę wpłaty", "Wszystkie konta naraz"),
+            listOf("Konto, na którym wywołano metodę", "Klasę Konto, w której jest metoda", "Kwotę podaną przy wywołaniu", "Wszystkie utworzone konta naraz"),
             0,
             "Przy k.wplac(10) Python przekazuje k jako self.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("AttributeError – saldo było tylko zmienną lokalną", "Wypisze 0", "Wypisze None", "SyntaxError"),
+            listOf("AttributeError", "Wypisze 0", "Wypisze None", "SyntaxError"),
             0,
-            "Bez self. zmienna saldo znika po wyjściu z __init__ i nie staje się atrybutem.",
+            "Bez self. saldo jest tylko zmienną lokalną: znika po wyjściu z __init__ i nie staje się atrybutem.",
             code = "class Konto:\n    def __init__(self):\n        saldo = 0\n\nk = Konto()\nprint(k.saldo)",
         ),
         choice(
             "Ile argumentów podajemy w Konto(...), gdy nagłówek to def __init__(self, wlasciciel, saldo)?",
-            listOf("2 – self Python przekazuje sam", "3", "1", "0"),
+            listOf("2", "3", "1", "0"),
             0,
-            "Za self podstawia się nowy obiekt, my podajemy tylko właściciela i saldo.",
+            "self Python przekazuje sam (nowy obiekt), my podajemy tylko właściciela i saldo.",
         ),
         fill(
             "Uzupełnij, aby każde nowe konto zaczynało z saldem 0 (wypisze 0).",
@@ -146,7 +146,7 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Co dzieje się z dalszym kodem metody po wykonaniu raise?",
-            listOf("Nie wykona się – metoda kończy działanie", "Wykona się normalnie", "Metoda zacznie się od nowa", "Saldo zostanie wyzerowane"),
+            listOf("Nie wykona się", "Wykona się normalnie", "Metoda zacznie się od nowa", "Saldo zostanie wyzerowane"),
             0,
             "raise przerywa metodę i przekazuje wyjątek do kodu wywołującego.",
         ),
@@ -228,9 +228,9 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Dlaczego wpis w historii zapisujemy jako krotkę (\"wpłata\", kwota)?",
-            listOf("Żeby w jednym wpisie trzymać typ operacji i kwotę", "Bo listy nie mogą zawierać liczb", "Żeby historia sama się sortowała", "Bo krotki można zmieniać"),
+            listOf("Żeby trzymać typ i kwotę razem", "Bo listy nie mogą zawierać liczb", "Żeby historia sama się sortowała", "Bo krotki można zmieniać"),
             0,
-            "Krotka łączy kilka informacji o jednej operacji.",
+            "Krotka łączy kilka informacji o jednej operacji: jej typ i kwotę.",
         ),
         choice(
             "Jak odczytać kwotę z ostatniego wpisu (typ, kwota) w historii h?",
@@ -259,7 +259,7 @@ internal val module36Practice = listOf(
             "Krotki z historii rozpakowujemy od razu w pętli for.",
         ),
         tiles(
-            "Policz sumę wszystkich kwot w historii h",
+            "Zapisz w zmiennej suma sumę wszystkich kwot z historii h",
             listOf("suma", "=", "sum(", "h", ")"),
             listOf("len(", "max("),
             "sum dodaje wszystkie liczby z listy.",
@@ -397,9 +397,9 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Co wypisze print(k), jeśli klasa Konto nie ma metody __str__?",
-            listOf("Domyślny opis, np. <__main__.Konto object at 0x...>", "Saldo konta", "Nazwę właściciela", "Nic – będzie błąd"),
+            listOf("Nazwę klasy i adres obiektu", "Aktualne saldo konta", "Nazwę właściciela konta", "Komunikat o błędzie"),
             0,
-            "Bez __str__ Python pokazuje tylko nazwę klasy i adres obiektu.",
+            "Bez __str__ Python pokazuje domyślny opis, np. <__main__.Konto object at 0x...>.",
         ),
         choice(
             "Którą metodę wywoła Python dla a == b, gdy a i b to konta?",
@@ -409,7 +409,7 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – Python nie wie, jak porównać konta", "Posortuje konta według salda", "Wypisze []", "Zwróci listę bez zmian"),
+            listOf("Zgłosi TypeError", "Posortuje konta według salda", "Wypisze []", "Zwróci listę bez zmian"),
             0,
             "Bez __lt__ obiektów Konto nie da się porównać przez <, więc sorted zgłasza błąd.",
             code = "class Konto:\n    def __init__(self, saldo):\n        self.saldo = saldo\n\nprint(sorted([Konto(5), Konto(1)]))",
@@ -429,7 +429,7 @@ internal val module36Practice = listOf(
             "Format .2f daje dokładnie dwa miejsca po przecinku.",
         ),
         tiles(
-            "Wybierz z listy konta konto z najmniejszym saldem",
+            "Zapisz w zmiennej naj konto z najmniejszym saldem z listy konta",
             listOf("naj", "=", "min(", "konta,", "key=lambda k:", "k.saldo", ")"),
             listOf("max(", "k.wl"),
             "min z key porównuje konta według salda.",

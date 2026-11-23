@@ -48,8 +48,8 @@ internal val module36Intro = lesson(
     ),
     choice(
         "Where is the best place to create the account's transaction history list?",
-        listOf("In __init__, through self.history = []", "As a class attribute", "In the __str__ method", "As a global variable"),
+        listOf("In the __init__ method", "As a class attribute", "In the __str__ method", "As a global variable"),
         0,
-        "Then every account has its own history.",
+        "A list created in __init__ with self.history = [] belongs to one account, so every account has its own history.",
     ),
 )

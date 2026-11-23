@@ -83,7 +83,7 @@ internal val module47Practice = listOf(
             "Separatorem jest średnik.",
         ),
         tiles(
-            "Usuń znak nowej linii z wiersza i podziel go po przecinkach",
+            "Usuń znak nowej linii z wiersza linia, podziel go po przecinkach i zapisz wynik w zmiennej pola",
             listOf("pola", "=", "linia.strip()", ".split(\",\")"),
             listOf(".join(\",\")", "linia.split()"),
             "Najpierw strip(), potem split(\",\").",
@@ -220,9 +220,9 @@ internal val module47Practice = listOf(
         ),
         choice(
             "Czym jest każdy wiersz zwracany przez csv.DictReader?",
-            listOf("Słownikiem: nazwa kolumny → wartość", "Listą liczb", "Krotką napisów", "Jednym napisem"),
+            listOf("Słownikiem (dict)", "Listą napisów (list)", "Krotką napisów (tuple)", "Jednym napisem (str)"),
             0,
-            "Klucze pochodzą z wiersza nagłówka.",
+            "Każdy wiersz to słownik: nazwa kolumny → wartość; klucze pochodzą z wiersza nagłówka.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -252,7 +252,7 @@ internal val module47Practice = listOf(
             "Atrybut fieldnames zawiera nagłówek; keys i header nie istnieją.",
         ),
         tiles(
-            "Utwórz listę wierszy-słowników z pliku f",
+            "Utwórz listę wierszy-słowników z pliku f i zapisz ją w zmiennej wiersze",
             listOf("wiersze", "=", "list(", "csv.DictReader(", "f))"),
             listOf("csv.reader(", "dict("),
             "list() zbiera wszystkie wiersze z DictReader.",
@@ -321,7 +321,7 @@ internal val module47Practice = listOf(
         ),
         choice(
             "Co trzeba zrobić, aby dodać wartości kolumny z CSV?",
-            listOf("Zamienić je na liczby, np. int()", "Nic – są już liczbami", "Użyć json.loads()", "Posortować je"),
+            listOf("Zamienić je przez int()", "Nic – już są liczbami", "Skleić je przez join()", "Posortować przez sorted()"),
             0,
             "Moduł csv zwraca wszystkie pola jako napisy.",
         ),
@@ -340,13 +340,13 @@ internal val module47Practice = listOf(
             "Zwykły reader daje listy, więc r[\"cena\"] zgłosi błąd.",
         ),
         tiles(
-            "Utwórz czytnik CSV z separatorem ; dla pliku f",
+            "Utwórz czytnik CSV z separatorem ; dla pliku f i zapisz go w zmiennej r",
             listOf("r", "=", "csv.reader(", "f,", "delimiter=\";\")"),
             listOf("sep=\";\")", "csv.writer("),
             "Separator ustawiamy parametrem delimiter.",
         ),
         tiles(
-            "Podziel napis linia na pola po przecinkach",
+            "Podziel napis linia po przecinkach i zapisz wynik w zmiennej pola",
             listOf("pola", "=", "linia.split(", "\",\"", ")"),
             listOf("linia.join(", "split(linia"),
             "split(\",\") dzieli napis na listę pól.",

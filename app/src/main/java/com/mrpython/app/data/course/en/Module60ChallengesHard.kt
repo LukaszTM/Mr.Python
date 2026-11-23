@@ -93,7 +93,7 @@ internal val module60 = CourseUnit(
             ),
             choice(
                 "What happens?",
-                listOf("UnboundLocalError", "x will equal 2", "NameError", "Nothing"),
+                listOf("UnboundLocalError", "x will equal 2", "SyntaxError", "Nothing"),
                 0,
                 "Assigning to x makes x a local variable that hasn't been given a value yet.",
                 code = "x = 1\ndef f():\n    x += 1\n\nf()",
@@ -348,7 +348,7 @@ internal val module60 = CourseUnit(
                 "and doesn't evaluate the right side when the left is falsy – we don't divide by zero.",
             ),
             tiles(
-                "Check whether x is in the range from 0 (inclusive) to 10",
+                "Check whether x is in the range from 0 (inclusive) to 10 (exclusive)",
                 listOf("if", "0 <=", "x", "< 10:"),
                 listOf("and", "=<"),
                 "Comparisons can be chained.",

@@ -21,7 +21,7 @@ internal val module41 = CourseUnit(
             ),
             choice(
                 "Czym różni się hej od hej()?",
-                listOf("hej to sama funkcja, hej() to jej wywołanie", "Niczym", "hej() to sama funkcja", "hej to błąd składni"),
+                listOf("hej to funkcja, hej() ją wywołuje", "Niczym, to ten sam zapis", "hej() to funkcja, hej ją wywołuje", "hej bez nawiasów to błąd składni"),
                 0,
                 "Nawiasy wywołują funkcję; bez nich mamy obiekt funkcji.",
             ),
@@ -63,7 +63,7 @@ internal val module41 = CourseUnit(
             ),
             choice(
                 "Czym jest dekorator?",
-                listOf("Funkcją, która przyjmuje funkcję i zwraca nową funkcję", "Specjalną klasą Pythona", "Komentarzem nad funkcją", "Sposobem na import modułu"),
+                listOf("Funkcją, która przyjmuje funkcję i zwraca nową funkcję", "Specjalną klasą, którą Python dodaje do funkcji", "Komentarzem nad funkcją, który Python pomija", "Sposobem na import funkcji z innego modułu"),
                 0,
                 "Dekorator dostaje funkcję i zwraca jej ulepszoną wersję.",
             ),

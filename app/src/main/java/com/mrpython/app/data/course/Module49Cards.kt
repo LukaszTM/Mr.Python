@@ -24,9 +24,10 @@ internal val module49Cards = listOf(
         explain(
             "Ujemne miejsca w round",
             "Ujemna liczba miejsc zaokrągla przed przecinkiem: `-1` do dziesiątek, `-2` do setek. " +
-                "`round(x, n)` z podanym `n` zwraca float, a dla liczby całkowitej – int.",
-            code = "print(round(1567, -1), round(1234, -2))\nprint(round(2.567, 1))",
-            output = "1570 1200\n2.6",
+                "`round(x, n)` z podanym `n` zwraca float, a dla liczby całkowitej – int. Formatowanie " +
+                "`{x:.0f}` też zaokrągla remisy do liczby parzystej.",
+            code = "print(round(1567, -1), round(1234, -2))\nprint(round(2.567, 1))\nprint(f\"{0.5:.0f} {1.5:.0f}\")",
+            output = "1570 1200\n2.6\n0 2",
         ),
         explain(
             "Pułapka: round(2.675, 2)",

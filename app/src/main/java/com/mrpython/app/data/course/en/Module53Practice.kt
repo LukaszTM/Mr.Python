@@ -106,19 +106,19 @@ internal val module53Practice = listOf(
         choice(
             "What's the difference between x = 5 and x == 5?",
             listOf(
-                "x = 5 assigns a value, while x == 5 checks equality",
-                "None, they are two ways to write the same thing",
-                "x == 5 assigns the value twice",
-                "x = 5 only works inside an if",
+                "= assigns, == compares",
+                "None, they're the same",
+                "== assigns twice",
+                "= only works in an if",
             ),
             0,
-            "A single = is assignment, a double == is comparison.",
+            "x = 5 assigns a value, while x == 5 checks equality: a single = is assignment, a double == is comparison.",
         ),
         choice(
             "Which error does this code raise?",
-            listOf("IndentationError – no indentation after else", "NameError", "TypeError", "No error"),
+            listOf("IndentationError", "NameError", "TypeError", "No error"),
             0,
-            "The block after else: must be indented.",
+            "The block after else: must be indented, and here return isn't.",
             code = "def f(n):\n    if n > 0:\n        return \"positive\"\n    else:\n    return \"other\"",
         ),
         fill(
@@ -136,9 +136,9 @@ internal val module53Practice = listOf(
         ),
         choice(
             "Where should print go to print the total only once, after the loop?",
-            listOf("Unindented, at the same level as the word for", "Indented inside the loop", "Before the loop", "In the if condition"),
+            listOf("Unindented", "Indented in the loop", "Before the loop", "In the if block"),
             0,
-            "Unindented code runs after the loop finishes.",
+            "An unindented print (at the same level as the word for) runs once, after the loop finishes.",
         ),
     ),
     practice(
@@ -187,13 +187,13 @@ internal val module53Practice = listOf(
         choice(
             "What do we use instead of the default value items=[]?",
             listOf(
-                "items=None, and we create a new list inside the function",
-                "items=[] with copy() added",
+                "items=None",
+                "items=list()",
                 "items=0",
-                "A global variable",
+                "items={}",
             ),
             0,
-            "None is a safe default value because it can't be modified.",
+            "We use items=None and create a new list inside the function. items=list() doesn't help – that list is also created only once.",
         ),
         choice(
             "What does this code print?",
@@ -264,9 +264,9 @@ internal val module53Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("It prints 5, but the name id no longer means the built-in function", "NameError", "SyntaxError", "It prints the object's address"),
+            listOf("It prints 5", "NameError", "SyntaxError", "It prints the object's address"),
             0,
-            "Shadowing isn't an error in itself – the trouble shows up later.",
+            "Shadowing isn't an error in itself – the code prints 5, but the name id no longer means the built-in function, and the trouble shows up later.",
             code = "id = 5\nprint(id)",
         ),
         choice(
@@ -277,15 +277,15 @@ internal val module53Practice = listOf(
         ),
         choice(
             "How do you restore a built-in function after accidentally shadowing it with a variable?",
-            listOf("Delete the variable with the del statement", "Assign None to the variable", "Write import name", "It can't be done"),
+            listOf("Delete it with del", "Assign None to it", "Write import name", "It can't be done"),
             0,
             "After del, Python finds the built-in name again.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError: 'int' object is not callable", "It prints 8", "It prints 4", "ValueError"),
+            listOf("TypeError", "It prints 8", "It prints 4", "ValueError"),
             0,
-            "int is now the number 3, so int(\"7\") won't work.",
+            "int is now the number 3, so int(\"7\") ends in TypeError: 'int' object is not callable.",
             code = "int = 3\nprint(int(\"7\") + 1)",
         ),
         fill(
@@ -329,9 +329,9 @@ internal val module53Practice = listOf(
         output("print(int(7 / 2), round(7 / 2))", "3 4", "int() cuts off, round() rounds a tie to the even number."),
         choice(
             "What happens when you run this code?",
-            listOf("It prints 5, then raises a TypeError", "It prints 10", "It prints 5", "It prints nothing"),
+            listOf("5, then a TypeError", "It prints 10", "It prints 5", "It prints nothing"),
             0,
-            "add prints 5 but returns None, and None * 2 is an error.",
+            "add prints 5 but returns None, and None * 2 is a TypeError.",
             code = "def add(a, b):\n    print(a + b)\n\nresult = add(2, 3) * 2",
         ),
         choice(
@@ -407,9 +407,9 @@ internal val module53Practice = listOf(
         choice(
             "A program raises “TypeError: 'list' object is not callable”. What is the most common cause?",
             listOf(
-                "A variable named list shadowed the built-in type",
+                "A variable shadowed list",
                 "The list is empty",
-                "The import of the list module is missing",
+                "The list module isn't imported",
                 "The list has too many elements",
             ),
             0,
@@ -432,7 +432,7 @@ internal val module53Practice = listOf(
             "def average(a, b):\n    return (a + b) ____ 2\n\nprint(average(3, 4))",
             listOf("/", "//", "%"),
             "/",
-            "/ gives 3.5; // would cut it down to 3, and % would give the remainder 1.",
+            "/ gives 3.5; // would round it down to 3, and % would give the remainder 1.",
         ),
         tiles(
             "Write the header of a loop over all the indexes of list x",

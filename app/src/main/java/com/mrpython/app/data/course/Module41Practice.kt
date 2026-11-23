@@ -52,9 +52,9 @@ internal val module41Practice = listOf(
         ),
         choice(
             "Co wypisze print(hej) dla zdefiniowanej funkcji hej?",
-            listOf("Opis funkcji, np. <function hej at 0x...>", "Wynik funkcji hej", "NameError", "Pusty wiersz"),
+            listOf("Opis obiektu funkcji", "Wynik funkcji hej", "Błąd NameError", "Pusty wiersz"),
             0,
-            "Bez nawiasów funkcja nie jest wywoływana – wypisujemy sam obiekt.",
+            "Bez nawiasów funkcja nie jest wywoływana – print pokazuje opis obiektu, np. <function hej at 0x...>.",
         ),
         choice(
             "Który zapis poprawnie przekazuje funkcję podwoj do map?",
@@ -133,22 +133,22 @@ internal val module41Practice = listOf(
         ),
         choice(
             "Co jest błędem w tym dekoratorze?",
-            listOf("Zwraca wynik wywołania wrapper() zamiast samej funkcji wrapper", "Brakuje parametru f", "wrapper nie może wywoływać f", "Nie ma błędu"),
+            listOf("return wrapper() zamiast return wrapper", "Dekoratorowi brakuje parametru f", "wrapper nie może wywoływać f", "Nie ma błędu"),
             0,
             "Dekorator ma zwrócić funkcję, więc piszemy return wrapper bez nawiasów.",
             code = "def ozdob(f):\n    def wrapper():\n        print(\"przed\")\n        f()\n    return wrapper()",
         ),
         choice(
             "Co robi zapis hej = ozdob(hej)?",
-            listOf("Podmienia hej na funkcję zwróconą przez dekorator", "Wywołuje hej i zapisuje wynik", "Usuwa funkcję hej", "Tworzy kopię dekoratora"),
+            listOf("Podmienia hej na funkcję zwróconą przez ozdob", "Wywołuje hej i zapisuje jej wynik", "Usuwa funkcję hej z programu", "Tworzy kopię dekoratora ozdob"),
             0,
             "Od tej chwili nazwa hej wskazuje na wrapper.",
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("Nic – funkcja b nie została wywołana", "A B C", "B", "A C"),
+            listOf("Nic", "A B C", "B", "A C"),
             0,
-            "Udekorowanie tylko podmienia funkcję – wrapper działa dopiero po b().",
+            "Funkcja b nie została wywołana. Udekorowanie tylko ją podmienia, a wrapper działa dopiero po b().",
             code = "def ozdob(f):\n    def wrapper():\n        print(\"A\")\n        f()\n        print(\"C\")\n    return wrapper\ndef b():\n    print(\"B\")\nb = ozdob(b)",
         ),
         fill(
@@ -222,9 +222,9 @@ internal val module41Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – wrapper nie przyjmuje argumentów", "Wypisze 9", "Wypisze None", "SyntaxError"),
+            listOf("Błąd TypeError", "Wypisze 9", "Wypisze None", "Błąd SyntaxError"),
             0,
-            "kw(3) wywołuje w(3), a w nie ma parametrów.",
+            "kw(3) wywołuje w(3), a w nie ma parametrów, więc pojawia się TypeError.",
             code = "def log(f):\n    def w():\n        return f()\n    return w\n@log\ndef kw(x):\n    return x * x\nprint(kw(3))",
         ),
         choice(
@@ -310,10 +310,10 @@ internal val module41Practice = listOf(
         ),
         choice(
             "Co jest nie tak w tym kodzie?",
-            listOf("Brakuje argumentu – powinno być @powtorz(liczba)", "Brakuje return w powtorz", "Za dużo poziomów funkcji", "Nic, kod jest poprawny"),
+            listOf("Brakuje argumentu przy @powtorz", "Brakuje return w funkcji powtorz", "Za dużo poziomów funkcji", "Nic, kod jest poprawny"),
             0,
-            "powtorz to fabryka dekoratorów, więc trzeba ją wywołać z argumentem.",
-            code = "def powtorz(n):\n    def dek(f):\n        def w():\n            for _ in range(n):\n                f()\n        return w\n    return dek\n@powtorz\ndef hej():\n    print(\"hej\")",
+            "powtorz to fabryka dekoratorów, więc trzeba ją wywołać z argumentem, np. @powtorz(3).",
+            code = "def powtorz(n):\n    def dek(f):\n        def w():\n            for _ in range(n):\n                f()\n        return w\n    return dek\n@powtorz\ndef hej():\n    print(\"hej\")\nhej()",
         ),
         choice(
             "Któremu zapisowi odpowiada @powtorz(3) nad def hej()?",

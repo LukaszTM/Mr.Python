@@ -57,7 +57,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "Co się stanie bez linii global licznik?",
-                listOf("UnboundLocalError", "Wypisze 2", "Wypisze 0", "NameError przy definicji"),
+                listOf("Błąd UnboundLocalError", "licznik zmieni się na 1", "Powstanie lokalny licznik równy 1", "NameError przy definicji"),
                 0,
                 "licznik += 1 traktuje licznik jako lokalny, a on nie ma jeszcze wartości.",
                 code = "licznik = 0\ndef dodaj():\n    licznik += 1\ndodaj()",
@@ -81,7 +81,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "Czym różni się global od nonlocal?",
-                listOf("global – zasięg modułu, nonlocal – najbliższa funkcja otaczająca", "Niczym", "nonlocal działa tylko w klasach", "global tworzy nową zmienną lokalną"),
+                listOf("global – zmienna modułu, nonlocal – zmienna funkcji otaczającej", "global – zmienna funkcji otaczającej, nonlocal – zmienna modułu", "global – zmienna lokalna, nonlocal – zmienna modułu", "Niczym, oba słowa działają tak samo"),
                 0,
                 "nonlocal sięga do funkcji zewnętrznej, global do poziomu pliku.",
             ),
@@ -111,7 +111,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "Czym jest domknięcie (closure)?",
-                listOf("Funkcją, która pamięta zmienne z zasięgu, w którym powstała", "Funkcją bez argumentów", "Zamkniętym plikiem", "Klasą bez metod"),
+                listOf("Funkcją, która pamięta zmienne z zasięgu, w którym powstała", "Funkcją, która po zakończeniu kasuje wszystkie swoje zmienne", "Blokiem with, który sam zamyka plik po zakończeniu", "Funkcją zdefiniowaną w klasie, która dostaje self"),
                 0,
                 "Domknięcie przechowuje zmienne funkcji otaczającej nawet po jej zakończeniu.",
             ),
@@ -148,7 +148,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "Jak naprawić pułapkę lambda: i w pętli?",
-                listOf("Użyć domyślnego argumentu: lambda i=i: i", "Dodać global i", "Użyć while zamiast for", "Nie da się"),
+                listOf("Dopisać domyślny argument: lambda i=i: i", "Dopisać nonlocal i przed pętlą", "Zamienić pętlę for na pętlę while", "Wywołać każdą lambdę jeszcze raz po pętli"),
                 0,
                 "Wartość domyślna jest obliczana raz, przy tworzeniu funkcji.",
             ),

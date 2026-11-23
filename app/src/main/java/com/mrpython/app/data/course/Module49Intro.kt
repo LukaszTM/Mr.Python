@@ -45,7 +45,7 @@ internal val module49Intro = lesson(
     ),
     choice(
         "Który typ wybrać do kwot pieniężnych?",
-        listOf("Decimal", "float", "bool", "complex"),
+        listOf("Decimal", "float", "bool", "str"),
         0,
         "Decimal liczy dokładnie w systemie dziesiętnym.",
     ),

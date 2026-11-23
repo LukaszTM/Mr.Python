@@ -18,7 +18,7 @@ internal val module10 = CourseUnit(
             ),
             choice(
                 "What error does 1 / 0 raise?",
-                listOf("ZeroDivisionError", "ValueError", "MathError", "None – the result is 0"),
+                listOf("ZeroDivisionError", "ValueError", "MathError", "No error – the result is 0"),
                 0,
                 "Dividing by zero is a ZeroDivisionError.",
             ),
@@ -30,13 +30,13 @@ internal val module10 = CourseUnit(
             ),
             choice(
                 "What error does \"a\" + 1 raise?",
-                listOf("TypeError", "ValueError", "NameError", "None"),
+                listOf("TypeError", "ValueError", "NameError", "No error"),
                 0,
                 "You can't add a string and a number – that's a type error.",
             ),
             choice(
                 "What error does [1, 2][5] raise?",
-                listOf("IndexError", "KeyError", "ValueError", "None"),
+                listOf("IndexError", "KeyError", "ValueError", "No error"),
                 0,
                 "An index outside the list's range is an IndexError.",
             ),
@@ -48,9 +48,9 @@ internal val module10 = CourseUnit(
             ),
             choice(
                 "What's wrong with this code?",
-                listOf("A colon is missing – SyntaxError", "A parenthesis is missing", "Nothing", "Wrong function name"),
+                listOf("A colon is missing", "A parenthesis is missing", "Nothing", "Wrong function name"),
                 0,
-                "Python detects a syntax error (SyntaxError) before it runs the program.",
+                "There's no colon after if True. Python detects this syntax error (SyntaxError) before it runs the program.",
                 code = "if True\n    print(\"yes\")",
             ),
         ),

@@ -132,7 +132,7 @@ internal val module22 = CourseUnit(
                     "There is no difference",
                 ),
                 0,
-                "sorted works on any sequence and doesn't change anything.",
+                "sorted builds a new list and leaves the original alone, while sort() changes the list itself and returns None.",
             ),
             fill(
                 "Fill in the blank to sort in descending order.",

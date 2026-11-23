@@ -52,7 +52,7 @@ internal val module52Intro = lesson(
         "An empty list has no first element – it's an extreme case.",
     ),
     tiles(
-        "Check that the length of the string \"abc\" is 3.",
+        "Check that the length of the string \"abc\" is 3 (the checked result first, then the expected value).",
         listOf("assert", "len(\"abc\")", "==", "3"),
         listOf("=", "if"),
         "assert with an == comparison checks the expected result.",

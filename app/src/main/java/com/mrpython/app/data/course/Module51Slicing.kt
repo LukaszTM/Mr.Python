@@ -43,9 +43,9 @@ internal val module51 = CourseUnit(
             output("s = slice(1, 3)\nprint([10, 20, 30, 40][s])", "[20, 30]", "Obiekt slice to zapisany wycinek [1:3]."),
             choice(
                 "Co się stanie?",
-                listOf("ValueError – długości się nie zgadzają", "x to [0, 1, 0]", "x to [0, 2]", "x to [0, 0, 3]"),
+                listOf("Błąd ValueError", "x to [0, 2, 3]", "x to [0, 2]", "x to [0, 0, 3]"),
                 0,
-                "Przy wycinku z krokiem trzeba podać dokładnie tyle elementów, ile zastępujemy.",
+                "Wycinek x[::2] ma dwa miejsca (indeksy 0 i 2), a podano jeden element – długości się nie zgadzają, więc jest ValueError.",
                 code = "x = [1, 2, 3]\nx[::2] = [0]",
             ),
             fill(

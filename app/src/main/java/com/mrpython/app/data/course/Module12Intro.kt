@@ -12,7 +12,7 @@ internal val module12Intro = lesson(
     explain(
         "Wyrównywanie",
         "Liczba w formacie to szerokość pola. `<` wyrównuje do lewej, `>` do prawej, a `^` środkuje. " +
-            "Wolne miejsce wypełniają spacje albo znak podany przed strzałką. Tak robi się równe tabelki.",
+            "Wolne miejsce wypełniają spacje albo znak podany przed znakiem wyrównania (np. `*^5`). Tak robi się równe tabelki.",
         code = "print(f\"[{'ok':>5}]\")\nprint(f\"[{'ok':<5}]\")\nprint(f\"{'a':*^5}\")",
         output = "[   ok]\n[ok   ]\n**a**",
     ),

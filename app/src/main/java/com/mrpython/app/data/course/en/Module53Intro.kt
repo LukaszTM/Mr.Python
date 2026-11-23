@@ -15,7 +15,8 @@ internal val module53Intro = lesson(
         "= or ==?",
         "`=` assigns a value, while `==` compares – in an `if` condition you need `==`. Watch your " +
             "indentation too: a `print` indented inside a loop runs on every iteration; unindented, it runs " +
-            "once, after the loop.",
+            "once, after the loop. A missing indentation where one is required (e.g. under `if` or `else:`) " +
+            "gives an `IndentationError`.",
         code = "total = 0\nfor x in [1, 2, 3]:\n    total += x\nprint(total == 6)",
         output = "True",
     ),
@@ -36,7 +37,7 @@ internal val module53Intro = lesson(
     ),
     explain(
         "Division and the missing return",
-        "`/` gives a result with a fraction, while `//` cuts it off – use `/` for an average. And when " +
+        "`/` gives a result with a fraction, while `//` rounds it down to a whole number – use `/` for an average. And when " +
             "a function returns `None`, check whether it's missing a `return`.",
         code = "def double(x):\n    result = x * 2\n\nprint(7 / 2, 7 // 2)\nprint(double(5))",
         output = "3.5 3\nNone",
@@ -48,9 +49,9 @@ internal val module53Intro = lesson(
     ),
     choice(
         "Which line correctly checks whether x is equal to 5?",
-        listOf("if x == 5:", "if x = 5:", "if x === 5:"),
+        listOf("if x == 5:", "if x = 5:", "if x == 5"),
         0,
-        "Comparison is ==; = is assignment, and === doesn't exist in Python.",
+        "Comparison is ==, and a line with if ends with a colon; = is assignment.",
     ),
     fill(
         "Fill in the blank so the function gives its result back to the caller.",

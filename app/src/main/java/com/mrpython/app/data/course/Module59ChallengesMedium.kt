@@ -203,7 +203,7 @@ internal val module59 = CourseUnit(
                 "Zdefiniuj rekurencyjnie funkcję suma(n), która liczy 0 + 1 + … + n",
                 listOf("def suma(n):", "return 0", "if n == 0", "else", "n + suma(n - 1)"),
                 listOf("elif", "n * suma(n)"),
-                "Przypadek bazowy to n == 0, a w innym razie dodajemy n do sumy dla n - 1.",
+                "Warunek stopu to n == 0, a w innym razie dodajemy n do sumy dla n - 1.",
             ),
         ),
         lesson(

@@ -52,7 +52,7 @@ internal val module61 = CourseUnit(
             tiles(
                 "Wypisz napis „Wynik:” i wartość zmiennej wynik",
                 listOf("print(", "\"Wynik:\",", "wynik", ")"),
-                listOf("+", "wynik)"),
+                listOf("\"wynik\"", "Print("),
                 "print() przyjmuje wiele wartości oddzielonych przecinkami.",
             ),
         ),
@@ -152,8 +152,8 @@ internal val module61 = CourseUnit(
             tiles(
                 "Sprawdź, czy x jest parzyste i dodatnie",
                 listOf("if", "x % 2 == 0", "and", "x > 0:"),
-                listOf("&&", "x > 0"),
-                "W Pythonie warunki łączy słowo and.",
+                listOf("or", "x > 0"),
+                "Oba warunki muszą być spełnione naraz, więc łączy je and.",
             ),
         ),
         lesson(
@@ -239,7 +239,7 @@ internal val module61 = CourseUnit(
                 "Co wypisze ten kod?",
                 listOf("Kot", "KOT", "kot", "KoT"),
                 0,
-                "capitalize() powiększa tylko pierwszą literę.",
+                "capitalize() zmienia pierwszą literę na wielką, a pozostałe na małe.",
                 code = "print(\"kot\".capitalize())",
             ),
             fill(
@@ -300,7 +300,7 @@ internal val module61 = CourseUnit(
                 "Format % mnoży przez 100 i dodaje znak procentu.",
             ),
             tiles(
-                "Wypisz za pomocą f-napisu tekst Suma: i wartość zmiennej suma",
+                "Wypisz za pomocą f-stringa tekst Suma: i wartość zmiennej suma",
                 listOf("print(", "f\"Suma: {suma}\"", ")"),
                 listOf("\"Suma: {suma}\"", "f("),
                 "Bez litery f nawiasy klamrowe zostałyby wypisane dosłownie.",

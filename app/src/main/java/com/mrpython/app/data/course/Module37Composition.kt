@@ -64,9 +64,9 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "Czym jest delegowanie?",
-                listOf("Przekazaniem zadania obiektowi, który jest częścią naszego obiektu", "Kopiowaniem metod z klasy bazowej", "Usuwaniem obiektu", "Wywołaniem super()"),
+                listOf("Przekazaniem pracy swojemu składnikowi", "Kopiowaniem metod z klasy bazowej", "Usuwaniem obiektu", "Wywołaniem super()"),
                 0,
-                "Obiekt zleca pracę swojemu składnikowi.",
+                "Obiekt zleca pracę obiektowi, który jest jego częścią, np. Auto silnikowi.",
             ),
             output(
                 "class Biblioteka:\n    def __init__(self):\n        self.ksiazki = [\"Lalka\", \"Potop\"]\n    def __len__(self):\n        return len(self.ksiazki)\n    def __contains__(self, t):\n        return t in self.ksiazki\n\nb = Biblioteka()\nprint(len(b), \"Lalka\" in b)",
@@ -87,9 +87,9 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "Dlaczego Auto.jedz() wywołuje self.silnik.start(), a nie robi wszystkiego samo?",
-                listOf("Każda klasa odpowiada za swoje zadanie – Auto zleca pracę silnikowi", "Bo Auto nie może mieć metod", "Bo tak wymaga dziedziczenie", "Żeby program działał wolniej"),
+                listOf("Bo każda klasa ma swoje zadanie", "Bo Auto nie może mieć metod", "Bo tak wymaga dziedziczenie", "Żeby Auto dziedziczyło po Silniku"),
                 0,
-                "Delegowanie dzieli odpowiedzialność między klasy.",
+                "Auto zleca pracę silnikowi – delegowanie dzieli odpowiedzialność między klasy. Dziedziczenia tu nie ma.",
             ),
             tiles(
                 "Uruchom silnik auta a i zapisz wynik w zmiennej w",
@@ -148,9 +148,9 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "Jaki problem ma ta wersja stosu?",
-                listOf("Dziedziczy wszystkie metody listy, np. insert, które łamią zasady stosu", "Nie da się utworzyć obiektu", "Metoda poloz nie działa", "SyntaxError"),
+                listOf("Ma też metody listy, np. insert", "Nie da się utworzyć obiektu", "Metoda poloz nie działa", "SyntaxError"),
                 0,
-                "Stos nie jest listą – lepiej, żeby listę miał (kompozycja).",
+                "Stos dziedziczy wszystkie metody listy, a insert łamie zasady stosu. Stos nie jest listą – lepiej, żeby listę miał (kompozycja).",
                 code = "class Stos(list):\n    def poloz(self, x):\n        self.append(x)\n\ns = Stos()\ns.poloz(1)\ns.insert(0, 5)",
             ),
         ),

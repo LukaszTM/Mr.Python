@@ -85,7 +85,7 @@ internal val module50Practice = listOf(
             "1100 & 0110 = 0100 = 4; | daje 14, a ^ daje 10.",
         ),
         tiles(
-            "Zapisz w zmiennej r bity, które są w a albo w b, ale nie w obu",
+            "Zapisz w zmiennej r bity, które są w a albo w b, ale nie w obu (a po lewej stronie operatora)",
             listOf("r", "=", "a", "^", "b"),
             listOf("|", "&"),
             "Tak działa XOR, czyli operator ^.",

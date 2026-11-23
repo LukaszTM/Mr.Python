@@ -26,9 +26,10 @@ internal val module58Intro = lesson(
     explain(
         "Warunki i prawdziwość",
         "`0`, pusty napis i pusta lista są fałszywe, prawie wszystko inne – prawdziwe. " +
-            "W `if/elif` wykonuje się tylko pierwsza pasująca gałąź.",
-        code = "x = 8\nif x > 10:\n    print(\"a\")\nelif x > 5:\n    print(\"b\")\nprint(bool(0), bool([0]))",
-        output = "b\nFalse True",
+            "W `if/elif` wykonuje się tylko pierwsza pasująca gałąź. `x or y` zwraca `x`, gdy jest prawdziwe, " +
+            "a inaczej `y`; `x and y` zwraca `x`, gdy jest fałszywe, a inaczej `y`.",
+        code = "x = 8\nif x > 10:\n    print(\"a\")\nelif x > 5:\n    print(\"b\")\nprint(bool(0), bool([0]))\nprint(0 or \"brak\", 3 and 5)",
+        output = "b\nFalse True\nbrak 5",
     ),
     explain(
         "Funkcje",

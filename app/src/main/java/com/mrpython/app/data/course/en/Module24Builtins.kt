@@ -148,11 +148,11 @@ internal val module24 = CourseUnit(
             ),
             output("print(int(3.9))\nprint(float(\"2.5\") * 2)", "3\n5.0", "int cuts off the fractional part, it doesn't round."),
             fill(
-                "Fill in the blank to convert the string \"7\" to an integer.",
+                "Fill in the blank to convert the string \"7\" to the number 7 (the program prints 14).",
                 "x = ____(\"7\")\nprint(x * 2)",
                 listOf("int", "str", "len"),
                 "int",
-                "int(\"7\") gives the number 7, so the result is 14.",
+                "int(\"7\") gives the number 7, so the result is 14. With str it would be \"77\", and len(\"7\") is 1.",
             ),
             output(
                 "print(list(\"ab\"), tuple([1, 2]))",

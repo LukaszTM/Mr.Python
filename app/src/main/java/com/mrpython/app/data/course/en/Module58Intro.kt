@@ -29,9 +29,10 @@ internal val module58Intro = lesson(
     explain(
         "Conditions and truthiness",
         "`0`, an empty string and an empty list are falsy; almost everything else is truthy. " +
-            "In `if/elif` only the first matching branch runs.",
-        code = "x = 8\nif x > 10:\n    print(\"a\")\nelif x > 5:\n    print(\"b\")\nprint(bool(0), bool([0]))",
-        output = "b\nFalse True",
+            "In `if/elif` only the first matching branch runs. `x or y` returns `x` if it is truthy, " +
+            "otherwise `y`; `x and y` returns `x` if it is falsy, otherwise `y`.",
+        code = "x = 8\nif x > 10:\n    print(\"a\")\nelif x > 5:\n    print(\"b\")\nprint(bool(0), bool([0]))\nprint(0 or \"none\", 3 and 5)",
+        output = "b\nFalse True\nnone 5",
     ),
     explain(
         "Functions",

@@ -19,9 +19,9 @@ internal val module9 = CourseUnit(
             output("t = (\"a\", \"b\")\nprint(len(t))", "2", "len() działa też na krotkach."),
             choice(
                 "Co się stanie?",
-                listOf("Błąd TypeError – krotki nie można zmieniać", "t zmieni się na (5, 2)", "t zmieni się na (5,)", "Nic"),
+                listOf("Błąd", "t zmieni się na (5, 2)", "t zmieni się na (5,)", "Nic"),
                 0,
-                "Krotka jest niezmienna.",
+                "Krotka jest niezmienna, więc t[0] = 5 kończy się błędem (TypeError).",
                 code = "t = (1, 2)\nt[0] = 5",
             ),
             output("punkt = (3, 4)\nx, y = punkt\nprint(x + y)", "7", "Rozpakowanie przypisuje kolejne elementy do zmiennych."),
@@ -37,9 +37,9 @@ internal val module9 = CourseUnit(
             output("print(3 in {1, 2, 3})", "True", "in sprawdza, czy element należy do zbioru."),
             choice(
                 "Co się stanie?",
-                listOf("Błąd – zbiory nie mają indeksów", "Wypisze 1", "Wypisze {1}", "Wypisze None"),
+                listOf("Błąd", "Wypisze 1", "Wypisze {1}", "Wypisze None"),
                 0,
-                "Zbiór nie ma ustalonej kolejności, więc nie ma indeksów.",
+                "Zbiór nie ma ustalonej kolejności ani indeksów, więc s[0] kończy się błędem.",
                 code = "s = {1, 2, 3}\nprint(s[0])",
             ),
             output("print(sorted({3, 1, 2}))", "[1, 2, 3]", "sorted() zwraca posortowaną listę."),
@@ -69,7 +69,7 @@ internal val module9 = CourseUnit(
                 "Obie lubią lody.",
             ),
             tiles(
-                "Zapisz w zmiennej wspolne część wspólną zbiorów a i b",
+                "Zapisz w zmiennej wspolne część wspólną zbiorów a i b (najpierw a)",
                 listOf("wspolne", "=", "a", "&", "b"),
                 listOf("|", "+"),
                 "& daje elementy obecne w obu zbiorach.",

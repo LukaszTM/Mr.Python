@@ -23,9 +23,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Która nazwa w tym kodzie łamie zasady PEP 8?",
-            listOf("gracz – klasa powinna być w CapWords", "imie – zła nazwa atrybutu", "self – powinno być this", "Żadna"),
+            listOf("gracz", "imie", "self", "Żadna"),
             0,
-            "Klasy nazywamy w stylu CapWords, np. Gracz.",
+            "gracz to nazwa klasy, a klasy nazywamy w stylu CapWords, np. Gracz. Nazwy imie i self są poprawne.",
             code = "class gracz:\n    def __init__(self, imie):\n        self.imie = imie",
         ),
         choice(
@@ -135,9 +135,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Jakimi cudzysłowami zwyczajowo zapisuje się docstring?",
-            listOf("Potrójnymi: \"\"\"...\"\"\"", "Pojedynczym apostrofem", "Znakiem #", "Nawiasami ostrymi"),
+            listOf("Potrójnymi: \"\"\"...\"\"\"", "Pojedynczymi: '...'", "Podwójnymi: \"...\"", "Krzyżykiem: # ..."),
             0,
-            "Potrójne cudzysłowy pozwalają też pisać docstring w wielu liniach.",
+            "Zwyczajowo docstring piszemy w potrójnym cudzysłowie – pozwala on też pisać w wielu liniach. # to komentarz, a nie docstring.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -148,7 +148,7 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Czym docstring różni się od komentarza z #?",
-            listOf("Docstring jest dostępny w programie przez __doc__, komentarz nie", "Komentarz działa szybciej", "Docstring nie może mieć polskich znaków", "Niczym"),
+            listOf("Docstring trafia do __doc__", "Komentarz działa szybciej", "Docstring nie może mieć polskich znaków", "Niczym"),
             0,
             "Python pomija komentarze, a docstring zapamiętuje w obiekcie.",
         ),
@@ -223,7 +223,7 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Co narusza zasadę DRY w tym kodzie?",
-            listOf("To samo .strip().title() powtórzone trzy razy", "Użycie print", "Imiona są za krótkie", "Brak klasy"),
+            listOf("Powtarzane .strip().title()", "Użycie print", "Imiona są za krótkie", "Brak klasy"),
             0,
             "Powtarzaną operację warto wydzielić do funkcji, np. popraw_imie.",
             code = "print(\"ola\".strip().title())\nprint(\"jan \".strip().title())\nprint(\" ewa\".strip().title())",
@@ -316,15 +316,15 @@ internal val module54Practice = listOf(
             "Pusta lista jest fałszywa, więc not lista wystarczy.",
         ),
         choice(
-            "Który zapis jest czytelniejszy i działa tak samo?",
+            "Który zapis jest czytelniejszy i działa tak samo dla każdego koloru?",
             listOf("if kolor in (\"red\", \"green\", \"blue\"):", "if kolor == \"red\" or \"green\" or \"blue\":", "if kolor in \"redgreenblue\":", "if kolor == (\"red\", \"green\", \"blue\"):"),
             0,
-            "in sprawdza przynależność do krotki bez powtarzania kolor ==.",
+            "in sprawdza, czy kolor jest elementem krotki. Wersja z or \"green\" jest zawsze prawdziwa, a in \"redgreenblue\" przepuści też np. \"e\".",
             code = "kolor = \"green\"\nif kolor == \"red\" or kolor == \"green\" or kolor == \"blue\":\n    print(\"RGB\")",
         ),
         choice(
             "Dlaczego stawkę VAT = 0.23 lepiej zapisać jako stałą na początku pliku?",
-            listOf("Gdy stawka się zmieni, poprawiamy ją w jednym miejscu", "Python wymaga stałych na górze pliku", "Program działa wtedy szybciej", "Bo stałych nie można używać w funkcjach"),
+            listOf("Zmianę stawki robimy w jednym miejscu", "Python wymaga stałych na górze pliku", "Program działa wtedy szybciej", "Bo stałych nie można używać w funkcjach"),
             0,
             "Stała to jedno źródło prawdy dla całego programu.",
         ),
@@ -412,9 +412,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Jak najlepiej uprościć tę funkcję?",
-            listOf("Najpierw obsłużyć przypadki specjalne wczesnym return", "Dodać kolejny zagnieżdżony if", "Zmienić nazwę x na X", "Usunąć return 0"),
+            listOf("Użyć wczesnego return", "Dodać kolejny zagnieżdżony if", "Zmienić nazwę x na X", "Usunąć return 0"),
             0,
-            "Wczesne wyjście spłaszcza zagnieżdżone warunki.",
+            "Wczesne wyjście (if x is None: return 0) obsługuje przypadek specjalny na początku i spłaszcza zagnieżdżone warunki.",
             code = "def f(x):\n    if x is not None:\n        if x > 0:\n            return x * 2\n    return 0",
         ),
         fill(

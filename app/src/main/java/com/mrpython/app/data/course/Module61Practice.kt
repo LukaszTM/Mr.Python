@@ -52,7 +52,7 @@ internal val module61Practice = listOf(
         ),
         choice(
             "Która instrukcja zamienia wartości zmiennych a i b?",
-            listOf("a, b = b, a", "a = b; b = a", "a = b, a", "swap(a, b)"),
+            listOf("a, b = b, a", "a = b; b = a", "a = b, a", "a, b = a, b"),
             0,
             "Krotka po prawej powstaje przed przypisaniem.",
         ),
@@ -245,7 +245,7 @@ internal val module61Practice = listOf(
         ),
         choice(
             "Która linia poprawnie sprawdza, czy x jest różne od 0?",
-            listOf("if x != 0:", "if x <> 0:", "if x =! 0:", "if not x = 0:"),
+            listOf("if x != 0:", "if x not 0:", "if x =! 0:", "if not x = 0:"),
             0,
             "Operator „różne od” to !=.",
         ),

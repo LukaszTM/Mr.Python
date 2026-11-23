@@ -51,9 +51,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("AttributeError – atrybut cale ma ekran, a nie telefon", "Wypisze 6", "Wypisze None", "Wypisze 0"),
+            listOf("AttributeError", "Wypisze 6", "Wypisze None", "Wypisze 0"),
             0,
-            "Do cali trzeba dojść przez część: t.ekran.cale.",
+            "Atrybut cale ma ekran, a nie telefon – trzeba dojść przez część: t.ekran.cale.",
             code = "class Ekran:\n    def __init__(self):\n        self.cale = 6\n\nclass Telefon:\n    def __init__(self):\n        self.ekran = Ekran()\n\nt = Telefon()\nprint(t.cale)",
         ),
         choice(
@@ -133,9 +133,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("AttributeError – Pokoj nie ma metody wlacz", "Wypisze świeci", "Wypisze None", "SyntaxError"),
+            listOf("AttributeError", "Wypisze świeci", "Wypisze None", "SyntaxError"),
             0,
-            "Metodę wlacz ma lampa, więc trzeba ją wywołać przez atrybut lampa.",
+            "Pokoj nie ma metody wlacz – ma ją lampa, więc trzeba napisać Pokoj().lampa.wlacz().",
             code = "class Lampa:\n    def wlacz(self):\n        return \"świeci\"\n\nclass Pokoj:\n    def __init__(self):\n        self.lampa = Lampa()\n\nprint(Pokoj().wlacz())",
         ),
         choice(
@@ -229,9 +229,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "Jaki jest problem z tym projektem?",
-            listOf("Auto nie jest silnikiem – powinno mieć silnik jako atrybut", "Auto nie może mieć metody start", "Silnik bez __init__ to błąd", "Nie ma żadnego problemu"),
+            listOf("Auto nie jest silnikiem, tylko go ma", "Auto nie może mieć metody start", "Silnik bez __init__ to błąd", "Nie ma żadnego problemu"),
             0,
-            "Między autem a silnikiem jest relacja „ma”, więc pasuje kompozycja.",
+            "Między autem a silnikiem jest relacja „ma”, więc silnik powinien być atrybutem auta (kompozycja).",
             code = "class Silnik:\n    def start(self):\n        return \"brum\"\n\nclass Auto(Silnik):\n    pass",
         ),
         choice(

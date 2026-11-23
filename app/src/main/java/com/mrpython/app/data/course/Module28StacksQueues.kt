@@ -44,9 +44,9 @@ internal val module28 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("IndexError – stos jest pusty", "Zwróci None", "Zwróci 0", "Nic"),
+                listOf("IndexError", "Zwróci None", "Zwróci 0", "Nic się nie stanie"),
                 0,
-                "Z pustej listy nie da się nic zdjąć.",
+                "Stos jest pusty, a pop() na pustej liście zgłasza IndexError.",
                 code = "stos = []\nstos.pop()",
             ),
             tiles(
@@ -77,10 +77,10 @@ internal val module28 = CourseUnit(
             choice(
                 "Dlaczego do kolejki lepiej użyć deque niż listy z pop(0)?",
                 listOf(
-                    "popleft() jest O(1), a pop(0) na liście jest O(n)",
-                    "Lista nie ma metody pop",
-                    "deque sortuje elementy",
-                    "deque nie pozwala dodawać elementów",
+                    "popleft() działa w O(1), a pop(0) na liście w O(n)",
+                    "pop(0) działa w O(1), a popleft() na deque w O(n)",
+                    "Lista nie ma metody pop(0), a deque ma popleft()",
+                    "deque sama sortuje elementy w kolejce rosnąco",
                 ),
                 0,
                 "pop(0) przesuwa wszystkie pozostałe elementy listy.",
@@ -105,7 +105,7 @@ internal val module28 = CourseUnit(
             tiles(
                 "Zaimportuj deque z modułu collections",
                 listOf("from", "collections", "import", "deque"),
-                listOf("deque.collections", "include"),
+                listOf("deque.collections", "Deque"),
                 "from moduł import nazwa.",
             ),
         ),
@@ -118,7 +118,7 @@ internal val module28 = CourseUnit(
             ),
             choice(
                 "Dlaczego sam licznik nie wystarczy dla napisu „)(”?",
-                listOf("Licznik da 0, a nawiasy są źle ułożone", "Licznik zgłosi błąd", "Licznik da 2", "Bo napis „)(” jest poprawny"),
+                listOf("Licznik da 0, choć nawiasy są źle ułożone", "Licznik zgłosi błąd przy pierwszym „)”", "Licznik da 2, bo są dwa nawiasy", "Licznik da -1, bo napis zaczyna się od „)”"),
                 0,
                 "Liczba się zgadza, ale nawias zamyka się, zanim został otwarty.",
             ),
@@ -147,13 +147,13 @@ internal val module28 = CourseUnit(
             choice(
                 "Kiedy napis z nawiasami jest poprawny?",
                 listOf(
-                    "Gdy każdy zamykający pasuje do ostatnio otwartego, a na końcu stos jest pusty",
-                    "Gdy ma parzystą liczbę znaków",
-                    "Gdy zaczyna się od „(”",
-                    "Gdy liczba „(” jest równa liczbie „)”",
+                    "Gdy każdy zamykający pasuje do ostatnio otwartego i na końcu stos jest pusty",
+                    "Gdy każdy zamykający pasuje do pierwszego otwartego i na końcu stos jest pusty",
+                    "Gdy liczba „(” jest równa liczbie „)”, a napis zaczyna się od „(”",
+                    "Gdy napis ma parzystą liczbę znaków i kończy się nawiasem „)”",
                 ),
                 0,
-                "Trzeba sprawdzić i kolejność, i to, czy nic nie zostało otwarte.",
+                "Trzeba sprawdzić i kolejność (zamykamy ostatnio otwarty, czyli szczyt stosu), i to, czy nic nie zostało otwarte.",
             ),
             tiles(
                 "Zapisz w zmiennej poprawny, czy stos jest pusty",

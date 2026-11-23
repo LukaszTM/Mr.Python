@@ -6,7 +6,8 @@ internal val module10Intro = lesson(
         "Rodzaje błędów",
         "Gdy coś pójdzie nie tak, Python zgłasza błąd (wyjątek) i zatrzymuje program. Nazwa mówi, " +
             "co się stało: `ValueError` – zła wartość, np. `int(\"abc\")`; `ZeroDivisionError` – dzielenie " +
-            "przez zero; `TypeError` – zły typ, np. `\"a\" + 1`; `IndexError`, `KeyError`, `NameError`.",
+            "przez zero; `TypeError` – zły typ, np. `\"a\" + 1`; `IndexError` – indeks spoza listy; " +
+            "`KeyError` – brak klucza w słowniku; `NameError` – nieznana nazwa.",
     ),
     explain(
         "try i except",

@@ -45,9 +45,9 @@ internal val module28 = CourseUnit(
             ),
             choice(
                 "What will happen?",
-                listOf("IndexError – the stack is empty", "It returns None", "It returns 0", "Nothing"),
+                listOf("IndexError", "It returns None", "It returns 0", "Nothing happens"),
                 0,
-                "You can't remove anything from an empty list.",
+                "The stack is empty, and pop() on an empty list raises IndexError.",
                 code = "stack = []\nstack.pop()",
             ),
             tiles(
@@ -78,10 +78,10 @@ internal val module28 = CourseUnit(
             choice(
                 "Why is deque a better choice for a queue than a list with pop(0)?",
                 listOf(
-                    "popleft() is O(1), while pop(0) on a list is O(n)",
-                    "A list has no pop method",
-                    "deque sorts the elements",
-                    "deque doesn't let you add elements",
+                    "popleft() runs in O(1), while pop(0) on a list is O(n)",
+                    "pop(0) runs in O(1), while popleft() on a deque is O(n)",
+                    "A list has no pop(0) method, but a deque has popleft()",
+                    "A deque sorts the queued elements in ascending order",
                 ),
                 0,
                 "pop(0) shifts all the other elements of the list.",
@@ -106,7 +106,7 @@ internal val module28 = CourseUnit(
             tiles(
                 "Import deque from the collections module",
                 listOf("from", "collections", "import", "deque"),
-                listOf("deque.collections", "include"),
+                listOf("deque.collections", "Deque"),
                 "from module import name.",
             ),
         ),
@@ -119,7 +119,7 @@ internal val module28 = CourseUnit(
             ),
             choice(
                 "Why isn't a counter alone enough for the string \")(\"?",
-                listOf("The counter gives 0, but the brackets are in the wrong order", "The counter raises an error", "The counter gives 2", "Because the string \")(\" is valid"),
+                listOf("The counter gives 0, but the brackets are in the wrong order", "The counter raises an error at the first \")\"", "The counter gives 2, because there are two brackets", "The counter gives -1, because the string starts with \")\""),
                 0,
                 "The count matches, but a bracket closes before it was opened.",
             ),
@@ -148,13 +148,13 @@ internal val module28 = CourseUnit(
             choice(
                 "When is a string of brackets valid?",
                 listOf(
-                    "When every closing bracket matches the most recently opened one and the stack is empty at the end",
-                    "When it has an even number of characters",
-                    "When it starts with \"(\"",
-                    "When the number of \"(\" equals the number of \")\"",
+                    "When every closing bracket matches the most recently opened one and the stack ends up empty",
+                    "When every closing bracket matches the first opened one and the stack ends up empty",
+                    "When the number of \"(\" equals the number of \")\" and the string starts with \"(\"",
+                    "When the string has an even number of characters and ends with \")\"",
                 ),
                 0,
-                "You have to check both the order and that nothing is left open.",
+                "You have to check both the order (a closing bracket closes the most recently opened one, the top of the stack) and that nothing is left open.",
             ),
             tiles(
                 "Store in the variable valid whether the stack is empty",

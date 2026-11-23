@@ -42,13 +42,13 @@ internal val module49 = CourseUnit(
             choice(
                 "Dlaczego 0.1 + 0.2 nie daje dokładnie 0.3?",
                 listOf(
-                    "Komputer zapisuje float binarnie i 0.1 nie ma dokładnej reprezentacji",
-                    "To błąd w Pythonie",
+                    "0.1 nie ma dokładnego zapisu dwójkowego",
+                    "To błąd w działaniu Pythona",
                     "Python zaokrągla w górę każde dodawanie",
                     "0.1 jest za małe dla typu float",
                 ),
                 0,
-                "Ułamki dziesiętne jak 0.1 w systemie dwójkowym są nieskończone.",
+                "Komputer zapisuje float dwójkowo, a ułamek 0.1 w systemie dwójkowym jest nieskończony.",
             ),
         ),
         lesson(
@@ -94,13 +94,13 @@ internal val module49 = CourseUnit(
             choice(
                 "Dlaczego Decimal tworzymy z napisu, np. Decimal(\"0.1\"), a nie Decimal(0.1)?",
                 listOf(
-                    "float 0.1 już ma błąd, który Decimal przepisze dokładnie",
+                    "Float 0.1 ma już błąd",
                     "Decimal nie przyjmuje liczb",
                     "Napis jest szybszy",
                     "Nie ma różnicy",
                 ),
                 0,
-                "Decimal(0.1) da długą liczbę 0.1000000000000000055511…",
+                "Float 0.1 ma już błąd, który Decimal(0.1) przepisze dokładnie: 0.1000000000000000055511…",
             ),
             output(
                 "from decimal import Decimal, ROUND_HALF_UP\nx = Decimal(\"2.675\")\nprint(x.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP))",
@@ -154,7 +154,7 @@ internal val module49 = CourseUnit(
                 "print(int(\"1A\", ____))",
                 listOf("16", "2", "10"),
                 "16",
-                "Litera A istnieje tylko w systemie szesnastkowym; dla 2 i 10 będzie ValueError.",
+                "Spośród tych podstaw tylko w systemie szesnastkowym A jest cyfrą (10); dla 2 i 10 będzie ValueError.",
             ),
         ),
         lesson(
@@ -178,7 +178,7 @@ internal val module49 = CourseUnit(
             output("print(int(\"777\", 8))", "511", "7·64 + 7·8 + 7 = 511."),
             choice(
                 "Który typ wybrać do kwot pieniężnych, by uniknąć błędów zaokrągleń?",
-                listOf("Decimal", "float", "complex", "bool"),
+                listOf("Decimal", "float", "str", "bool"),
                 0,
                 "Decimal liczy dokładnie w systemie dziesiętnym.",
             ),

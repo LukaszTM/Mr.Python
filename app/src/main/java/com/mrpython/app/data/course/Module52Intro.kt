@@ -50,7 +50,7 @@ internal val module52Intro = lesson(
         "Pusta lista nie ma pierwszego elementu – to skrajny przypadek.",
     ),
     tiles(
-        "Sprawdź, że długość napisu \"abc\" wynosi 3.",
+        "Sprawdź, że długość napisu \"abc\" wynosi 3 (najpierw sprawdzany wynik, potem oczekiwana wartość).",
         listOf("assert", "len(\"abc\")", "==", "3"),
         listOf("=", "if"),
         "assert z porównaniem == sprawdza oczekiwany wynik.",

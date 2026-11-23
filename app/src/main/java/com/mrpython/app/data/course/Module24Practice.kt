@@ -314,10 +314,10 @@ internal val module24Practice = listOf(
             "Wypisz sumę wartości bezwzględnych liczb z listy a",
             listOf("print(", "sum(", "abs(x) for x in a", "))"),
             listOf("max(", "abs(a)"),
-            "Wyrażenie generatora podaje sum kolejne wartości abs(x).",
+            "Wyrażenie generatorowe podaje do sum() kolejne wartości abs(x).",
         ),
         tiles(
-            "Zapisz w kod kod litery \"Z\"",
+            "Zapisz kod litery \"Z\" w zmiennej kod",
             listOf("kod", "=", "ord(", "\"Z\"", ")"),
             listOf("chr(", "=="),
             "ord zamienia znak na jego kod.",

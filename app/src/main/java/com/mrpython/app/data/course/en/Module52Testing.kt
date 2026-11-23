@@ -17,7 +17,7 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "What happens when the condition in an assert is false?",
-                listOf("An AssertionError is raised", "It prints False", "Nothing, the program keeps running", "The function returns None"),
+                listOf("An AssertionError", "It prints False", "Nothing happens", "The function returns None"),
                 0,
                 "A false condition in an assert raises an AssertionError exception.",
             ),
@@ -46,9 +46,9 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Why will this assert never raise an error?",
-                listOf("The parentheses make a tuple, and a non-empty tuple is always truthy", "Because x is negative", "Because the message is a string", "Because assert only works inside functions"),
+                listOf("Because the parentheses make a tuple", "Because x is negative", "Because the message is a string", "Because assert only works inside functions"),
                 0,
-                "assert (condition, text) checks a tuple – don't put parentheses after assert.",
+                "assert (condition, text) checks a tuple, and a non-empty tuple is always truthy – don't put parentheses after assert.",
                 code = "x = -5\nassert(x > 0, \"negative\")\nprint(\"passed\")",
             ),
             output(
@@ -88,7 +88,7 @@ internal val module52 = CourseUnit(
                 "A list of (input, expected result) pairs lets you check many cases in a loop.",
             ),
             tiles(
-                "Check that the length of the string \"cat\" is 3.",
+                "Check that the length of the string \"cat\" is 3 (the checked result first, then the expected value).",
                 listOf("assert", "len(\"cat\")", "==", "3"),
                 listOf("=", "return"),
                 "assert with an == comparison checks the expected result.",
@@ -100,9 +100,9 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "What should a good test contain?",
-                listOf("Specific input and a known expected result", "Random data with no checks", "Just a function call", "Printing the result to the screen"),
+                listOf("Input and the expected result", "Random data with no checks", "Just a function call", "Printing the result to the screen"),
                 0,
-                "A test compares the result with a value we know in advance.",
+                "A test calls the code with specific input and compares the result with a value we know in advance.",
             ),
         ),
         lesson(
@@ -134,7 +134,7 @@ internal val module52 = CourseUnit(
                 "How do you fix the largest function from the previous exercise?",
                 listOf("Start with result = items[0]", "Start with result = 1", "Change > to <", "Remove the return"),
                 0,
-                "The first element of the list is a good starting point.",
+                "The first element of the list is a good starting point (an empty list then has to be handled separately).",
             ),
             output(
                 "def sign(n):\n    if n > 0:\n        return \"+\"\n    elif n < 0:\n        return \"-\"\n\nprint(sign(5), sign(-2), sign(0))",
@@ -142,16 +142,16 @@ internal val module52 = CourseUnit(
                 "Zero was forgotten – the function returns nothing, so the result is None.",
             ),
             tiles(
-                "Write a test: the factorial of zero should be 1.",
+                "Write a test: the factorial of zero should be 1 (the checked result first, then the expected value).",
                 listOf("assert", "factorial(0)", "==", "1"),
                 listOf("=", "return"),
                 "Zero is a classic edge case for factorial.",
             ),
             choice(
                 "Which inputs are best to test for the function divide(a, b)?",
-                listOf("b = 0, negative numbers, and ordinary numbers", "Only 10 and 2", "Only large numbers", "Any single example is enough"),
+                listOf("Various, including b = 0", "Only 10 and 2", "Only large numbers", "Any single example"),
                 0,
-                "Good tests cover both ordinary cases and edge cases.",
+                "Good tests cover both ordinary cases and edge cases: b = 0, negative numbers, and ordinary numbers.",
             ),
         ),
         lesson(
@@ -176,7 +176,7 @@ internal val module52 = CourseUnit(
                 "unittest runs the methods whose names start with test.",
             ),
             tiles(
-                "Inside a test method, check that add(2, 2) gives 4.",
+                "Inside a test method, check that add(2, 2) gives 4 (the checked result first, then the expected value).",
                 listOf("self.assertEqual(", "add(2, 2)", ",", "4", ")"),
                 listOf("assertTrue(", "="),
                 "assertEqual(a, b) checks whether a == b.",
@@ -207,9 +207,9 @@ internal val module52 = CourseUnit(
             "u52l5", "Review: thinking in tests",
             choice(
                 "What do you start with when working with TDD (test-driven development)?",
-                listOf("Writing a test that doesn't pass yet", "Writing the whole function", "Printing the results", "Deleting old tests"),
+                listOf("Writing a test", "Writing the function", "Printing the results", "Deleting tests"),
                 0,
-                "In TDD the test comes first, and only then the code that satisfies it.",
+                "In TDD the test comes first (it doesn't pass yet), and only then the code that satisfies it.",
             ),
             choice(
                 "What is the order of steps in TDD?",
@@ -235,7 +235,7 @@ internal val module52 = CourseUnit(
                 "The condition is false, so we catch the AssertionError with its message.",
             ),
             tiles(
-                "Write a test: the total of an empty list should be 0.",
+                "Write a test: the total of an empty list should be 0 (the checked result first, then the expected value).",
                 listOf("assert", "total([])", "==", "0"),
                 listOf("return", "!="),
                 "An empty list is an important edge case.",
@@ -247,7 +247,7 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Which assert raises an error?",
-                listOf("The second: len([]) == 1", "The first: upper()", "Neither", "Both"),
+                listOf("The second", "The first", "Neither", "Both"),
                 0,
                 "\"abc\".upper() is \"ABC\", but the length of an empty list is 0, not 1.",
                 code = "assert \"abc\".upper() == \"ABC\"\nassert len([]) == 1\nprint(\"done\")",

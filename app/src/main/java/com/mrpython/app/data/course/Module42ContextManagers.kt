@@ -27,7 +27,7 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "Który kod jest odpowiednikiem with open(\"a.txt\") as f: ...?",
-                listOf("f = open(...), potem try i f.close() w finally", "f = open(...) bez zamykania", "import a.txt", "f = close(open(...))"),
+                listOf("f = open(...), potem try, a w finally f.close()", "f = open(...), potem try, a w except f.close()", "f = open(...) i blok, bez zamykania pliku", "f = open(...), a f.close() przed blokiem"),
                 0,
                 "with to krótszy zapis wzorca try / finally.",
             ),
@@ -74,9 +74,9 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "Ile parametrów (oprócz self) ma metoda __exit__?",
-                listOf("3: typ, wartość i ślad wyjątku", "0", "1: wyjątek", "2: wejście i wyjście"),
+                listOf("3", "0", "1", "2"),
                 0,
-                "Gdy nie było błędu, wszystkie trzy mają wartość None.",
+                "Trzy: typ, wartość i ślad wyjątku. Gdy nie było błędu, wszystkie trzy mają wartość None.",
             ),
             fill(
                 "Uzupełnij, aby x w bloku with był obiektem klasy Zasob.",
@@ -117,9 +117,9 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "Co zrobi ten kod?",
-                listOf("Zgłosi KeyError – suppress tłumi tylko ValueError", "Nic nie wypisze", "Wypisze None", "Stłumi błąd"),
+                listOf("Zgłosi błąd KeyError", "Stłumi błąd i nic nie wypisze", "Wypisze None", "Zgłosi błąd ValueError"),
                 0,
-                "suppress tłumi tylko wymienione typy wyjątków.",
+                "d[\"x\"] zgłasza KeyError, a suppress tłumi tylko wymienione typy – tu ValueError.",
                 code = "from contextlib import suppress\nd = {}\nwith suppress(ValueError):\n    print(d[\"x\"])",
             ),
             output(

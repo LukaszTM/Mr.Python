@@ -26,7 +26,7 @@ internal val module11Intro = lesson(
     explain(
         "Czytelny opis: __str__",
         "Metoda `__str__` zwraca napis, który pokaże `print()` dla obiektu. Bez niej zobaczysz " +
-            "mało czytelny techniczny opis.",
+            "mało czytelny techniczny opis. Tego samego napisu używa też `str(obiekt)`.",
         code = "class Kot:\n    def __init__(self, imie):\n        self.imie = imie\n    def __str__(self):\n        return \"Kot \" + self.imie\nprint(Kot(\"Mruczek\"))",
         output = "Kot Mruczek",
     ),
@@ -39,7 +39,7 @@ internal val module11Intro = lesson(
     ),
     choice(
         "Które słowo kluczowe tworzy klasę?",
-        listOf("class", "def", "object", "new"),
+        listOf("class", "def", "object", "Class"),
         0,
         "Klasy definiujemy słowem class.",
     ),
@@ -51,8 +51,8 @@ internal val module11Intro = lesson(
     fill(
         "Uzupełnij, aby zapisać imię w obiekcie.",
         "class Osoba:\n    def __init__(self, imie):\n        ____.imie = imie\n\no = Osoba(\"Ala\")\nprint(o.imie)",
-        listOf("self", "this", "imie"),
+        listOf("self", "o", "imie"),
         "self",
-        "Dane obiektu zapisujemy przez self.",
+        "Dane obiektu zapisujemy przez self – zmiennej o jeszcze wtedy nie ma.",
     ),
 )

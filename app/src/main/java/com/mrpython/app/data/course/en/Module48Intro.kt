@@ -28,8 +28,9 @@ internal val module48Intro = lesson(
     ),
     explain(
         "Checking characters",
-        "The methods `isdigit()`, `isalpha()`, `isalnum()` and `isupper()` check whether a string consists " +
-            "only of digits, of letters, of letters or digits, or of uppercase letters. A space or a period spoils the result.",
+        "The methods `isdigit()`, `isalpha()` and `isalnum()` check whether a string consists only " +
+            "of digits, of letters, or of letters and digits – a space or a period spoils the result. " +
+            "`isupper()` checks whether all the letters in the string are uppercase.",
         code = "print(\"123\".isdigit(), \"12.5\".isdigit())\nprint(\"gęś\".isalpha(), \"Hi there\".isalpha())",
         output = "True False\nTrue False",
     ),

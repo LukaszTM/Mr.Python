@@ -62,10 +62,10 @@ internal val module29 = CourseUnit(
             choice(
                 "Dlaczego dzielników wystarczy szukać do pierwiastka z n?",
                 listOf(
-                    "Jeśli n = a · b, to jeden z czynników jest nie większy niż pierwiastek z n",
-                    "Bo większych dzielników nie ma",
-                    "Bo liczby pierwsze są małe",
-                    "Bo tak wymaga Python",
+                    "Gdy n = a · b, jeden z czynników nie przekracza pierwiastka z n",
+                    "Liczba n nie ma dzielników większych niż pierwiastek z n",
+                    "Pierwiastek z n jest zawsze liczbą pierwszą",
+                    "Pętla range() nie może sięgać dalej niż pierwiastek z n",
                 ),
                 0,
                 "Gdyby oba czynniki były większe od pierwiastka, ich iloczyn przekroczyłby n.",
@@ -91,9 +91,9 @@ internal val module29 = CourseUnit(
                 "Co robi sito Eratostenesa?",
                 listOf(
                     "Wykreśla wielokrotności kolejnych liczb pierwszych",
-                    "Dzieli każdą liczbę przez 2",
-                    "Losuje liczby pierwsze",
-                    "Sortuje liczby rosnąco",
+                    "Sprawdza każdą liczbę, dzieląc ją przez wszystkie mniejsze",
+                    "Wykreśla liczby, które dają resztę przy dzieleniu przez 2",
+                    "Wypisuje kolejne liczby, które dzielą n bez reszty",
                 ),
                 0,
                 "Co zostanie niewykreślone, jest liczbą pierwszą.",
@@ -173,8 +173,8 @@ internal val module29 = CourseUnit(
                 "Dlaczego wersja iteracyjna Fibonacciego jest szybsza od prostej rekurencji?",
                 listOf(
                     "Każdą liczbę liczy tylko raz",
-                    "Bo pętle zawsze są szybsze od funkcji",
-                    "Bo nie używa dodawania",
+                    "Pętle zawsze są szybsze od funkcji",
+                    "Nie używa dodawania",
                     "Nie jest szybsza",
                 ),
                 0,
@@ -190,7 +190,7 @@ internal val module29 = CourseUnit(
             output(
                 "print(2 ** 10)\nprint(pow(3, 4))\nprint(pow(2, 10, 1000))",
                 "1024\n81\n24",
-                "pow(a, b, m) liczy resztę z a do potęgi b przez m: 1024 % 1000 = 24.",
+                "pow(a, b, m) liczy resztę z dzielenia a ** b przez m: 1024 % 1000 = 24.",
             ),
             output(
                 "def potega_dwojki(n):\n    while n % 2 == 0 and n > 1:\n        n //= 2\n    return n == 1\n\nprint(potega_dwojki(16), potega_dwojki(12))",

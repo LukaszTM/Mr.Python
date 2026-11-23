@@ -87,7 +87,7 @@ internal val module50Practice = listOf(
             "1100 & 0110 = 0100 = 4; | gives 14, and ^ gives 10.",
         ),
         tiles(
-            "Store in the variable r the bits that are in a or in b, but not in both",
+            "Store in the variable r the bits that are in a or in b, but not in both (a on the left of the operator)",
             listOf("r", "=", "a", "^", "b"),
             listOf("|", "&"),
             "That's how XOR, the ^ operator, works.",

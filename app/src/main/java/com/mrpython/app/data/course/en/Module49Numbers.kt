@@ -43,7 +43,7 @@ internal val module49 = CourseUnit(
             choice(
                 "Why doesn't 0.1 + 0.2 give exactly 0.3?",
                 listOf(
-                    "The computer stores floats in binary and 0.1 has no exact representation",
+                    "0.1 has no exact binary form",
                     "It's a bug in Python",
                     "Python rounds every addition up",
                     "0.1 is too small for the float type",
@@ -95,13 +95,13 @@ internal val module49 = CourseUnit(
             choice(
                 "Why do we create a Decimal from a string, e.g. Decimal(\"0.1\"), and not Decimal(0.1)?",
                 listOf(
-                    "The float 0.1 already has an error, which Decimal would copy exactly",
+                    "The float 0.1 already has an error",
                     "Decimal doesn't accept numbers",
                     "A string is faster",
                     "There is no difference",
                 ),
                 0,
-                "Decimal(0.1) gives the long number 0.1000000000000000055511…",
+                "The float 0.1 already has an error, which Decimal(0.1) would copy exactly: 0.1000000000000000055511…",
             ),
             output(
                 "from decimal import Decimal, ROUND_HALF_UP\nx = Decimal(\"2.675\")\nprint(x.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP))",
@@ -155,7 +155,7 @@ internal val module49 = CourseUnit(
                 "print(int(\"1A\", ____))",
                 listOf("16", "2", "10"),
                 "16",
-                "The letter A exists only in the hexadecimal system; for 2 and 10 there will be a ValueError.",
+                "Of these bases, only in hexadecimal is A a digit (10); for 2 and 10 there will be a ValueError.",
             ),
         ),
         lesson(
@@ -179,7 +179,7 @@ internal val module49 = CourseUnit(
             output("print(int(\"777\", 8))", "511", "7·64 + 7·8 + 7 = 511."),
             choice(
                 "Which type should you choose for amounts of money to avoid rounding errors?",
-                listOf("Decimal", "float", "complex", "bool"),
+                listOf("Decimal", "float", "str", "bool"),
                 0,
                 "Decimal calculates exactly in the decimal system.",
             ),

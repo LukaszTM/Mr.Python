@@ -14,7 +14,7 @@ internal val module12Intro = lesson(
     explain(
         "Alignment",
         "The number in the format is the field width. `<` aligns to the left, `>` to the right, and `^` centers. " +
-            "The empty space is filled with spaces or with the character given before the arrow. " +
+            "The empty space is filled with spaces or with the character given before the alignment sign (like `*^5`). " +
             "That's how you make neat tables.",
         code = "print(f\"[{'ok':>5}]\")\nprint(f\"[{'ok':<5}]\")\nprint(f\"{'a':*^5}\")",
         output = "[   ok]\n[ok   ]\n**a**",

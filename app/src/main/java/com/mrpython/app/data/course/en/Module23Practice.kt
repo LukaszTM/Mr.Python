@@ -28,36 +28,36 @@ internal val module23Practice = listOf(
         choice(
             "What does iter(items) return?",
             listOf(
-                "An iterator that hands out the items one by one",
+                "An iterator over the list",
                 "A copy of the list",
                 "The first item of the list",
-                "The number of items",
+                "The number of items in it",
             ),
             0,
-            "We take items from an iterator with the next() function.",
+            "iter() creates an iterator, and we take its items one by one with next().",
         ),
         choice(
             "What happens when you run this code?",
             listOf(
                 "It prints 1 and then raises StopIteration",
-                "It prints 1 and 1",
-                "It prints 1 and None",
-                "It raises IndexError",
+                "It prints 1 and then 1 again",
+                "It prints 1 and then None",
+                "It prints 1 and then raises IndexError",
             ),
             0,
-            "The iterator had only one item.",
+            "The iterator had only one item, so the second next() raises StopIteration, not IndexError.",
             code = "it = iter([1])\nprint(next(it))\nprint(next(it))",
         ),
         choice(
             "What does a for loop do when the iterator runs out?",
             listOf(
-                "It handles StopIteration itself and ends the loop",
-                "It raises a program error",
+                "It simply ends the loop",
+                "It raises StopIteration",
                 "It starts over from the beginning",
                 "It prints None",
             ),
             0,
-            "That's why we never see StopIteration in an ordinary for loop.",
+            "for catches StopIteration itself and ends the loop without an error – that's why we never see it in an ordinary loop.",
         ),
         fill(
             "Fill in the blank so the program prints 8.",
@@ -131,13 +131,13 @@ internal val module23Practice = listOf(
         choice(
             "What does calling a function that contains yield return?",
             listOf(
-                "A generator object – the function's code hasn't run yet",
+                "A generator object",
                 "The value from the first yield",
                 "A list of all the values",
                 "None",
             ),
             0,
-            "The code starts only at the first next().",
+            "The function's code hasn't run yet – it starts only at the first next().",
         ),
         choice(
             "What will this code print?",
@@ -197,9 +197,9 @@ internal val module23Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – a generator can't be indexed", "It prints 1", "It prints 0", "It prints [1]"),
+            listOf("It raises TypeError", "It prints the number 1", "It prints the number 0", "It prints the list [1]"),
             0,
-            "A generator doesn't store values, so there is no g[0].",
+            "A generator doesn't store values, so it can't be indexed – g[0] is a TypeError.",
             code = "g = (x for x in [1, 2, 3])\nprint(g[0])",
         ),
         choice(
@@ -280,13 +280,13 @@ internal val module23Practice = listOf(
         choice(
             "What does it mean that a generator is lazy?",
             listOf(
-                "It computes the next value only when it is needed",
+                "It computes values only on demand",
                 "It runs slower than a list",
                 "It computes all the values right away",
                 "It stops after 10 values",
             ),
             0,
-            "Thanks to that it can even be infinite.",
+            "The next value is computed only at next() – thanks to that a generator can even be infinite.",
         ),
         choice(
             "What will this code print?",
@@ -297,9 +297,9 @@ internal val module23Practice = listOf(
         ),
         choice(
             "How do you safely take 5 values from an infinite generator g?",
-            listOf("[next(g) for _ in range(5)]", "list(g)", "list(g)[:5]", "g[:5]"),
+            listOf("[next(g) for _ in range(5)]", "[list(g) for _ in range(5)]", "[g[i] for i in range(5)]", "list(g)[:5]"),
             0,
-            "list(g) would try to take infinitely many values.",
+            "list(g) would try to take infinitely many values, and g[i] is a TypeError – next() is the way.",
         ),
         fill(
             "Fill in the blank to make the generator infinite.",

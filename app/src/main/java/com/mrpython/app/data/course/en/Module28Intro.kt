@@ -20,7 +20,7 @@ internal val module28Intro = lesson(
     ),
     explain(
         "Queue (FIFO) with deque",
-        "A queue works like a checkout line: first come, first out (FIFO). We use `deque` from the " +
+        "A queue works like a checkout line: whoever comes first leaves first – first in, first out (FIFO). We use `deque` from the " +
             "`collections` module: `append()` adds to the end, `popleft()` takes from the front in `O(1)`.",
         code = "from collections import deque\nq = deque([\"Amy\", \"Jon\"])\nq.append(\"Eve\")\nprint(q.popleft())",
         output = "Amy",

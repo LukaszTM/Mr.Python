@@ -131,7 +131,7 @@ internal val module22 = CourseUnit(
                     "Niczym",
                 ),
                 0,
-                "sorted działa na każdej sekwencji i niczego nie zmienia.",
+                "sorted tworzy nową listę i nie rusza oryginału, a sort() zmienia samą listę i zwraca None.",
             ),
             fill(
                 "Uzupełnij, aby posortować malejąco.",

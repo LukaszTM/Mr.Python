@@ -53,9 +53,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – the screen has the inches attribute, not the phone", "It prints 6", "It prints None", "It prints 0"),
+            listOf("AttributeError", "It prints 6", "It prints None", "It prints 0"),
             0,
-            "You have to reach inches through the part: t.screen.inches.",
+            "The screen has the inches attribute, not the phone – you have to reach it through the part: t.screen.inches.",
             code = "class Screen:\n    def __init__(self):\n        self.inches = 6\n\nclass Phone:\n    def __init__(self):\n        self.screen = Screen()\n\nt = Phone()\nprint(t.inches)",
         ),
         choice(
@@ -79,7 +79,7 @@ internal val module37Practice = listOf(
             "We go through the disks list, which is an attribute of the computer.",
         ),
         tiles(
-            "Read the power of the engine of the car car and save it in the variable p",
+            "Read the engine power of the car stored in car and save it in the variable p",
             listOf("p", "=", "car.engine", ".power"),
             listOf("Engine", ".start()"),
             "We reach the power through the engine object.",
@@ -135,9 +135,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – Room has no turn_on method", "It prints shining", "It prints None", "SyntaxError"),
+            listOf("AttributeError", "It prints shining", "It prints None", "SyntaxError"),
             0,
-            "The lamp has the turn_on method, so you have to call it through the lamp attribute.",
+            "Room has no turn_on method – the lamp has it, so you have to write Room().lamp.turn_on().",
             code = "class Lamp:\n    def turn_on(self):\n        return \"shining\"\n\nclass Room:\n    def __init__(self):\n        self.lamp = Lamp()\n\nprint(Room().turn_on())",
         ),
         choice(
@@ -231,9 +231,9 @@ internal val module37Practice = listOf(
         ),
         choice(
             "What is the problem with this design?",
-            listOf("A car is not an engine – it should have an engine as an attribute", "Car can't have a start method", "An Engine without __init__ is an error", "There is no problem"),
+            listOf("A car isn't an engine, it has one", "Car can't have a start method", "An Engine without __init__ is an error", "There is no problem"),
             0,
-            "Between a car and an engine there is a \"has a\" relationship, so composition fits.",
+            "Between a car and an engine there is a \"has a\" relationship, so the engine should be an attribute of the car (composition).",
             code = "class Engine:\n    def start(self):\n        return \"vroom\"\n\nclass Car(Engine):\n    pass",
         ),
         choice(

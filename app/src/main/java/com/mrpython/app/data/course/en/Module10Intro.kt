@@ -8,7 +8,8 @@ internal val module10Intro = lesson(
         "Kinds of errors",
         "When something goes wrong, Python raises an error (an exception) and stops the program. The name " +
             "tells you what happened: `ValueError` – a bad value, like `int(\"abc\")`; `ZeroDivisionError` – " +
-            "division by zero; `TypeError` – the wrong type, like `\"a\" + 1`; `IndexError`, `KeyError`, `NameError`.",
+            "division by zero; `TypeError` – the wrong type, like `\"a\" + 1`; `IndexError` – an index outside the list; " +
+            "`KeyError` – a missing dictionary key; `NameError` – an unknown name.",
     ),
     explain(
         "try and except",

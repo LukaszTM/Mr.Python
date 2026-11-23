@@ -25,8 +25,9 @@ internal val module48Intro = lesson(
     ),
     explain(
         "Sprawdzanie znaków",
-        "Metody `isdigit()`, `isalpha()`, `isalnum()` i `isupper()` sprawdzają, czy napis składa " +
-            "się tylko z cyfr, liter, liter lub cyfr albo wielkich liter. Spacja i kropka psują wynik.",
+        "Metody `isdigit()`, `isalpha()` i `isalnum()` sprawdzają, czy napis składa się tylko " +
+            "z cyfr, z liter albo z liter i cyfr – spacja czy kropka psuje wynik. `isupper()` sprawdza, " +
+            "czy wszystkie litery napisu są wielkie.",
         code = "print(\"123\".isdigit(), \"12.5\".isdigit())\nprint(\"gęś\".isalpha(), \"Ala ma\".isalpha())",
         output = "True False\nTrue False",
     ),

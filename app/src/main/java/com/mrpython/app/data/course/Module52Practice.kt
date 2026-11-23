@@ -33,9 +33,9 @@ internal val module52Practice = listOf(
         output("print(\"start\")\nassert 2 > 1\nprint(\"koniec\")", "start\nkoniec", "Udany assert niczego nie wypisuje."),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("Wypisze A, a potem zgłosi AssertionError", "Wypisze A i B", "Wypisze tylko B", "Nic nie wypisze"),
+            listOf("A, potem AssertionError", "Wypisze A i B", "Wypisze tylko B", "Nic nie wypisze"),
             0,
-            "Pierwszy print wykona się, ale assert False przerywa program.",
+            "Pierwszy print wypisze A, ale assert False zgłasza AssertionError i przerywa program.",
             code = "print(\"A\")\nassert False\nprint(\"B\")",
         ),
         choice(
@@ -45,7 +45,7 @@ internal val module52Practice = listOf(
             "Fałszywy warunek w assert zawsze daje AssertionError.",
         ),
         choice(
-            "Który zapis assert jest poprawny?",
+            "Który assert naprawdę sprawdza, że x > 0, i ma komunikat \"ujemne\"?",
             listOf("assert x > 0, \"ujemne\"", "assert(x > 0, \"ujemne\")", "assert x > 0: \"ujemne\"", "assert x > 0 else \"ujemne\""),
             0,
             "Po assert piszemy warunek, przecinek i komunikat – bez nawiasów.",
@@ -117,13 +117,13 @@ internal val module52Practice = listOf(
         choice(
             "Po co pisać funkcje testujące zamiast sprawdzać wyniki „na oko”?",
             listOf(
-                "Można je uruchamiać wiele razy i od razu widać, co się zepsuło",
-                "Sprawiają, że program działa szybciej",
-                "Python wymaga ich do uruchomienia programu",
+                "Można je łatwo powtarzać",
+                "Program działa szybciej",
+                "Python wymaga ich do działania",
                 "Zastępują pisanie funkcji",
             ),
             0,
-            "Automatyczne testy szybko wykrywają błędy po każdej zmianie.",
+            "Testy można uruchamiać wiele razy i od razu widać, co się zepsuło – szybko wykrywają błędy po każdej zmianie.",
         ),
         choice(
             "Która nazwa najlepiej pasuje do funkcji testującej funkcję srednia?",
@@ -210,13 +210,13 @@ internal val module52Practice = listOf(
         ),
         choice(
             "Który zestaw danych najlepiej przetestuje funkcję zwracającą długość napisu?",
-            listOf("Pusty napis, jeden znak i dłuższy napis", "Tylko \"kot\"", "Tylko bardzo długi napis", "Dwa napisy tej samej długości"),
+            listOf("Pusty, krótki i długi napis", "Tylko napis \"kot\"", "Tylko bardzo długi napis", "Dwa napisy tej samej długości"),
             0,
-            "Dobre testy łączą zwykłe dane z przypadkami skrajnymi.",
+            "Dobre testy łączą zwykłe dane z przypadkami skrajnymi, takimi jak pusty napis albo jeden znak.",
         ),
         choice(
             "Funkcja daje zniżkę od kwoty 100 zł. Którą kwotę koniecznie przetestować?",
-            listOf("Dokładnie 100", "50", "300", "1000"),
+            listOf("100", "50", "300", "1000"),
             0,
             "Wartość na granicy najczęściej ujawnia błąd > zamiast >=.",
         ),
@@ -235,7 +235,7 @@ internal val module52Practice = listOf(
             "not s jest prawdziwe dla pustego napisu; pozostałe warunki prowadzą do IndexError.",
         ),
         tiles(
-            "Napisz test: maksimum listy [-3, -1] ma wynosić -1",
+            "Napisz test: maksimum listy [-3, -1] ma wynosić -1 (najpierw sprawdzany wynik, potem oczekiwana wartość)",
             listOf("assert", "maks([-3, -1])", "==", "-1"),
             listOf("=", "0"),
             "Lista samych liczb ujemnych to dobry przypadek brzegowy.",
@@ -342,9 +342,9 @@ internal val module52Practice = listOf(
         "u52l5",
         choice(
             "Co oznacza „czerwony” etap w TDD?",
-            listOf("Napisany test na razie nie przechodzi", "Kod ma błąd składni", "Wszystkie testy przeszły", "Usuwamy testy"),
+            listOf("Test nie przechodzi", "Kod ma błąd składni", "Wszystkie testy przeszły", "Usuwamy testy"),
             0,
-            "Najpierw test nie przechodzi, bo kodu jeszcze nie ma.",
+            "Napisany test na razie nie przechodzi, bo kodu jeszcze nie ma.",
         ),
         choice(
             "Co robisz w etapie refaktoryzacji?",
@@ -420,7 +420,7 @@ internal val module52Practice = listOf(
             "Pusty napis ma długość 0; \"a\" ma 1, a None nie ma długości.",
         ),
         tiles(
-            "Napisz test: odwrócenie napisu \"ab\" ma dać \"ba\"",
+            "Napisz test: odwrócenie napisu \"ab\" ma dać \"ba\" (najpierw sprawdzany wynik, potem oczekiwana wartość)",
             listOf("assert", "odwroc(\"ab\")", "==", "\"ba\""),
             listOf("=", "\"ab\""),
             "assert porównuje wynik funkcji z oczekiwaną wartością.",

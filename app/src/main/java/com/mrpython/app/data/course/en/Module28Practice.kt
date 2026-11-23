@@ -240,10 +240,10 @@ internal val module28Practice = listOf(
         choice(
             "What does an empty stack mean at the moment a closing bracket arrives?",
             listOf(
-                "The bracket closes something that was never opened – an error",
+                "An error: the bracket has no match",
                 "Everything is fine",
-                "The bracket has to be added to the stack",
-                "The string has ended",
+                "It has to be pushed onto the stack",
+                "The string has just ended",
             ),
             0,
             "There is no open bracket it could match.",
@@ -333,7 +333,7 @@ internal val module28Practice = listOf(
         choice(
             "How does processing with a queue differ from processing with a stack?",
             listOf(
-                "A queue goes breadth-first (level by level), a stack goes depth-first",
+                "A queue goes breadth-first, a stack goes depth-first",
                 "A queue goes depth-first, a stack goes breadth-first",
                 "There is no difference",
                 "A stack processes elements randomly",
@@ -430,9 +430,9 @@ internal val module28Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("IndexError – the queue is empty", "It returns None", "It returns 0", "Nothing happens"),
+            listOf("IndexError", "It returns None", "It returns 0", "Nothing happens"),
             0,
-            "You can't remove an element from an empty queue.",
+            "The queue is empty, and popleft() on an empty deque raises IndexError.",
             code = "from collections import deque\nq = deque()\nq.popleft()",
         ),
         fill(

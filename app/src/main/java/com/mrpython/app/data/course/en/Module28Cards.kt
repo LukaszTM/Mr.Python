@@ -25,7 +25,7 @@ internal val module28Cards = listOf(
         explain(
             "A deque is like a list",
             "`q[0]` is the front of the queue, and `q[-1]` is its end. `len(q)`, a `while q:` loop, " +
-                "and `list(q)`, which shows the contents as a regular list, work too.",
+                "and `list(q)`, which shows the contents as a regular list, work too. Like a list, an empty queue raises `IndexError` on `popleft()`.",
             code = "from collections import deque\nq = deque([1, 2, 3])\nq.append(q.popleft())\nprint(q[0], q[-1], len(q))\nprint(list(q))",
             output = "2 1 3\n[2, 3, 1]",
         ),

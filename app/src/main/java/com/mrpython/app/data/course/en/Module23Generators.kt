@@ -19,7 +19,7 @@ internal val module23 = CourseUnit(
                 "What does next(it) do?",
                 listOf(
                     "Returns the next item of the iterator",
-                    "Returns the first item of the list",
+                    "Always returns the first item of the list",
                     "Rewinds the iterator to the start",
                     "Returns the number of items",
                 ),
@@ -76,13 +76,13 @@ internal val module23 = CourseUnit(
             choice(
                 "How is yield different from return?",
                 listOf(
-                    "yield hands out a value and pauses the function – it can be resumed later",
-                    "yield ends the function for good",
-                    "yield prints the value on the screen",
-                    "There is no difference",
+                    "yield pauses the function, return ends it",
+                    "yield ends the function, return pauses it",
+                    "yield prints the value, return returns it",
+                    "Nothing – they are two names for one thing",
                 ),
                 0,
-                "A generator remembers its state between one value and the next.",
+                "yield hands out a value and pauses the function – the next next() resumes it from that spot. return ends the function.",
             ),
             output(
                 "def squares(n):\n    for i in range(n):\n        yield i * i\n\nprint(list(squares(4)))",
@@ -124,13 +124,13 @@ internal val module23 = CourseUnit(
             choice(
                 "How is (x for x in a) different from [x for x in a]?",
                 listOf(
-                    "A generator doesn't build the whole list at once – it computes on demand",
-                    "Round brackets create a tuple",
-                    "There is no difference",
-                    "A generator works only on numbers",
+                    "Round ones make a generator, not a list",
+                    "Round ones make a tuple, not a list",
+                    "Round ones work only on numbers",
+                    "There is no difference between them",
                 ),
                 0,
-                "A generator saves memory because it doesn't store all the values.",
+                "(x for x in a) is a generator expression, not a tuple: it computes values on demand and doesn't keep the whole list in memory.",
             ),
             output(
                 "words = [\"cat\", \"giraffe\", \"dog\"]\nprint(max(len(w) for w in words))",
@@ -183,13 +183,13 @@ internal val module23 = CourseUnit(
             choice(
                 "What happens after list(g) when g is an infinite generator?",
                 listOf(
-                    "The program never finishes (or runs out of memory)",
+                    "The program never finishes",
                     "A list of 10 items is created",
                     "An empty list is created",
                     "StopIteration is raised",
                 ),
                 0,
-                "list() tries to take all the values, and they never end.",
+                "list() tries to take all the values, and they never end – the program runs until it runs out of memory.",
             ),
             fill(
                 "Complete the stop condition to print only 1, 2, 3.",

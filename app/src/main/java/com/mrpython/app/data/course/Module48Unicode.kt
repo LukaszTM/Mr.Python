@@ -48,13 +48,13 @@ internal val module48 = CourseUnit(
             choice(
                 "Dlaczego sorted() stawia „żaba” za „zebra”, ale też „ćma” za „dom”?",
                 listOf(
-                    "Sortuje według numerów Unicode, a polskie litery mają duże numery",
-                    "Sortuje według długości słów",
-                    "Sortuje losowo",
-                    "Polskie litery są zawsze na końcu z powodu błędu",
+                    "Porównuje kody Unicode znaków",
+                    "Porównuje długości słów",
+                    "Układa słowa losowo",
+                    "Porównuje ostatnie litery",
                 ),
                 0,
-                "Domyślne sortowanie napisów porównuje kody znaków, nie polski alfabet.",
+                "Domyślne sortowanie napisów porównuje kody znaków, nie polski alfabet – a polskie litery mają duże kody.",
             ),
             choice(
                 "Ile znaków ma napis \"źdźbło\" według len()?",
@@ -133,7 +133,7 @@ internal val module48 = CourseUnit(
             "u48l5", "Powtórka: napisy i Unicode",
             output("print(chr(ord(\"x\") + 1))", "y", "Kod x + 1 to kod y."),
             output("print(len(\"ćma\"), len(\"ćma\".encode()))", "3 4", "ć zajmuje 2 bajty, m i a po jednym."),
-            output("print(\"€\".encode())", "b'\\xe2\\x82\\xac'", "Znak euro zajmuje w UTF-8 aż 3 bajty."),
+            output("print(len(\"€\".encode()))", "3", "Znak euro zajmuje w UTF-8 aż 3 bajty."),
             output("print(\"Łódź\".casefold() == \"ŁÓDŹ\".casefold())", "True", "Po casefold() oba napisy są takie same."),
             choice(
                 "Co wypisze ten kod?",

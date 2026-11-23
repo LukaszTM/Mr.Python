@@ -86,7 +86,7 @@ internal val module27Practice = listOf(
             "+= 1 counts every step taken.",
         ),
         tiles(
-            "Write a loop that halves n as long as it is greater than 1",
+            "Write the header of a loop that runs as long as n is greater than 1",
             listOf("while", "n > 1", ":"),
             listOf("for", "n < 1"),
             "A while loop runs as long as the condition is true.",
@@ -173,9 +173,9 @@ internal val module27Practice = listOf(
             "Two nested loops with n iterations each are n · n.",
         ),
         tiles(
-            "Arrange the complexities from slowest to fastest",
+            "Put the four complexities you have learned into the list, from slowest to fastest",
             listOf("orders = [", "\"O(n²)\",", "\"O(n)\",", "\"O(log n)\",", "\"O(1)\"]"),
-            listOf("\"O(n³)\",", "\"O(0)\","),
+            listOf("\"O(1)\",", "\"O(0)\","),
             "Quadratic, linear, logarithmic, and finally constant.",
         ),
         tiles(
@@ -197,18 +197,18 @@ internal val module27Practice = listOf(
             "Why is x in a_list O(n)?",
             listOf(
                 "A list compares x with the elements one by one",
-                "A list is always sorted",
-                "A list turns into a set",
-                "A list counts its length",
+                "A list first sorts all of its elements",
+                "A list first turns itself into a set",
+                "A list first counts its own length",
             ),
             0,
             "In the worst case, all the elements have to be checked.",
         ),
         choice(
             "What does a set NOT provide compared with a list?",
-            listOf("Keeping order and repeats", "A fast in check", "Adding elements", "Removing elements"),
+            listOf("Keeping elements in order", "A fast in check", "Adding elements", "Removing elements"),
             0,
-            "A set stores each element once and has no indexes.",
+            "A set doesn't remember order (it has no indexes) and stores each element only once.",
         ),
         output(
             "items = [2, 4, 6, 8, 10]\ncomparisons = 0\nfor x in items:\n    comparisons += 1\n    if x == 10:\n        break\nprint(comparisons)",
@@ -260,7 +260,7 @@ internal val module27Practice = listOf(
             "A set has the add() method, not append().",
         ),
         choice(
-            "A program checks 10,000 times whether a word is in a language dictionary (100,000 words). How should you store the words?",
+            "A program checks 10,000 times whether a word is in a list of 100,000 valid words. How should you store these words?",
             listOf("In a set", "In a list", "In one long string", "In a tuple"),
             0,
             "Each check in a set is O(1) on average, and in a list it's O(n).",

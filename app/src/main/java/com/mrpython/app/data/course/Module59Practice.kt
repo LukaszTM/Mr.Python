@@ -6,7 +6,7 @@ internal val module59Practice = listOf(
         output(
             "print([x for x in range(10) if x % 3 == 1])",
             "[1, 4, 7]",
-            "Reszta 1 z dzielenia przez 3 mają tylko 1, 4 i 7.",
+            "Resztę 1 z dzielenia przez 3 dają tylko 1, 4 i 7.",
         ),
         output(
             "print([s.upper() for s in [\"ab\", \"c\"] if len(s) > 1])",
@@ -331,9 +331,9 @@ internal val module59Practice = listOf(
         ),
         choice(
             "Co jest niezbędne w każdej funkcji rekurencyjnej?",
-            listOf("Przypadek bazowy, który kończy wywołania", "Pętla while", "Zmienna globalna", "Instrukcja yield"),
+            listOf("Warunek stopu", "Pętla while", "Zmienna globalna", "Instrukcja yield"),
             0,
-            "Bez przypadku bazowego wywołania nigdy by się nie skończyły.",
+            "Warunek stopu kończy łańcuch wywołań – bez niego nigdy by się nie skończyły.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -347,7 +347,7 @@ internal val module59Practice = listOf(
             "def pot(a, n):\n    if n == 0:\n        return 1\n    return a * pot(a, ____)\n\nprint(pot(3, 4))",
             listOf("n - 1", "n", "n + 1"),
             "n - 1",
-            "Każde wywołanie musi zbliżać się do przypadku bazowego n == 0.",
+            "Każde wywołanie musi zbliżać się do warunku stopu n == 0.",
         ),
         fill(
             "Uzupełnij warunek stopu, aby wypisać 6.",

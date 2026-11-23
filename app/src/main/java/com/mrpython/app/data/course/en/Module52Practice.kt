@@ -35,9 +35,9 @@ internal val module52Practice = listOf(
         output("print(\"start\")\nassert 2 > 1\nprint(\"end\")", "start\nend", "A passing assert prints nothing."),
         choice(
             "What happens when you run this code?",
-            listOf("It prints A, then raises an AssertionError", "It prints A and B", "It prints only B", "It prints nothing"),
+            listOf("A, then an AssertionError", "It prints A and B", "It prints only B", "It prints nothing"),
             0,
-            "The first print runs, but assert False stops the program.",
+            "The first print outputs A, but assert False raises an AssertionError and stops the program.",
             code = "print(\"A\")\nassert False\nprint(\"B\")",
         ),
         choice(
@@ -47,7 +47,7 @@ internal val module52Practice = listOf(
             "A false condition in an assert always gives an AssertionError.",
         ),
         choice(
-            "Which assert is written correctly?",
+            "Which assert really checks that x > 0 and has the message \"negative\"?",
             listOf("assert x > 0, \"negative\"", "assert(x > 0, \"negative\")", "assert x > 0: \"negative\"", "assert x > 0 else \"negative\""),
             0,
             "After assert you write the condition, a comma and the message – no parentheses.",
@@ -119,13 +119,13 @@ internal val module52Practice = listOf(
         choice(
             "Why write test functions instead of checking results by eye?",
             listOf(
-                "You can run them many times and see right away what broke",
-                "They make the program run faster",
-                "Python requires them to run a program",
+                "They're easy to rerun",
+                "The program runs faster",
+                "Python requires them",
                 "They replace writing functions",
             ),
             0,
-            "Automated tests quickly catch bugs after every change.",
+            "You can run tests many times and see right away what broke – they quickly catch bugs after every change.",
         ),
         choice(
             "Which name fits best for a function that tests the function average?",
@@ -212,13 +212,13 @@ internal val module52Practice = listOf(
         ),
         choice(
             "Which set of inputs best tests a function that returns the length of a string?",
-            listOf("An empty string, one character, and a longer string", "Only \"cat\"", "Only a very long string", "Two strings of the same length"),
+            listOf("Empty, short and long strings", "Only the string \"cat\"", "Only a very long string", "Two strings of the same length"),
             0,
-            "Good tests combine ordinary inputs with extreme cases.",
+            "Good tests combine ordinary inputs with extreme cases, such as an empty string or a single character.",
         ),
         choice(
             "A function gives a discount starting at \$100. Which amount must you test?",
-            listOf("Exactly 100", "50", "300", "1000"),
+            listOf("100", "50", "300", "1000"),
             0,
             "The boundary value is what most often reveals a > instead of >= bug.",
         ),
@@ -237,7 +237,7 @@ internal val module52Practice = listOf(
             "not s is true for an empty string; the other conditions lead to an IndexError.",
         ),
         tiles(
-            "Write a test: the largest value of the list [-3, -1] should be -1",
+            "Write a test: the largest value of the list [-3, -1] should be -1 (the checked result first, then the expected value)",
             listOf("assert", "largest([-3, -1])", "==", "-1"),
             listOf("=", "0"),
             "A list of only negative numbers is a good edge case.",
@@ -344,9 +344,9 @@ internal val module52Practice = listOf(
         "u52l5",
         choice(
             "What does the “red” stage mean in TDD?",
-            listOf("The test you wrote doesn't pass yet", "The code has a syntax error", "All tests passed", "We delete the tests"),
+            listOf("The test fails", "The code has a syntax error", "All tests passed", "We delete the tests"),
             0,
-            "At first the test fails because the code doesn't exist yet.",
+            "The test you just wrote doesn't pass yet, because the code doesn't exist yet.",
         ),
         choice(
             "What do you do in the refactor stage?",
@@ -422,7 +422,7 @@ internal val module52Practice = listOf(
             "An empty string has length 0; \"a\" has 1, and None has no length.",
         ),
         tiles(
-            "Write a test: reversing the string \"ab\" should give \"ba\"",
+            "Write a test: reversing the string \"ab\" should give \"ba\" (the checked result first, then the expected value)",
             listOf("assert", "reverse(\"ab\")", "==", "\"ba\""),
             listOf("=", "\"ab\""),
             "assert compares the function's result with the expected value.",

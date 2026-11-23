@@ -12,7 +12,8 @@ internal val module53Intro = lesson(
     explain(
         "= czy ==?",
         "`=` przypisuje wartość, a `==` porównuje – w warunku `if` potrzebujesz `==`. Uważaj też na " +
-            "wcięcia: `print` wcięty w pętli wykona się przy każdym obrocie, a bez wcięcia – raz, po pętli.",
+            "wcięcia: `print` wcięty w pętli wykona się przy każdym obrocie, a bez wcięcia – raz, po pętli. Brak wcięcia tam, gdzie jest wymagane (np. pod `if` " +
+            "albo `else:`), daje `IndentationError`.",
         code = "suma = 0\nfor x in [1, 2, 3]:\n    suma += x\nprint(suma == 6)",
         output = "True",
     ),
@@ -32,7 +33,7 @@ internal val module53Intro = lesson(
     ),
     explain(
         "Dzielenie i brakujący return",
-        "`/` daje wynik z ułamkiem, a `//` go obcina – do średniej używaj `/`. A gdy funkcja " +
+        "`/` daje wynik z ułamkiem, a `//` zaokrągla go w dół do liczby całkowitej – do średniej używaj `/`. A gdy funkcja " +
             "zwraca `None`, sprawdź, czy nie brakuje w niej `return`.",
         code = "def podwoj(x):\n    wynik = x * 2\n\nprint(7 / 2, 7 // 2)\nprint(podwoj(5))",
         output = "3.5 3\nNone",
@@ -44,9 +45,9 @@ internal val module53Intro = lesson(
     ),
     choice(
         "Który zapis poprawnie sprawdza, czy x jest równe 5?",
-        listOf("if x == 5:", "if x = 5:", "if x === 5:"),
+        listOf("if x == 5:", "if x = 5:", "if x == 5"),
         0,
-        "Porównanie to ==; = jest przypisaniem, a === nie istnieje w Pythonie.",
+        "Porównanie to ==, a linia z if kończy się dwukropkiem; = jest przypisaniem.",
     ),
     fill(
         "Uzupełnij, aby funkcja oddawała wynik do miejsca wywołania.",

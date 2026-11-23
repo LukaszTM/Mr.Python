@@ -142,7 +142,7 @@ internal val module60Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("UnboundLocalError", "Wypisze 1", "Wypisze 2", "NameError"),
+            listOf("UnboundLocalError", "Wypisze 1", "Wypisze 2", "SyntaxError"),
             0,
             "Przypisanie w funkcji czyni x lokalnym, a print jest przed nim.",
             code = "def f():\n    print(x)\n    x = 2\n\nx = 1\nf()",
@@ -201,7 +201,7 @@ internal val module60Practice = listOf(
         output(
             "x = None\nprint(x is None, x == None, x is not None)",
             "True True False",
-            "None istnieje tylko jedno, więc is i == dają to samo.",
+            "x to właśnie None, więc is None i == None dają True, a is not None – False.",
         ),
         output(
             "a = [1, 2]\nb = list(a)\nb.append(3)\nprint(a, b == a)",

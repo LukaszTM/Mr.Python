@@ -54,7 +54,7 @@ internal val module61Practice = listOf(
         ),
         choice(
             "Which statement swaps the values of the variables a and b?",
-            listOf("a, b = b, a", "a = b; b = a", "a = b, a", "swap(a, b)"),
+            listOf("a, b = b, a", "a = b; b = a", "a = b, a", "a, b = a, b"),
             0,
             "The tuple on the right is created before the assignment.",
         ),
@@ -247,7 +247,7 @@ internal val module61Practice = listOf(
         ),
         choice(
             "Which line correctly checks whether x is not equal to 0?",
-            listOf("if x != 0:", "if x <> 0:", "if x =! 0:", "if not x = 0:"),
+            listOf("if x != 0:", "if x not 0:", "if x =! 0:", "if not x = 0:"),
             0,
             "The \"not equal to\" operator is !=.",
         ),

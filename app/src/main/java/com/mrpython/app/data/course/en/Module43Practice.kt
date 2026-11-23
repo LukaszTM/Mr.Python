@@ -59,8 +59,8 @@ internal val module43Practice = listOf(
             code = "def f():\n    z = 5\nf()\nprint(z)",
         ),
         choice(
-            "What will this code print?",
-            listOf("UnboundLocalError", "3", "4", "None"),
+            "What happens when you run this code?",
+            listOf("An UnboundLocalError", "The global result becomes 4", "A local result equal to 1 is created", "Nothing happens"),
             0,
             "The assignment in the function makes result local, and += first tries to read it.",
             code = "result = 3\ndef f():\n    result += 1\nf()",
@@ -87,7 +87,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Which scope does the letter E in LEGB stand for?",
-            listOf("The enclosing function's scope", "The exception scope", "The file scope", "The built-in scope"),
+            listOf("The enclosing function", "Exception handling", "The whole file", "Built-in names"),
             0,
             "Enclosing is the function inside which the current function was defined.",
         ),
@@ -136,7 +136,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "What happens when you run this?",
-            listOf("SyntaxError – there is no variable n in an enclosing function", "It prints 1", "It prints 0", "It creates a global n"),
+            listOf("A SyntaxError", "It changes the global n to 1", "It creates a local n equal to 1", "An UnboundLocalError"),
             0,
             "nonlocal requires a variable in an enclosing function, not at the module level.",
             code = "n = 0\ndef f():\n    nonlocal n\n    n = 1\nf()",
@@ -169,7 +169,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Where can you use the statement nonlocal x?",
-            listOf("In a nested function, when x exists in an enclosing function", "At the module level", "Anywhere in the program", "Only in a for loop"),
+            listOf("In a nested function, when x exists in an enclosing function", "At the module level, when x is a global variable", "In any function, even when x exists only globally", "Only in a for loop inside a function"),
             0,
             "nonlocal looks for x in enclosing functions – without them it's a SyntaxError.",
         ),
@@ -224,13 +224,13 @@ internal val module43Practice = listOf(
         ),
         choice(
             "What is needed to create a closure?",
-            listOf("An inner function that uses a variable of the outer function", "A class with an __init__ method", "A global variable", "A with statement"),
+            listOf("An inner function that uses a variable of the outer function", "A class with an __init__ method that sets attributes", "A global variable changed with global", "A with block that closes a resource after use"),
             0,
             "The inner function takes along the variables of the scope where it was created.",
         ),
         choice(
-            "What will this code print?",
-            listOf("UnboundLocalError", "1", "0", "None"),
+            "What happens when you run this code?",
+            listOf("An UnboundLocalError", "It prints 1", "It prints 0", "A NameError"),
             0,
             "Without nonlocal, n += 1 treats n as a new local variable with no value.",
             code = "def counter():\n    n = 0\n    def f():\n        n += 1\n        return n\n    return f\nprint(counter()())",
@@ -312,7 +312,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Why does this code print [2, 2, 2]?",
-            listOf("The lambdas read i only when called, when i is already 2", "range(3) returns only twos", "A lambda always returns the last element", "It's a Python bug"),
+            listOf("The lambdas read i only when called, when i is already 2", "range(3) returns only twos here", "A lambda always returns the last element of a list", "The lambdas stored the value of i when they were created"),
             0,
             "A closure remembers the variable, not its value at creation time.",
             code = "fs = [lambda: i for i in range(3)]\nprint([f() for f in fs])",

@@ -86,9 +86,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Jak naprawić kod z poprzedniego zadania, aby wypisał tylko 6?",
-                listOf("Cofnąć wcięcie print, aby był poza pętlą", "Zmienić += na =", "Dodać return", "Zamienić listę na krotkę"),
+                listOf("Cofnąć wcięcie print", "Zmienić += na =", "Dodać return", "Zamienić listę na krotkę"),
                 0,
-                "Kod bez wcięcia wykona się raz, po zakończeniu pętli.",
+                "print bez wcięcia jest poza pętlą, więc wykona się raz, po jej zakończeniu.",
             ),
             output(
                 "def ma_parzysta(lista):\n    for x in lista:\n        if x % 2 == 0:\n            return True\n        return False\n\nprint(ma_parzysta([1, 2]))",
@@ -117,9 +117,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Dlaczego drugie wywołanie dodaj pamięta poprzedni element?",
-                listOf("Domyślna lista powstaje raz, przy definicji funkcji", "append kopiuje listę", "Python zapisuje wyniki funkcji", "Bo x jest globalny"),
+                listOf("Domyślna lista powstaje raz", "append kopiuje listę", "Python zapamiętuje wyniki", "Bo x jest globalny"),
                 0,
-                "Wartość domyślna jest tworzona tylko raz i potem współdzielona.",
+                "Wartość domyślna jest tworzona tylko raz, przy definicji funkcji, i potem współdzielona.",
             ),
             fill(
                 "Popraw funkcję, aby każde wywołanie zaczynało od pustej listy.",
@@ -140,9 +140,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Dlaczego w poprzednim zadaniu liczba 4 została na liście?",
-                listOf("Usuwanie w trakcie pętli przesuwa elementy i pętla pomija następny", "remove usuwa tylko liczby nieparzyste", "4 % 2 nie jest równe 0", "Pętla for nie widzi zmian"),
+                listOf("Pętla przeskoczyła 4", "remove usuwa tylko nieparzyste", "4 % 2 nie jest równe 0", "Pętla for nie widzi zmian"),
                 0,
-                "Nie zmieniaj listy, po której właśnie iterujesz.",
+                "Po usunięciu 2 elementy przesunęły się i pętla przeskoczyła 4. Nie zmieniaj listy, po której właśnie iterujesz.",
             ),
             fill(
                 "Uzupełnij, aby pętla szła po kopii listy i usunęła wszystkie parzyste.",
@@ -166,7 +166,7 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Dlaczego list(\"abc\") w poprzednim zadaniu nie zadziałało?",
-                listOf("Zmienna list przesłoniła wbudowany typ list", "list nie przyjmuje napisów", "Brakuje importu", "Napis jest za krótki"),
+                listOf("Zmienna zasłoniła typ list", "list nie przyjmuje napisów", "Brakuje importu", "Napis jest za krótki"),
                 0,
                 "Własna zmienna o nazwie wbudowanej funkcji ją zasłania.",
             ),
@@ -177,9 +177,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError: 'int' object is not callable", "Wypisze 9", "Wypisze 15", "NameError"),
+                listOf("TypeError", "Wypisze 9", "Wypisze 15", "NameError"),
                 0,
-                "sum to teraz liczba 6, więc nie można jej wywołać jak funkcji.",
+                "sum to teraz liczba 6, więc nie można jej wywołać jak funkcji: 'int' object is not callable.",
                 code = "sum = 0\nfor x in [1, 2, 3]:\n    sum += x\nprint(sum([4, 5]))",
             ),
             fill(
@@ -211,13 +211,13 @@ internal val module53 = CourseUnit(
             output(
                 "print(7 / 2, 7 // 2)",
                 "3.5 3",
-                "/ daje float, a // obcina część ułamkową.",
+                "/ daje float, a // zaokrągla w dół do liczby całkowitej.",
             ),
             choice(
                 "Średnia ocen 4 i 5 powinna wynosić 4.5. Gdzie jest błąd?",
-                listOf("// obcina wynik – trzeba użyć /", "sum nie działa dla list", "len zwraca złą liczbę", "Brakuje round"),
+                listOf("Trzeba / zamiast //", "sum nie działa dla list", "len zwraca złą liczbę", "Brakuje round"),
                 0,
-                "Do średniej potrzebne jest zwykłe dzielenie /.",
+                "// zaokrągla wynik w dół (9 // 2 to 4), a do średniej potrzebne jest zwykłe dzielenie /.",
                 code = "oceny = [4, 5]\nsrednia = sum(oceny) // len(oceny)\nprint(srednia)",
             ),
             output(
@@ -258,15 +258,15 @@ internal val module53 = CourseUnit(
             "u53l6", "Powtórka: debugowanie",
             choice(
                 "Jaki błąd zgłosi ten kod?",
-                listOf("IndexError – zakres jest o jeden za duży", "KeyError", "TypeError", "Żaden"),
+                listOf("IndexError", "KeyError", "TypeError", "Żaden"),
                 0,
-                "Ostatni indeks to 2, a range(4) dochodzi do 3.",
+                "Zakres jest o jeden za duży: ostatni indeks to 2, a range(4) dochodzi do 3.",
                 code = "lista = [1, 2, 3]\nfor i in range(len(lista) + 1):\n    print(lista[i])",
             ),
             output(
                 "def polowa(n):\n    return n // 2\n\nprint(polowa(5))",
                 "2",
-                "// obcina część ułamkową – do połowy 5 potrzebne jest /.",
+                "// zaokrągla w dół, więc 5 // 2 to 2 – do połowy 5 potrzebne jest /.",
             ),
             output(
                 "def maks(a, b):\n    if a > b:\n        return a\n    elif b > a:\n        return b\n\nprint(maks(3, 3))",
@@ -287,9 +287,9 @@ internal val module53 = CourseUnit(
             fill(
                 "Uzupełnij operator, aby sprawdzić hasło.",
                 "haslo = \"tajne\"\nif haslo ____ \"tajne\":\n    print(\"OK\")",
-                listOf("==", "=", "==="),
+                listOf("==", "=", "!="),
                 "==",
-                "W Pythonie porównanie to ==; nie ma operatora ===.",
+                "Równość sprawdza ==; = to przypisanie (SyntaxError w if), a != sprawdza, czy wartości są różne.",
             ),
             tiles(
                 "Napisz nagłówek pętli, która idzie po kopii listy liczby.",
@@ -299,9 +299,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Co najlepiej zrobić najpierw, gdy program daje zły wynik?",
-                listOf("Odtworzyć błąd na małym przykładzie i wypisać wartości zmiennych", "Przepisać cały program od nowa", "Dodać więcej pętli", "Zignorować błąd"),
+                listOf("Wypisać wartości zmiennych", "Przepisać cały program", "Dodać więcej pętli", "Zignorować błąd"),
                 0,
-                "Mały przykład i print (albo debugger) pokazują, gdzie wartości się rozjeżdżają.",
+                "Odtwórz błąd na małym przykładzie i wypisz wartości zmiennych (print albo debugger) – zobaczysz, gdzie się rozjeżdżają.",
             ),
         ),
     ),

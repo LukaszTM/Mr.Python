@@ -44,9 +44,9 @@ internal val module51 = CourseUnit(
             output("s = slice(1, 3)\nprint([10, 20, 30, 40][s])", "[20, 30]", "A slice object is a stored [1:3] slice."),
             choice(
                 "What happens?",
-                listOf("ValueError – the lengths don't match", "x is [0, 1, 0]", "x is [0, 2]", "x is [0, 0, 3]"),
+                listOf("A ValueError", "x is [0, 2, 3]", "x is [0, 2]", "x is [0, 0, 3]"),
                 0,
-                "For a slice with a step, you must provide exactly as many elements as you're replacing.",
+                "The slice x[::2] has two spots (indexes 0 and 2), but only one element was given – the lengths don't match, so you get a ValueError.",
                 code = "x = [1, 2, 3]\nx[::2] = [0]",
             ),
             fill(

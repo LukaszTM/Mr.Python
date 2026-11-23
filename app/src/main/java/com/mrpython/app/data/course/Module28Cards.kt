@@ -23,7 +23,7 @@ internal val module28Cards = listOf(
         explain(
             "deque jak lista",
             "`q[0]` to początek kolejki, a `q[-1]` – jej koniec. Działają też `len(q)`, pętla `while q:` " +
-                "i `list(q)`, który pokazuje zawartość jako zwykłą listę.",
+                "i `list(q)`, który pokazuje zawartość jako zwykłą listę. Jak lista, pusta kolejka przy `popleft()` zgłasza `IndexError`.",
             code = "from collections import deque\nq = deque([1, 2, 3])\nq.append(q.popleft())\nprint(q[0], q[-1], len(q))\nprint(list(q))",
             output = "2 1 3\n[2, 3, 1]",
         ),

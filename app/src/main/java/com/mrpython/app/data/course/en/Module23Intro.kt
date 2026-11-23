@@ -36,7 +36,8 @@ internal val module23Intro = lesson(
     explain(
         "Lazy and infinite",
         "A generator computes the next value only when you ask for it. That's why it can go on forever " +
-            "(`while True`) – you just need to stop the loop in time with `break`.",
+            "(`while True`) – you just need to stop the loop in time with `break` or take a few values with `next()`. " +
+            "In the example, `_` is an ordinary variable name for a value we don't need.",
         code = "def naturals():\n    n = 1\n    while True:\n        yield n\n        n += 1\n\ng = naturals()\nprint([next(g) for _ in range(3)])",
         output = "[1, 2, 3]",
     ),

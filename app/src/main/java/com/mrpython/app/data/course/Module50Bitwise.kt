@@ -55,13 +55,13 @@ internal val module50 = CourseUnit(
             choice(
                 "Czym różni się & od and?",
                 listOf(
-                    "& działa na poszczególnych bitach, and na prawdziwości wartości",
-                    "To to samo",
-                    "& działa tylko na napisach",
-                    "and działa na bitach, & na wartościach logicznych",
+                    "& działa na bitach, and na całych wartościach",
+                    "Nie ma między nimi różnicy",
+                    "& działa tylko na napisach i listach",
+                    "and działa na bitach, & na całych wartościach",
                 ),
                 0,
-                "6 & 3 to 2, a 6 and 3 to 3.",
+                "& liczy bit po bicie, a and patrzy na prawdziwość całych wartości: 6 & 3 to 2, a 6 and 3 to 3.",
             ),
             fill(
                 "Uzupełnij, aby połączyć bity obu liczb (wynik 7).",

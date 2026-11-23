@@ -46,8 +46,8 @@ internal val module36Intro = lesson(
     ),
     choice(
         "Gdzie najlepiej utworzyć listę historii operacji konta?",
-        listOf("W __init__, przez self.historia = []", "Jako atrybut klasy", "W metodzie __str__", "Jako zmienną globalną"),
+        listOf("W metodzie __init__", "Jako atrybut klasy", "W metodzie __str__", "Jako zmienną globalną"),
         0,
-        "Wtedy każde konto ma własną historię.",
+        "Lista utworzona w __init__ przez self.historia = [] należy do jednego konta, więc każde ma własną historię.",
     ),
 )

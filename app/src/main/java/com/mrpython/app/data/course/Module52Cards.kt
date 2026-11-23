@@ -73,7 +73,7 @@ internal val module52Cards = listOf(
             "`TestLoader` zbiera z klasy metody o nazwach zaczynających się od `test`, a `run(w)` zapisuje " +
                 "wyniki w `TestResult`: `testsRun` to liczba testów, `failures` – lista porażek, " +
                 "a `wasSuccessful()` mówi, czy wszystko przeszło.",
-            code = "import unittest\nclass T(unittest.TestCase):\n    def test_a(self): self.assertEqual(1, 2)\nw =unittest.TestResult()\nunittest.TestLoader().loadTestsFromTestCase(T).run(w)\nprint(w.testsRun, len(w.failures), w.wasSuccessful())",
+            code = "import unittest\nclass T(unittest.TestCase):\n    def test_a(self): self.assertEqual(1, 2)\nw = unittest.TestResult()\nunittest.TestLoader().loadTestsFromTestCase(T).run(w)\nprint(w.testsRun, len(w.failures), w.wasSuccessful())",
             output = "1 1 False",
         ),
     ),

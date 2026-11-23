@@ -34,13 +34,13 @@ internal val module51Practice = listOf(
         choice(
             "Dlaczego x[0:3:-1] daje pustą listę?",
             listOf(
-                "Przy ujemnym kroku start musi być większy niż koniec",
+                "Start jest mniejszy niż koniec",
                 "Krok -1 jest niedozwolony",
-                "Lista jest za krótka",
+                "Lista ma za mało elementów",
                 "Wycinki nie działają na listach",
             ),
             0,
-            "Idąc wstecz od 0, nigdy nie dojdziemy do 3.",
+            "Przy ujemnym kroku start musi być większy niż koniec: idąc wstecz od 0, nigdy nie dojdziemy do 3.",
         ),
         fill(
             "Uzupełnij, aby wypisać [6, 4, 2].",
@@ -117,13 +117,13 @@ internal val module51Practice = listOf(
         choice(
             "Co tworzy copy.copy(a) dla listy list a?",
             listOf(
-                "Nową listę zewnętrzną z tymi samymi listami wewnętrznymi",
-                "Całkowicie niezależną kopię",
+                "Płytką kopię",
+                "Głęboką kopię",
                 "Alias tej samej listy",
                 "Pustą listę",
             ),
             0,
-            "To płytka kopia – tylko pierwszy poziom jest nowy.",
+            "To płytka kopia: nowa lista zewnętrzna, ale z tymi samymi listami wewnętrznymi.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -184,7 +184,7 @@ internal val module51Practice = listOf(
             "kajak to palindrom.",
         ),
         fill(
-            "Uzupełnij, aby wyczyścić listę w miejscu (zmianę ma widać też przez b).",
+            "Uzupełnij, aby wyczyścić listę w miejscu (zmiana ma być widoczna też przez b).",
             "a = [1, 2]\nb = a\na____ = []\nprint(b)",
             listOf("[:]", "[0]", "[1]"),
             "[:]",

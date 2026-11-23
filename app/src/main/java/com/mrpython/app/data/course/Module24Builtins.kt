@@ -147,11 +147,11 @@ internal val module24 = CourseUnit(
             ),
             output("print(int(3.9))\nprint(float(\"2.5\") * 2)", "3\n5.0", "int obcina część ułamkową, nie zaokrągla."),
             fill(
-                "Uzupełnij, aby zamienić napis \"7\" na liczbę całkowitą.",
+                "Uzupełnij, aby zamienić napis \"7\" na liczbę 7 (program wypisze 14).",
                 "x = ____(\"7\")\nprint(x * 2)",
                 listOf("int", "str", "len"),
                 "int",
-                "int(\"7\") daje liczbę 7, więc wynik to 14.",
+                "int(\"7\") daje liczbę 7, więc wynik to 14. Z str byłoby \"77\", a len(\"7\") to 1.",
             ),
             output(
                 "print(list(\"ab\"), tuple([1, 2]))",

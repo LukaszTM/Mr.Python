@@ -29,9 +29,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Where is the best place to set an account's starting balance?",
-                listOf("In __init__, through self.balance", "In the deposit method", "As a global variable", "In __str__"),
+                listOf("In the __init__ method", "In the deposit method", "As a global variable", "In the __str__ method"),
                 0,
-                "__init__ prepares the state of every new object.",
+                "__init__ prepares the state of every new object, e.g. self.balance = 0.",
             ),
             output(
                 "class Account:\n    def __init__(self, balance=0):\n        self.balance = balance\n\nprint(Account().balance, Account(200).balance)",
@@ -51,9 +51,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "What's the problem with a deposit method that checks nothing?",
-                listOf("You can deposit a negative amount and lower the balance that way", "You can't deposit twice", "The balance always stays 0", "There is no problem"),
+                listOf("You can deposit a negative amount", "You can't deposit twice", "The balance always stays 0", "There is no problem"),
                 0,
-                "That's why we'll add validation in the next lesson.",
+                "A negative \"deposit\" would lower the balance. That's why we'll add validation in the next lesson.",
             ),
         ),
         lesson(
@@ -101,9 +101,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Why is it better to raise an exception than to just print \"Insufficient funds\"?",
-                listOf("The calling code can decide for itself how to handle the error", "Exceptions are faster than print", "print doesn't work in methods", "Because then the balance fixes itself"),
+                listOf("The calling code decides how to handle it", "Exceptions are faster than print", "print doesn't work in methods", "Because then the balance fixes itself"),
                 0,
-                "An exception tells the calling code that the operation failed.",
+                "An exception tells the calling code that the operation failed, and that code can catch it with try and handle it its own way.",
             ),
         ),
         lesson(
@@ -115,9 +115,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Why do we create history = [] in __init__ and not as a class attribute?",
-                listOf("A class attribute would be one list shared by all accounts", "Class attributes can't be lists", "A list works faster in __init__", "It makes no difference"),
+                listOf("All accounts would share one list", "Class attributes can't be lists", "A list works faster in __init__", "It makes no difference"),
                 0,
-                "Every account needs its own history.",
+                "A list in a class attribute is a single list shared by all objects, but every account needs its own history.",
             ),
             fill(
                 "Fill in the blank to save the transaction in the history.",

@@ -319,7 +319,7 @@ internal val module24Practice = listOf(
             "The generator expression feeds sum the abs(x) values one by one.",
         ),
         tiles(
-            "Store the code of the letter \"Z\" in code",
+            "Store the code of the letter \"Z\" in the variable code",
             listOf("code", "=", "ord(", "\"Z\"", ")"),
             listOf("chr(", "=="),
             "ord turns a character into its code.",

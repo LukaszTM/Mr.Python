@@ -144,7 +144,7 @@ internal val module60Practice = listOf(
         ),
         choice(
             "What happens?",
-            listOf("UnboundLocalError", "It prints 1", "It prints 2", "NameError"),
+            listOf("UnboundLocalError", "It prints 1", "It prints 2", "SyntaxError"),
             0,
             "The assignment inside the function makes x local, and print comes before it.",
             code = "def f():\n    print(x)\n    x = 2\n\nx = 1\nf()",
@@ -203,7 +203,7 @@ internal val module60Practice = listOf(
         output(
             "x = None\nprint(x is None, x == None, x is not None)",
             "True True False",
-            "There is only one None, so is and == give the same result.",
+            "x is None itself, so is None and == None both give True, and is not None gives False.",
         ),
         output(
             "a = [1, 2]\nb = list(a)\nb.append(3)\nprint(a, b == a)",

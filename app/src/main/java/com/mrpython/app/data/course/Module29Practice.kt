@@ -128,7 +128,7 @@ internal val module29Practice = listOf(
         ),
         choice(
             "Od której liczby sito Eratostenesa zaczyna wykreślać wielokrotności i?",
-            listOf("Od i * i", "Od 0", "Od i + 1", "Od 2 * n"),
+            listOf("Od i * i", "Od 0", "Od i + 1", "Od i"),
             0,
             "Mniejsze wielokrotności zostały już wykreślone przez mniejsze liczby pierwsze.",
         ),
@@ -302,10 +302,10 @@ internal val module29Practice = listOf(
             code = "n = 64\nwhile n % 2 == 0 and n > 1:\n    n //= 2\nprint(n == 1)",
         ),
         choice(
-            "Co oblicza pow(a, b, m)?",
-            listOf("Resztę z a do potęgi b dzielonego przez m", "a razy b razy m", "a do potęgi b do potęgi m", "Pierwiastek stopnia m"),
+            "Któremu wyrażeniu odpowiada pow(a, b, m)?",
+            listOf("a ** b % m", "a * b % m", "a ** (b * m)", "a ** b // m"),
             0,
-            "Trzeci argument to modulo.",
+            "Trzeci argument m sprawia, że pow zwraca resztę z dzielenia a ** b przez m.",
         ),
         fill(
             "Uzupełnij, aby obliczyć 5 do potęgi 3.",
@@ -352,7 +352,7 @@ internal val module29Practice = listOf(
         output(
             "a, b = 0, 1\nfor _ in range(12):\n    a, b = b, a + b\nprint(a)",
             "144",
-            "Dwunasty wyraz ciągu Fibonacciego to 144.",
+            "Dwunasty wyraz ciągu Fibonacciego (licząc od zera) to 144.",
         ),
         output("print(pow(7, 2, 10))", "9", "49 % 10 = 9 – ostatnia cyfra liczby 7 do kwadratu."),
         output("import math\nprint(math.lcm(6, 9))", "18", "Najmniejsza liczba podzielna przez 6 i 9 to 18."),

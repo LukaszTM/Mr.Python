@@ -71,7 +71,7 @@ internal val module29Cards = listOf(
         explain(
             "Potęgi dwójki",
             "Każda liczba do potęgi 0 daje 1. Potęgę dwójki poznasz po tym, że da się ją dzielić " +
-                "przez 2 aż do 1 – inna liczba utknie na reszcie nieparzystej.",
+                "przez 2 aż do 1 – inna liczba utknie na liczbie nieparzystej większej od 1.",
             code = "n = 12\nwhile n % 2 == 0 and n > 1:\n    n //= 2\nprint(n, n == 1)\nprint(2 ** 0)",
             output = "3 False\n1",
         ),
