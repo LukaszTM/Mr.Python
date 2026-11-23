@@ -37,9 +37,10 @@ internal val module66Cards = listOf(
         explain(
             "Godziny w timedelta",
             "`timedelta` przyjmuje też `hours=`, `minutes=` i `weeks=`. Wypisany pokazuje czas jako " +
-                "`g:mm:ss`, a `total_seconds()` zamienia go na liczbę sekund.",
-            code = "from datetime import timedelta\nt = timedelta(hours=1, minutes=30)\nprint(t)\nprint(t.total_seconds())",
-            output = "1:30:00\n5400.0",
+                "`g:mm:ss`, a pełne dni przed nim (`1 day, …`, `2 days, …`). Można go mnożyć przez liczbę, " +
+                "a `total_seconds()` zamienia go na liczbę sekund.",
+            code = "from datetime import timedelta\nt = timedelta(hours=1, minutes=30)\nprint(t, t * 3)\nprint(timedelta(days=2, hours=3))\nprint(t.total_seconds())",
+            output = "1:30:00 4:30:00\n2 days, 3:00:00\n5400.0",
         ),
     ),
     cards(

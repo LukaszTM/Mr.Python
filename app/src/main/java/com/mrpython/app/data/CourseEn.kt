@@ -291,6 +291,7 @@ import com.mrpython.app.data.course.en.module70Cards
 import com.mrpython.app.data.course.en.module71Cards
 import com.mrpython.app.data.course.en.module72Cards
 import com.mrpython.app.data.course.en.module73Cards
+import com.mrpython.app.domain.ArrangeTiles
 import com.mrpython.app.domain.CourseUnit
 import com.mrpython.app.domain.Exercise
 import com.mrpython.app.domain.Lesson
@@ -368,10 +369,15 @@ internal object CourseEn {
     ).map { unit ->
         val lessons = unit.lessons.map {
             it.copy(
-                exercises = lessonCards[it.id].orEmpty() + it.exercises,
-                practice = practicePools[it.id].orEmpty(),
+                exercises = (lessonCards[it.id].orEmpty() + it.exercises).map(::withAlternatives),
+                practice = practicePools[it.id].orEmpty().map(::withAlternatives),
             )
         }
-        unit.copy(lessons = listOfNotNull(intros[unit.id]) + lessons)
+        val intro = intros[unit.id]?.let { it.copy(exercises = it.exercises.map(::withAlternatives)) }
+        unit.copy(lessons = listOfNotNull(intro) + lessons)
     }
+
+    /** Tile exercises also accept the orders listed in the generated table of equivalent answers. */
+    private fun withAlternatives(exercise: Exercise): Exercise =
+        if (exercise is ArrangeTiles) exercise.copy(alternatives = tileAlternativesEn[exercise.id].orEmpty()) else exercise
 }

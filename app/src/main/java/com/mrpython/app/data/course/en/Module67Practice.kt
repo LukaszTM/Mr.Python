@@ -239,7 +239,7 @@ internal val module67Practice = listOf(
             "class EmptyCart(____):\n    pass\ntry:\n    raise EmptyCart(\"empty\")\nexcept EmptyCart as e:\n    print(e)",
             listOf("Exception", "list", "int"),
             "Exception",
-            "Your own exception has to inherit from Exception.",
+            "A custom exception is a class that inherits from Exception.",
         ),
         fill(
             "Fill in the blank to print the amount with cents (the program should print 5.50).",
@@ -251,8 +251,8 @@ internal val module67Practice = listOf(
         tiles(
             "Raise a ValueError exception with the message \"bad price\"",
             listOf("raise", "ValueError(", "\"bad price\"", ")"),
-            listOf("throw", "except"),
-            "Exceptions are raised with the keyword raise.",
+            listOf("return", "except"),
+            "Exceptions are raised with the keyword raise; return would only hand back the exception object without raising it.",
         ),
         tiles(
             "Compute the total price of all the products in the dictionary prices",
@@ -520,7 +520,7 @@ internal val module67Practice = listOf(
             "Parameter types go after a colon, and the result type after ->.",
         ),
         tiles(
-            "Silence the KeyError error in a with block",
+            "Silence KeyError in a with block",
             listOf("with", "suppress(", "KeyError", "):"),
             listOf("try", "except("),
             "suppress(KeyError) ignores this exception inside the block.",
@@ -601,7 +601,7 @@ internal val module67Practice = listOf(
             "The difference of two dates is a timedelta, and its days attribute is the number of days.",
         ),
         tiles(
-            "Take the task with the lowest priority from the heap h",
+            "Pop the task with the smallest priority number from the heap h and store it in the variable task",
             listOf("task", "=", "heapq.heappop(", "h", ")"),
             listOf("heapq.heappush(", "h.pop("),
             "heappop removes the smallest element from the heap.",

@@ -88,9 +88,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "What's wrong here if we want the exact average?",
-                listOf("// cuts off the fractional part – you need /", "sum doesn't work on lists", "len returns the wrong result", "Nothing – it's correct"),
+                listOf("It should be / instead of //", "sum doesn't work on lists", "len returns the wrong result", "Nothing – it's correct"),
                 0,
-                "14 // 3 is 4, and the exact average is 4.67.",
+                "// rounds the result down to a whole number: 14 // 3 is 4, and the exact average is 4.67.",
                 code = "grades = [4, 5, 5]\naverage = sum(grades) // len(grades)",
             ),
             output(
@@ -129,9 +129,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Which type is best for amounts of money without rounding errors?",
-                listOf("Decimal from the decimal module", "float", "str", "complex"),
+                listOf("Decimal", "float", "str", "bool"),
                 0,
-                "Decimal computes in base ten, so 0.1 + 0.2 is exactly 0.3.",
+                "Decimal from the decimal module computes in base ten, so Decimal(\"0.1\") + Decimal(\"0.2\") is exactly 0.3.",
             ),
             output(
                 "from decimal import Decimal\nprint(0.1 + 0.2, Decimal(\"0.1\") + Decimal(\"0.2\"))",
@@ -146,7 +146,7 @@ internal val module67 = CourseUnit(
                 "print uses the __str__ method.",
             ),
             tiles(
-                "Compute the total value: the sum of p * q for the (price, quantity) pairs in the list cart",
+                "Compute the total value (the sum of p * q for the (price, quantity) pairs in the list cart) and store it in the variable total",
                 listOf("total", "=", "sum(", "p * q", "for p, q in", "cart", ")"),
                 listOf("p + q", "len("),
                 "We unpack each pair and add up the products.",
@@ -224,7 +224,7 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Why doesn't (x for x in range(10**9)) use a lot of memory?",
-                listOf("A generator creates items on demand, one after another", "Python compresses lists", "range has a limit on items", "It creates a list in the background and quickly deletes it"),
+                listOf("It creates items only on demand", "Python compresses lists", "range has a limit on items", "It creates a list in the background and quickly deletes it"),
                 0,
                 "A generator doesn't store all the items at once.",
             ),
@@ -233,7 +233,7 @@ internal val module67 = CourseUnit(
                 "def countdown(n):\n    while n > 0:\n        ____ n\n        n -= 1\nprint(list(countdown(3)))",
                 listOf("yield", "return", "print"),
                 "yield",
-                "yield turns a function into a generator.",
+                "yield turns a function into a generator function, which hands out 3, 2 and 1 in turn.",
             ),
             output(
                 "names = [\"Amy\", \"Tom\"]\npoints = [7, 9]\nfor i, (n, p) in enumerate(zip(names, points), 1):\n    print(f\"{i}. {n} - {p}\")",
@@ -323,9 +323,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Which structure is best for an \"undo\" feature in an editor?",
-                listOf("A stack (a list with append and pop)", "A FIFO queue", "A set", "A dictionary"),
+                listOf("A stack", "A FIFO queue", "A set", "A dictionary"),
                 0,
-                "We undo the last change first – that's the LIFO rule.",
+                "We undo the last change first – that's the LIFO rule, i.e. a stack (e.g. a list with append and pop).",
             ),
             fill(
                 "Fill in the blank to transpose the matrix (the program should print [[1, 4], [2, 5], [3, 6]]).",

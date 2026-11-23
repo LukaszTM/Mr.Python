@@ -27,8 +27,8 @@ internal val module67Intro = lesson(
     ),
     explain(
         "Generators",
-        "A function with `yield` is a generator – it hands out values one at a time, on demand. `next(gen, None)` " +
-            "gets the next one, or returns `None` when they run out.",
+        "A function with `yield` is a generator function: calling it gives a generator, which hands out values " +
+            "one at a time, on demand. `next(gen, None)` gets the next one, or returns `None` when they run out.",
         code = "def evens(n):\n    for i in range(n):\n        if i % 2 == 0:\n            yield i\nprint(list(evens(7)))",
         output = "[0, 2, 4, 6]",
     ),

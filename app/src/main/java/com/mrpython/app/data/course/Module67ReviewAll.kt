@@ -86,9 +86,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Co jest nie tak, jeśli chcemy dokładną średnią?",
-                listOf("// obcina część ułamkową – trzeba użyć /", "sum nie działa na listach", "len zwraca zły wynik", "Nic – to poprawne"),
+                listOf("Zamiast // powinno być /", "sum nie działa na listach", "len zwraca zły wynik", "Nic – to poprawne"),
                 0,
-                "14 // 3 to 4, a dokładna średnia to 4.67.",
+                "// zaokrągla wynik w dół do liczby całkowitej: 14 // 3 to 4, a dokładna średnia to 4.67.",
                 code = "oceny = [4, 5, 5]\nsrednia = sum(oceny) // len(oceny)",
             ),
             output(
@@ -127,9 +127,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Jaki typ najlepiej nadaje się do kwot pieniędzy bez błędów zaokrągleń?",
-                listOf("Decimal z modułu decimal", "float", "str", "complex"),
+                listOf("Decimal", "float", "str", "bool"),
                 0,
-                "Decimal liczy w systemie dziesiętnym, więc 0.1 + 0.2 to dokładnie 0.3.",
+                "Decimal z modułu decimal liczy w systemie dziesiętnym, więc Decimal(\"0.1\") + Decimal(\"0.2\") to dokładnie 0.3.",
             ),
             output(
                 "from decimal import Decimal\nprint(0.1 + 0.2, Decimal(\"0.1\") + Decimal(\"0.2\"))",
@@ -144,7 +144,7 @@ internal val module67 = CourseUnit(
                 "print używa metody __str__.",
             ),
             tiles(
-                "Oblicz łączną wartość: suma c * i dla par (cena, ilość) w liście koszyk",
+                "Oblicz łączną wartość (suma c * i dla par (cena, ilość) w liście koszyk) i zapisz ją w zmiennej razem",
                 listOf("razem", "=", "sum(", "c * i", "for c, i in", "koszyk", ")"),
                 listOf("c + i", "len("),
                 "Rozpakowujemy każdą parę i sumujemy iloczyny.",
@@ -222,7 +222,7 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Dlaczego (x for x in range(10**9)) nie zużywa dużo pamięci?",
-                listOf("Generator tworzy elementy na żądanie, jeden po drugim", "Python kompresuje listy", "range ma limit elementów", "Tworzy listę w tle i szybko ją usuwa"),
+                listOf("Tworzy elementy dopiero na żądanie", "Python kompresuje listy", "range ma limit elementów", "Tworzy listę w tle i szybko ją usuwa"),
                 0,
                 "Generator nie przechowuje wszystkich elementów naraz.",
             ),
@@ -231,7 +231,7 @@ internal val module67 = CourseUnit(
                 "def odliczanie(n):\n    while n > 0:\n        ____ n\n        n -= 1\nprint(list(odliczanie(3)))",
                 listOf("yield", "return", "print"),
                 "yield",
-                "yield zamienia funkcję w generator.",
+                "yield zamienia funkcję w funkcję generatora, która oddaje 3, 2 i 1 po kolei.",
             ),
             output(
                 "imiona = [\"Ola\", \"Jan\"]\npunkty = [7, 9]\nfor i, (n, p) in enumerate(zip(imiona, punkty), 1):\n    print(f\"{i}. {n} - {p}\")",
@@ -302,7 +302,7 @@ internal val module67 = CourseUnit(
             output(
                 "import heapq\nzadania = []\nheapq.heappush(zadania, (2, \"zakupy\"))\nheapq.heappush(zadania, (1, \"rachunki\"))\nheapq.heappush(zadania, (3, \"film\"))\nwhile zadania:\n    print(heapq.heappop(zadania)[1])",
                 "rachunki\nzakupy\nfilm",
-                "Kopiec oddaje zadania od najniższego priorytetu.",
+                "heappop zawsze zdejmuje krotkę z najmniejszą liczbą na początku: 1, potem 2, potem 3.",
             ),
             output(
                 "pytania = {\"2+2\": \"4\", \"stolica\": \"Warszawa\"}\nodp = {\"2+2\": \"4\", \"stolica\": \"kraków\"}\npkt = sum(odp[p].lower() == o.lower()\n          for p, o in pytania.items())\nprint(f\"{pkt}/{len(pytania)}\")",
@@ -321,9 +321,9 @@ internal val module67 = CourseUnit(
             ),
             choice(
                 "Która struktura najlepiej nada się do funkcji „cofnij” w edytorze?",
-                listOf("Stos (lista z append i pop)", "Kolejka FIFO", "Zbiór", "Słownik"),
+                listOf("Stos", "Kolejka FIFO", "Zbiór", "Słownik"),
                 0,
-                "Cofamy najpierw ostatnią zmianę – to zasada LIFO.",
+                "Cofamy najpierw ostatnią zmianę – to zasada LIFO, czyli stos (np. lista z append i pop).",
             ),
             fill(
                 "Uzupełnij, aby transponować macierz (program ma wypisać [[1, 4], [2, 5], [3, 6]]).",

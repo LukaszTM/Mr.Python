@@ -97,7 +97,7 @@ internal val module66 = CourseUnit(
             tiles(
                 "Utwórz datę 1 stycznia 2027 i zapisz ją w zmiennej d",
                 listOf("d", "=", "date(", "2027,", "1,", "1", ")"),
-                listOf("\"2027-01-01\"", "datetime."),
+                listOf("\"2027-01-01\"", "12,"),
                 "date przyjmuje rok, miesiąc i dzień.",
             ),
         ),
@@ -219,7 +219,7 @@ internal val module66 = CourseUnit(
             ),
             choice(
                 "Co robi functools.wraps w dekoratorze?",
-                listOf("Kopiuje nazwę i opis oryginalnej funkcji", "Przyspiesza funkcję", "Zapamiętuje wyniki", "Zamienia funkcję w metodę"),
+                listOf("Kopiuje nazwę i opis oryginalnej funkcji", "Przyspiesza działanie oryginalnej funkcji", "Zapamiętuje wyniki oryginalnej funkcji", "Zamienia oryginalną funkcję w metodę"),
                 0,
                 "Dzięki wraps udekorowana funkcja zachowuje __name__ i __doc__.",
             ),

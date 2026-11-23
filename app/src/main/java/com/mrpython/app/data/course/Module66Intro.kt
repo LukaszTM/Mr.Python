@@ -18,7 +18,7 @@ internal val module66Intro = lesson(
     ),
     explain(
         "itertools",
-        "`itertools` daje gotowe iteratory: `chain` łączy, `combinations` wybiera pary, " +
+        "`itertools` daje gotowe iteratory: `chain` łączy, `combinations` wybiera kombinacje (np. pary)," +
             "`accumulate` liczy sumy narastające, a `groupby` grupuje sąsiednie elementy.",
         code = "from itertools import accumulate, combinations\nprint(list(accumulate([1, 2, 3])))\nprint(list(combinations(\"ABC\", 2)))",
         output = "[1, 3, 6]\n[('A', 'B'), ('A', 'C'), ('B', 'C')]",
