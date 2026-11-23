@@ -1,5 +1,7 @@
 package com.mrpython.app.domain
 
+import kotlin.random.Random
+
 /**
  * Progress through one lesson. Like in Duolingo, an exercise answered
  * wrongly goes to the back of the queue and must be solved again.
@@ -25,10 +27,21 @@ data class LessonSession(
     }
 
     companion object {
-        fun start(lesson: Lesson) = LessonSession(
-            lessonId = lesson.id,
-            queue = lesson.exercises,
-            total = lesson.exercises.size,
-        )
+        /** How many exercises a replay draws from the lesson's pool. */
+        const val REPLAY_SIZE = 10
+
+        /**
+         * A first attempt goes through the core exercises in order. A replay shows the
+         * lesson's theory cards again and then [REPLAY_SIZE] random exercises from the
+         * whole pool, so it differs every time. Introductions are always read in order.
+         */
+        fun start(lesson: Lesson, replay: Boolean = false, random: Random = Random.Default): LessonSession {
+            val queue = if (replay && !lesson.isIntro) {
+                lesson.cards + lesson.pool.filterNot { it is Explanation }.shuffled(random).take(REPLAY_SIZE)
+            } else {
+                lesson.exercises
+            }
+            return LessonSession(lessonId = lesson.id, queue = queue, total = queue.size)
+        }
     }
 }

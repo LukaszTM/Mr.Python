@@ -1,0 +1,361 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+import com.mrpython.app.domain.CourseUnit
+
+internal val module61 = CourseUnit(
+    id = "u61",
+    title = "Review week: the basics",
+    description = "Daily reviews: print, variables, types, conditions, loops and strings",
+    lessons = listOf(
+        lesson(
+            "u61l1", "Day 1: print and variables",
+            output(
+                "print(\"a\", \"b\", sep=\"\")",
+                "ab",
+                "sep=\"\" means there is no space between the values.",
+            ),
+            output(
+                "print(\"x\", end=\"-\")\nprint(\"y\")",
+                "x-y",
+                "end=\"-\" replaces the newline character.",
+            ),
+            output(
+                "a, b = 1, 2\na, b = b, a + b\nprint(a, b)",
+                "2 3",
+                "The right side is evaluated before the assignment: (2, 1 + 2).",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("5 4", "5 5", "4 4", "4 5"),
+                0,
+                "Changing x doesn't affect y – numbers are immutable.",
+                code = "x = y = 4\nx += 1\nprint(x, y)",
+            ),
+            choice(
+                "Which variable name is valid?",
+                listOf("number_2", "2number", "number-2", "class"),
+                0,
+                "A name can't start with a digit, contain a hyphen or be a keyword.",
+            ),
+            fill(
+                "Fill in the blank to print 1-2-3.",
+                "print(1, 2, 3, ____=\"-\")",
+                listOf("sep", "end", "join"),
+                "sep",
+                "sep sets what goes between the values.",
+            ),
+            output(
+                "print(10, \"10\", sep=\"|\")",
+                "10|10",
+                "A number and a string look the same when printed.",
+            ),
+            tiles(
+                "Print the string \"Result:\" and the value of the variable result",
+                listOf("print(", "\"Result:\",", "result", ")"),
+                listOf("+", "result)"),
+                "print() accepts multiple values separated by commas.",
+            ),
+        ),
+        lesson(
+            "u61l2", "Day 2: types and conversions",
+            output(
+                "print(int(\"12\") * 2, \"12\" * 2)",
+                "24 1212",
+                "The number is multiplied, and the string is repeated.",
+            ),
+            output(
+                "print(float(\"3\") + 1)",
+                "4.0",
+                "float() gives a floating-point number, so the result is one too.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("-2", "-3", "-2.7", "-2.0"),
+                0,
+                "int() cuts off the fractional part, toward zero.",
+                code = "print(int(-2.7))",
+            ),
+            output(
+                "print(str(1) + str(2.0))",
+                "12.0",
+                "This joins the strings \"1\" and \"2.0\".",
+            ),
+            output(
+                "print(bool(0.0), bool(\"0\"))",
+                "False True",
+                "0.0 is falsy, while the string \"0\" is not empty.",
+            ),
+            choice(
+                "What happens?",
+                listOf("ValueError", "It prints 3", "It prints 3.5", "TypeError"),
+                0,
+                "int() can't convert a string with a decimal point – you need float() first.",
+                code = "print(int(\"3.5\"))",
+            ),
+            fill(
+                "Fill in the blank to print 5.",
+                "print(____(\"2\") + 3)",
+                listOf("int", "str", "len"),
+                "int",
+                "int(\"2\") converts the string to the number 2.",
+            ),
+            tiles(
+                "Convert the string text to an integer and store it in the variable age",
+                listOf("age", "=", "int(text)"),
+                listOf("str(text)", "=="),
+                "int() converts a string of digits to a number.",
+            ),
+        ),
+        lesson(
+            "u61l3", "Day 3: conditions",
+            output(
+                "x = 7\nif x % 2 == 0:\n    print(\"even\")\nelif x % 3 == 0:\n    print(\"3\")\nelse:\n    print(\"other\")",
+                "other",
+                "7 is divisible by neither 2 nor 3.",
+            ),
+            output(
+                "t = 25\nprint(\"warm\" if t > 20 else \"cold\")",
+                "warm",
+                "25 > 20, so the first value is chosen.",
+            ),
+            output(
+                "a = 5\nif a > 3:\n    if a > 8:\n        print(\"A\")\n    else:\n        print(\"B\")\nelse:\n    print(\"C\")",
+                "B",
+                "The outer condition is true, the inner one is not.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("True", "False", "Error", "None"),
+                0,
+                "The parentheses hold False, and not flips it to True.",
+                code = "print(not (3 > 2 and 2 > 5))",
+            ),
+            output(
+                "x = 0\nif x == 0 or 1 / x > 1:\n    print(\"ok\")",
+                "ok",
+                "or doesn't check the right side when the left is true.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("A", "B", "Nothing", "Error"),
+                0,
+                "A string with a space is not empty, so it is truthy.",
+                code = "s = \" \"\nif s:\n    print(\"A\")\nelse:\n    print(\"B\")",
+            ),
+            fill(
+                "Fill in the blank to print \"middle\".",
+                "x = 5\nif x < 3:\n    print(\"low\")\n____ x < 7:\n    print(\"middle\")\nelse:\n    print(\"high\")",
+                listOf("elif", "else", "for"),
+                "elif",
+                "The next condition in the same chain is elif.",
+            ),
+            tiles(
+                "Check whether x is even and positive",
+                listOf("if", "x % 2 == 0", "and", "x > 0:"),
+                listOf("&&", "x > 0"),
+                "In Python, conditions are joined with the word and.",
+            ),
+        ),
+        lesson(
+            "u61l4", "Day 4: loops",
+            output(
+                "for i in range(1, 4):\n    print(i * \"*\")",
+                "*\n**\n***",
+                "A string multiplied by i is repeated i times.",
+            ),
+            output(
+                "n = 0\nfor i in range(1, 4):\n    for j in range(i):\n        n += 1\nprint(n)",
+                "6",
+                "The inner loop runs 1, 2 and 3 times.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("1", "0", "2", "1.25"),
+                0,
+                "10 → 5 → 2 → 1, and then the condition is no longer true.",
+                code = "i = 10\nwhile i > 1:\n    i //= 2\nprint(i)",
+            ),
+            output(
+                "result = \"\"\nfor ch in \"abc\":\n    result = ch + result\nprint(result)",
+                "cba",
+                "Each letter is added at the front, so the string gets reversed.",
+            ),
+            output(
+                "for i in range(5):\n    if i == 2:\n        continue\n    if i == 4:\n        break\n    print(i)",
+                "0\n1\n3",
+                "2 is skipped, and at 4 the loop ends.",
+            ),
+            choice(
+                "How many numbers does this code print?",
+                listOf("3", "5", "2", "4"),
+                0,
+                "It prints 0, 2 and 4.",
+                code = "i = 0\nwhile i < 5:\n    print(i)\n    i += 2",
+            ),
+            fill(
+                "Fill in the blank to print only 1.",
+                "for x in [1, 3, 5]:\n    if x == 3:\n        ____\n    print(x)",
+                listOf("break", "continue", "pass"),
+                "break",
+                "break ends the loop immediately.",
+            ),
+            tiles(
+                "Write the header of a loop that counts down from 10 to 1",
+                listOf("for i in", "range(", "10, 0, -1", "):"),
+                listOf("-1, 0, 10", "while"),
+                "A step of -1 makes range count down.",
+            ),
+        ),
+        lesson(
+            "u61l5", "Day 5: strings",
+            output(
+                "s = \"programming\"\nprint(s[3:7])",
+                "gram",
+                "The characters at indexes 3 through 6.",
+            ),
+            output(
+                "print(\"Anna has cats\".split()[1].upper())",
+                "HAS",
+                "The second word is \"has\", and upper() makes it uppercase.",
+            ),
+            output(
+                "print(\"a\" < \"b\", \"Z\" < \"a\")",
+                "True True",
+                "Strings are compared by character codes – uppercase letters come first.",
+            ),
+            output(
+                "print((\"ab\" * 3).count(\"ba\"))",
+                "2",
+                "In \"ababab\" the fragment \"ba\" appears twice.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("-1 1", "Error", "0 1", "-1 -1"),
+                0,
+                "find() returns -1 when it doesn't find the fragment.",
+                code = "print(\"Python\".find(\"x\"), \"Python\".index(\"y\"))",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("Cat", "CAT", "cat", "CaT"),
+                0,
+                "capitalize() makes only the first letter uppercase.",
+                code = "print(\"cat\".capitalize())",
+            ),
+            fill(
+                "Fill in the blank to print True.",
+                "print(\"2026\".____())",
+                listOf("isdigit", "isalpha", "isupper"),
+                "isdigit",
+                "isdigit() checks whether the string consists of digits.",
+            ),
+            tiles(
+                "Store the string word reversed in the variable backward",
+                listOf("backward", "=", "word[::-1]"),
+                listOf("word[-1]", "reversed"),
+                "A slice with a step of -1 reverses the string.",
+            ),
+        ),
+        lesson(
+            "u61l6", "Day 6: formatting",
+            output(
+                "x = 3.14159\nprint(f\"{x:.2f}\")",
+                "3.14",
+                ".2f rounds to two decimal places.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("007", "7", "700", "0.07"),
+                0,
+                "03 pads the number with zeros to three characters.",
+                code = "n = 7\nprint(f\"{n:03}\")",
+            ),
+            output(
+                "print(f\"{'ok':*^6}\")",
+                "**ok**",
+                "*^6 centers the string in 6 characters, padding with asterisks.",
+            ),
+            output(
+                "a = 2\nb = 3\nprint(f\"{a}+{b}={a + b}\")",
+                "2+3=5",
+                "You can evaluate expressions inside the curly braces.",
+            ),
+            output(
+                "print(\"{} and {}\".format(\"A\", \"B\"))",
+                "A and B",
+                "format() inserts the values in order in place of {}.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("1,000,000", "1000000", "1.000.000", "1 000 000"),
+                0,
+                "A comma in the format separates thousands.",
+                code = "print(f\"{1000000:,}\")",
+            ),
+            fill(
+                "Fill in the blank to print 50%.",
+                "p = 0.5\nprint(f\"{p:.0____}\")",
+                listOf("%", "f", "d"),
+                "%",
+                "The % format multiplies by 100 and adds a percent sign.",
+            ),
+            tiles(
+                "Use an f-string to print the text Total: and the value of the variable total",
+                listOf("print(", "f\"Total: {total}\"", ")"),
+                listOf("\"Total: {total}\"", "f("),
+                "Without the letter f, the curly braces would be printed literally.",
+            ),
+        ),
+        lesson(
+            "u61l7", "Day 7: all together",
+            output(
+                "numbers = [3, 8, 1]\nlargest = numbers[0]\nfor x in numbers:\n    if x > largest:\n        largest = x\nprint(largest)",
+                "8",
+                "The loop remembers the largest number so far.",
+            ),
+            output(
+                "s = \"kayak\"\nprint(s == s[::-1])",
+                "True",
+                "\"kayak\" reads the same backward – it's a palindrome.",
+            ),
+            output(
+                "total = 0\nfor c in \"1234\":\n    total += int(c)\nprint(total)",
+                "10",
+                "We add up the digits 1 + 2 + 3 + 4.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("8", "abcdabcd", "4", "16"),
+                0,
+                "The joined string has 4 characters, and 4 * 2 = 8.",
+                code = "print(len(\"ab\" + \"cd\") * 2)",
+            ),
+            output(
+                "w = \"\"\nfor i in range(1, 7):\n    w += \"F\" if i % 3 == 0 else str(i)\nprint(w)",
+                "12F45F",
+                "Numbers divisible by 3 are replaced with the letter F.",
+            ),
+            choice(
+                "What does this code print?",
+                listOf("55", "10", "Error", "5 5"),
+                0,
+                "A string multiplied by 2 is repeated.",
+                code = "x = \"5\"\nprint(x * 2)",
+            ),
+            fill(
+                "Fill in the blank to print 5.",
+                "text = \"abracadabra\"\ncount = 0\nfor ch in text:\n    if ch ____ \"a\":\n        count += 1\nprint(count)",
+                listOf("==", "=", "!="),
+                "==",
+                "A comparison is ==, while a single = is assignment.",
+            ),
+            tiles(
+                "Write the header of a loop that runs while counter is less than 10",
+                listOf("while", "counter", "< 10", ":"),
+                listOf("for", "in"),
+                "while repeats the block as long as the condition is true.",
+            ),
+        ),
+    ),
+)

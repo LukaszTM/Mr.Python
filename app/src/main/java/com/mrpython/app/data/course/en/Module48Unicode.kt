@@ -1,0 +1,166 @@
+package com.mrpython.app.data.course.en
+
+import com.mrpython.app.data.course.*
+import com.mrpython.app.domain.CourseUnit
+
+internal val module48 = CourseUnit(
+    id = "u48",
+    title = "Strings and Unicode",
+    description = "Character codes, Polish letters, bytes and checking methods",
+    lessons = listOf(
+        lesson(
+            "u48l1", "ord and chr",
+            output("print(ord(\"A\"))", "65", "ord() returns the character's number in Unicode."),
+            output("print(chr(97))", "a", "chr() turns the number back into a character."),
+            output("print(ord(\"b\") - ord(\"a\"))", "1", "Consecutive letters have consecutive numbers."),
+            output("print(chr(ord(\"a\") + 2))", "c", "We add 2 to the code and turn it back into a character."),
+            output("print(ord(\"a\") - ord(\"A\"))", "32", "Lowercase ASCII letters are 32 further along than uppercase ones."),
+            choice(
+                "What does ord(\"7\") return?",
+                listOf("55", "7", "\"7\"", "Error"),
+                0,
+                "ord() returns the code of the character \"7\", which is 55, not the digit's value.",
+            ),
+            fill(
+                "Fill in the blank to print the character with code 66.",
+                "print(____(66))",
+                listOf("chr", "ord", "str"),
+                "chr",
+                "chr(66) is \"B\"; ord(66) would raise an error, and str(66) would give \"66\".",
+            ),
+            tiles(
+                "Store the number of the character ch in the variable code",
+                listOf("code", "=", "ord(ch)"),
+                listOf("chr(ch)", "ch.ord()"),
+                "ord(character) returns its number in Unicode.",
+            ),
+        ),
+        lesson(
+            "u48l2", "Polish letters",
+            output("print(len(\"żółw\"))", "4", "Each Polish letter is one character of the string."),
+            output("print(ord(\"ą\"))", "261", "Polish letters have numbers above 127, outside ASCII."),
+            output("print(chr(322))", "ł", "322 is the code of the letter ł."),
+            output("print(\"zażółć\".upper())", "ZAŻÓŁĆ", "upper() correctly changes Polish letters too."),
+            output(
+                "words = [\"łódź\", \"lis\", \"most\"]\nprint(sorted(words))",
+                "['lis', 'most', 'łódź']",
+                "sorted() compares character codes, and ł (322) comes after m (109).",
+            ),
+            choice(
+                "Why does sorted() put the Polish word \"żaba\" after \"zebra\", but also \"ćma\" after \"dom\"?",
+                listOf(
+                    "It sorts by Unicode numbers, and Polish letters have large numbers",
+                    "It sorts by word length",
+                    "It sorts randomly",
+                    "Polish letters always go last because of a bug",
+                ),
+                0,
+                "The default string sort compares character codes, not the Polish alphabet.",
+            ),
+            choice(
+                "How many characters does the string \"źdźbło\" have according to len()?",
+                listOf("6", "8", "10", "4"),
+                0,
+                "len() counts characters, not bytes – every letter, including ź, is one character.",
+            ),
+            fill(
+                "Fill in the blank to print the number of letters in the word.",
+                "print(____(\"gęś\"))",
+                listOf("len", "ord", "chr"),
+                "len",
+                "len() returns 3; ord() and chr() don't accept an argument like this.",
+            ),
+        ),
+        lesson(
+            "u48l3", "encode, decode and bytes",
+            output("print(\"a\".encode())", "b'a'", "encode() turns a string into bytes (UTF-8 by default)."),
+            output("print(len(\"ą\".encode()))", "2", "In UTF-8 the letter ą takes 2 bytes."),
+            output("print(\"ą\".encode())", "b'\\xc4\\x85'", "Non-ASCII bytes are shown as \\x and a hexadecimal code."),
+            output("print(b'\\xc4\\x85'.decode())", "ą", "decode() turns bytes back into a string."),
+            output(
+                "s = \"zażółć\"\nprint(len(s), len(s.encode()))",
+                "6 10",
+                "6 characters, but the four Polish letters take 2 bytes each.",
+            ),
+            choice(
+                "What will happen?",
+                listOf("UnicodeEncodeError", "It prints b'a'", "It prints b'\\xc4\\x85'", "It prints ą"),
+                0,
+                "The ASCII encoding has no letter ą, so encode raises an error.",
+                code = "print(\"ą\".encode(\"ascii\"))",
+            ),
+            fill(
+                "Fill in the blank to turn the bytes into a string.",
+                "b = \"łąka\".encode()\nprint(b.____())",
+                listOf("decode", "encode", "upper"),
+                "decode",
+                "We turn bytes into a string with the decode() method; bytes have no encode().",
+            ),
+            choice(
+                "What is the result of \"cat\".encode()?",
+                listOf("A bytes object", "A str string", "A list of numbers", "A tuple of characters"),
+                0,
+                "encode() always returns bytes – written with the letter b before the quote.",
+            ),
+        ),
+        lesson(
+            "u48l4", "Checking characters and casefold",
+            output("print(\"123\".isdigit())", "True", "isdigit() checks whether there are only digits."),
+            choice(
+                "What will \"12.5\".isdigit() return?",
+                listOf("False", "True", "12.5", "Error"),
+                0,
+                "A period is not a digit, so isdigit() is no good for checking decimals.",
+            ),
+            output("print(\"żółw\".isalpha())", "True", "Polish letters are letters too."),
+            output("print(\"abc1\".isalnum(), \"abc 1\".isalnum())", "True False", "isalnum() means letters or digits – a space spoils the result."),
+            output("print(\"ABC\".isupper(), \"Abc\".isupper())", "True False", "isupper() requires all the letters to be uppercase."),
+            output("print(\"Straße\".lower())\nprint(\"Straße\".casefold())", "straße\nstrasse", "casefold() goes further than lower() and turns ß into ss."),
+            choice(
+                "Which method is best for comparing strings regardless of letter case?",
+                listOf("casefold()", "upper() on only one of the strings", "isupper()", "title()"),
+                0,
+                "casefold() is designed for case-insensitive comparisons.",
+            ),
+            fill(
+                "Fill in the blank to check whether the string is all digits.",
+                "code = \"0042\"\nprint(code.____())",
+                listOf("isdigit", "isalpha", "isupper"),
+                "isdigit",
+                "isdigit() returns True; isalpha() and isupper() return False.",
+            ),
+        ),
+        lesson(
+            "u48l5", "Review: strings and Unicode",
+            output("print(chr(ord(\"x\") + 1))", "y", "The code of x + 1 is the code of y."),
+            output("print(len(\"ćma\"), len(\"ćma\".encode()))", "3 4", "ć takes 2 bytes, m and a one each."),
+            output("print(\"€\".encode())", "b'\\xe2\\x82\\xac'", "The euro sign takes as many as 3 bytes in UTF-8."),
+            output("print(\"Łódź\".casefold() == \"ŁÓDŹ\".casefold())", "True", "After casefold() both strings are the same."),
+            choice(
+                "What will this code print?",
+                listOf("False", "True", "Error", "None"),
+                0,
+                "A space is not a letter, so isalpha() returns False.",
+                code = "print(\"Hi there\".isalpha())",
+            ),
+            output(
+                "s = \"a1b2c3\"\nprint(\"\".join(ch for ch in s if ch.isdigit()))",
+                "123",
+                "We keep only the characters that are digits.",
+            ),
+            fill(
+                "Fill in the blank to turn the string into UTF-8 bytes.",
+                "b = \"gęś\".____()\nprint(len(b))",
+                listOf("encode", "decode", "split"),
+                "encode",
+                "encode() gives bytes (5); a string has no decode() method.",
+            ),
+            tiles(
+                "Store the number of UTF-8 bytes of the string s in the variable n",
+                listOf("n", "=", "len(", "s.encode())"),
+                listOf("s.decode())", "ord("),
+                "First encode(), then len() on the bytes.",
+            ),
+        ),
+    ),
+)

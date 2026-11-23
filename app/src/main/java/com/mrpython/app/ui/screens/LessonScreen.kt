@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,10 +38,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -49,23 +52,28 @@ import androidx.compose.ui.unit.sp
 import com.mrpython.app.domain.Answer
 import com.mrpython.app.domain.ArrangeTiles
 import com.mrpython.app.domain.Exercise
+import com.mrpython.app.domain.Explanation
 import com.mrpython.app.domain.FillInBlank
 import com.mrpython.app.domain.MultipleChoice
 import com.mrpython.app.domain.PredictOutput
+import com.mrpython.app.domain.t
 import com.mrpython.app.ui.ActiveLesson
 import com.mrpython.app.ui.Feedback
-import com.mrpython.app.ui.components.ChunkyButton
 import com.mrpython.app.ui.components.CodeBlock
 import com.mrpython.app.ui.components.CodeText
+import com.mrpython.app.ui.components.OptionCard
+import com.mrpython.app.ui.components.PrimaryButton
 import com.mrpython.app.ui.components.ProgressBar
-import com.mrpython.app.ui.components.StatBadge
-import com.mrpython.app.ui.components.TileCard
+import com.mrpython.app.ui.components.StatPill
 import com.mrpython.app.ui.theme.AppColors
 
 @Composable
 fun LessonScreen(
     lesson: ActiveLesson,
-    hearts: Int,
+    /** Null when hearts are unlimited (full course). */
+    hearts: Int?,
+    /** The multiplier of the running XP bonus ("2", "1,5"), if there is one. */
+    xpMultiplier: String? = null,
     onSubmit: (Answer) -> Unit,
     onContinue: () -> Unit,
     onQuit: () -> Unit,
@@ -88,7 +96,7 @@ fun LessonScreen(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+                .padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
@@ -97,17 +105,27 @@ fun LessonScreen(
                     .clip(RoundedCornerShape(8.dp))
                     .clickable { confirmQuit = true }
                     .padding(8.dp),
-                fontSize = 22.sp,
-                color = AppColors.GrayDark,
-                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = AppColors.TextDim,
             )
             Spacer(Modifier.width(8.dp))
             ProgressBar(session.progress, Modifier.weight(1f))
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(8.dp))
+            Text(
+                "${session.solved}/${session.total}",
+                color = AppColors.TextDim,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 13.sp,
+            )
+            Spacer(Modifier.width(10.dp))
+            if (xpMultiplier != null) {
+                StatPill("⚡", "×$xpMultiplier", AppColors.EventStart)
+                Spacer(Modifier.width(6.dp))
+            }
             if (lesson.isPractice) {
-                StatBadge("💪", "", AppColors.Blue)
+                StatPill("↻", "", AppColors.BlueBright)
             } else {
-                StatBadge("❤️", "$hearts", AppColors.Red)
+                StatPill("♥", hearts?.toString() ?: "∞", AppColors.Heart)
             }
         }
 
@@ -119,19 +137,22 @@ fun LessonScreen(
         ) {
             // Wrongly answered exercises are appended to the queue, so after the first
             // pass through the lesson everything left is a retry.
-            if (session.solved + session.mistakes >= session.total) {
-                Text(
-                    "↻ POPRZEDNI BŁĄD",
-                    color = AppColors.Orange,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 13.sp,
-                )
-                Spacer(Modifier.height(4.dp))
+            val label = when {
+                exercise is Explanation -> "# teoria".t()
+                session.solved + session.mistakes >= session.total -> "# poprawka".t()
+                else -> "# zadanie".t()
             }
             Text(
+                label,
+                color = if (label == "# poprawka".t()) AppColors.Streak else AppColors.TextFaint,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 13.sp,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
                 exercise.instruction,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.ExtraBold,
+                fontSize = 21.sp,
+                fontWeight = FontWeight.Bold,
                 color = AppColors.Text,
                 lineHeight = 28.sp,
             )
@@ -145,14 +166,18 @@ fun LessonScreen(
             Spacer(Modifier.height(24.dp))
         }
 
-        HorizontalDivider(color = AppColors.Gray, thickness = 2.dp)
         if (feedback == null) {
+            HorizontalDivider(color = AppColors.Border, thickness = 1.dp)
             Box(Modifier.padding(16.dp)) {
-                ChunkyButton(
-                    text = "Sprawdź",
-                    onClick = { pending?.let(onSubmit) },
-                    enabled = pending != null,
-                )
+                if (exercise is Explanation) {
+                    PrimaryButton(text = "Dalej  →".t(), onClick = { onSubmit(Answer.Seen) })
+                } else {
+                    PrimaryButton(
+                        text = "▶  Sprawdź".t(),
+                        onClick = { pending?.let(onSubmit) },
+                        enabled = pending != null,
+                    )
+                }
             }
         }
         AnimatedVisibility(visible = feedback != null, enter = slideInVertically { it }) {
@@ -163,19 +188,21 @@ fun LessonScreen(
     if (confirmQuit) {
         AlertDialog(
             onDismissRequest = { confirmQuit = false },
-            title = { Text("Przerwać lekcję?") },
-            text = { Text("Jeśli wyjdziesz teraz, stracisz postęp w tej lekcji.") },
+            title = { Text("Przerwać lekcję?".t()) },
+            text = { Text("Jeśli wyjdziesz teraz, stracisz postęp w tej lekcji.".t()) },
             confirmButton = {
                 TextButton(onClick = { confirmQuit = false; onQuit() }) {
-                    Text("Wyjdź", color = AppColors.Red, fontWeight = FontWeight.Bold)
+                    Text("Wyjdź".t(), color = AppColors.Error, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { confirmQuit = false }) {
-                    Text("Ucz się dalej", color = AppColors.Blue, fontWeight = FontWeight.Bold)
+                    Text("Ucz się dalej".t(), color = AppColors.Yellow, fontWeight = FontWeight.Bold)
                 }
             },
-            containerColor = Color.White,
+            containerColor = AppColors.Surface,
+            titleContentColor = AppColors.Text,
+            textContentColor = AppColors.TextDim,
         )
     }
 }
@@ -192,6 +219,45 @@ private fun ExerciseBody(
         is FillInBlank -> FillInBlankBody(exercise, attemptKey, enabled, onAnswerChange)
         is ArrangeTiles -> ArrangeTilesBody(exercise, attemptKey, enabled, onAnswerChange)
         is PredictOutput -> PredictOutputBody(exercise, attemptKey, enabled, onAnswerChange)
+        is Explanation -> ExplanationBody(exercise)
+    }
+}
+
+/** `backticks` in theory text are shown as inline code. */
+private fun inlineCode(text: String) = buildAnnotatedString {
+    text.split('`').forEachIndexed { i, part ->
+        if (i % 2 == 1) {
+            withStyle(SpanStyle(fontFamily = FontFamily.Monospace, color = AppColors.Yellow, background = AppColors.CodeBackground)) {
+                append(part)
+            }
+        } else {
+            append(part)
+        }
+    }
+}
+
+@Composable
+private fun ExplanationBody(card: Explanation) {
+    Text(inlineCode(card.text), color = AppColors.Text, fontSize = 17.sp, lineHeight = 26.sp)
+    card.code?.let {
+        Spacer(Modifier.height(20.dp))
+        CodeBlock(it)
+    }
+    card.output?.let {
+        Spacer(Modifier.height(12.dp))
+        val shape = RoundedCornerShape(12.dp)
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clip(shape)
+                .background(AppColors.CodeBackground)
+                .border(1.dp, AppColors.Border, shape)
+                .padding(14.dp)
+        ) {
+            Text("$ python main.py", color = AppColors.TextFaint, fontFamily = FontFamily.Monospace, fontSize = 13.sp)
+            Spacer(Modifier.height(6.dp))
+            CodeText(it, color = AppColors.Success, fontSize = 15)
+        }
     }
 }
 
@@ -208,15 +274,18 @@ private fun MultipleChoiceBody(
     // Options are shuffled for display; the answer still reports the original index.
     val order = remember(attemptKey) { exercise.options.indices.shuffled() }
     var selected by remember(attemptKey) { mutableStateOf<Int?>(null) }
+    // One font for all options of a question, so e.g. `printf Cześć` does not stand out
+    // among code answers: monospace when most of the options look like code.
+    val codeFont = exercise.options.count(::looksLikeCode) * 2 > exercise.options.size
 
     exercise.code?.let {
         CodeBlock(it)
         Spacer(Modifier.height(20.dp))
     }
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        order.forEach { index ->
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        order.forEachIndexed { position, index ->
             val option = exercise.options[index]
-            TileCard(
+            OptionCard(
                 modifier = Modifier.fillMaxWidth(),
                 selected = selected == index,
                 enabled = enabled,
@@ -225,10 +294,19 @@ private fun MultipleChoiceBody(
                     onAnswerChange(Answer.Choice(index))
                 },
             ) {
-                if (looksLikeCode(option)) {
-                    CodeText(option, fontSize = 17)
-                } else {
-                    Text(option, fontSize = 17.sp, color = AppColors.Text, fontWeight = FontWeight.SemiBold)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        "${'A' + position}",
+                        color = if (selected == index) AppColors.BlueBright else AppColors.TextFaint,
+                        fontFamily = FontFamily.Monospace,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(Modifier.width(14.dp))
+                    if (codeFont) {
+                        CodeText(option, fontSize = 16)
+                    } else {
+                        Text(option, fontSize = 16.sp, color = AppColors.Text)
+                    }
                 }
             }
         }
@@ -257,7 +335,7 @@ private fun FillInBlankBody(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         order.forEach { index ->
-            TileCard(
+            OptionCard(
                 selected = selected == index,
                 enabled = enabled,
                 onClick = {
@@ -286,49 +364,54 @@ private fun ArrangeTilesBody(
         onAnswerChange(if (newPicked.isEmpty()) null else Answer.Tiles(newPicked.map { bank[it] }))
     }
 
-    // Answer area with "notebook lines".
-    Box(
+    // Answer area styled as an interpreter prompt.
+    val shape = RoundedCornerShape(12.dp)
+    Row(
         Modifier
             .fillMaxWidth()
-            .heightIn(min = 120.dp)
+            .heightIn(min = 110.dp)
+            .clip(shape)
+            .background(AppColors.CodeBackground)
+            .border(1.dp, AppColors.Border, shape)
+            .padding(12.dp)
     ) {
-        Column(Modifier.fillMaxWidth()) {
-            repeat(2) {
-                Spacer(Modifier.height(58.dp))
-                HorizontalDivider(color = AppColors.Gray, thickness = 2.dp)
-            }
-        }
+        Text(
+            ">>>",
+            Modifier.padding(top = 12.dp, end = 10.dp),
+            color = AppColors.Yellow,
+            fontFamily = FontFamily.Monospace,
+            fontWeight = FontWeight.Bold,
+        )
         FlowRow(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp),
+            Modifier.weight(1f),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             picked.forEach { bankIndex ->
-                TileCard(enabled = enabled, onClick = { update(picked - bankIndex) }) {
+                OptionCard(selected = true, enabled = enabled, onClick = { update(picked - bankIndex) }) {
                     CodeText(bank[bankIndex])
                 }
             }
         }
     }
-    Spacer(Modifier.height(32.dp))
+    Spacer(Modifier.height(24.dp))
     FlowRow(
         Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         bank.forEachIndexed { index, tile ->
             if (index in picked) {
-                // Empty slot keeps the layout stable, like Duolingo's grey placeholder.
+                // Empty dashed-looking slot keeps the layout stable.
                 Box(
                     Modifier
+                        .padding(bottom = 4.dp)
                         .clip(RoundedCornerShape(12.dp))
-                        .background(AppColors.Gray)
-                        .padding(horizontal = 14.dp, vertical = 10.dp)
-                ) { CodeText(tile, color = AppColors.Gray) }
+                        .background(AppColors.Edge)
+                        .padding(horizontal = 14.dp, vertical = 12.dp)
+                ) { CodeText(tile, color = AppColors.Edge) }
             } else {
-                TileCard(enabled = enabled, onClick = { update(picked + index) }) { CodeText(tile) }
+                OptionCard(enabled = enabled, onClick = { update(picked + index) }) { CodeText(tile) }
             }
         }
     }
@@ -344,7 +427,12 @@ private fun PredictOutputBody(
     var text by remember(attemptKey) { mutableStateOf("") }
     CodeBlock(exercise.code)
     Spacer(Modifier.height(20.dp))
-    Text("Wynik w konsoli:", color = AppColors.TextLight, fontWeight = FontWeight.Bold)
+    Text(
+        "$ python main.py",
+        color = AppColors.TextDim,
+        fontFamily = FontFamily.Monospace,
+        fontSize = 14.sp,
+    )
     Spacer(Modifier.height(8.dp))
     OutlinedTextField(
         value = text,
@@ -355,57 +443,126 @@ private fun PredictOutputBody(
         enabled = enabled,
         modifier = Modifier.fillMaxWidth(),
         minLines = 2,
-        placeholder = { Text("Wpisz, co pojawi się na ekranie…", fontFamily = FontFamily.Monospace) },
-        textStyle = TextStyle(fontFamily = FontFamily.Monospace, fontSize = 17.sp, color = AppColors.Text),
+        placeholder = {
+            Text("wpisz, co wypisze program…".t(), fontFamily = FontFamily.Monospace, color = AppColors.TextFaint)
+        },
+        textStyle = TextStyle(fontFamily = FontFamily.Monospace, fontSize = 16.sp, color = AppColors.Text),
         keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = AppColors.Blue,
-            unfocusedBorderColor = AppColors.Gray,
-            focusedContainerColor = Color(0xFFF7F7F7),
-            unfocusedContainerColor = Color(0xFFF7F7F7),
-            disabledContainerColor = Color(0xFFF7F7F7),
+            focusedBorderColor = AppColors.Yellow,
+            unfocusedBorderColor = AppColors.Border,
+            disabledBorderColor = AppColors.Border,
+            focusedContainerColor = AppColors.CodeBackground,
+            unfocusedContainerColor = AppColors.CodeBackground,
+            disabledContainerColor = AppColors.CodeBackground,
+            disabledTextColor = AppColors.Text,
+            cursorColor = AppColors.Yellow,
         ),
     )
 }
 
 @Composable
 private fun FeedbackPanel(feedback: Feedback, onContinue: () -> Unit) {
-    val background = if (feedback.correct) AppColors.GreenLight else AppColors.RedLight
-    val accent = if (feedback.correct) AppColors.GreenDark else AppColors.RedDark
+    if (feedback.retry) {
+        RetryPanel(onContinue)
+        return
+    }
+    val accent = if (feedback.correct) AppColors.Success else AppColors.Error
     Column(
         Modifier
             .fillMaxWidth()
-            .background(background)
-            .padding(20.dp)
+            .background(if (feedback.correct) AppColors.SuccessBackground else AppColors.ErrorBackground)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(if (feedback.correct) "✅" else "❌", fontSize = 24.sp)
-            Spacer(Modifier.width(10.dp))
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(accent)
+        )
+        Column(Modifier.padding(20.dp)) {
             Text(
-                if (feedback.correct) praise(feedback) else "Niepoprawnie",
+                when {
+                    feedback.typo -> "✓ Zaliczone, mała literówka".t()
+                    feedback.correct -> "✓ ${praise(feedback)}"
+                    else -> "✗ Niepoprawnie".t()
+                },
                 color = accent,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 20.sp,
+            )
+            if (!feedback.correct || feedback.typo) {
+                Spacer(Modifier.height(10.dp))
+                Text(if (feedback.typo) "Dokładny zapis:".t() else "Poprawna odpowiedź:".t(), color = AppColors.TextDim, fontSize = 14.sp)
+                Spacer(Modifier.height(2.dp))
+                CodeText(feedback.correctAnswer, color = AppColors.Text)
+            }
+            if (!feedback.correct) {
+                Spacer(Modifier.height(8.dp))
+                Text("Każdy błąd obniża XP za tę lekcję.".t(), color = AppColors.Error, fontSize = 13.sp)
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "# ${feedback.explanation}",
+                color = AppColors.TextDim,
+                fontSize = 14.sp,
+                fontFamily = FontFamily.Monospace,
+                lineHeight = 20.sp,
+            )
+            Spacer(Modifier.height(16.dp))
+            PrimaryButton(
+                text = if (feedback.correct) "Dalej  →".t() else "Rozumiem  →".t(),
+                onClick = onContinue,
+                color = accent,
+                contentColor = AppColors.Background,
             )
         }
-        if (!feedback.correct) {
-            Spacer(Modifier.height(10.dp))
-            Text("Poprawna odpowiedź:", color = accent, fontWeight = FontWeight.Bold)
-            CodeText(feedback.correctAnswer, color = accent)
-        }
-        Spacer(Modifier.height(8.dp))
-        Text(feedback.explanation, color = accent, fontSize = 15.sp)
-        Spacer(Modifier.height(16.dp))
-        ChunkyButton(
-            text = if (feedback.correct) "Dalej" else "Rozumiem",
-            onClick = onContinue,
-            color = if (feedback.correct) AppColors.Green else AppColors.Red,
-            shadowColor = if (feedback.correct) AppColors.GreenDark else AppColors.RedDark,
-        )
     }
 }
 
-private val praises = listOf("Świetnie!", "Doskonale!", "Brawo!", "Tak trzymaj!", "Super!")
+/** Shown after the first mistake in an exercise: one free correction. */
+@Composable
+private fun RetryPanel(onRetry: () -> Unit) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(AppColors.SurfaceHigh)
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(AppColors.Streak)
+        )
+        Column(Modifier.padding(20.dp)) {
+            Text(
+                "✗ Jeszcze nie to".t(),
+                color = AppColors.Streak,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                fontSize = 20.sp,
+            )
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "# Masz jedną darmową poprawkę. Sprawdź literówki i spróbuj ponownie, serce zostaje.".t(),
+                color = AppColors.TextDim,
+                fontSize = 14.sp,
+                fontFamily = FontFamily.Monospace,
+                lineHeight = 20.sp,
+            )
+            Spacer(Modifier.height(16.dp))
+            PrimaryButton(
+                text = "↺  Popraw odpowiedź".t(),
+                onClick = onRetry,
+                color = AppColors.Streak,
+                contentColor = AppColors.Background,
+            )
+        }
+    }
+}
 
-private fun praise(feedback: Feedback) = praises[Math.floorMod(feedback.explanation.hashCode(), praises.size)]
+/** Kept in Polish; [praise] translates the one it picks. */
+private val praises = listOf("Świetnie!", "Dokładnie tak!", "Brawo!", "Tak trzymaj!", "Działa!")
+
+private fun praise(feedback: Feedback) = praises[Math.floorMod(feedback.explanation.hashCode(), praises.size)].t()

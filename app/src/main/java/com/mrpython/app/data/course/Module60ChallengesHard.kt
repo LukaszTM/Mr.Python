@@ -1,0 +1,357 @@
+package com.mrpython.app.data.course
+
+import com.mrpython.app.domain.CourseUnit
+
+internal val module60 = CourseUnit(
+    id = "u60",
+    title = "Wyzwania: trudne",
+    description = "Podchwytliwe zagadki: domknięcia, kopie, iteratory, MRO i dekoratory",
+    lessons = listOf(
+        lesson(
+            "u60l1", "Wyzwanie 1: mutowalne wartości domyślne",
+            output(
+                "def f(x, a=[]):\n    a.append(x)\n    return a\n\nf(1)\nprint(f(2))",
+                "[1, 2]",
+                "Domyślna lista powstaje raz i jest wspólna dla wszystkich wywołań.",
+            ),
+            output(
+                "def f(x, a=None):\n    if a is None:\n        a = []\n    a.append(x)\n    return a\n\nf(1)\nprint(f(2))",
+                "[2]",
+                "Przy każdym wywołaniu powstaje nowa lista.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("[0, 1] [0, 1]", "[0] [0, 1]", "[0] [0]", "[0] [1]"),
+                0,
+                "Oba wywołania zwracają tę samą listę, a print widzi ją już po obu zmianach.",
+                code = "def f(a=[]):\n    a.append(len(a))\n    return a\n\nprint(f(), f())",
+            ),
+            output(
+                "def f(d={}):\n    d[\"n\"] = d.get(\"n\", 0) + 1\n    return d[\"n\"]\n\nf()\nf()\nprint(f())",
+                "3",
+                "Domyślny słownik zapamiętuje stan między wywołaniami.",
+            ),
+            output(
+                "def f(x, a=[]):\n    a = a + [x]\n    return a\n\nf(1)\nprint(f(2))",
+                "[2]",
+                "a + [x] tworzy nową listę, więc domyślna lista się nie zmienia.",
+            ),
+            choice(
+                "Kiedy powstaje domyślna lista w def f(a=[])?",
+                listOf("Raz – gdy wykonuje się instrukcja def", "Przy każdym wywołaniu f", "Przy pierwszym wywołaniu bez a", "Dopiero przy pierwszym append"),
+                0,
+                "Wartości domyślne oblicza się jeden raz, w chwili definiowania funkcji.",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać [2].",
+                "def dodaj(x, lista=____):\n    if lista is None:\n        lista = []\n    lista.append(x)\n    return lista\n\ndodaj(1)\nprint(dodaj(2))",
+                listOf("None", "[]", "()"),
+                "None",
+                "None jako wartość domyślna pozwala tworzyć nową listę przy każdym wywołaniu.",
+            ),
+            tiles(
+                "Utwórz nową listę, gdy argument a nie został podany",
+                listOf("if", "a", "is", "None:", "a = []"),
+                listOf("not", "False:"),
+                "To bezpieczny wzorzec zamiast domyślnej listy.",
+            ),
+        ),
+        lesson(
+            "u60l2", "Wyzwanie 2: domknięcia i późne wiązanie",
+            output(
+                "fs = [lambda: i for i in range(3)]\nprint([f() for f in fs])",
+                "[2, 2, 2]",
+                "Lambdy odczytują i dopiero przy wywołaniu, a wtedy i = 2.",
+            ),
+            output(
+                "fs = [lambda i=i: i for i in range(3)]\nprint([f() for f in fs])",
+                "[0, 1, 2]",
+                "Wartość domyślna zapamiętuje i w chwili tworzenia lambdy.",
+            ),
+            output(
+                "def licznik():\n    n = 0\n    def inc():\n        nonlocal n\n        n += 1\n        return n\n    return inc\n\nc = licznik()\nc()\nprint(c())",
+                "2",
+                "Domknięcie pamięta n między wywołaniami.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("2", "1", "Błąd", "None"),
+                0,
+                "Funkcja odczytuje x w chwili wywołania, a nie definicji.",
+                code = "x = 1\ndef f():\n    return x\n\nx = 2\nprint(f())",
+            ),
+            output(
+                "def mnoz(k):\n    return lambda x: x * k\n\nrazy3 = mnoz(3)\nprint(razy3(5))",
+                "15",
+                "Lambda pamięta k = 3 z funkcji mnoz.",
+            ),
+            output(
+                "i = 10\nf = lambda: i\ni = 20\nprint(f())",
+                "20",
+                "Lambda nie kopiuje i – sprawdza je przy wywołaniu.",
+            ),
+            choice(
+                "Co się stanie?",
+                listOf("UnboundLocalError", "x będzie równe 2", "NameError", "Nic"),
+                0,
+                "Przypisanie do x czyni x zmienną lokalną, której nie nadano jeszcze wartości.",
+                code = "x = 1\ndef f():\n    x += 1\n\nf()",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać 2.",
+                "def licznik():\n    n = 0\n    def inc():\n        ____ n\n        n += 1\n        return n\n    return inc\n\nc = licznik()\nc()\nprint(c())",
+                listOf("nonlocal", "global", "del"),
+                "nonlocal",
+                "nonlocal pozwala zmieniać zmienną z funkcji otaczającej.",
+            ),
+        ),
+        lesson(
+            "u60l3", "Wyzwanie 3: is kontra ==",
+            output(
+                "a = [1, 2]\nb = [1, 2]\nprint(a == b, a is b)",
+                "True False",
+                "Listy są równe, ale to dwa różne obiekty.",
+            ),
+            output(
+                "a = [1]\nb = a\nb += [2]\nprint(a, a is b)",
+                "[1, 2] True",
+                "+= na liście zmienia ją w miejscu.",
+            ),
+            output(
+                "a = [1]\nb = a\nb = b + [2]\nprint(a, a is b)",
+                "[1] False",
+                "b + [2] tworzy nową listę i b wskazuje na nią.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("False", "True", "Błąd", "None"),
+                0,
+                "Bez __eq__ operator == porównuje tożsamość obiektów.",
+                code = "class A:\n    pass\n\nprint(A() == A())",
+            ),
+            output(
+                "a = \"ab\"\nb = a\na += \"c\"\nprint(b)",
+                "ab",
+                "Napisy są niezmienne – a += \"c\" tworzy nowy napis.",
+            ),
+            choice(
+                "Do czego najlepiej używać operatora is?",
+                listOf("Do porównania z None", "Do porównywania liczb", "Do porównywania napisów", "Zawsze zamiast =="),
+                0,
+                "is sprawdza tożsamość – idealne dla None, ale nie dla wartości.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("True False", "True True", "False False", "False True"),
+                0,
+                "Wycinek [:] tworzy nową listę o tej samej zawartości.",
+                code = "a = [1, 2, 3]\nb = a[:]\nprint(a == b, a is b)",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać „brak”.",
+                "wynik = None\nif wynik ____ None:\n    print(\"brak\")",
+                listOf("is", "is not", "!="),
+                "is",
+                "Z None porównujemy za pomocą is.",
+            ),
+        ),
+        lesson(
+            "u60l4", "Wyzwanie 4: kopie płytkie i głębokie",
+            output(
+                "a = [[0] * 2] * 2\na[0][0] = 1\nprint(a)",
+                "[[1, 0], [1, 0]]",
+                "* 2 powiela odnośnik do tej samej wewnętrznej listy.",
+            ),
+            output(
+                "a = [[0] * 2 for _ in range(2)]\na[0][0] = 1\nprint(a)",
+                "[[1, 0], [0, 0]]",
+                "Wyrażenie listowe tworzy osobną listę dla każdego wiersza.",
+            ),
+            output(
+                "a = [[1], [2]]\nb = a.copy()\nb[0].append(9)\nprint(a)",
+                "[[1, 9], [2]]",
+                "copy() jest płytka – wewnętrzne listy są wspólne.",
+            ),
+            output(
+                "a = [[1], [2]]\nb = a.copy()\nb.append([3])\nprint(len(a))",
+                "2",
+                "Zewnętrzna lista jest już osobna.",
+            ),
+            output(
+                "import copy\na = [[1]]\nb = copy.deepcopy(a)\nb[0].append(2)\nprint(a)",
+                "[[1]]",
+                "deepcopy kopiuje też wewnętrzne listy.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("1", "9", "[9, 2, 3]", "Błąd"),
+                0,
+                "a[:] to nowa lista, więc zmiana b nie dotyka a.",
+                code = "a = [1, 2, 3]\nb = a[:]\nb[0] = 9\nprint(a[0])",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("{'k': [1, 2]}", "{'k': [1]}", "{'k': [2]}", "Błąd"),
+                0,
+                "dict(d) to płytka kopia – lista pod kluczem jest wspólna.",
+                code = "d = {\"k\": [1]}\ne = dict(d)\ne[\"k\"].append(2)\nprint(d)",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać [[1], [2]].",
+                "import copy\na = [[1], [2]]\nb = copy.____(a)\nb[0].append(5)\nprint(a)",
+                listOf("deepcopy", "copy", "replace"),
+                "deepcopy",
+                "Tylko głęboka kopia oddziela wewnętrzne listy.",
+            ),
+        ),
+        lesson(
+            "u60l5", "Wyzwanie 5: wyczerpane iteratory",
+            output(
+                "g = (x for x in range(3))\nprint(sum(g), sum(g))",
+                "3 0",
+                "Generator można przejść tylko raz – drugi raz jest pusty.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("True [3]", "True [1, 2, 3]", "True []", "False [3]"),
+                0,
+                "in zużywa elementy aż do znalezienia 2.",
+                code = "g = iter([1, 2, 3])\nprint(2 in g, list(g))",
+            ),
+            output(
+                "z = zip([1, 2], [3, 4])\nlist(z)\nprint(list(z))",
+                "[]",
+                "zip to iterator – po jednym przejściu jest pusty.",
+            ),
+            output(
+                "m = map(str, [1, 2])\nprint(len(list(m)) + len(list(m)))",
+                "2",
+                "Pierwsze list() zabiera oba elementy, drugie dostaje pustą listę.",
+            ),
+            output(
+                "g = (x * x for x in range(4))\nnext(g)\nprint(list(g))",
+                "[1, 4, 9]",
+                "next() zabrało już pierwszą wartość 0.",
+            ),
+            choice(
+                "Co się stanie?",
+                listOf("StopIteration", "Wypisze 1", "Wypisze None", "Nic"),
+                0,
+                "Generator miał jedną wartość – drugie next() zgłasza StopIteration.",
+                code = "g = (x for x in [1])\nnext(g)\nprint(next(g))",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać 6 6.",
+                "dane = ____(x * 2 for x in range(3))\nprint(sum(dane), sum(dane))",
+                listOf("list", "iter", "next"),
+                "list",
+                "Listę można przechodzić wiele razy, generator tylko raz.",
+            ),
+            tiles(
+                "Utwórz iterator z listy dane i pobierz z niego pierwszy element",
+                listOf("pierwszy =", "next(", "iter(dane)", ")"),
+                listOf("list(dane)", "len("),
+                "iter() tworzy iterator, a next() pobiera z niego kolejny element.",
+            ),
+        ),
+        lesson(
+            "u60l6", "Wyzwanie 6: MRO i dekoratory",
+            choice(
+                "Co wypisze ten kod?",
+                listOf("C", "A", "B", "Błąd"),
+                0,
+                "Kolejność szukania to D, B, C, A – C ma metodę wcześniej niż A.",
+                code = "class A:\n    def k(self): return \"A\"\nclass B(A): pass\nclass C(A):\n    def k(self): return \"C\"\nclass D(B, C): pass\n\nprint(D().k())",
+            ),
+            output(
+                "class A: pass\nclass B(A): pass\nclass C(A): pass\nclass D(B, C): pass\n\nprint([k.__name__ for k in D.__mro__])",
+                "['D', 'B', 'C', 'A', 'object']",
+                "MRO odwiedza A dopiero po obu klasach pośrednich.",
+            ),
+            output(
+                "class A:\n    def h(self): return \"A\"\nclass B(A):\n    def h(self): return \"B\" + super().h()\nclass C(A):\n    def h(self): return \"C\" + super().h()\nclass D(B, C):\n    def h(self): return \"D\" + super().h()\n\nprint(D().h())",
+                "DBCA",
+                "super() w B prowadzi do C, bo idzie według MRO klasy D.",
+            ),
+            output(
+                "def a(f):\n    return lambda: \"a\" + f()\ndef b(f):\n    return lambda: \"b\" + f()\n\n@a\n@b\ndef f():\n    return \"f\"\n\nprint(f())",
+                "abf",
+                "Najbliższy dekorator działa pierwszy: f = a(b(f)).",
+            ),
+            output(
+                "def d(f):\n    print(\"dek\")\n    return f\n\n@d\ndef g():\n    print(\"g\")\n\ng()\ng()",
+                "dek\ng\ng",
+                "Dekorator wykonuje się raz – przy definicji funkcji.",
+            ),
+            choice(
+                "Czemu odpowiada zapis @x nad @y nad def f?",
+                listOf("f = x(y(f))", "f = y(x(f))", "f = x(f) + y(f)", "f = x(f), a y jest pomijany"),
+                0,
+                "Dekoratory nakłada się od dołu do góry.",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać „hej”.",
+                "import functools\n\ndef d(f):\n    @functools.____(f)\n    def w():\n        return f()\n    return w\n\n@d\ndef hej(): pass\n\nprint(hej.__name__)",
+                listOf("wraps", "partial", "cache"),
+                "wraps",
+                "functools.wraps kopiuje nazwę i opis oryginalnej funkcji.",
+            ),
+            tiles(
+                "Zdefiniuj pustą klasę D dziedziczącą najpierw po B, potem po C",
+                listOf("class", "D(B, C):", "pass"),
+                listOf("D(C, B):", "def"),
+                "Kolejność klas bazowych w nawiasie wpływa na MRO.",
+            ),
+        ),
+        lesson(
+            "u60l7", "Wyzwanie 7: porównania i skróty",
+            choice(
+                "Co wypisze ten kod?",
+                listOf("True", "False", "Błąd", "2"),
+                0,
+                "To znaczy 1 < 3 and 3 > 2.",
+                code = "print(1 < 3 > 2)",
+            ),
+            output(
+                "print(5 > 3 == 3, (5 > 3) == 3)",
+                "True False",
+                "Łańcuch to 5 > 3 and 3 == 3, a w nawiasie porównujemy True z 3.",
+            ),
+            output(
+                "print(0 or [] or \"x\", 1 and 0 and 2)",
+                "x 0",
+                "or zwraca pierwszą prawdziwą wartość, and – pierwszą fałszywą.",
+            ),
+            output(
+                "def f():\n    print(\"f\")\n    return True\n\nprint(False and f())",
+                "False",
+                "and zatrzymuje się na False, więc f() się nie wywoła.",
+            ),
+            output(
+                "def f(x):\n    print(x)\n    return x\n\nr = f(0) or f(2) or f(3)\nprint(r)",
+                "0\n2\n2",
+                "or kończy na pierwszej prawdziwej wartości – f(3) się nie wywoła.",
+            ),
+            choice(
+                "Co wypisze ten kod?",
+                listOf("0", "None", "False", "True"),
+                0,
+                "Gdy obie wartości są fałszywe, or zwraca ostatnią.",
+                code = "print(None or 0)",
+            ),
+            fill(
+                "Uzupełnij, aby wypisać False bez błędu.",
+                "d = 0\nok = d != 0 ____ 10 / d > 1\nprint(ok)",
+                listOf("and", "or", "&"),
+                "and",
+                "and nie liczy prawej strony, gdy lewa jest fałszywa – nie dzielimy przez zero.",
+            ),
+            tiles(
+                "Sprawdź, czy x należy do przedziału od 0 (włącznie) do 10",
+                listOf("if", "0 <=", "x", "< 10:"),
+                listOf("and", "=<"),
+                "Porównania można łączyć w łańcuch.",
+            ),
+        ),
+    ),
+)

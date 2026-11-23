@@ -13,12 +13,29 @@ data class Progress(
     val lastActiveEpochDay: Long? = null,
     val xpToday: Int = 0,
     val xpTodayEpochDay: Long? = null,
+    val leagueTier: Tier = Tier.INTERN,
+    /** Monday of the league week that [weekXp] belongs to. */
+    val leagueWeekStartEpochDay: Long? = null,
+    val weekXp: Int = 0,
+    /** Result of the last finished week, until the learner has seen it. */
+    val pendingWeekResult: WeekResult? = null,
+    val avatar: Avatar = Avatar(),
+    /** The last XP bonus earned; it may already be over. */
+    val boost: Boost? = null,
 )
 
 object Rules {
     const val MAX_HEARTS = 5
     const val HEART_REFILL_MILLIS = 20 * 60 * 1000L
     const val XP_PER_LESSON = 10
+    const val XP_MISTAKE_PENALTY = 2
+    const val XP_MIN = 2
+
+    /**
+     * With unlimited hearts nothing else stops a lesson, so this many mistakes end it and it
+     * has to be started again. It equals [MAX_HEARTS]: the same patience the free version has.
+     */
+    const val MAX_MISTAKES_PER_LESSON = 5
     const val XP_PERFECT_BONUS = 5
     const val XP_PRACTICE = 5
     const val DAILY_GOAL_XP = 30
@@ -50,6 +67,9 @@ object Rules {
         )
     }
 
+    /** A paid refill or a streak reward: all hearts back at once. */
+    fun fillHearts(p: Progress): Progress = p.copy(hearts = MAX_HEARTS, heartsRefillStartMillis = null)
+
     fun gainHeart(p: Progress): Progress {
         val hearts = (p.hearts + 1).coerceAtMost(MAX_HEARTS)
         return p.copy(
@@ -67,10 +87,34 @@ object Rules {
     fun visibleXpToday(p: Progress, today: LocalDate): Int =
         if (p.xpTodayEpochDay == today.toEpochDay()) p.xpToday else 0
 
+    /**
+     * Every mistake costs XP, so guessing never pays: a flawless lesson earns the bonus, and
+     * each mistake takes [XP_MISTAKE_PENALTY] off, down to [XP_MIN].
+     */
     fun xpForLesson(mistakes: Int, isPractice: Boolean): Int = when {
-        isPractice -> XP_PRACTICE
+        isPractice -> (XP_PRACTICE - mistakes).coerceAtLeast(XP_MIN)
         mistakes == 0 -> XP_PER_LESSON + XP_PERFECT_BONUS
-        else -> XP_PER_LESSON
+        else -> (XP_PER_LESSON - mistakes * XP_MISTAKE_PENALTY).coerceAtLeast(XP_MIN)
+    }
+
+    /**
+     * Closes the league week once a new one has started: the top
+     * [League.PROMOTION_SLOTS] of the finished week move one tier up.
+     * Weeks without any XP don't count and show no result.
+     */
+    fun rolloverLeague(p: Progress, today: LocalDate): Progress {
+        val currentWeek = League.weekStart(today)
+        val storedDay = p.leagueWeekStartEpochDay
+            ?: return p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (storedDay >= currentWeek.toEpochDay()) return p
+        val fresh = p.copy(leagueWeekStartEpochDay = currentWeek.toEpochDay(), weekXp = 0)
+        if (p.weekXp <= 0) return fresh
+        val rank = League.finalRank(LocalDate.ofEpochDay(storedDay), p.leagueTier, p.weekXp)
+        val promotedTo = if (rank <= League.PROMOTION_SLOTS) p.leagueTier.next else null
+        return fresh.copy(
+            leagueTier = promotedTo ?: p.leagueTier,
+            pendingWeekResult = WeekResult(rank, promotedTo),
+        )
     }
 
     fun completeLesson(
@@ -78,33 +122,43 @@ object Rules {
         lessonId: String,
         mistakes: Int,
         today: LocalDate,
+        /** XP percent of the bonus running when the lesson was finished (100 = none). */
+        xpPercent: Int = 100,
+        nowMillis: Long = 0,
     ): Progress {
         val isPractice = lessonId in p.completedLessons
-        val xp = xpForLesson(mistakes, isPractice)
+        val xp = Events.apply(xpForLesson(mistakes, isPractice), xpPercent)
         val day = today.toEpochDay()
         val streak = when (p.lastActiveEpochDay) {
             day -> p.streak
             day - 1 -> p.streak + 1
             else -> 1
         }
-        val updated = p.copy(
+        val league = rolloverLeague(p, today)
+        val updated = league.copy(
             completedLessons = p.completedLessons + lessonId,
             totalXp = p.totalXp + xp,
+            weekXp = league.weekXp + xp,
             streak = streak,
             lastActiveEpochDay = day,
             xpToday = visibleXpToday(p, today) + xp,
             xpTodayEpochDay = day,
+            // A streak that has just grown to a milestone earns a bonus for the next lessons.
+            boost = (if (streak != p.streak) Events.forStreak(streak, nowMillis) else null) ?: p.boost,
         )
         // Practising an old lesson earns a heart back, as in Duolingo.
         return if (isPractice) gainHeart(updated) else updated
     }
 
-    /** Lessons unlock in order: the next one opens once the previous one is done. */
+    /**
+     * Lessons unlock in order: the next one opens once the previous one is done.
+     * A finished lesson stays open even if new lessons were added before it.
+     */
     fun isUnlocked(course: List<CourseUnit>, lessonId: String, completed: Set<String>): Boolean {
         val ordered = course.flatMap { it.lessons }
         val index = ordered.indexOfFirst { it.id == lessonId }
         if (index < 0) return false
-        return index == 0 || ordered[index - 1].id in completed
+        return index == 0 || lessonId in completed || ordered[index - 1].id in completed
     }
 
     /** The first lesson that is unlocked but not finished yet, if any. */

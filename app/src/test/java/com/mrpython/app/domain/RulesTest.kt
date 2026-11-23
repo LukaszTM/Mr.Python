@@ -9,6 +9,18 @@ import java.time.LocalDate
 
 class RulesTest {
 
+    @Test
+    fun everyMistakeCostsXp() {
+        assertEquals(15, Rules.xpForLesson(0, isPractice = false))
+        assertEquals(8, Rules.xpForLesson(1, isPractice = false))
+        assertEquals(6, Rules.xpForLesson(2, isPractice = false))
+        assertEquals(2, Rules.xpForLesson(4, isPractice = false))
+        assertEquals(2, Rules.xpForLesson(9, isPractice = false))
+        assertEquals(5, Rules.xpForLesson(0, isPractice = true))
+        assertEquals(4, Rules.xpForLesson(1, isPractice = true))
+        assertEquals(2, Rules.xpForLesson(7, isPractice = true))
+    }
+
     private val today = LocalDate.of(2026, 10, 22)
     private val minute = 60_000L
 
@@ -58,7 +70,8 @@ class RulesTest {
         var p = Rules.completeLesson(Progress(), "a", mistakes = 0, today = today)
         assertEquals(Rules.XP_PER_LESSON + Rules.XP_PERFECT_BONUS, p.totalXp)
         p = Rules.completeLesson(p, "b", mistakes = 2, today = today)
-        assertEquals(25, Rules.visibleXpToday(p, today))
+        // 15 for the flawless lesson, 6 for the one with two mistakes.
+        assertEquals(21, Rules.visibleXpToday(p, today))
         assertEquals(0, Rules.visibleXpToday(p, today.plusDays(1)))
         p = Rules.completeLesson(p, "c", mistakes = 0, today = today.plusDays(1))
         assertEquals(15, p.xpToday)
@@ -69,7 +82,7 @@ class RulesTest {
         val start = Progress(completedLessons = setOf("a"), hearts = 2, heartsRefillStartMillis = 0)
         val p = Rules.completeLesson(start, "a", mistakes = 1, today = today)
         assertEquals(3, p.hearts)
-        assertEquals(Rules.XP_PRACTICE, p.totalXp)
+        assertEquals(Rules.XP_PRACTICE - 1, p.totalXp)
     }
 
     @Test
@@ -84,5 +97,18 @@ class RulesTest {
         assertFalse(Rules.isUnlocked(course, "missing", emptySet()))
         assertEquals("b", Rules.currentLessonId(course, setOf("a")))
         assertNull(Rules.currentLessonId(course, setOf("a", "b", "c")))
+    }
+
+    @Test
+    fun finishedLessonStaysOpenWhenNewLessonIsAddedBeforeIt() {
+        // "new" was added to the course after the learner had finished "a" and "c".
+        val course = listOf(
+            CourseUnit("u1", "", "", listOf(Lesson("a", "", emptyList()), Lesson("new", "", emptyList()))),
+            CourseUnit("u2", "", "", listOf(Lesson("c", "", emptyList()))),
+        )
+        val completed = setOf("a", "c")
+        assertTrue(Rules.isUnlocked(course, "new", completed))
+        assertTrue(Rules.isUnlocked(course, "c", completed))
+        assertEquals("new", Rules.currentLessonId(course, completed))
     }
 }
