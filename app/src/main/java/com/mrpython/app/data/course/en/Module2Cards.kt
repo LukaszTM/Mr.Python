@@ -77,8 +77,8 @@ internal val module2Cards = listOf(
         ),
         explain(
             "What is falsy?",
-            "These are falsy: `0`, `0.0`, the empty string `\"\"`, and `None`. Everything else is truthy – including " +
-                "the string `\"0\"`, a string with a space, and the string `\"False\"`, because they are not empty.",
+            "Of the values you know so far, these are falsy: `False`, `0`, `0.0`, the empty string `\"\"`, and `None`. " +
+                "The others are truthy – including the string `\"0\"`, a string with a space, and the string `\"False\"`, because they are not empty.",
             code = "print(bool(None))\nprint(bool(\"0\"))\nprint(bool(-3))",
             output = "False\nTrue\nTrue",
         ),

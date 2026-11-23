@@ -52,7 +52,7 @@ internal val module4 = CourseUnit(
             ),
             choice(
                 "Co natychmiast przerywa pętlę?",
-                listOf("break", "continue", "stop", "exit loop"),
+                listOf("break", "continue", "stop", "else"),
                 0,
                 "break kończy pętlę, a continue przechodzi do następnego obrotu.",
             ),
@@ -81,13 +81,13 @@ internal val module4 = CourseUnit(
             choice(
                 "Co jest nie tak z tą pętlą?",
                 listOf(
-                    "Nigdy się nie skończy – n się nie zmienia",
+                    "Nigdy się nie skończy",
                     "Nie wykona się ani razu",
                     "Brakuje dwukropka",
                     "Nic, jest poprawna",
                 ),
                 0,
-                "Bez zmniejszania n warunek n > 0 zawsze będzie prawdziwy.",
+                "n się nie zmienia, więc warunek n > 0 zawsze będzie prawdziwy.",
                 code = "n = 5\nwhile n > 0:\n    print(n)",
             ),
         ),
@@ -149,10 +149,10 @@ internal val module4 = CourseUnit(
             ),
             fill(
                 "Uzupełnij, aby pętla działała, dopóki nie trafi na break.",
-                "while ____:\n    odp = \"tak\"\n    if odp == \"tak\":\n        break",
+                "while ____:\n    print(\"pytam\")\n    odp = \"tak\"\n    if odp == \"tak\":\n        break\nprint(\"koniec\")",
                 listOf("True", "False", "0"),
                 "True",
-                "while True to pętla „bez końca”, z której wychodzi się przez break.",
+                "while True to pętla „bez końca”, z której wychodzi się przez break. Z False lub 0 pętla nie wykonałaby się ani razu.",
             ),
         ),
         lesson(

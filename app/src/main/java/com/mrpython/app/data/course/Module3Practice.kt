@@ -3,7 +3,7 @@ package com.mrpython.app.data.course
 internal val module3Practice = listOf(
     practice(
         "u3l1",
-        output("print(9 // 4)", "2", "9 / 4 = 2.25, a // odcina część ułamkową."),
+        output("print(9 // 4)", "2", "9 / 4 = 2.25, a // zaokrągla w dół do 2."),
         output("print(9 % 4)", "1", "9 = 2 · 4 + 1, więc reszta to 1."),
         output("print(3 ** 2)", "9", "3 do kwadratu to 3 · 3."),
         output("print(15 / 3)", "5.0", "Dzielenie / daje float, nawet gdy dzieli się bez reszty."),
@@ -94,7 +94,7 @@ internal val module3Practice = listOf(
             "print(True ____ False)",
             listOf("or", "and", "=="),
             "or",
-            "or wystarczy jedna prawdziwa strona.",
+            "Dla or wystarczy jedna prawdziwa strona.",
         ),
         tiles(
             "Zapisz warunek: x jest większe lub równe 10",
@@ -148,9 +148,9 @@ internal val module3Practice = listOf(
         ),
         choice(
             "Czy else ma własny warunek?",
-            listOf("Nie – else działa, gdy nic wcześniej nie pasowało", "Tak, zawsze", "Tylko po elif", "Tylko w pętli"),
+            listOf("Nie, nigdy", "Tak, zawsze", "Tak, po elif", "Tak, po if"),
             0,
-            "else zapisujemy bez warunku, tylko z dwukropkiem.",
+            "else zapisujemy bez warunku, tylko z dwukropkiem – działa, gdy nic wcześniej nie pasowało.",
         ),
         fill(
             "Uzupełnij, aby sprawdzić drugi warunek, gdy pierwszy nie jest spełniony.",
@@ -244,9 +244,9 @@ internal val module3Practice = listOf(
             "Pusty napis jest fałszywy, a not robi z tego prawdę.",
         ),
         tiles(
-            "Zapisz warunek: nieprawda, że x jest większe od 5",
+            "Zapisz warunek z not i nawiasem: nieprawda, że x jest większe od 5",
             listOf("not", "(", "x", ">", "5", ")"),
-            listOf("!", "<"),
+            listOf("!=", ">="),
             "not przed nawiasem odwraca wynik całego porównania.",
         ),
         choice(
@@ -276,7 +276,7 @@ internal val module3Practice = listOf(
         output(
             "rok = 2024\nif rok % 4 == 0:\n    print(\"przestępny\")\nelse:\n    print(\"zwykły\")",
             "przestępny",
-            "2024 dzieli się przez 4 bez reszty.",
+            "2024 dzieli się przez 4 bez reszty. (Pełna reguła lat przestępnych ma jeszcze wyjątki dla lat takich jak 1900, ale tu wystarczy ta prosta.)",
         ),
         output("print(7 / 2 > 3)", "True", "7 / 2 = 3.5, a 3.5 > 3."),
         choice(

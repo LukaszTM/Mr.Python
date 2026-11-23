@@ -215,7 +215,7 @@ internal val module63 = CourseUnit(
             ),
             choice(
                 "Czego brakuje tej funkcji?",
-                listOf("Warunku stopu (przypadku bazowego)", "Instrukcji return na końcu", "Parametru domyślnego", "Niczego – działa poprawnie"),
+                listOf("Warunku bazowego", "Instrukcji return na końcu", "Parametru domyślnego", "Niczego – działa poprawnie"),
                 0,
                 "Bez przypadku bazowego funkcja woła samą siebie bez końca (RecursionError).",
                 code = "def odliczaj(n):\n    print(n)\n    odliczaj(n - 1)",

@@ -11,7 +11,7 @@ internal val module72Intro = lesson(
     ),
     explain(
         "Pułapka: dwie nazwy, jedna lista",
-        "`b = a` nie kopiuje listy – obie nazwy wskazują ten sam obiekt, więc zmiana przez `b` widać w `a`. " +
+        "`b = a` nie kopiuje listy – obie nazwy wskazują ten sam obiekt, więc zmianę zrobioną przez `b` widać w `a`. " +
             "Kopię zrobisz przez `a.copy()` albo `a[:]`.",
         code = "a = [1, 2]\nb = a\nb.append(3)\nprint(a, a is b)",
         output = "[1, 2, 3] True",

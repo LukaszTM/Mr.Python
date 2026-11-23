@@ -13,7 +13,7 @@ internal val module73 = CourseUnit(
             output(
                 "def pal(s):\n    s = \"\".join(c for c in s.lower()\n                if c.isalnum())\n    return s == s[::-1]\nprint(pal(\"Never odd or even\"))\nprint(pal(\"Python\"))",
                 "True\nFalse",
-                "After dropping the spaces and uppercase letters, we check whether the string reads the same backward.",
+                "After making all letters lowercase and dropping the spaces, we check whether the string reads the same backward.",
             ),
             output(
                 "def cipher(t, k):\n    return \"\".join(\n        chr((ord(c) - 97 + k) % 26 + 97)\n        for c in t)\nprint(cipher(\"xyz\", 3))\nprint(cipher(\"abc\", 1))",
@@ -86,9 +86,9 @@ internal val module73 = CourseUnit(
             ),
             choice(
                 "Why is x in my_set usually faster than x in my_list?",
-                listOf("A set uses hashing – a lookup takes O(1) on average", "A set is always sorted", "A list doesn't support the in operator", "Sets can only store numbers"),
+                listOf("A set finds items by their hash", "A set is always sorted", "A list doesn't support the in operator", "Sets can only store numbers"),
                 0,
-                "A list has to be searched element by element, which is O(n).",
+                "Thanks to hashing, a set checks an item in O(1) on average, while a list has to be searched element by element, which is O(n).",
             ),
             output(
                 "import heapq\nprint(heapq.nlargest(3, [5, 1, 9, 3, 7]))\nprint(heapq.nsmallest(2, [5, 1, 9, 3, 7]))",
@@ -239,7 +239,7 @@ internal val module73 = CourseUnit(
             tiles(
                 "Print your title using an f-string",
                 listOf("print(", "f\"Day {day}:", "Python Master!\"", ")"),
-                listOf("echo(", "\"Student\""),
+                listOf("\"Day {day}:", "\"Student\""),
                 "Congratulations – the f-string inserts the day number, and you are a Python Master!",
             ),
         ),

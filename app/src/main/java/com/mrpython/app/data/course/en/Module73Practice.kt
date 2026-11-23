@@ -149,9 +149,9 @@ internal val module73Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – a list can't be a key", "{[1, 2]: 'x'}", "{(1, 2): 'x'}", "KeyError"),
+            listOf("TypeError", "KeyError", "ValueError", "It runs without an error"),
             0,
-            "A dictionary key must be immutable, and a list is mutable.",
+            "A dictionary key must be immutable (hashable), and a list is mutable – hence the TypeError.",
             code = "d = {}\nd[[1, 2]] = \"x\"",
         ),
         fill(
@@ -402,9 +402,9 @@ internal val module73Practice = listOf(
         ),
         choice(
             "What does the statement import this display?",
-            listOf("The Zen of Python – principles for writing good code", "A list of all modules", "The Python version", "An import error"),
+            listOf("The Zen of Python", "A list of all modules", "The Python version", "An import error"),
             0,
-            "It's a hidden Easter egg with Python's principles.",
+            "It's a hidden Easter egg: short principles for writing good Python code.",
         ),
         choice(
             "Which sentence comes from the Zen of Python?",

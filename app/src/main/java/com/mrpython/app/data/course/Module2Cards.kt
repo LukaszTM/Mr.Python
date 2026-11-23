@@ -75,8 +75,8 @@ internal val module2Cards = listOf(
         ),
         explain(
             "Co jest fałszywe?",
-            "Fałszywe są: `0`, `0.0`, pusty napis `\"\"` i `None`. Wszystko inne jest prawdziwe – także " +
-                "napis `\"0\"`, napis ze spacją i napis `\"False\"`, bo nie są puste.",
+            "Z poznanych dotąd wartości fałszywe są: `False`, `0`, `0.0`, pusty napis `\"\"` i `None`. Pozostałe są " +
+                "prawdziwe – także napis `\"0\"`, napis ze spacją i napis `\"False\"`, bo nie są puste.",
             code = "print(bool(None))\nprint(bool(\"0\"))\nprint(bool(-3))",
             output = "False\nTrue\nTrue",
         ),

@@ -302,7 +302,7 @@ internal val module62 = CourseUnit(
                 "The value in the dictionary should be v.",
             ),
             tiles(
-                "Pick only the even numbers from the list numbers",
+                "Store in the variable evens a list of only the even numbers from the list numbers",
                 listOf("evens =", "[x", "for x in numbers", "if x % 2 == 0]"),
                 listOf("else", "while"),
                 "The filtering condition goes at the end of a list comprehension.",
@@ -354,7 +354,7 @@ internal val module62 = CourseUnit(
             tiles(
                 "Import the Counter class from the collections module",
                 listOf("from", "collections", "import", "Counter"),
-                listOf("Counter()", "include"),
+                listOf("Counter()", "collections.Counter"),
                 "The syntax is: from module import name.",
             ),
         ),

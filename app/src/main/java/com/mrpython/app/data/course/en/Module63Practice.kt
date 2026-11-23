@@ -203,7 +203,7 @@ internal val module63Practice = listOf(
         ),
         choice(
             "What type is kwargs inside the function def f(**kwargs)?",
-            listOf("dict (dictionary)", "tuple", "list", "set"),
+            listOf("dict", "tuple", "list", "set"),
             0,
             "**kwargs collects the keyword arguments into a dictionary.",
         ),
@@ -379,9 +379,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "What is the base case in recursion?",
-            listOf("A situation where the function returns a result without calling itself", "The first call of the function", "The largest possible argument", "A call to a function from a base class"),
+            listOf("A case where it doesn't call itself", "The first call of the function", "The largest possible argument", "A call to a function from a base class"),
             0,
-            "The base case stops further calls.",
+            "In the base case the function returns a result without calling itself, so further calls stop.",
         ),
         output(
             "def count(t, x):\n    if not t:\n        return 0\n    return (t[0] == x) + count(t[1:], x)\nprint(count([1, 2, 1, 1], 1))",
@@ -502,9 +502,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "Why don't you need to write nonlocal t in the function g?",
-            listOf("Because the list is only modified, not reassigned", "Because lists are always global", "Because g has no parameters", "You do – without nonlocal there will be an error"),
+            listOf("Because t is never reassigned", "Because lists are always global", "Because g has no parameters", "You do – without nonlocal there will be an error"),
             0,
-            "nonlocal is only needed when assigning a new value to the name.",
+            "t.append(1) only modifies the existing list; nonlocal is needed only when assigning a new value to the name.",
             code = "def f():\n    t = []\n    def g():\n        t.append(1)\n        return len(t)\n    return g",
         ),
         output(
@@ -578,9 +578,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "How many times does the decorator itself (not the wrapper function) run if we call the decorated function 5 times?",
-            listOf("Once – when the function is defined", "5 times", "6 times", "Never"),
+            listOf("Once", "5 times", "6 times", "Never"),
             0,
-            "@decor is a one-time f = decor(f); after that only the wrapper gets called.",
+            "@decor is a one-time f = decor(f) when the function is defined; after that only the wrapper gets called.",
         ),
         output(
             "def with_prefix(p):\n    def decor(f):\n        def w(s):\n            return p + f(s)\n        return w\n    return decor\n@with_prefix(\">> \")\ndef echo(s):\n    return s\nprint(echo(\"hey\"))",

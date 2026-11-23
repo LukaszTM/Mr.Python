@@ -38,6 +38,16 @@ internal val module73Cards = listOf(
         ),
     ),
     cards(
+        "u73l4",
+        explain(
+            "Counter: - and &",
+            "Operators work on `Counter`s: `a - b` subtracts the counts and drops keys left with 0 or less, " +
+                "and `a & b` is the intersection – for each key it takes the smaller of the two counts.",
+            code = "from collections import Counter\na = Counter(\"kkkt\")\nb = Counter(\"kot\")\nprint(a - b)\nprint(a & b)",
+            output = "Counter({'k': 2})\nCounter({'k': 1, 't': 1})",
+        ),
+    ),
+    cards(
         "u73l5",
         explain(
             "The Zen of Python",

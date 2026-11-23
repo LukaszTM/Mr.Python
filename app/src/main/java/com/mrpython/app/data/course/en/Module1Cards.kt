@@ -8,9 +8,10 @@ internal val module1Cards = listOf(
         explain(
             "Math operations",
             "Python calculates like a calculator: `+` adds, `-` subtracts, `*` multiplies, and `/` divides. " +
-                "The result of a calculation inside `print()` shows up on the screen.",
-            code = "print(10 - 3)\nprint(3 * 5)",
-            output = "7\n15",
+                "The result of a calculation inside `print()` shows up on the screen. The order is the same as in math: first `*` and `/`, " +
+                "then `+` and `-`. Note: a calculation in quotes is text – Python doesn't work it out, it just prints it.",
+            code = "print(10 - 3)\nprint(3 * 5)\nprint(\"3 * 5\")",
+            output = "7\n15\n3 * 5",
         ),
         explain(
             "Uppercase and lowercase matter",
@@ -60,8 +61,8 @@ internal val module1Cards = listOf(
         ),
         explain(
             "The end and sep parameters",
-            "After every `print()` Python moves to a new line – `end=\"\"` changes what " +
-                "gets added at the end. `sep` sets what separates several values (a space by default).",
+            "After every `print()` Python moves to a new line. The `end` parameter changes what " +
+                "gets added at the end – `end=\"\"` means: nothing. `sep` sets what separates several values (a space by default).",
             code = "print(\"A\", end=\"\")\nprint(\"B\")\nprint(\"x\", \"y\", sep=\"-\")",
             output = "AB\nx-y",
         ),

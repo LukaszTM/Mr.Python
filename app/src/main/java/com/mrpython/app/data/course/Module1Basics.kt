@@ -11,9 +11,9 @@ internal val module1 = CourseUnit(
             "u1l1", "Witaj, świecie!",
             choice(
                 "Która instrukcja wypisze tekst na ekranie?",
-                listOf("print(\"Cześć\")", "echo \"Cześć\"", "console.log(\"Cześć\")", "printf Cześć"),
+                listOf("print(\"Cześć\")", "Print(\"Cześć\")", "print \"Cześć\"", "print(Cześć)"),
                 0,
-                "W Pythonie tekst wypisujemy funkcją print().",
+                "print piszemy małymi literami, z nawiasami, a napis w cudzysłowie.",
             ),
             output(
                 "print(\"Witaj, świecie!\")",
@@ -23,13 +23,13 @@ internal val module1 = CourseUnit(
             tiles(
                 "Ułóż kod, który wypisze: Hej",
                 listOf("print(", "\"Hej\"", ")"),
-                listOf("echo", "Hej"),
+                listOf("Print(", "Hej"),
                 "Napis musi być w cudzysłowie i w nawiasach funkcji print.",
             ),
             fill(
                 "Uzupełnij, aby wypisać słowo Python.",
                 "____(\"Python\")",
-                listOf("print", "write", "say"),
+                listOf("print", "Print", "write"),
                 "print",
                 "Funkcja wypisująca tekst to print.",
             ),
@@ -40,7 +40,7 @@ internal val module1 = CourseUnit(
             ),
             choice(
                 "Czego brakuje w tym kodzie?",
-                listOf("Zamykającego nawiasu )", "Średnika na końcu", "Słowa def", "Niczego – kod jest poprawny"),
+                listOf("Zamykającego nawiasu )", "Otwierającego nawiasu (", "Cudzysłowu na końcu", "Niczego – kod jest poprawny"),
                 0,
                 "Każdy otwarty nawias trzeba zamknąć.",
                 code = "print(\"Hej\"",
@@ -56,13 +56,13 @@ internal val module1 = CourseUnit(
             choice(
                 "Co oznacza znak # w Pythonie?",
                 listOf(
-                    "Początek komentarza – Python go pomija",
+                    "Początek komentarza",
                     "Liczbę",
                     "Koniec programu",
                     "Mnożenie",
                 ),
                 0,
-                "Wszystko od # do końca linii to komentarz dla ludzi, nie dla komputera.",
+                "Od # do końca linii jest komentarz – notatka dla ludzi, którą Python pomija.",
             ),
             output(
                 "# print(\"A\")\nprint(\"B\")",
@@ -70,8 +70,8 @@ internal val module1 = CourseUnit(
                 "Pierwsza linia jest komentarzem, więc się nie wykona.",
             ),
             choice(
-                "Który zapis napisu jest poprawny?",
-                listOf("\"tekst\" oraz 'tekst' – oba", "Tylko \"tekst\"", "Tylko 'tekst'", "«tekst»"),
+                "Czy oba zapisy napisu są poprawne: \"tekst\" i 'tekst'?",
+                listOf("Tak, oba", "Tylko \"tekst\"", "Tylko 'tekst'", "Nie, żaden"),
                 0,
                 "Python akceptuje zarówno cudzysłowy, jak i apostrofy.",
             ),
@@ -107,7 +107,7 @@ internal val module1 = CourseUnit(
             output("print(\"Ala\\nma kota\")", "Ala\nma kota", "\\n w napisie oznacza przejście do nowej linii."),
             choice(
                 "Co oznacza \\t w napisie?",
-                listOf("Tabulator (odstęp)", "Nową linię", "Literę t", "Koniec napisu"),
+                listOf("Tabulator", "Nową linię", "Literę t", "Koniec napisu"),
                 0,
                 "\\t wstawia znak tabulacji, czyli szeroki odstęp.",
             ),
@@ -120,7 +120,7 @@ internal val module1 = CourseUnit(
                 "end",
                 "Parametr end określa, co print dopisze na końcu zamiast nowej linii.",
             ),
-            output("print(\"Cena:\", 5, \"zł\")", "Cena: 5 zł", "print() może wypisywać napisy i liczby razem."),
+            output("print(\"Cena:\", 5, \"zł\")", "Cena: 5 zł", "print() wypisuje napisy i liczby razem i wstawia spację między argumentami."),
             choice(
                 "Ile linii wypisze ten kod?",
                 listOf("3", "1", "2", "0"),
@@ -156,7 +156,7 @@ internal val module1 = CourseUnit(
             tiles(
                 "Ułóż kod, który wypisze: Hej, Ola!",
                 listOf("print(", "\"Hej, \"", "+", "\"Ola!\"", ")"),
-                listOf("-", "echo"),
+                listOf("-", "*"),
                 "+ skleja dwa napisy w jeden.",
             ),
             output("print(\"1\" + \"2\")\nprint(1 + 2)", "12\n3", "Napisy się sklejają, a liczby dodają."),

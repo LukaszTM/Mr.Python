@@ -12,9 +12,9 @@ internal val module2 = CourseUnit(
             "u2l1", "Variables",
             choice(
                 "How do you store the number 5 in the variable x?",
-                listOf("x = 5", "x == 5", "5 = x", "let x = 5"),
+                listOf("x = 5", "x == 5", "5 = x", "x = \"5\""),
                 0,
-                "A single = sign assigns a value to a variable.",
+                "A single = sign assigns a value to a variable; \"5\" in quotes would be a string, not a number.",
             ),
             output(
                 "x = 3\nx = x + 2\nprint(x)",
@@ -83,10 +83,10 @@ internal val module2 = CourseUnit(
             ),
             fill(
                 "Convert the string to a whole number.",
-                "age = ____(\"18\")",
-                listOf("int", "str", "text"),
+                "age = ____(\"18\")\nprint(age + 2)",
+                listOf("int", "str", "float"),
                 "int",
-                "int() creates a whole number.",
+                "int() creates the whole number 18; str() would keep a string, and float() would give 18.0.",
             ),
             output(
                 "print(str(10) + \"0\")",
@@ -100,7 +100,7 @@ internal val module2 = CourseUnit(
             "u2l3", "f-strings and input()",
             choice(
                 "What does the input() function return?",
-                listOf("Always a string (str)", "Always a number", "True or False", "Nothing"),
+                listOf("Always a string", "Always a number", "True or False", "Nothing"),
                 0,
                 "input() returns whatever the user typed, as a string.",
             ),
@@ -112,7 +112,7 @@ internal val module2 = CourseUnit(
             fill(
                 "Fill in the blank so the expression in braces gets calculated.",
                 "print(____\"Result: {2 + 2}\")",
-                listOf("f", "$", "#"),
+                listOf("f", "s", "#"),
                 "f",
                 "The letter f before the quote creates an f-string.",
             ),
@@ -134,9 +134,9 @@ internal val module2 = CourseUnit(
             ),
             choice(
                 "The user types 5. What happens?",
-                listOf("An error – you can't add str and int", "It prints 6", "It prints 51", "It prints 5 1"),
+                listOf("An error occurs", "It prints 6", "It prints 51", "It prints 5 1"),
                 0,
-                "input() returns the string \"5\". You have to convert it: int(x) + 1.",
+                "input() returns the string \"5\", and you can't add a string and a number. Convert it first: int(x) + 1.",
                 code = "x = input(\"Number: \")\nprint(x + 1)",
             ),
         ),
@@ -187,7 +187,7 @@ internal val module2 = CourseUnit(
             tiles(
                 "Increase the value of the variable points by 10",
                 listOf("points", "+=", "10"),
-                listOf("-=", "++"),
+                listOf("-=", "="),
                 "+= adds a value to a variable.",
             ),
             output("x = 5\nx = x * 2 - 1\nprint(x)", "9", "5 * 2 - 1 = 9."),

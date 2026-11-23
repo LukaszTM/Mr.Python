@@ -36,7 +36,7 @@ internal val module1Practice = listOf(
         ),
         choice(
             "What is missing from this code?",
-            listOf("Quotes around Hey", "A semicolon at the end", "A second parenthesis", "Nothing – the code is correct"),
+            listOf("Quotes around Hey", "A capital letter: Print", "A second parenthesis", "Nothing – the code is correct"),
             0,
             "Text you want to print has to be in quotes.",
             code = "print(Hey)",
@@ -58,13 +58,13 @@ internal val module1Practice = listOf(
         tiles(
             "Arrange the code to print: Good morning",
             listOf("print(", "\"Good morning\"", ")"),
-            listOf("Good", "say"),
+            listOf("Good", "Print("),
             "We put the text in quotes inside the parentheses of print().",
         ),
         tiles(
             "Arrange the code to print the result of 9 - 4",
             listOf("print(", "9", "-", "4", ")"),
-            listOf("\"9 - 4\"", "echo"),
+            listOf("\"9 - 4\"", "+"),
             "Without quotes Python does the math and prints 5.",
         ),
     ),
@@ -82,7 +82,7 @@ internal val module1Practice = listOf(
             "What does this code print?",
             listOf("22", "4", "2 2", "Error"),
             0,
-            "\"2\" is a string, so + joins them.",
+            "Both \"2\" values are strings, so + joins them.",
             code = "print(\"2\" + \"2\")",
         ),
         choice(
@@ -107,7 +107,7 @@ internal val module1Practice = listOf(
         fill(
             "Fill in the blank so the first line is a comment.",
             "____ this is a comment\nprint(\"OK\")",
-            listOf("#", "//", "--"),
+            listOf("#", "*", "\""),
             "#",
             "A comment in Python starts with #.",
         ),
@@ -147,9 +147,9 @@ internal val module1Practice = listOf(
         ),
         choice(
             "What does print() add at the end by default?",
-            listOf("A newline character (\\n)", "A space", "Nothing", "A comma"),
+            listOf("A new line", "A space", "Nothing", "A comma"),
             0,
-            "That's why every print() starts on a new line.",
+            "By default end is \\n, which is why each next print() starts on a new line.",
         ),
         choice(
             "What does print() put between several arguments by default?",

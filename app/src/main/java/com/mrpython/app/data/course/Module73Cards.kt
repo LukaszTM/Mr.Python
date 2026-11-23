@@ -36,6 +36,16 @@ internal val module73Cards = listOf(
         ),
     ),
     cards(
+        "u73l4",
+        explain(
+            "Counter: - i &",
+            "Na `Counter`ach działają operatory: `a - b` odejmuje liczności i usuwa klucze, którym zostało 0 lub mniej, " +
+                "a `a & b` to część wspólna – dla każdego klucza bierze mniejszą z dwóch liczności.",
+            code = "from collections import Counter\na = Counter(\"kkkt\")\nb = Counter(\"kot\")\nprint(a - b)\nprint(a & b)",
+            output = "Counter({'k': 2})\nCounter({'k': 1, 't': 1})",
+        ),
+    ),
+    cards(
         "u73l5",
         explain(
             "Zen Pythona",

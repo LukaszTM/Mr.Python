@@ -11,9 +11,9 @@ internal val module2 = CourseUnit(
             "u2l1", "Zmienne",
             choice(
                 "Jak zapisać liczbę 5 w zmiennej x?",
-                listOf("x = 5", "x == 5", "5 = x", "let x = 5"),
+                listOf("x = 5", "x == 5", "5 = x", "x = \"5\""),
                 0,
-                "Pojedynczy znak = przypisuje wartość do zmiennej.",
+                "Pojedynczy znak = przypisuje wartość do zmiennej; \"5\" w cudzysłowie byłoby napisem, a nie liczbą.",
             ),
             output(
                 "x = 3\nx = x + 2\nprint(x)",
@@ -82,10 +82,10 @@ internal val module2 = CourseUnit(
             ),
             fill(
                 "Zamień napis na liczbę całkowitą.",
-                "wiek = ____(\"18\")",
-                listOf("int", "str", "text"),
+                "wiek = ____(\"18\")\nprint(wiek + 2)",
+                listOf("int", "str", "float"),
                 "int",
-                "int() tworzy liczbę całkowitą.",
+                "int() tworzy liczbę całkowitą 18; str() zostawiłoby napis, a float() dałoby 18.0.",
             ),
             output(
                 "print(str(10) + \"0\")",
@@ -99,7 +99,7 @@ internal val module2 = CourseUnit(
             "u2l3", "f-stringi i input()",
             choice(
                 "Co zwraca funkcja input()?",
-                listOf("Zawsze napis (str)", "Zawsze liczbę", "True lub False", "Nic"),
+                listOf("Zawsze napis", "Zawsze liczbę", "True lub False", "Nic"),
                 0,
                 "input() zwraca to, co wpisał użytkownik, jako napis.",
             ),
@@ -111,7 +111,7 @@ internal val module2 = CourseUnit(
             fill(
                 "Uzupełnij, aby wyrażenie w klamrach zostało obliczone.",
                 "print(____\"Wynik: {2 + 2}\")",
-                listOf("f", "$", "#"),
+                listOf("f", "s", "#"),
                 "f",
                 "Litera f przed cudzysłowem tworzy f-string.",
             ),
@@ -133,9 +133,9 @@ internal val module2 = CourseUnit(
             ),
             choice(
                 "Użytkownik wpisuje 5. Co się stanie?",
-                listOf("Błąd – nie można dodać str i int", "Wypisze 6", "Wypisze 51", "Wypisze 5 1"),
+                listOf("Pojawi się błąd", "Wypisze 6", "Wypisze 51", "Wypisze 5 1"),
                 0,
-                "input() zwraca napis \"5\". Trzeba go zamienić: int(x) + 1.",
+                "input() zwraca napis \"5\", a napisu i liczby nie można dodać. Trzeba go zamienić: int(x) + 1.",
                 code = "x = input(\"Liczba: \")\nprint(x + 1)",
             ),
         ),
@@ -186,7 +186,7 @@ internal val module2 = CourseUnit(
             tiles(
                 "Zwiększ wartość zmiennej punkty o 10",
                 listOf("punkty", "+=", "10"),
-                listOf("-=", "++"),
+                listOf("-=", "="),
                 "+= dodaje wartość do zmiennej.",
             ),
             output("x = 5\nx = x * 2 - 1\nprint(x)", "9", "5 * 2 - 1 = 9."),

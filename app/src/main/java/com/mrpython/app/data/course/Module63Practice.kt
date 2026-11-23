@@ -377,9 +377,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "Czym jest przypadek bazowy w rekurencji?",
-            listOf("Sytuacją, w której funkcja zwraca wynik bez wywoływania siebie", "Pierwszym wywołaniem funkcji", "Największym możliwym argumentem", "Wywołaniem funkcji z klasy bazowej"),
+            listOf("Przypadkiem, gdy funkcja nie woła siebie", "Pierwszym wywołaniem funkcji", "Największym możliwym argumentem", "Wywołaniem funkcji z klasy bazowej"),
             0,
-            "Przypadek bazowy zatrzymuje kolejne wywołania.",
+            "W przypadku bazowym funkcja zwraca wynik bez wywoływania siebie, więc kolejne wywołania się zatrzymują.",
         ),
         output(
             "def ile(t, x):\n    if not t:\n        return 0\n    return (t[0] == x) + ile(t[1:], x)\nprint(ile([1, 2, 1, 1], 1))",
@@ -500,9 +500,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "Dlaczego w funkcji g nie trzeba pisać nonlocal t?",
-            listOf("Bo lista jest tylko zmieniana, a nie przypisywana na nowo", "Bo listy są zawsze globalne", "Bo g nie ma parametrów", "Trzeba – bez nonlocal będzie błąd"),
+            listOf("Bo t nie jest przypisywane na nowo", "Bo listy są zawsze globalne", "Bo g nie ma parametrów", "Trzeba – bez nonlocal będzie błąd"),
             0,
-            "nonlocal potrzebne jest tylko przy przypisaniu nowej wartości do nazwy.",
+            "t.append(1) tylko zmienia istniejącą listę; nonlocal jest potrzebne dopiero przy przypisaniu nowej wartości do nazwy.",
             code = "def f():\n    t = []\n    def g():\n        t.append(1)\n        return len(t)\n    return g",
         ),
         output(
@@ -576,9 +576,9 @@ internal val module63Practice = listOf(
         ),
         choice(
             "Ile razy wykona się sam dekorator (nie funkcja opakowująca), jeśli udekorowaną funkcję wywołamy 5 razy?",
-            listOf("Raz – przy definicji funkcji", "5 razy", "6 razy", "Ani razu"),
+            listOf("Raz", "5 razy", "6 razy", "Ani razu"),
             0,
-            "@dekor to jednorazowe f = dekor(f); potem woła się już wrapper.",
+            "@dekor to jednorazowe f = dekor(f) w chwili definicji funkcji; potem woła się już tylko wrapper.",
         ),
         output(
             "def z_prefiksem(p):\n    def dekor(f):\n        def w(s):\n            return p + f(s)\n        return w\n    return dekor\n@z_prefiksem(\">> \")\ndef echo(s):\n    return s\nprint(echo(\"hej\"))",

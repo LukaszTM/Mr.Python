@@ -5,7 +5,7 @@ import com.mrpython.app.data.course.*
 internal val module3Practice = listOf(
     practice(
         "u3l1",
-        output("print(9 // 4)", "2", "9 / 4 = 2.25, and // cuts off the fractional part."),
+        output("print(9 // 4)", "2", "9 / 4 = 2.25, and // rounds down to 2."),
         output("print(9 % 4)", "1", "9 = 2 · 4 + 1, so the remainder is 1."),
         output("print(3 ** 2)", "9", "3 squared is 3 · 3."),
         output("print(15 / 3)", "5.0", "Division with / gives a float, even when it divides evenly."),
@@ -150,9 +150,9 @@ internal val module3Practice = listOf(
         ),
         choice(
             "Does else have its own condition?",
-            listOf("No – else runs when nothing before it matched", "Yes, always", "Only after elif", "Only in a loop"),
+            listOf("No, never", "Yes, always", "Yes, after elif", "Yes, after if"),
             0,
-            "We write else with no condition, just a colon.",
+            "We write else with no condition, just a colon – it runs when nothing before it matched.",
         ),
         fill(
             "Fill in the blank to check a second condition when the first one is not met.",
@@ -246,9 +246,9 @@ internal val module3Practice = listOf(
             "An empty string is falsy, and not turns that into true.",
         ),
         tiles(
-            "Write the condition: it is not true that x is greater than 5",
+            "Write the condition with not and parentheses: it is not true that x is greater than 5",
             listOf("not", "(", "x", ">", "5", ")"),
-            listOf("!", "<"),
+            listOf("!=", ">="),
             "not before the parentheses flips the result of the whole comparison.",
         ),
         choice(
@@ -278,7 +278,7 @@ internal val module3Practice = listOf(
         output(
             "year = 2024\nif year % 4 == 0:\n    print(\"leap year\")\nelse:\n    print(\"regular year\")",
             "leap year",
-            "2024 divides by 4 with no remainder.",
+            "2024 divides by 4 with no remainder. (The full leap-year rule has exceptions for years like 1900, but this simple one is enough here.)",
         ),
         output("print(7 / 2 > 3)", "True", "7 / 2 = 3.5, and 3.5 > 3."),
         choice(

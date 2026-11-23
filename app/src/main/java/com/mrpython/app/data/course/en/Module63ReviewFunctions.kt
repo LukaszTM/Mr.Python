@@ -115,7 +115,7 @@ internal val module63 = CourseUnit(
             ),
             choice(
                 "What type is args inside the function def f(*args)?",
-                listOf("tuple", "list", "dict (dictionary)", "set"),
+                listOf("tuple", "list", "dict", "set"),
                 0,
                 "*args collects the positional arguments into a tuple.",
             ),
@@ -216,7 +216,7 @@ internal val module63 = CourseUnit(
             ),
             choice(
                 "What is this function missing?",
-                listOf("A stopping condition (base case)", "A return statement at the end", "A default parameter", "Nothing – it works correctly"),
+                listOf("A base case", "A return statement at the end", "A default parameter", "Nothing – it works correctly"),
                 0,
                 "Without a base case the function calls itself forever (RecursionError).",
                 code = "def countdown(n):\n    print(n)\n    countdown(n - 1)",

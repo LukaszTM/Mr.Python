@@ -34,7 +34,7 @@ internal val module1Practice = listOf(
         ),
         choice(
             "Czego brakuje w tym kodzie?",
-            listOf("Cudzysłowów wokół Hej", "Średnika na końcu", "Drugiego nawiasu", "Niczego – kod jest poprawny"),
+            listOf("Cudzysłowów wokół Hej", "Wielkiej litery: Print", "Drugiego nawiasu", "Niczego – kod jest poprawny"),
             0,
             "Tekst do wypisania musi być w cudzysłowie.",
             code = "print(Hej)",
@@ -56,13 +56,13 @@ internal val module1Practice = listOf(
         tiles(
             "Ułóż kod, który wypisze: Dzień dobry",
             listOf("print(", "\"Dzień dobry\"", ")"),
-            listOf("Dzień", "say"),
+            listOf("Dzień", "Print("),
             "Tekst w cudzysłowie umieszczamy w nawiasach print().",
         ),
         tiles(
             "Ułóż kod, który wypisze wynik działania 9 - 4",
             listOf("print(", "9", "-", "4", ")"),
-            listOf("\"9 - 4\"", "echo"),
+            listOf("\"9 - 4\"", "+"),
             "Bez cudzysłowu Python obliczy działanie i wypisze 5.",
         ),
     ),
@@ -80,7 +80,7 @@ internal val module1Practice = listOf(
             "Co wypisze ten kod?",
             listOf("22", "4", "2 2", "Błąd"),
             0,
-            "\"2\" to napisy, więc + je skleja.",
+            "\"2\" i \"2\" to napisy, więc + je skleja.",
             code = "print(\"2\" + \"2\")",
         ),
         choice(
@@ -105,7 +105,7 @@ internal val module1Practice = listOf(
         fill(
             "Uzupełnij, aby pierwsza linia była komentarzem.",
             "____ to jest komentarz\nprint(\"OK\")",
-            listOf("#", "//", "--"),
+            listOf("#", "*", "\""),
             "#",
             "Komentarz w Pythonie zaczyna się od #.",
         ),
@@ -145,9 +145,9 @@ internal val module1Practice = listOf(
         ),
         choice(
             "Co print() domyślnie dopisuje na końcu?",
-            listOf("Znak nowej linii (\\n)", "Spację", "Nic", "Przecinek"),
+            listOf("Nową linię", "Spację", "Nic", "Przecinek"),
             0,
-            "Dlatego każde print() zaczyna się w nowej linii.",
+            "Domyślnie end to \\n, dlatego każde kolejne print() zaczyna się w nowej linii.",
         ),
         choice(
             "Czym print() domyślnie rozdziela kilka argumentów?",

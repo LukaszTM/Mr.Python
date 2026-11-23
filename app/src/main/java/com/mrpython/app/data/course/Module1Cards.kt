@@ -6,9 +6,10 @@ internal val module1Cards = listOf(
         explain(
             "Działania matematyczne",
             "Python liczy jak kalkulator: `+` dodaje, `-` odejmuje, `*` mnoży, a `/` dzieli. " +
-                "Wynik działania wpisanego w `print()` pojawi się na ekranie.",
-            code = "print(10 - 3)\nprint(3 * 5)",
-            output = "7\n15",
+                "Wynik działania wpisanego w `print()` pojawi się na ekranie. Kolejność jak w matematyce: najpierw `*` i `/`, " +
+                "potem `+` i `-`. Uwaga: działanie w cudzysłowie to już tekst – Python go nie liczy, tylko wypisuje.",
+            code = "print(10 - 3)\nprint(3 * 5)\nprint(\"3 * 5\")",
+            output = "7\n15\n3 * 5",
         ),
         explain(
             "Wielkość liter ma znaczenie",
@@ -29,8 +30,8 @@ internal val module1Cards = listOf(
         ),
         explain(
             "Sklejanie i powtarzanie napisów",
-            "Znak `+` skleja dwa napisy w jeden (bez dodatkowej spacji!). Napis pomnożony przez " +
-                "liczbę `*` powtarza się tyle razy.",
+            "Znak `+` skleja dwa napisy w jeden (bez dodatkowej spacji!). Napis pomnożony " +
+                "(znakiem `*`) przez liczbę powtarza się tyle razy.",
             code = "print(\"Py\" + \"thon\")\nprint(\"ha\" * 3)",
             output = "Python\nhahaha",
         ),
@@ -58,8 +59,8 @@ internal val module1Cards = listOf(
         ),
         explain(
             "Parametry end i sep",
-            "Po każdym `print()` Python przechodzi do nowej linii – `end=\"\"` zmienia to, co " +
-                "zostanie dopisane na końcu. `sep` ustala, czym oddzielić kilka wartości (domyślnie spacją).",
+            "Po każdym `print()` Python przechodzi do nowej linii. Parametr `end` zmienia to, co " +
+                "zostanie dopisane na końcu – `end=\"\"` oznacza: nic. `sep` ustala, czym oddzielić kilka wartości (domyślnie spacją).",
             code = "print(\"A\", end=\"\")\nprint(\"B\")\nprint(\"x\", \"y\", sep=\"-\")",
             output = "AB\nx-y",
         ),

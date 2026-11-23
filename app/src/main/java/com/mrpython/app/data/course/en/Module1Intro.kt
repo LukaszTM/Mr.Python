@@ -25,13 +25,14 @@ internal val module1Intro = lesson(
     ),
     explain(
         "Numbers and math",
-        "We don't put numbers in quotes. That way Python can calculate with them – `print()` shows the result.",
+        "We don't put numbers and calculations in quotes – then Python works them out and `print()` shows the result. " +
+            "Anything inside quotes is text: it is printed exactly as written, even if it looks like a calculation.",
         code = "print(2 + 3)\nprint(\"2 + 3\")",
         output = "5\n2 + 3",
     ),
     explain(
         "Comments",
-        "A line that starts with `#` is a comment – a note for people. Python skips it.",
+        "The `#` sign starts a comment – from there to the end of the line is a note for people. Python skips it.",
         code = "# this is a comment\nprint(\"It works!\")",
         output = "It works!",
     ),

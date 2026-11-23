@@ -78,9 +78,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "Co robi continue?",
-            listOf("Pomija resztę obrotu i przechodzi do następnego", "Kończy całą pętlę", "Kończy program", "Powtarza ten sam obrót"),
+            listOf("Przechodzi do następnego obrotu", "Kończy całą pętlę", "Kończy program", "Powtarza ten sam obrót"),
             0,
-            "continue przeskakuje do kolejnego obrotu pętli.",
+            "continue pomija resztę bieżącego obrotu i przeskakuje do kolejnego.",
         ),
         choice(
             "Ile razy wykona się ta pętla?",
@@ -111,7 +111,7 @@ internal val module4Practice = listOf(
             "n musi maleć, żeby warunek n > 0 w końcu był fałszywy.",
         ),
         tiles(
-            "Ułóż nagłówek pętli: dopóki zycia są większe od 0",
+            "Ułóż nagłówek pętli: dopóki zmienna zycia jest większa od 0",
             listOf("while", "zycia", ">", "0", ":"),
             listOf("for", "=="),
             "while warunek: – pętla działa, dopóki warunek jest prawdziwy.",
@@ -155,9 +155,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("Nic – zakres jest pusty", "5 4 3 2", "5", "Błąd"),
+            listOf("Nic", "5 4 3 2", "5", "Błąd"),
             0,
-            "Bez ujemnego kroku range nie liczy w dół, więc od 5 do 1 nie ma liczb.",
+            "Zakres jest pusty: bez ujemnego kroku range nie liczy w dół, więc od 5 do 1 nie ma liczb.",
             code = "for i in range(5, 1):\n    print(i)",
         ),
         fill(
@@ -233,10 +233,10 @@ internal val module4Practice = listOf(
             code = "for i in range(2):\n    for j in range(5):\n        print(\"x\")",
         ),
         choice(
-            "Co przerywa break w pętli zagnieżdżonej?",
-            listOf("Tylko pętlę, w której się znajduje", "Obie pętle", "Cały program", "Nic"),
+            "break stoi w wewnętrznej z dwóch pętli. Co przerywa?",
+            listOf("Wewnętrzną pętlę", "Obie pętle", "Cały program", "Zewnętrzną pętlę"),
             0,
-            "break kończy najbliższą pętlę – zewnętrzna działa dalej.",
+            "break kończy tylko pętlę, w której się znajduje – zewnętrzna działa dalej.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -299,9 +299,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "Kiedy kończy się pętla while?",
-            listOf("Gdy warunek przestaje być prawdziwy (albo po break)", "Zawsze po 10 obrotach", "Po przejściu całego napisu", "Nigdy"),
+            listOf("Gdy warunek stanie się fałszywy", "Zawsze po 10 obrotach", "Po przejściu całego napisu", "Nigdy"),
             0,
-            "while sprawdza warunek przed każdym obrotem.",
+            "while sprawdza warunek przed każdym obrotem i kończy się, gdy jest fałszywy (wcześniej może ją przerwać break).",
         ),
         choice(
             "Co wypisze ten kod?",
