@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -34,6 +36,22 @@ jobs:
         with:
           name: mr-python-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # Build artifacts expire and need a GitHub login. The latest test APK is therefore also
+      # kept as a release asset, which has one stable address that never expires.
+      - name: Publish the test APK under a permanent link
+        if: github.ref == 'refs/heads/main' || github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk mr-python.apk
+          if ! gh release view apk-latest >/dev/null 2>&1; then
+            gh release create apk-latest --prerelease --target "$TARGET_SHA" \
+              --title "Mr. Python – wersja testowa (APK)" \
+              --notes "Najnowsza wersja testowa aplikacji, podmieniana automatycznie po każdej kompilacji. Zakupy są w niej symulowane, a reklamy próbne."
+          fi
+          gh release upload apk-latest mr-python.apk --clobber
 
       # The Google Play bundle. It is signed only when the upload key is stored in the
       # repository secrets (see docs/play-store/CHECKLIST.md); otherwise it is built
