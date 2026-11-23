@@ -46,7 +46,7 @@ internal val module21Practice = listOf(
         choice(
             "Co zwraca f.read()?",
             listOf(
-                "Całą zawartość pliku jako jeden napis",
+                "Całą treść jako napis",
                 "Listę liczb",
                 "Tylko pierwszy znak",
                 "Nazwę pliku",
@@ -57,7 +57,7 @@ internal val module21Practice = listOf(
         choice(
             "Po co wywołujemy f.close()?",
             listOf(
-                "Aby zamknąć plik i zapisać zmiany na dysku",
+                "Aby zakończyć pracę z plikiem",
                 "Aby usunąć plik",
                 "Aby wyczyścić zawartość pliku",
                 "Aby otworzyć plik ponownie",
@@ -68,13 +68,13 @@ internal val module21Practice = listOf(
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
-                "ValueError – plik jest już zamknięty",
+                "Błąd ValueError",
                 "Plik będzie zawierał xy",
                 "Plik będzie zawierał y",
                 "Nic się nie stanie",
             ),
             0,
-            "Do zamkniętego pliku nie da się już pisać.",
+            "Do zamkniętego pliku nie da się już pisać – write zgłasza ValueError.",
             code = "f = open(\"a.txt\", \"w\")\nf.write(\"x\")\nf.close()\nf.write(\"y\")",
         ),
         fill(
@@ -160,13 +160,13 @@ internal val module21Practice = listOf(
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
-                "ValueError – plik jest już zamknięty",
+                "Błąd ValueError",
                 "W pliku będzie ab",
                 "W pliku będzie b",
                 "Nic się nie stanie",
             ),
             0,
-            "Po bloku with plik jest zamknięty, więc zapis się nie uda.",
+            "Po bloku with plik jest zamknięty, więc write zgłasza ValueError.",
             code = "with open(\"a.txt\", \"w\") as f:\n    f.write(\"a\")\nf.write(\"b\")",
         ),
         choice(
@@ -247,7 +247,7 @@ internal val module21Practice = listOf(
         choice(
             "Co zwraca f.readlines()?",
             listOf(
-                "Listę napisów – po jednym na każdą linię",
+                "Listę wszystkich linii",
                 "Liczbę linii",
                 "Jedną, następną linię",
                 "Cały plik jako jeden napis",
@@ -461,8 +461,8 @@ internal val module21Practice = listOf(
             "Wyrażenie listowe ma postać [wyrażenie for zmienna in plik].",
         ),
         fill(
-            "Uzupełnij tryb, aby zapisać plik od nowa.",
-            "with open(\"p.txt\", \"____\") as f:\n    f.write(\"nowy tekst\")",
+            "Uzupełnij tryb, aby program wypisał tylko: nowy tekst.",
+            "with open(\"p.txt\", \"w\") as f:\n    f.write(\"stary \")\nwith open(\"p.txt\", \"____\") as f:\n    f.write(\"nowy tekst\")\nprint(open(\"p.txt\").read())",
             listOf("w", "a", "r"),
             "w",
             "\"w\" czyści plik, \"a\" tylko dopisuje, a \"r\" nie pozwala pisać.",

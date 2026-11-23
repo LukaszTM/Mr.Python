@@ -164,7 +164,7 @@ internal val module14 = CourseUnit(
             ),
             choice(
                 "Co robi instrukcja b = a, gdy a jest listą?",
-                listOf("Daje drugą nazwę tej samej liście", "Tworzy kopię płytką", "Tworzy kopię głęboką", "Czyści listę a"),
+                listOf("Daje drugą nazwę tej samej liście", "Tworzy płytką kopię listy a", "Tworzy głęboką kopię listy a", "Usuwa wszystko z listy a"),
                 0,
                 "Przypisanie nigdy nie kopiuje – obie zmienne wskazują ten sam obiekt.",
             ),

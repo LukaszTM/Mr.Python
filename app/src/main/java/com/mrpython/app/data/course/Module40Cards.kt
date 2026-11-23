@@ -56,8 +56,9 @@ internal val module40Cards = listOf(
         "u40l4",
         explain(
             "Dekorator w skrócie",
-            "Dekorator to funkcja, która dostaje funkcję i zwraca nową. `@ozdob` nad `def hej` to " +
-                "skrót od `hej = ozdob(hej)`. Dlatego bez `wraps` nazwa to nazwa funkcji wewnętrznej.",
+            "Dekorator to funkcja, która dostaje funkcję i zwraca nową. Tę nową funkcję można zdefiniować " +
+                "przez `def` wewnątrz dekoratora i zwrócić, tak jak zwracaliśmy lambdę. `@ozdob` nad " +
+                "`def hej` to skrót od `hej = ozdob(hej)`. Dlatego bez `wraps` nazwa to nazwa funkcji wewnętrznej.",
             code = "def ozdob(f):\n    def wrapper(): return f()\n    return wrapper\n@ozdob\ndef hej(): pass\nprint(hej.__name__)",
             output = "wrapper",
         ),

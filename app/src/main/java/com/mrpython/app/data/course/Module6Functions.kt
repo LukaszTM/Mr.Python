@@ -11,7 +11,7 @@ internal val module6 = CourseUnit(
             "u6l1", "Definiowanie funkcji",
             choice(
                 "Które słowo kluczowe definiuje funkcję?",
-                listOf("def", "function", "fun", "func"),
+                listOf("def", "function", "return", "func"),
                 0,
                 "Funkcje w Pythonie definiujemy słowem def.",
             ),
@@ -79,12 +79,12 @@ internal val module6 = CourseUnit(
                 "Czym jest argument funkcji?",
                 listOf(
                     "Wartością przekazaną do funkcji przy wywołaniu",
-                    "Nazwą funkcji",
-                    "Komentarzem w funkcji",
-                    "Błędem w funkcji",
+                    "Nazwą, którą nadajesz funkcji po def",
+                    "Komentarzem opisującym działanie funkcji",
+                    "Wynikiem, który funkcja oddaje przez return",
                 ),
                 0,
-                "W podwoj(4) liczba 4 jest argumentem.",
+                "W podwoj(4) liczba 4 jest argumentem. Wynik oddany przez return to wartość zwracana, a nie argument.",
             ),
             output("def pole(a, b):\n    return a * b\n\nprint(pole(3, 4) + 1)", "13", "Wynik funkcji można dalej używać w obliczeniach."),
             output(
@@ -102,9 +102,9 @@ internal val module6 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("Błąd NameError – y istnieje tylko w funkcji", "Wypisze 10", "Wypisze None", "Wypisze 0"),
+                listOf("Błąd NameError", "Wypisze 10", "Wypisze None", "Wypisze 0"),
                 0,
-                "Zmienne utworzone w funkcji nie są widoczne poza nią.",
+                "y istnieje tylko wewnątrz funkcji – poza nią Python nie zna tej nazwy.",
                 code = "def f():\n    y = 10\n\nf()\nprint(y)",
             ),
             output(
@@ -173,7 +173,7 @@ internal val module6 = CourseUnit(
             output(
                 "def silnia(n):\n    wynik = 1\n    for i in range(2, n + 1):\n        wynik *= i\n    return wynik\n\nprint(silnia(5))",
                 "120",
-                "5! = 1 · 2 · 3 · 4 · 5 = 120.",
+                "silnia(5) = 1 · 2 · 3 · 4 · 5 = 120.",
             ),
         ),
     ),

@@ -41,7 +41,7 @@ internal val module35Intro = lesson(
     tiles(
         "Raise the exception BadAge with the message \"negative\"",
         listOf("raise", "BadAge(", "\"negative\"", ")"),
-        listOf("throw", "return"),
+        listOf("except", "return"),
         "We raise exceptions with the raise keyword.",
     ),
     output(

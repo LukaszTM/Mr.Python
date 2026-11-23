@@ -40,7 +40,7 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("AttributeError – there is no x", "It prints 1", "It prints None", "It prints 2"),
+                listOf("AttributeError", "It prints 1", "It prints None", "It prints 2"),
                 0,
                 "B overrode __init__ and didn't call super().__init__(), so x was never created.",
                 code = "class A:\n    def __init__(self):\n        self.x = 1\n\nclass B(A):\n    def __init__(self):\n        self.y = 2\n\nprint(B().x)",
@@ -53,7 +53,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Call the base class's __init__ with the argument name",
                 listOf("super()", ".__init__(", "name", ")"),
-                listOf("self,", "parent()"),
+                listOf("self,", "super"),
                 "super().__init__(name) – self is passed automatically.",
             ),
         ),
@@ -66,9 +66,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "What is polymorphism?",
-                listOf("Different classes have a method with the same name and can be used the same way", "A class has many constructors", "An object changes its class while the program runs", "A class inherits from many classes"),
+                listOf("Different classes have a method with the same name", "One class has several different constructors", "An object changes its class while the program runs", "One class inherits from several other classes"),
                 0,
-                "Thanks to polymorphism, a loop can call the same method on different objects.",
+                "Different classes have a method with the same name, so a loop calls it the same way and each object answers in its own way.",
             ),
             output(
                 "class Animal:\n    pass\n\nclass Dog(Animal):\n    pass\n\nd = Dog()\nprint(isinstance(d, Dog), isinstance(d, Animal))",
@@ -132,7 +132,7 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "What does the abbreviation MRO mean?",
-                listOf("The order in which Python looks for methods in classes", "A list of all objects of a class", "A method that creates an object", "A kind of error"),
+                listOf("The method search order", "A list of a class's objects", "A method that creates objects", "A kind of class error"),
                 0,
                 "MRO (Method Resolution Order) is the order in which classes are searched.",
             ),
@@ -151,7 +151,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Write the header of class C that inherits from A and B",
                 listOf("class", "C(", "A,", "B", "):"),
-                listOf("def", "extends"),
+                listOf("def", "and"),
                 "Base classes are listed in the parentheses, separated by commas.",
             ),
         ),
@@ -164,9 +164,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – you can't create an abstract class", "An object s is created", "NameError", "s.area() returns None"),
+                listOf("TypeError", "An object s is created", "NameError", "s.area() returns None"),
                 0,
-                "A class with an unimplemented abstract method can't be instantiated.",
+                "A class with an unimplemented abstract method can't be instantiated – Python raises a TypeError.",
                 code = "from abc import ABC, abstractmethod\n\nclass Shape(ABC):\n    @abstractmethod\n    def area(self):\n        pass\n\ns = Shape()",
             ),
             output(
@@ -183,9 +183,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "What does an abstract class inherit from in Python?",
-                listOf("ABC from the abc module", "Abstract", "Exception", "Nothing – the word abstract is enough"),
+                listOf("ABC", "abstractmethod", "Exception", "Abstract"),
                 0,
-                "An abstract class inherits from abc.ABC.",
+                "An abstract class inherits from ABC from the abc module; abstractmethod is a decorator for methods, not a base class.",
             ),
             output(
                 "from abc import ABC, abstractmethod\nclass Animal(ABC):\n    @abstractmethod\n    def sound(self):\n        pass\n    def introduce(self):\n        return \"Me: \" + self.sound()\nclass Cat(Animal):\n    def sound(self):\n        return \"meow\"\nprint(Cat().introduce())",
@@ -195,12 +195,12 @@ internal val module33 = CourseUnit(
             tiles(
                 "Import ABC and abstractmethod",
                 listOf("from", "abc", "import", "ABC,", "abstractmethod"),
-                listOf("include", "abstract"),
+                listOf("Abc", "abstract"),
                 "Both come from the abc module.",
             ),
             choice(
                 "Why do we use abstract classes?",
-                listOf("To force derived classes to implement certain methods", "To make the program run faster", "To hide attributes", "To make a class have only one object"),
+                listOf("To force methods in derived classes", "To make the program run faster", "To hide attributes from others", "To allow only one object of a class"),
                 0,
                 "An abstract class is a template – it says which methods derived classes must have.",
             ),
@@ -238,9 +238,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Which expression calls the describe method from the base class?",
-                listOf("super().describe()", "parent.describe()", "base().describe()", "self.super().describe()"),
+                listOf("super().describe()", "super.describe()", "super().describe", "self.super().describe()"),
                 0,
-                "We reach the parent's methods through super().",
+                "super() is a function, so it needs parentheses (self.super() doesn't exist); without parentheses after describe, the method isn't called.",
             ),
             output(
                 "from abc import ABC, abstractmethod\nclass Shape(ABC):\n    @abstractmethod\n    def area(self):\n        pass\nclass Circle(Shape):\n    def area(self):\n        return 3\ns = Circle()\nprint(isinstance(s, Shape), s.area())",
@@ -250,7 +250,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Write the header of the class Cat that inherits from Animal",
                 listOf("class", "Cat(", "Animal", "):"),
-                listOf("def", "extends"),
+                listOf("def", "self,"),
                 "The base class goes in the parentheses.",
             ),
         ),

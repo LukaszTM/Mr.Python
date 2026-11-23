@@ -16,7 +16,7 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Po jakiej klasie zwykle dziedziczy własny wyjątek?",
-                listOf("Exception", "Error", "object", "Throwable"),
+                listOf("Exception", "Error", "object", "str"),
                 0,
                 "Własne wyjątki dziedziczą po Exception (lub jej podklasie).",
             ),
@@ -40,14 +40,14 @@ internal val module35 = CourseUnit(
             tiles(
                 "Zgłoś wyjątek BrakSrodkow z komunikatem \"za mało\"",
                 listOf("raise", "BrakSrodkow(", "\"za mało\"", ")"),
-                listOf("throw", "return"),
+                listOf("except", "return"),
                 "Wyjątki zgłaszamy słowem raise.",
             ),
             choice(
                 "Dlaczego warto tworzyć własne wyjątki?",
-                listOf("Nazwa mówi, co poszło nie tak, i można je łapać osobno", "Bo wbudowane wyjątki są wolniejsze", "Bo Python nie ma wbudowanych wyjątków", "Żeby program nigdy się nie zatrzymał"),
+                listOf("Nazwa mówi, co poszło nie tak", "Bo wbudowane wyjątki są wolniejsze", "Bo Python nie ma wbudowanych wyjątków", "Żeby program nigdy się nie zatrzymał"),
                 0,
-                "Własny wyjątek precyzyjnie opisuje problem w naszym programie.",
+                "Nazwa własnego wyjątku opisuje problem w naszym programie, a taki wyjątek można złapać osobno.",
             ),
             output(
                 "class KodError(Exception):\n    def __init__(self, kod):\n        super().__init__(f\"kod {kod}\")\n        self.kod = kod\n\ntry:\n    raise KodError(404)\nexcept KodError as e:\n    print(e, e.kod)",
@@ -69,9 +69,9 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Po jakiej klasie dziedziczy wbudowany ValueError?",
-                listOf("Exception", "KeyError", "TypeError", "ValueBase"),
+                listOf("Exception", "KeyError", "TypeError", "LookupError"),
                 0,
-                "Prawie wszystkie wbudowane wyjątki dziedziczą po Exception.",
+                "ValueError, tak jak TypeError czy LookupError, dziedziczy bezpośrednio po Exception.",
             ),
             output(
                 "print(issubclass(KeyError, LookupError))\nprint(issubclass(ZeroDivisionError, ArithmeticError))",
@@ -136,9 +136,9 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Po co pisać raise NowyBlad(...) from e?",
-                listOf("Żeby zachować informację o oryginalnej przyczynie błędu", "Żeby wyciszyć błąd", "Żeby zgłosić dwa wyjątki naraz", "Żeby przyspieszyć program"),
+                listOf("Żeby zachować przyczynę błędu", "Żeby wyciszyć błąd", "Żeby zgłosić dwa wyjątki naraz", "Żeby przyspieszyć program"),
                 0,
-                "Komunikat błędu pokaże oba wyjątki: przyczynę i nowy.",
+                "Przyczyna trafia do __cause__, a komunikat o błędzie pokaże oba wyjątki.",
             ),
             tiles(
                 "Zgłoś BladApp(\"x\") z przyczyną e",
@@ -178,8 +178,8 @@ internal val module35 = CourseUnit(
                 "W nawiasie można podać kilka klas wyjątków; raise przyjmuje też samą klasę.",
             ),
             choice(
-                "Który except złapie BladLogowania, jeśli dziedziczy on po BladAplikacji?",
-                listOf("Zarówno except BladLogowania, jak i except BladAplikacji", "Tylko except BladLogowania", "Tylko except BladAplikacji", "Żaden"),
+                "Który except może złapać BladLogowania, jeśli dziedziczy on po BladAplikacji?",
+                listOf("Każdy z tych dwóch", "Tylko except BladLogowania", "Tylko except BladAplikacji", "Żaden z tych dwóch"),
                 0,
                 "Wyjątek pasuje do swojej klasy i do wszystkich klas bazowych.",
             ),

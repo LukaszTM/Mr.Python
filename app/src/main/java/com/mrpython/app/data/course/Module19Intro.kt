@@ -39,7 +39,7 @@ internal val module19Intro = lesson(
     ),
     choice(
         "Co zwraca random.randint(1, 6)?",
-        listOf("Liczbę całkowitą od 1 do 6 (włącznie)", "Liczbę całkowitą od 1 do 5", "Liczbę float od 1 do 6", "Zawsze 6"),
+        listOf("Liczbę całkowitą od 1 do 6", "Liczbę całkowitą od 1 do 5", "Liczbę float od 1 do 6", "Liczbę całkowitą od 0 do 6"),
         0,
         "randint obejmuje obie granice przedziału.",
     ),

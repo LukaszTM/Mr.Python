@@ -25,7 +25,7 @@ internal val module15Practice = listOf(
         output("def cena(kwota, rabat=0):\n    return kwota - rabat\n\nprint(cena(50), cena(50, 10))", "50 40", "Bez rabatu odejmujemy 0."),
         choice(
             "Co wypisze ten kod?",
-            listOf("Błąd TypeError", "1", "0", "None"),
+            listOf("TypeError", "1", "0", "None"),
             0,
             "Parametr a nie ma wartości domyślnej, więc trzeba go podać.",
             code = "def f(a, b=1):\n    return a + b\n\nprint(f())",
@@ -94,13 +94,13 @@ internal val module15Practice = listOf(
         choice(
             "Czy nazwa args jest obowiązkowa?",
             listOf(
-                "Nie, ważna jest gwiazdka – można napisać np. *liczby",
+                "Nie, liczy się tylko gwiazdka",
                 "Tak, musi to być args",
                 "Tak, inaczej będzie błąd składni",
                 "Nie, gwiazdka też jest zbędna",
             ),
             0,
-            "args to tylko zwyczajowa nazwa; liczy się *.",
+            "args to tylko zwyczajowa nazwa; liczy się *, więc można napisać np. *liczby.",
         ),
         choice(
             "Co się stanie?",
@@ -227,9 +227,9 @@ internal val module15Practice = listOf(
             "Co oznacza samotna * w def f(a, *, b)?",
             listOf(
                 "Parametry po niej można podać tylko z nazwą",
-                "f przyjmuje dowolnie wiele argumentów",
-                "b jest mnożone przez a",
-                "b jest opcjonalne",
+                "f przyjmuje dowolnie wiele argumentów pozycyjnych",
+                "b zostaje pomnożone przez a przy wywołaniu",
+                "b staje się parametrem opcjonalnym",
             ),
             0,
             "Gwiazdka bez nazwy oddziela parametry tylko nazwane.",
@@ -287,14 +287,14 @@ internal val module15Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("Błąd TypeError", "3", "2", "1"),
+            listOf("TypeError", "3", "2", "1"),
             0,
             "b jest tylko nazwany, więc nie można go podać pozycyjnie.",
             code = "def f(a, *, b=1):\n    return a + b\n\nprint(f(1, 2))",
         ),
         choice(
             "Czym różni się *lista od **slownik przy wywołaniu funkcji?",
-            listOf("* daje argumenty pozycyjne, ** – nazwane", "Niczym", "* działa tylko dla słowników", "** podnosi argumenty do kwadratu"),
+            listOf("* daje argumenty pozycyjne, ** – nazwane", "Niczym, oba działają tak samo", "* działa tylko dla słowników, ** dla list", "** podnosi każdy argument do kwadratu"),
             0,
             "** zamienia pary klucz–wartość na argumenty nazwane.",
         ),

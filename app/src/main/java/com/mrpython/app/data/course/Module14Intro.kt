@@ -51,7 +51,7 @@ internal val module14Intro = lesson(
     ),
     choice(
         "Co robi b = a, gdy a jest listą?",
-        listOf("Daje drugą nazwę tej samej liście", "Tworzy kopię głęboką", "Tworzy pustą listę", "Usuwa listę a"),
+        listOf("Daje drugą nazwę tej samej liście", "Tworzy głęboką kopię listy a", "Tworzy nową, pustą listę b", "Przenosi listę a do b"),
         0,
         "Przypisanie nie kopiuje – obie nazwy wskazują ten sam obiekt.",
     ),

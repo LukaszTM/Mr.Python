@@ -53,7 +53,7 @@ internal val module14Intro = lesson(
     ),
     choice(
         "What does b = a do when a is a list?",
-        listOf("Gives the same list a second name", "Creates a deep copy", "Creates an empty list", "Deletes the list a"),
+        listOf("Gives the same list a second name", "Creates a deep copy of the list a", "Creates a new, empty list b", "Moves the list a into b"),
         0,
         "Assignment doesn't copy – both names point to the same object.",
     ),

@@ -21,7 +21,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Co @dataclass tworzy automatycznie?",
-                listOf("__init__, __repr__ i __eq__", "Tylko __init__", "__lt__ i __gt__", "Nic – to tylko komentarz"),
+                listOf("__init__, __repr__ i __eq__", "Tylko __init__ i __repr__", "__init__, __lt__ i __gt__", "Nic – to tylko komentarz"),
                 0,
                 "Na podstawie listy pól powstają __init__, __repr__ i __eq__.",
             ),
@@ -70,15 +70,15 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Co się stanie, gdy w dataclassie napiszesz rzeczy: list = []?",
-                listOf("ValueError – dla listy trzeba użyć field(default_factory=list)", "Każdy obiekt dostanie osobną listę", "Lista będzie pusta i niezmienna", "SyntaxError"),
+                listOf("ValueError", "Każdy obiekt dostanie osobną listę", "Wszystkie obiekty dostaną jedną wspólną listę", "SyntaxError"),
                 0,
-                "Dataclass zabrania zmiennych wartości domyślnych, żeby uniknąć wspólnej listy.",
+                "Dataclass zabrania listy jako zwykłej wartości domyślnej (ValueError), bo obiekty dzieliłyby jedną listę; trzeba użyć field(default_factory=list).",
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – pole bez wartości domyślnej po polu z domyślną", "y dostanie wartość 0", "y dostanie None", "Kod zadziała bez błędu"),
+                listOf("TypeError", "y dostanie wartość 0", "y dostanie None", "Kod zadziała bez błędu"),
                 0,
-                "Pola z wartościami domyślnymi muszą być na końcu, tak jak parametry funkcji.",
+                "Pole y bez wartości domyślnej stoi po polu z domyślną, więc już definicja klasy zgłasza TypeError.",
                 code = "from dataclasses import dataclass\n\n@dataclass\nclass A:\n    x: int = 0\n    y: int",
             ),
             fill(
@@ -114,7 +114,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Co daje parametr frozen=True?",
-                listOf("Obiektu nie można zmieniać po utworzeniu", "Obiekty można sortować", "Pola stają się prywatne", "Obiekt tworzy się szybciej"),
+                listOf("Obiektu nie da się zmienić", "Obiekty można sortować", "Pola stają się prywatne", "Obiekt tworzy się szybciej"),
                 0,
                 "frozen=True blokuje przypisywanie do pól.",
             ),
@@ -130,9 +130,9 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – brak porównania <", "Wypisze True", "Wypisze False", "SyntaxError"),
+                listOf("TypeError", "Wypisze True", "Wypisze False", "SyntaxError"),
                 0,
-                "Bez order=True dataclass nie ma metod porównujących < i >.",
+                "Bez order=True dataclass nie ma porównania <, więc W(1) < W(2) zgłasza TypeError.",
                 code = "from dataclasses import dataclass\n\n@dataclass\nclass W:\n    a: int\n\nprint(W(1) < W(2))",
             ),
             fill(
@@ -186,7 +186,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Jaki błąd pojawi się przy próbie zmiany pola w obiekcie z frozen=True?",
-                listOf("FrozenInstanceError (rodzaj AttributeError)", "ValueError", "KeyError", "Żaden – pole się zmieni"),
+                listOf("FrozenInstanceError", "ValueError", "KeyError", "Żaden – pole się zmieni"),
                 0,
                 "FrozenInstanceError dziedziczy po AttributeError.",
             ),
@@ -196,7 +196,7 @@ internal val module34 = CourseUnit(
                 "Lista graczy jest polem i pokazuje się w __repr__.",
             ),
             tiles(
-                "Utwórz obiekt Punkt z x=3 i y=4, używając argumentów nazwanych",
+                "Utwórz obiekt Punkt z x=3 i y=4 (argumenty nazwane) i zapisz go w p",
                 listOf("p", "=", "Punkt(", "x=3,", "y=4", ")"),
                 listOf("new", "x:3,"),
                 "Dataclass przyjmuje argumenty nazwane jak zwykła funkcja.",

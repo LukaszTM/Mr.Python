@@ -12,7 +12,7 @@ internal val module39Intro = lesson(
     ),
     explain(
         "chain i product",
-        "`chain` łączy kilka iteratorów w jeden ciąg, jeden po drugim. `product` tworzy " +
+        "`chain` łączy kilka ciągów (listy, napisy, iteratory) w jeden, jeden po drugim. `product` tworzy " +
             "wszystkie pary – działa jak dwie zagnieżdżone pętle `for`.",
         code = "from itertools import chain, product\nprint(list(chain([1, 2], [3])))\nprint(list(product(\"ab\", [1, 2])))",
         output = "[1, 2, 3]\n[('a', 1), ('a', 2), ('b', 1), ('b', 2)]",
@@ -48,7 +48,7 @@ internal val module39Intro = lesson(
     output(
         "from itertools import chain\nprint(list(chain(\"ab\", \"c\")))",
         "['a', 'b', 'c']",
-        "chain łączy iteratory jeden po drugim.",
+        "chain łączy ciągi jeden po drugim – tu dwa napisy.",
     ),
     fill(
         "Uzupełnij, aby dostać sumy częściowe [1, 3, 6].",

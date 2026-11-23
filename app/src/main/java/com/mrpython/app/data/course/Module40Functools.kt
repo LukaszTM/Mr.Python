@@ -46,7 +46,7 @@ internal val module40 = CourseUnit(
             tiles(
                 "Zaimportuj reduce z functools",
                 listOf("from", "functools", "import", "reduce"),
-                listOf("itertools", "include"),
+                listOf("itertools", "Functools"),
                 "reduce w Pythonie 3 trzeba zaimportować z functools.",
             ),
         ),
@@ -69,9 +69,9 @@ internal val module40 = CourseUnit(
             ),
             choice(
                 "Co zwraca partial(f, 1)?",
-                listOf("Nową funkcję z ustalonym pierwszym argumentem", "Wynik f(1)", "Listę argumentów", "Kopię f bez zmian"),
+                listOf("Funkcję z ustalonym 1", "Wynik f(1)", "Listę [f, 1]", "Kopię f bez zmian"),
                 0,
-                "partial tworzy nowy obiekt wywoływalny, nie wywołuje f.",
+                "partial tworzy nowy obiekt wywoływalny, w którym pierwszy argument f to już 1 – samej f nie wywołuje.",
             ),
             output(
                 "from functools import partial\nnapis = partial(print, end=\"!\\n\")\nnapis(\"Hej\")",
@@ -129,7 +129,7 @@ internal val module40 = CourseUnit(
             ),
             choice(
                 "Co oznacza maxsize=128 w @lru_cache(maxsize=128)?",
-                listOf("Pamięć trzyma najwyżej 128 ostatnich wyników", "Funkcja przyjmie najwyżej 128 argumentów", "Wynik nie przekroczy 128", "Funkcja wykona się najwyżej 128 razy"),
+                listOf("Pamięć trzyma najwyżej 128 wyników", "Funkcja przyjmie najwyżej 128 argumentów", "Wynik nie przekroczy 128", "Funkcja wykona się najwyżej 128 razy"),
                 0,
                 "Gdy pamięć jest pełna, usuwany jest najdawniej używany wynik (LRU).",
             ),
@@ -182,7 +182,7 @@ internal val module40 = CourseUnit(
                 "Pamięć działa tylko przy powtarzających się argumentach.",
             ),
             tiles(
-                "Utwórz funkcję podwoj z ustalonym a=2",
+                "Utwórz funkcję podwoj: mnoz z ustalonym a=2",
                 listOf("podwoj", "=", "partial(", "mnoz,", "a=2", ")"),
                 listOf("reduce(", "lambda"),
                 "partial(funkcja, argumenty) zwraca nową funkcję.",

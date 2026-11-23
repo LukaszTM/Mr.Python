@@ -95,7 +95,7 @@ internal val module5Practice = listOf(
         fill(
             "Fill in the blank to check whether 5 is in the list.",
             "x = [1, 5, 9]\nprint(5 ____ x)",
-            listOf("in", "==", "of"),
+            listOf("in", "==", "not"),
             "in",
             "The in operator checks whether an element belongs to a list.",
         ),
@@ -142,9 +142,9 @@ internal val module5Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – 5 isn't in the list", "Nothing happens", "It removes the last element", "It removes all the elements"),
+            listOf("A ValueError", "Nothing happens", "It removes the last element", "It removes all the elements"),
             0,
-            "remove() raises a ValueError when the value isn't in the list.",
+            "5 isn't in the list, and in that case remove() raises a ValueError.",
             code = "x = [1, 2, 3]\nx.remove(5)",
         ),
         choice(

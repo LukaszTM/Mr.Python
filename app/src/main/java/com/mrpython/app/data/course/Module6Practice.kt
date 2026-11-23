@@ -31,10 +31,10 @@ internal val module6Practice = listOf(
         choice(
             "Czym różni się return od print?",
             listOf(
-                "return oddaje wynik z funkcji, print tylko wypisuje",
-                "Niczym",
-                "print oddaje wynik z funkcji",
-                "return wypisuje tekst na ekranie",
+                "return oddaje wynik, print tylko go wypisuje",
+                "print oddaje wynik, return tylko go wypisuje",
+                "Niczym – oba działają tak samo",
+                "return działa tylko na liczbach",
             ),
             0,
             "Wynik z return można zapisać w zmiennej i dalej używać.",
@@ -103,9 +103,9 @@ internal val module6Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – brakuje argumentu b", "Wypisze 1", "Wypisze None", "Wypisze 0"),
+            listOf("Błąd", "Wypisze 1", "Wypisze None", "Wypisze 0"),
             0,
-            "Parametr b nie ma wartości domyślnej, więc trzeba go podać.",
+            "Brakuje argumentu b, a parametr b nie ma wartości domyślnej, więc trzeba go podać.",
             code = "def f(a, b):\n    return a + b\n\nprint(f(1))",
         ),
         fill(
@@ -170,7 +170,7 @@ internal val module6Practice = listOf(
         ),
         choice(
             "Co zwraca funkcja z linią return a, b?",
-            listOf("Obie wartości naraz", "Tylko a", "Tylko b", "Błąd"),
+            listOf("Obie wartości naraz", "Tylko wartość a", "Tylko wartość b", "Sumę a + b"),
             0,
             "Wartości po przecinku są zwracane razem.",
         ),

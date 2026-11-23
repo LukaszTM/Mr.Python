@@ -47,7 +47,7 @@ internal val module40 = CourseUnit(
             tiles(
                 "Import reduce from functools",
                 listOf("from", "functools", "import", "reduce"),
-                listOf("itertools", "include"),
+                listOf("itertools", "Functools"),
                 "In Python 3, reduce has to be imported from functools.",
             ),
         ),
@@ -70,9 +70,9 @@ internal val module40 = CourseUnit(
             ),
             choice(
                 "What does partial(f, 1) return?",
-                listOf("A new function with the first argument fixed", "The result of f(1)", "A list of arguments", "An unchanged copy of f"),
+                listOf("A function with 1 fixed", "The result of f(1)", "The list [f, 1]", "An unchanged copy of f"),
                 0,
-                "partial creates a new callable object; it doesn't call f.",
+                "partial creates a new callable object in which the first argument of f is already 1 – it doesn't call f itself.",
             ),
             output(
                 "from functools import partial\nshout = partial(print, end=\"!\\n\")\nshout(\"Hey\")",
@@ -130,7 +130,7 @@ internal val module40 = CourseUnit(
             ),
             choice(
                 "What does maxsize=128 mean in @lru_cache(maxsize=128)?",
-                listOf("The cache holds at most the 128 most recent results", "The function accepts at most 128 arguments", "The result won't exceed 128", "The function will run at most 128 times"),
+                listOf("The cache holds at most 128 results", "The function accepts at most 128 arguments", "The result won't exceed 128", "The function will run at most 128 times"),
                 0,
                 "When the cache is full, the least recently used result is removed (LRU).",
             ),
@@ -183,7 +183,7 @@ internal val module40 = CourseUnit(
                 "The cache only works when arguments repeat.",
             ),
             tiles(
-                "Create a function double with a=2 fixed",
+                "Create a function double: multiply with a=2 fixed",
                 listOf("double", "=", "partial(", "multiply,", "a=2", ")"),
                 listOf("reduce(", "lambda"),
                 "partial(function, arguments) returns a new function.",

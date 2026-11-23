@@ -47,14 +47,14 @@ internal val module34Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – the y argument is missing", "y gets 0", "y gets None", "The code runs without an error"),
+            listOf("TypeError", "y gets 0", "y gets None", "The code runs without an error"),
             0,
-            "A field without a default value is a required argument of __init__.",
+            "Field y has no default value, so it is required – a missing argument is a TypeError.",
             code = "from dataclasses import dataclass\n\n@dataclass\nclass A:\n    x: int\n    y: int\n\nA(1)",
         ),
         choice(
             "How do you declare a field in a dataclass?",
-            listOf("name: type, e.g. age: int", "self.age = int", "int age", "age = int()"),
+            listOf("age: int", "self.age = int", "age(int)", "age = int()"),
             0,
             "A field is a name with a type annotation in the class body.",
         ),
@@ -136,9 +136,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "What do we pass to default_factory?",
-            listOf("A function or class to be called, e.g. list", "A ready-made list []", "The field name as a string", "The number of elements"),
+            listOf("A function without (), e.g. list", "A ready-made list, e.g. []", "The field name as a string", "The number of elements"),
             0,
-            "The factory is called separately each time an object is created.",
+            "default_factory gets a function (or a class such as list) and calls it separately for each object.",
         ),
         choice(
             "What will this code print?",
@@ -149,9 +149,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Why must fields with a default value come after fields without one?",
-            listOf("Because they become __init__, and default parameters must come last", "Because fields are sorted alphabetically", "Because otherwise __repr__ won't work", "They don't have to – any order works"),
+            listOf("Because __init__ is built from them", "Because fields are sorted alphabetically", "Because otherwise __repr__ won't work", "They don't have to – any order works"),
             0,
-            "It's the same rule as for function parameters.",
+            "Fields become the parameters of __init__, and parameters with a default value must come last – as in any function.",
         ),
         fill(
             "Complete the code so the points field has the default value 0 (prints G(name='Anna', points=0)).",
@@ -224,14 +224,14 @@ internal val module34Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – the object can't be hashed", "A set with one element is created", "An empty set is created", "AttributeError"),
+            listOf("TypeError", "A set with one element is created", "An empty set is created", "AttributeError"),
             0,
-            "An ordinary dataclass has no __hash__; only frozen=True provides it.",
+            "An ordinary dataclass can't be put in a set (unhashable type); only frozen=True allows it.",
             code = "from dataclasses import dataclass\n\n@dataclass\nclass P:\n    x: int\n\ns = {P(1)}",
         ),
         choice(
             "What does order=True compare objects by?",
-            listOf("By fields in declaration order, like tuples", "By the class name", "By the first text field", "By the order the objects were created"),
+            listOf("Field by field, like tuples", "By the class name", "By the first text field", "By the order the objects were created"),
             0,
             "The first field that differs decides.",
         ),
@@ -313,9 +313,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Which notation gives each object a separate empty list?",
-            listOf("field(default_factory=list)", "= []", "= list", "field(default=[])"),
+            listOf("field(default_factory=list)", "field(default=[])", "field(default=list)", "field(default_factory=[])"),
             0,
-            "Only a factory creates a new list for each object.",
+            "default_factory=list calls list() for each object; default=[] is a ValueError, default=list gives the list class itself, and [] cannot be called.",
         ),
         choice(
             "What will this code print?",

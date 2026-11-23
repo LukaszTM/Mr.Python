@@ -6,7 +6,7 @@ internal val module33Cards = listOf(
         explain(
             "Zapomniany super().__init__()",
             "Klasa bez własnego `__init__` dziedziczy konstruktor rodzica. Ale gdy napiszesz własny `__init__` " +
-                "i nie wywołasz `super().__init__()`, atrybuty rodzica nie powstaną (`AttributeError`).",
+                "i nie wywołasz `super().__init__()`, atrybuty rodzica nie powstaną – próba ich odczytu da `AttributeError`.",
             code = "class A:\n    def __init__(self, x):\n        self.x = x\n\nclass B(A):\n    pass\n\nprint(B(7).x)",
             output = "7",
         ),

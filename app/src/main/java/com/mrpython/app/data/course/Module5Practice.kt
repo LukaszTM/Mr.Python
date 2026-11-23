@@ -93,7 +93,7 @@ internal val module5Practice = listOf(
         fill(
             "Uzupełnij, aby sprawdzić, czy 5 jest na liście.",
             "x = [1, 5, 9]\nprint(5 ____ x)",
-            listOf("in", "==", "of"),
+            listOf("in", "==", "not"),
             "in",
             "Operator in sprawdza, czy element należy do listy.",
         ),
@@ -135,9 +135,9 @@ internal val module5Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – na liście nie ma 5", "Nic się nie stanie", "Usunie ostatni element", "Usunie wszystkie elementy"),
+            listOf("Błąd ValueError", "Nic się nie stanie", "Usunie ostatni element", "Usunie wszystkie elementy"),
             0,
-            "remove() zgłasza błąd ValueError, gdy wartości nie ma na liście.",
+            "Na liście nie ma 5, a remove() zgłasza wtedy błąd ValueError.",
             code = "x = [1, 2, 3]\nx.remove(5)",
         ),
         choice(

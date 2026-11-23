@@ -12,9 +12,9 @@ internal val module5 = CourseUnit(
             "u5l1", "Creating lists",
             choice(
                 "How do you create a list with the numbers 1, 2, 3?",
-                listOf("[1, 2, 3]", "<1, 2, 3>", "{1 2 3}", "list 1 2 3"),
+                listOf("[1, 2, 3]", "[1 2 3]", "(1, 2, 3)", "\"1, 2, 3\""),
                 0,
-                "Lists are written in square brackets.",
+                "Lists are written in square brackets, with the elements separated by commas. \"1, 2, 3\" in quotes is a string, not a list.",
             ),
             output(
                 "fruits = [\"apple\", \"banana\", \"kiwi\"]\nprint(fruits[0])",
@@ -30,14 +30,14 @@ internal val module5 = CourseUnit(
             fill(
                 "Add 3 to the end of the list.",
                 "numbers = [1, 2]\nnumbers.____(3)\nprint(numbers)",
-                listOf("append", "add", "push"),
+                listOf("append", "add", "pop"),
                 "append",
                 "The append() method adds an element to the end of a list.",
             ),
             output("x = [10, 20, 30]\nx[1] = 99\nprint(x)", "[10, 99, 30]", "You can replace a list element using its index."),
             choice(
                 "What will happen?",
-                listOf("An IndexError – there is no index 3", "It prints 3", "It prints None", "It prints [1, 2, 3]"),
+                listOf("An IndexError", "It prints 3", "It prints None", "It prints [1, 2, 3]"),
                 0,
                 "The indexes of this list are 0, 1 and 2 – index 3 doesn't exist.",
                 code = "x = [1, 2, 3]\nprint(x[3])",
@@ -92,9 +92,9 @@ internal val module5 = CourseUnit(
             output("x = [\"a\", \"b\", \"c\"]\nprint(x.index(\"c\"))", "2", "index() returns the position of an element."),
             choice(
                 "Which method removes the element at a given index and returns it?",
-                listOf("pop", "remove", "delete", "cut"),
+                listOf("pop", "remove", "delete", "index"),
                 0,
-                "pop(i) removes the element at index i and returns it.",
+                "pop(i) removes the element at index i and returns it. remove() looks for a value, and index() only gives the position.",
             ),
             output("a = [1, 2]\nb = [3]\nprint(a + b)", "[1, 2, 3]", "+ joins two lists into a new one."),
             fill(
@@ -136,7 +136,7 @@ internal val module5 = CourseUnit(
             fill(
                 "Fill in the blank to print all the elements of the list.",
                 "names = [\"Ann\", \"Tom\"]\nfor name ____ names:\n    print(name)",
-                listOf("in", "of", "="),
+                listOf("in", "range", "="),
                 "in",
                 "Looping over a list: for element in list:",
             ),

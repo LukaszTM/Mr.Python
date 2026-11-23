@@ -96,13 +96,13 @@ internal val module15Practice = listOf(
         choice(
             "Is the name args required?",
             listOf(
-                "No, the star is what matters – you can write e.g. *numbers",
+                "No, only the star matters",
                 "Yes, it has to be args",
-                "Yes, otherwise you get a syntax error",
+                "Yes, otherwise it's a syntax error",
                 "No, and the star isn't needed either",
             ),
             0,
-            "args is just the conventional name; what counts is the *.",
+            "args is just the conventional name; what counts is the *, so you can write e.g. *numbers.",
         ),
         choice(
             "What will happen?",
@@ -228,10 +228,10 @@ internal val module15Practice = listOf(
         choice(
             "What does the lone * mean in def f(a, *, b)?",
             listOf(
-                "The parameters after it can only be passed by name",
-                "f accepts any number of arguments",
-                "b is multiplied by a",
-                "b is optional",
+                "Parameters after it must be passed by name",
+                "f accepts any number of positional arguments",
+                "b gets multiplied by a when f is called",
+                "b becomes an optional parameter",
             ),
             0,
             "A star without a name separates off the keyword-only parameters.",
@@ -289,14 +289,14 @@ internal val module15Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("A TypeError", "3", "2", "1"),
+            listOf("TypeError", "3", "2", "1"),
             0,
             "b is keyword-only, so it can't be passed positionally.",
             code = "def f(a, *, b=1):\n    return a + b\n\nprint(f(1, 2))",
         ),
         choice(
             "How does *items differ from **dictionary in a function call?",
-            listOf("* gives positional arguments, ** gives keyword ones", "It doesn't", "* works only for dictionaries", "** squares the arguments"),
+            listOf("* gives positional arguments, ** keyword ones", "Nothing, both work the same way", "* works only for dicts, ** for lists", "** squares every argument first"),
             0,
             "** turns key–value pairs into keyword arguments.",
         ),

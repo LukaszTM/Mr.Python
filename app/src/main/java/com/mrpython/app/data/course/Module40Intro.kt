@@ -39,9 +39,9 @@ internal val module40Intro = lesson(
     ),
     choice(
         "Co zwraca partial(f, 1)?",
-        listOf("Nową funkcję z ustalonym argumentem", "Wynik f(1)", "Liczbę 1", "Listę argumentów"),
+        listOf("Nową funkcję", "Wynik f(1)", "Liczbę 1", "Listę argumentów"),
         0,
-        "partial tworzy nową funkcję i jej nie wywołuje.",
+        "partial tworzy nową funkcję z ustalonym argumentem 1 i nie wywołuje f.",
     ),
     output(
         "from functools import reduce\nprint(reduce(lambda a, b: a + b, [1, 2, 3]))",

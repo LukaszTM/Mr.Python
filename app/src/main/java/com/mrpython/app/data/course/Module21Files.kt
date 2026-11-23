@@ -17,13 +17,13 @@ internal val module21 = CourseUnit(
             choice(
                 "Co oznacza tryb \"w\" w open()?",
                 listOf(
-                    "Zapis – plik jest tworzony lub czyszczony",
-                    "Odczyt pliku",
+                    "Zapis",
+                    "Odczyt",
                     "Dopisywanie na końcu",
                     "Usunięcie pliku",
                 ),
                 0,
-                "\"w\" (write) otwiera plik do zapisu i kasuje starą zawartość.",
+                "\"w\" (write) otwiera plik do zapisu: tworzy go albo kasuje starą zawartość.",
             ),
             choice(
                 "Jaki tryb ma open(\"plik.txt\") bez drugiego argumentu?",
@@ -51,13 +51,13 @@ internal val module21 = CourseUnit(
             choice(
                 "Co się stanie po f.write(5) dla pliku otwartego w trybie \"w\"?",
                 listOf(
-                    "TypeError – write przyjmuje tylko napisy",
-                    "Zapisze liczbę 5",
+                    "Błąd TypeError",
+                    "Zapisze napis \"5\"",
                     "Zapisze pięć spacji",
                     "Nic się nie stanie",
                 ),
                 0,
-                "Do pliku tekstowego zapisujemy napisy – liczbę trzeba zamienić przez str().",
+                "write przyjmuje tylko napisy, więc liczba daje TypeError – trzeba ją zamienić przez str().",
             ),
             tiles(
                 "Otwórz plik notatki.txt do zapisu.",
@@ -115,13 +115,13 @@ internal val module21 = CourseUnit(
             choice(
                 "Dlaczego warto używać with przy plikach?",
                 listOf(
-                    "Nie trzeba pamiętać o close(), nawet gdy wystąpi błąd",
+                    "Zawsze sam zamyka plik",
                     "Bez with nie da się czytać plików",
-                    "with szyfruje plik",
-                    "with działa tylko z plikami .txt",
+                    "Szyfruje zawartość pliku",
+                    "Działa tylko z plikami .txt",
                 ),
                 0,
-                "with zamyka plik zawsze – także po wyjątku.",
+                "with zamyka plik zawsze – także po wyjątku – więc nie trzeba pamiętać o close().",
             ),
         ),
         lesson(

@@ -26,8 +26,8 @@ internal val module21Intro = lesson(
     ),
     explain(
         "Reading lines",
-        "You can go through a file with a `for` loop – line by line. Every line ends with the `\\n` character, " +
-            "so we usually cut it off with `strip()`.",
+        "You can go through a file with a `for` loop – line by line. A line usually ends with the `\\n` character " +
+            "(only the last one may lack it), so we usually cut it off with `strip()`.",
         code = "with open(\"a.txt\", \"w\") as f:\n    f.write(\"x\\ny\\n\")\nwith open(\"a.txt\") as f:\n    for line in f:\n        print(line.strip())",
         output = "x\ny",
     ),

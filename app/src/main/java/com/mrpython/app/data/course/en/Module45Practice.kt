@@ -47,9 +47,9 @@ internal val module45Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("AttributeError – None has no group() method", "An empty string", "None", "0"),
+            listOf("AttributeError", "An empty string", "None", "0"),
             0,
-            "When search() returns None, calling group() ends with an error.",
+            "search() returned None, and None has no group() method, so you get an AttributeError.",
             code = "import re\nm = re.search(r\"\\d\", \"abc\")\nprint(m.group())",
         ),
         choice(
@@ -316,14 +316,14 @@ internal val module45Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("{'a': '1', 'b': '2'}", "('1', '2')", "['a', 'b']", "None"),
+            listOf("{'a': '1', 'b': '2'}", "{'a': 1, 'b': 2}", "[('a', '1'), ('b', '2')]", "('1', '2')"),
             0,
-            "groupdict() returns a dictionary: group name → text.",
+            "groupdict() returns a dictionary: group name → text (a string, not a number).",
             code = "import re\nm = re.search(r\"(?P<a>\\d)(?P<b>\\d)\", \"12\")\nprint(m.groupdict())",
         ),
         choice(
             "What does a pair of parentheses ( ) create in a pattern?",
-            listOf("A group that captures a piece of the match", "A character class", "A quantifier", "A comment"),
+            listOf("A group", "A character class", "A quantifier", "A comment"),
             0,
             "Character classes use [ ], and round parentheses create groups.",
         ),
@@ -403,7 +403,7 @@ internal val module45Practice = listOf(
         ),
         choice(
             "What does re.sub() return?",
-            listOf("A new string with the pieces replaced", "A list of matches", "A match object", "The number of replacements"),
+            listOf("A new string", "A list of matches", "A match object", "The number of replacements"),
             0,
             "Strings are immutable, so sub() creates a new string.",
         ),
@@ -435,7 +435,7 @@ internal val module45Practice = listOf(
             "re.sub(pattern, replacement, string).",
         ),
         tiles(
-            "Split the string t at the digits",
+            "Split the string t at the digits and store the result in the variable parts",
             listOf("parts", "=", "re.split(", "r\"\\d\",", "t)"),
             listOf("re.sub(", "t.split(r\"\\d\")"),
             "re.split(pattern, string) returns a list of parts.",

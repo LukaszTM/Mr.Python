@@ -39,14 +39,14 @@ internal val module20 = CourseUnit(
             ),
             choice(
                 "Co się stanie po date(2025, 2, 30)?",
-                listOf("ValueError – luty nie ma 30 dni", "Powstanie data 2 marca", "Powstanie data 28 lutego", "Nic"),
+                listOf("Błąd ValueError", "Powstanie data 2 marca", "Powstanie data 28 lutego", "Błąd TypeError"),
                 0,
-                "Python sprawdza, czy taki dzień istnieje.",
+                "Python sprawdza, czy taki dzień istnieje – luty nie ma 30 dni, więc to ValueError.",
             ),
             tiles(
                 "Utwórz datę 1 maja 2025.",
                 listOf("d =", "date(", "2025, 5, 1", ")"),
-                listOf("1, 5, 2025", "date.today("),
+                listOf("1, 5, 2025", "2025, 1, 5"),
                 "Kolejność to rok, miesiąc, dzień.",
             ),
             output(
@@ -144,9 +144,9 @@ internal val module20 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – nie można porównać daty z napisem", "True", "False", "ValueError"),
+                listOf("TypeError", "True", "False", "ValueError"),
                 0,
-                "Datę można porównać tylko z inną datą.",
+                "Datę można porównać przez < tylko z inną datą – z napisem to TypeError.",
                 code = "from datetime import date\nprint(date(2025, 1, 1) < \"2026-01-01\")",
             ),
         ),
@@ -212,7 +212,7 @@ internal val module20 = CourseUnit(
             ),
             choice(
                 "Którą metodą zamienisz datę na napis w wybranym formacie?",
-                listOf("strftime", "weekday", "timedelta", "isoweek"),
+                listOf("strftime", "weekday", "timedelta", "days"),
                 0,
                 "strftime formatuje datę według podanego wzoru.",
             ),

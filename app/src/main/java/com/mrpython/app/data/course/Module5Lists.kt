@@ -11,9 +11,9 @@ internal val module5 = CourseUnit(
             "u5l1", "Tworzenie list",
             choice(
                 "Jak utworzyć listę z liczbami 1, 2, 3?",
-                listOf("[1, 2, 3]", "<1, 2, 3>", "{1 2 3}", "list 1 2 3"),
+                listOf("[1, 2, 3]", "[1 2 3]", "(1, 2, 3)", "\"1, 2, 3\""),
                 0,
-                "Listy zapisujemy w nawiasach kwadratowych.",
+                "Listy zapisujemy w nawiasach kwadratowych, a elementy oddzielamy przecinkami. \"1, 2, 3\" w cudzysłowie to napis, nie lista.",
             ),
             output(
                 "owoce = [\"jabłko\", \"banan\", \"kiwi\"]\nprint(owoce[0])",
@@ -29,14 +29,14 @@ internal val module5 = CourseUnit(
             fill(
                 "Dodaj 3 na koniec listy.",
                 "liczby = [1, 2]\nliczby.____(3)\nprint(liczby)",
-                listOf("append", "add", "push"),
+                listOf("append", "add", "pop"),
                 "append",
                 "Metoda append() dodaje element na koniec listy.",
             ),
             output("x = [10, 20, 30]\nx[1] = 99\nprint(x)", "[10, 99, 30]", "Element listy można podmienić przez indeks."),
             choice(
                 "Co się stanie?",
-                listOf("Błąd IndexError – nie ma indeksu 3", "Wypisze 3", "Wypisze None", "Wypisze [1, 2, 3]"),
+                listOf("Błąd IndexError", "Wypisze 3", "Wypisze None", "Wypisze [1, 2, 3]"),
                 0,
                 "Indeksy tej listy to 0, 1 i 2 – indeks 3 nie istnieje.",
                 code = "x = [1, 2, 3]\nprint(x[3])",
@@ -91,9 +91,9 @@ internal val module5 = CourseUnit(
             output("x = [\"a\", \"b\", \"c\"]\nprint(x.index(\"c\"))", "2", "index() zwraca pozycję elementu."),
             choice(
                 "Która metoda usuwa element o podanym indeksie i go zwraca?",
-                listOf("pop", "remove", "delete", "cut"),
+                listOf("pop", "remove", "delete", "index"),
                 0,
-                "pop(i) usuwa element o indeksie i i go zwraca.",
+                "pop(i) usuwa element o indeksie i i go zwraca. remove() szuka wartości, a index() tylko podaje pozycję.",
             ),
             output("a = [1, 2]\nb = [3]\nprint(a + b)", "[1, 2, 3]", "+ łączy dwie listy w nową."),
             fill(
@@ -135,7 +135,7 @@ internal val module5 = CourseUnit(
             fill(
                 "Uzupełnij, aby wypisać wszystkie elementy listy.",
                 "imiona = [\"Ala\", \"Ola\"]\nfor imie ____ imiona:\n    print(imie)",
-                listOf("in", "of", "="),
+                listOf("in", "range", "="),
                 "in",
                 "Pętla po liście: for element in lista:",
             ),

@@ -57,7 +57,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Gdzie umieszcza się adnotację typu wyniku funkcji?",
-            listOf("Po nawiasie z parametrami, za strzałką ->", "Przed słowem def", "W instrukcji return", "W pierwszej linii ciała funkcji"),
+            listOf("Za strzałką -> po nawiasie", "Przed słowem def", "W instrukcji return", "W pierwszej linii ciała"),
             0,
             "Np. def f(x: int) -> str:",
         ),
@@ -144,7 +144,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Co oznacza adnotacja int | str?",
-            listOf("Wartość może być liczbą całkowitą albo napisem", "Wartość musi być jednocześnie int i str", "Liczba zapisana jako napis", "Błąd składni"),
+            listOf("Liczba całkowita albo napis", "Jednocześnie int i str", "Liczba zapisana jako napis", "Błąd składni"),
             0,
             "Kreska | w adnotacji to „albo”.",
         ),
@@ -158,9 +158,9 @@ internal val module44Practice = listOf(
         fill(
             "Uzupełnij adnotację: wynik to liczba albo None.",
             "from typing import Optional\ndef indeks(s: str) -> ____[int]:\n    return s.find(\"x\") if \"x\" in s else None\nprint(indeks(\"abc\"))",
-            listOf("Optional", "Maybe", "Nullable"),
+            listOf("Optional", "optional", "Option"),
             "Optional",
-            "Optional[int] oznacza int albo None; Maybe i Nullable nie istnieją w Pythonie.",
+            "Optional[int] oznacza int albo None; nazwa musi być taka jak w imporcie, więc optional i Option dają NameError.",
         ),
         tiles(
             "Zapisz nagłówek funkcji znajdz przyjmującej str i zwracającej int albo None",
@@ -225,7 +225,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Kto korzysta z adnotacji typów?",
-            listOf("Programiści, edytory kodu i narzędzia takie jak mypy", "Tylko interpreter Pythona", "Nikt – to komentarze usuwane przy starcie", "Tylko system operacyjny"),
+            listOf("Ludzie, edytory i mypy", "Tylko interpreter Pythona", "Nikt – są usuwane przy starcie", "Tylko system operacyjny"),
             0,
             "Adnotacje pomagają ludziom i narzędziom wykrywać błędy.",
         ),
@@ -246,9 +246,9 @@ internal val module44Practice = listOf(
         fill(
             "Uzupełnij, aby wypisać liczbę adnotacji funkcji (3).",
             "def f(a: int, b: int) -> int:\n    return a + b\nprint(len(f.____))",
-            listOf("__annotations__", "__name__", "__doc__"),
+            listOf("__annotations__", "__name__", "__types__"),
             "__annotations__",
-            "__annotations__ ma 3 wpisy; __name__ to „f” (długość 1), a __doc__ to None.",
+            "__annotations__ ma 3 wpisy; __name__ to „f” (długość 1), a __types__ nie istnieje.",
         ),
         tiles(
             "Wypisz słownik adnotacji funkcji licz",
@@ -307,13 +307,13 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Co jest prawdą o adnotacjach typów w Pythonie?",
-            listOf("Są podpowiedziami, których interpreter nie wymusza", "Wymuszają typ przy każdym przypisaniu", "Przyspieszają program", "Są wymagane w każdej funkcji"),
+            listOf("Interpreter ich nie wymusza", "Wymuszają typ przy przypisaniu", "Przyspieszają program", "Są wymagane w każdej funkcji"),
             0,
             "Adnotacje to dokumentacja dla ludzi i narzędzi.",
         ),
         choice(
             "Który zapis jest poprawną adnotacją zmiennej?",
-            listOf("x: int = 5", "int x = 5", "x -> int = 5", "x = int: 5"),
+            listOf("x: int = 5", "x = 5: int", "x -> int = 5", "x = int: 5"),
             0,
             "Typ podajemy po dwukropku, przed znakiem =.",
         ),
@@ -327,9 +327,9 @@ internal val module44Practice = listOf(
         fill(
             "Uzupełnij adnotację: napis albo None.",
             "def f(x: str | ____ = None) -> str:\n    return x or \"-\"\nprint(f())",
-            listOf("None", "Null", "nil"),
+            listOf("None", "none", "0"),
             "None",
-            "Brak wartości w Pythonie to None; Null i nil nie istnieją.",
+            "Brak wartości w Pythonie to None, z wielkiej litery; none to nieznana nazwa, a 0 to liczba.",
         ),
         tiles(
             "Zadeklaruj zmienną wyniki jako słownik z kluczami str i wartościami float, pusty",

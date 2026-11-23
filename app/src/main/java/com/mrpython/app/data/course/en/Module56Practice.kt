@@ -43,13 +43,13 @@ internal val module56Practice = listOf(
         output(
             "tasks = [{\"title\": \"X\", \"done\": False}]\nfor t in tasks:\n    print(f\"{t['title']}: {t['done']}\")",
             "X: False",
-            "Inside an f-string we reach dictionary fields using single quotes.",
+            "Inside an f-string written in double quotes, we write the key in single quotes – it's easier to read.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("KeyError – there is no \"done\" key", "It prints False", "It prints None", "It prints Study"),
+            listOf("KeyError", "It prints False", "It prints None", "It prints Study"),
             0,
-            "Reading a missing key with [] raises a KeyError.",
+            "The dictionary has no \"done\" key, and reading a missing key with [] raises a KeyError.",
             code = "t = {\"title\": \"Study\"}\nprint(t[\"done\"])",
         ),
         choice(
@@ -60,9 +60,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "What type is the value under the \"done\" key?",
-            listOf("bool – True or False", "str", "int", "list"),
+            listOf("bool", "str", "int", "list"),
             0,
-            "A task is either done or not – that's a boolean value.",
+            "A task is either done or not – that's a boolean value, True or False, of type bool.",
         ),
         fill(
             "Fill in the blank to print the number of tasks (2).",
@@ -135,9 +135,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("ValueError – there is no such element", "It removes the last element", "Nothing happens", "KeyError"),
+            listOf("ValueError", "It removes the last element", "Nothing happens", "KeyError"),
             0,
-            "remove raises a ValueError when the value isn't in the list.",
+            "remove raises a ValueError when the value (here \"C\") isn't in the list.",
             code = "tasks = [\"A\", \"B\"]\ntasks.remove(\"C\")",
         ),
         choice(
@@ -311,9 +311,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – there is no done attribute", "It prints False", "It prints None", "It prints A"),
+            listOf("AttributeError", "It prints False", "It prints None", "It prints A"),
             0,
-            "__init__ didn't set the done attribute.",
+            "__init__ didn't set the done attribute, so reading t.done raises an AttributeError.",
             code = "class Task:\n    def __init__(self, title):\n        self.title = title\n\nt = Task(\"A\")\nprint(t.done)",
         ),
         choice(
@@ -349,7 +349,7 @@ internal val module56Practice = listOf(
             "You reach an object's attributes with a dot.",
         ),
         tiles(
-            "Write the header of the complete method in the Task class.",
+            "Write the header of the complete method in the Task class, with the parameter self.",
             listOf("def", "complete(", "self", "):"),
             listOf("class", "this"),
             "The first parameter of a method is self.",

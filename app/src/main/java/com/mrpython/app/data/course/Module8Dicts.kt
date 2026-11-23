@@ -27,9 +27,9 @@ internal val module8 = CourseUnit(
             output("print(len({\"x\": 1, \"y\": 2, \"z\": 3}))", "3", "len() zwraca liczbę par w słowniku."),
             choice(
                 "Co się stanie?",
-                listOf("Błąd KeyError – nie ma klucza b", "Wypisze None", "Wypisze 0", "Wypisze b"),
+                listOf("Błąd KeyError", "Wypisze None", "Wypisze 0", "Wypisze b"),
                 0,
-                "Odczyt nieistniejącego klucza przez [] powoduje KeyError.",
+                "Klucza b nie ma, a odczyt brakującego klucza przez [] powoduje KeyError.",
                 code = "d = {\"a\": 1}\nprint(d[\"b\"])",
             ),
             tiles(

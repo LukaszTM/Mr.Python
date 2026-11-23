@@ -12,7 +12,7 @@ internal val module6 = CourseUnit(
             "u6l1", "Defining functions",
             choice(
                 "Which keyword defines a function?",
-                listOf("def", "function", "fun", "func"),
+                listOf("def", "function", "return", "func"),
                 0,
                 "In Python, functions are defined with the word def.",
             ),
@@ -80,12 +80,12 @@ internal val module6 = CourseUnit(
                 "What is a function argument?",
                 listOf(
                     "A value passed to the function when it is called",
-                    "The name of the function",
-                    "A comment inside the function",
-                    "An error in the function",
+                    "The name you give the function after def",
+                    "A comment describing what the function does",
+                    "The result the function hands back with return",
                 ),
                 0,
-                "In double(4), the number 4 is the argument.",
+                "In double(4), the number 4 is the argument. The result handed back by return is the return value, not an argument.",
             ),
             output("def area(a, b):\n    return a * b\n\nprint(area(3, 4) + 1)", "13", "You can keep using a function's result in calculations."),
             output(
@@ -103,9 +103,9 @@ internal val module6 = CourseUnit(
             ),
             choice(
                 "What will happen?",
-                listOf("A NameError – y exists only inside the function", "It prints 10", "It prints None", "It prints 0"),
+                listOf("A NameError", "It prints 10", "It prints None", "It prints 0"),
                 0,
-                "Variables created inside a function aren't visible outside it.",
+                "y exists only inside the function – outside it Python doesn't know this name.",
                 code = "def f():\n    y = 10\n\nf()\nprint(y)",
             ),
             output(
@@ -174,7 +174,7 @@ internal val module6 = CourseUnit(
             output(
                 "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result\n\nprint(factorial(5))",
                 "120",
-                "5! = 1 · 2 · 3 · 4 · 5 = 120.",
+                "factorial(5) = 1 · 2 · 3 · 4 · 5 = 120.",
             ),
         ),
     ),

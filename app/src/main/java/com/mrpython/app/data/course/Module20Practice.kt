@@ -111,9 +111,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – dwóch dat nie można dodać", "Wypisze 4050-02-03", "Wypisze 2025-01-03", "Wypisze 1"),
+            listOf("Błąd TypeError", "Wypisze 4050-02-03", "Wypisze 2025-01-03", "Wypisze 1"),
             0,
-            "Daty można odejmować, ale do daty dodajemy tylko timedelta.",
+            "Dwóch dat nie można dodać (TypeError) – do daty dodajemy tylko timedelta.",
             code = "from datetime import date\nprint(date(2025, 1, 1) + date(2025, 1, 2))",
         ),
         choice(
@@ -277,9 +277,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "Co oznacza %d w strftime?",
-            listOf("Dzień miesiąca (dwie cyfry)", "Dzień tygodnia", "Liczbę dni w miesiącu", "Rok"),
+            listOf("Dzień miesiąca", "Dzień tygodnia", "Liczbę dni w miesiącu", "Rok"),
             0,
-            "%d to dzień miesiąca, np. 05.",
+            "%d to dzień miesiąca, zawsze dwiema cyframi, np. 05.",
         ),
         choice(
             "Jaki typ zwraca d.strftime(\"%Y\")?",
@@ -373,9 +373,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("ValueError – kwiecień ma 30 dni", "Wypisze 2025-05-01", "Wypisze 2025-04-31", "Wypisze 2025-04-30"),
+            listOf("Błąd ValueError", "Wypisze 2025-05-01", "Wypisze 2025-04-31", "Wypisze 2025-04-30"),
             0,
-            "date sprawdza, czy podany dzień istnieje.",
+            "date sprawdza, czy podany dzień istnieje – kwiecień ma 30 dni, więc to ValueError.",
             code = "from datetime import date\nprint(date(2025, 4, 31))",
         ),
         fill(
@@ -393,7 +393,7 @@ internal val module20Practice = listOf(
             "Na końcu potrzebny jest pełny rok – %Y.",
         ),
         tiles(
-            "Zapisz w nowa datę d przesuniętą o 100 dni.",
+            "Zapisz w zmiennej nowa datę d przesuniętą o 100 dni.",
             listOf("nowa =", "d +", "timedelta(", "days=100", ")"),
             listOf("d.day +", "date("),
             "Do daty dodajemy timedelta(days=100).",

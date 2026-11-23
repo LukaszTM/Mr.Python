@@ -47,9 +47,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "How do you store the correct option in a multiple-choice question's dictionary?",
-            listOf("As the index of the correct option, e.g. \"correct\": 1", "In a separate variable outside the dictionary", "It can't be stored", "As the number of all options"),
+            listOf("As the index of the correct option", "As the number of all options", "As the index of the last option", "In a separate variable outside the dictionary"),
             0,
-            "The index points to the correct element of the options list.",
+            "For example \"correct\": 1 – the index points to the correct element of the options list.",
         ),
         choice(
             "What does this code print?",
@@ -143,9 +143,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Why do we call strip() on the player's answer?",
-            listOf("To remove accidental spaces from the start and end", "To turn the letters into lowercase", "To split the answer into words", "To convert the text to a number"),
+            listOf("To remove spaces at the edges", "To turn the letters into lowercase", "To split the answer into words", "To convert the text to a number"),
             0,
-            "The player may type a space by accident – that shouldn't count as a mistake.",
+            "strip() removes spaces from the start and end. The player may type a space by accident – that shouldn't count as a mistake.",
         ),
         choice(
             "Which comparison gives True for answer = \"paris\" and correct = \"Paris\"?",
@@ -237,9 +237,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "What grade does grade(70) return?",
-            listOf("\"C\" – the thresholds are in the wrong order", "\"B\"", "\"F\"", "An error"),
+            listOf("\"C\"", "\"B\"", "\"F\"", "An error"),
             0,
-            "70 >= 50 is already true in the first condition.",
+            "70 >= 50 is already true in the first condition, so the function returns \"C\" – the thresholds are in the wrong order.",
             code = "def grade(p):\n    if p >= 50:\n        return \"C\"\n    if p >= 70:\n        return \"B\"\n    return \"F\"",
         ),
         fill(
@@ -313,22 +313,22 @@ internal val module57Practice = listOf(
         ),
         choice(
             "What is wrong with this code?",
-            listOf("shuffle returns None, so questions becomes None", "The shuffle function doesn't exist", "The list is too short", "Nothing – it prints the shuffled list"),
+            listOf("The variable questions becomes None", "The shuffle function doesn't exist", "The list is too short", "Nothing – it prints the shuffled list"),
             0,
-            "We don't assign the result of shuffle – the list changes in place.",
+            "shuffle returns None, so after the assignment questions is None. We don't assign the result of shuffle – the list changes in place.",
             code = "import random\n\nquestions = [1, 2, 3]\nquestions = random.shuffle(questions)\nprint(questions)",
         ),
         choice(
             "How do you get the questions in random order without changing the original list?",
-            listOf("random.sample(questions, len(questions))", "random.shuffle(questions)", "questions.sort()", "random.choice(questions)"),
+            listOf("random.sample(questions, len(questions))", "random.shuffle(questions)", "sorted(questions, reverse=True)", "random.choice(questions)"),
             0,
-            "sample returns a new list, while shuffle changes the original.",
+            "sample returns a new list in random order, while shuffle changes the original. sorted with reverse=True gives the reverse order, not a random one.",
         ),
         choice(
             "Why would you call random.seed(42) before shuffling?",
-            listOf("So the order is the same every time, e.g. in tests", "So the shuffling is faster", "To pick 42 questions", "To sort the list"),
+            listOf("So the result is repeatable", "So the shuffling is faster", "To pick 42 questions", "To sort the list"),
             0,
-            "A fixed seed gives repeatable random results.",
+            "A fixed seed gives the same order every time – that's useful e.g. in tests.",
         ),
         fill(
             "Fill in the blank to pick one random question from the list.",
@@ -401,15 +401,15 @@ internal val module57Practice = listOf(
         ),
         choice(
             "What should the check method in the Question class do?",
-            listOf("Compare the player's answer with the correct one and return True or False", "Print all the questions", "Shuffle the questions", "Save the quiz to a file"),
+            listOf("Check the player's answer", "Print all the questions", "Shuffle the questions", "Save the quiz to a file"),
             0,
-            "Each method has one clear job.",
+            "check compares the player's answer with the correct one and returns True or False – each method has one clear job.",
         ),
         choice(
             "What does this code print?",
             listOf("2", "1", "0", "None"),
             0,
-            "The correct method was called twice.",
+            "The method correct() was called twice, and each call adds 1 point.",
             code = "class Quiz:\n    def __init__(self):\n        self.points = 0\n    def correct(self):\n        self.points += 1\n\nquiz = Quiz()\nquiz.correct()\nquiz.correct()\nprint(quiz.points)",
         ),
         choice(

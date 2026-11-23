@@ -44,23 +44,23 @@ internal val module32Practice = listOf(
             "Sam obiekt używa __str__, a repr() i lista – __repr__.",
         ),
         choice(
-            "Którą metodę wywołuje funkcja str(obiekt)?",
-            listOf("__str__, a gdy jej brak – __repr__", "Zawsze __repr__", "__init__", "__print__"),
+            "Którą metodę wywołuje str(obiekt), gdy klasa ma i __str__, i __repr__?",
+            listOf("__str__", "__repr__", "__init__", "__print__"),
             0,
-            "__repr__ jest zapasem, gdy klasa nie ma __str__.",
+            "str() wywołuje __str__; __repr__ jest tylko zapasem, gdy klasa nie ma __str__.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – __str__ musi zwrócić napis", "Wypisze 5", "Wypisze None", "Wypisze '5'"),
+            listOf("TypeError", "Wypisze 5", "Wypisze None", "Wypisze '5'"),
             0,
-            "__str__ zwrócił liczbę zamiast napisu.",
+            "__str__ musi zwrócić napis, a zwrócił liczbę – dlatego TypeError.",
             code = "class A:\n    def __str__(self):\n        return 5\n\nprint(A())",
         ),
         choice(
             "Jak zwykle wygląda dobry __repr__ klasy Punkt?",
-            listOf("Punkt(x=1, y=2) – jak kod tworzący obiekt", "punkt :)", "<obiekt>", "Pusty napis"),
+            listOf("Punkt(x=1, y=2)", "Punkt", "<obiekt>", "Pusty napis"),
             0,
-            "__repr__ powinien jednoznacznie opisywać obiekt dla programisty.",
+            "Dobry __repr__ wygląda jak kod tworzący obiekt i jednoznacznie go opisuje.",
         ),
         fill(
             "Uzupełnij, aby print wypisał „Ola (12 lat)”.",
@@ -220,9 +220,9 @@ internal val module32Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – obiekt nie ma len()", "Wypisze 0", "Wypisze None", "Wypisze 1"),
+            listOf("TypeError", "Wypisze 0", "Wypisze None", "Wypisze 1"),
             0,
-            "Bez metody __len__ funkcja len() nie działa.",
+            "Bez metody __len__ funkcja len() zgłasza TypeError.",
             code = "class A:\n    pass\n\nprint(len(A()))",
         ),
         choice(
@@ -314,9 +314,9 @@ internal val module32Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – brak obsługi +", "Wypisze 3", "Wypisze 12", "Wypisze None"),
+            listOf("TypeError", "Wypisze 3", "Wypisze 12", "Wypisze None"),
             0,
-            "Klasa nie ma __add__, więc nie da się dodać jej obiektów.",
+            "Klasa nie ma __add__, więc dodanie jej obiektów kończy się TypeError.",
             code = "class A:\n    def __init__(self, n):\n        self.n = n\n\nprint((A(1) + A(2)).n)",
         ),
         choice(

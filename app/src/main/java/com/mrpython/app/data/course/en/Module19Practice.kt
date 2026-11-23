@@ -48,17 +48,17 @@ internal val module19Practice = listOf(
         choice(
             "What happens when you run this code?",
             listOf(
-                "ValueError – the start of the range is greater than the end",
+                "A ValueError",
                 "It picks a number from 1 to 5",
                 "It always prints 5",
                 "It always prints 1",
             ),
             0,
-            "In randint(a, b) you need a ≤ b – otherwise the range is empty.",
+            "In randint(a, b) you need a ≤ b – randint(5, 1) raises a ValueError.",
             code = "import random\nprint(random.randint(5, 1))",
         ),
         fill(
-            "Fill in the blank to pick a random fraction from the range [0, 1).",
+            "Fill in the blank to pick a random fraction from 0 up to 1 (not including 1).",
             "import random\nx = random.____()\nprint(0 <= x < 1)",
             listOf("random", "randint", "choice"),
             "random",
@@ -72,7 +72,7 @@ internal val module19Practice = listOf(
             "randint includes both ends, so 1–6 is exactly the faces of a die.",
         ),
         tiles(
-            "Pick a random fraction from the range [0, 1) into the variable u.",
+            "Store a random fraction from 0 up to 1 (not including 1) in the variable u.",
             listOf("u =", "random.random(", ")"),
             listOf("random.randint(", "0, 1"),
             "random() takes no arguments.",
@@ -125,7 +125,7 @@ internal val module19Practice = listOf(
         choice(
             "What does random.sample(my_list, 3) return?",
             listOf(
-                "A new list of 3 different items from the list",
+                "A list of 3 different items",
                 "The third item of the list",
                 "The list shuffled in place",
                 "One item repeated 3 times",
@@ -317,7 +317,7 @@ internal val module19Practice = listOf(
         ),
         choice(
             "What does random.choice(\"abc\") return?",
-            listOf("One random letter of the string", "A list of letters", "The whole string shuffled", "None"),
+            listOf("A random letter", "A list of letters", "The whole string shuffled", "None"),
             0,
             "A string is a sequence of letters, so choice picks one of them.",
         ),
@@ -345,7 +345,7 @@ internal val module19Practice = listOf(
         tiles(
             "Import the functions choice and shuffle from the random module.",
             listOf("from", "random", "import", "choice,", "shuffle"),
-            listOf("as", "include"),
+            listOf("as", "and"),
             "Several names are imported separated by commas.",
         ),
         tiles(

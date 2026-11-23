@@ -46,7 +46,7 @@ internal val module45 = CourseUnit(
             choice(
                 "Why do we write r before a pattern, e.g. r\"\\d+\"?",
                 listOf(
-                    "So the backslash \\ isn't treated as a special string character",
+                    "So the backslash \\ stays as it is",
                     "So the pattern runs faster",
                     "So letter case doesn't matter",
                     "Without r the re module doesn't work at all",
@@ -151,7 +151,7 @@ internal val module45 = CourseUnit(
             ),
             choice(
                 "What does \\s match in a pattern?",
-                listOf("A whitespace character, e.g. a space", "Any letter", "A digit", "The letter s"),
+                listOf("Whitespace", "Any letter", "A digit", "The letter s"),
                 0,
                 "\\s is a space, a tab, a newline and so on.",
             ),

@@ -39,7 +39,7 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("AttributeError – brak x", "Wypisze 1", "Wypisze None", "Wypisze 2"),
+                listOf("AttributeError", "Wypisze 1", "Wypisze None", "Wypisze 2"),
                 0,
                 "B nadpisał __init__ i nie wywołał super().__init__(), więc x nie powstał.",
                 code = "class A:\n    def __init__(self):\n        self.x = 1\n\nclass B(A):\n    def __init__(self):\n        self.y = 2\n\nprint(B().x)",
@@ -52,7 +52,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Wywołaj __init__ klasy bazowej z argumentem imie",
                 listOf("super()", ".__init__(", "imie", ")"),
-                listOf("self,", "parent()"),
+                listOf("self,", "super"),
                 "super().__init__(imie) – self przekazuje się automatycznie.",
             ),
         ),
@@ -65,9 +65,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Czym jest polimorfizm?",
-                listOf("Różne klasy mają metodę o tej samej nazwie i można ich używać tak samo", "Klasa ma wiele konstruktorów", "Obiekt zmienia klasę w trakcie działania", "Klasa dziedziczy po wielu klasach"),
+                listOf("Różne klasy mają metodę o tej samej nazwie", "Jedna klasa ma kilka różnych konstruktorów", "Obiekt zmienia swoją klasę w trakcie działania", "Jedna klasa dziedziczy po kilku innych klasach"),
                 0,
-                "Dzięki polimorfizmowi pętla wywołuje tę samą metodę na różnych obiektach.",
+                "Różne klasy mają metodę o tej samej nazwie, więc pętla wywołuje ją tak samo, a każdy obiekt odpowiada po swojemu.",
             ),
             output(
                 "class Zwierze:\n    pass\n\nclass Pies(Zwierze):\n    pass\n\np = Pies()\nprint(isinstance(p, Pies), isinstance(p, Zwierze))",
@@ -131,7 +131,7 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Co oznacza skrót MRO?",
-                listOf("Kolejność, w jakiej Python szuka metod w klasach", "Listę wszystkich obiektów klasy", "Metodę tworzącą obiekt", "Rodzaj błędu"),
+                listOf("Kolejność szukania metod", "Listę obiektów klasy", "Metodę tworzącą obiekt", "Rodzaj błędu w klasie"),
                 0,
                 "MRO (Method Resolution Order) to kolejność przeszukiwania klas.",
             ),
@@ -150,7 +150,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Napisz nagłówek klasy C dziedziczącej po A i B",
                 listOf("class", "C(", "A,", "B", "):"),
-                listOf("def", "extends"),
+                listOf("def", "and"),
                 "Klasy bazowe wymieniamy po przecinku w nawiasie.",
             ),
         ),
@@ -163,9 +163,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – nie można utworzyć klasy abstrakcyjnej", "Powstanie obiekt f", "NameError", "f.pole() zwróci None"),
+                listOf("TypeError", "Powstanie obiekt f", "NameError", "f.pole() zwróci None"),
                 0,
-                "Klasy z niezaimplementowaną metodą abstrakcyjną nie da się utworzyć.",
+                "Klasy z niezaimplementowaną metodą abstrakcyjną nie da się utworzyć – Python zgłasza TypeError.",
                 code = "from abc import ABC, abstractmethod\n\nclass Figura(ABC):\n    @abstractmethod\n    def pole(self):\n        pass\n\nf = Figura()",
             ),
             output(
@@ -182,9 +182,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Po czym dziedziczy klasa abstrakcyjna w Pythonie?",
-                listOf("Po ABC z modułu abc", "Po Abstract", "Po Exception", "Po niczym – wystarczy słowo abstract"),
+                listOf("Po ABC", "Po abstractmethod", "Po Exception", "Po Abstract"),
                 0,
-                "Klasa abstrakcyjna dziedziczy po abc.ABC.",
+                "Klasa abstrakcyjna dziedziczy po ABC z modułu abc; abstractmethod to dekorator dla metod, a nie klasa bazowa.",
             ),
             output(
                 "from abc import ABC, abstractmethod\nclass Zw(ABC):\n    @abstractmethod\n    def glos(self):\n        pass\n    def przedstaw(self):\n        return \"Ja: \" + self.glos()\nclass Kot(Zw):\n    def glos(self):\n        return \"miau\"\nprint(Kot().przedstaw())",
@@ -194,12 +194,12 @@ internal val module33 = CourseUnit(
             tiles(
                 "Zaimportuj ABC i abstractmethod",
                 listOf("from", "abc", "import", "ABC,", "abstractmethod"),
-                listOf("include", "abstract"),
+                listOf("Abc", "abstract"),
                 "Oba elementy pochodzą z modułu abc.",
             ),
             choice(
                 "Po co stosuje się klasy abstrakcyjne?",
-                listOf("Żeby wymusić, by klasy pochodne zaimplementowały określone metody", "Żeby program działał szybciej", "Żeby ukryć atrybuty", "Żeby klasa miała tylko jeden obiekt"),
+                listOf("Żeby wymusić metody w klasach pochodnych", "Żeby program działał szybciej", "Żeby ukryć atrybuty przed innymi", "Żeby klasa miała tylko jeden obiekt"),
                 0,
                 "Klasa abstrakcyjna to szablon – mówi, jakie metody muszą mieć klasy pochodne.",
             ),
@@ -237,9 +237,9 @@ internal val module33 = CourseUnit(
             ),
             choice(
                 "Który zapis wywołuje metodę opis z klasy bazowej?",
-                listOf("super().opis()", "parent.opis()", "base().opis()", "self.super().opis()"),
+                listOf("super().opis()", "super.opis()", "super().opis", "self.super().opis()"),
                 0,
-                "Do metod rodzica odwołujemy się przez super().",
+                "super() to funkcja, więc potrzebuje nawiasów (self.super() nie istnieje); bez nawiasów po opis metoda nie zostanie wywołana.",
             ),
             output(
                 "from abc import ABC, abstractmethod\nclass Figura(ABC):\n    @abstractmethod\n    def pole(self):\n        pass\nclass Kolo(Figura):\n    def pole(self):\n        return 3\nf = Kolo()\nprint(isinstance(f, Figura), f.pole())",
@@ -249,7 +249,7 @@ internal val module33 = CourseUnit(
             tiles(
                 "Napisz nagłówek klasy Kot dziedziczącej po Zwierze",
                 listOf("class", "Kot(", "Zwierze", "):"),
-                listOf("def", "extends"),
+                listOf("def", "self,"),
                 "Klasę bazową podajemy w nawiasie.",
             ),
         ),

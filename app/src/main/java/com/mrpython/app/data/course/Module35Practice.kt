@@ -45,9 +45,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – wyjątek musi dziedziczyć po BaseException", "Zgłosi wyjątek A", "Nic się nie stanie", "NameError"),
+            listOf("TypeError", "Zgłosi wyjątek A", "Nic się nie stanie", "NameError"),
             0,
-            "Klasa A nie dziedziczy po Exception, więc nie można jej zgłosić.",
+            "Klasa A nie dziedziczy po BaseException (ani po Exception), więc raise A() zgłasza TypeError.",
             code = "class A:\n    pass\n\nraise A()",
         ),
         choice(
@@ -66,7 +66,7 @@ internal val module35Practice = listOf(
         fill(
             "Uzupełnij, aby zgłosić własny wyjątek (wypisze „za dużo”).",
             "class ZaDuzo(Exception):\n    pass\n\ntry:\n    ____ ZaDuzo(\"za dużo\")\nexcept ZaDuzo as e:\n    print(e)",
-            listOf("raise", "return", "throw"),
+            listOf("raise", "return", "except"),
             "raise",
             "W Pythonie wyjątki zgłaszamy słowem raise.",
         ),
@@ -147,9 +147,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Po co tworzyć wspólną klasę bazową dla wyjątków aplikacji?",
-            listOf("Żeby jednym except złapać wszystkie błędy aplikacji", "Żeby wyjątki działały szybciej", "Żeby nie trzeba było pisać raise", "Bo Python tego wymaga"),
+            listOf("Żeby łapać je jednym except", "Żeby wyjątki działały szybciej", "Żeby nie trzeba było pisać raise", "Bo Python tego wymaga"),
             0,
-            "Klasa bazowa grupuje powiązane błędy.",
+            "except z klasą bazową złapie naraz wszystkie błędy aplikacji, które po niej dziedziczą.",
         ),
         fill(
             "Uzupełnij, aby jeden except złapał oba błędy (wypisze dwa razy „błąd sklepu”).",
@@ -310,7 +310,7 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Co oznacza raise X(...) from e?",
-            listOf("Zgłoś X i zapisz e jako jego przyczynę", "Złap X i zamień go na e", "Zgłoś e zamiast X", "Zgłoś oba wyjątki naraz"),
+            listOf("Zgłoś X z przyczyną e", "Złap X i zamień go na e", "Zgłoś e zamiast X", "Zgłoś oba wyjątki naraz"),
             0,
             "e trafia do atrybutu __cause__ nowego wyjątku.",
         ),
@@ -323,9 +323,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Które zdanie o samym raise (bez argumentu) jest prawdziwe?",
-            listOf("W bloku except zgłasza ponownie obsługiwany wyjątek", "Zawsze tworzy nowy Exception", "Kończy funkcję i zwraca None", "Działa tylko poza except"),
+            listOf("Ponawia obsługiwany wyjątek", "Zawsze tworzy nowy Exception", "Kończy funkcję i zwraca None", "Działa tylko poza except"),
             0,
-            "Samo raise przekazuje bieżący wyjątek dalej.",
+            "W bloku except samo raise zgłasza ponownie obsługiwany wyjątek i przekazuje go dalej.",
         ),
         fill(
             "Uzupełnij, aby except złapał wszystkie błędy aplikacji (wypisze app).",

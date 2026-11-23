@@ -26,9 +26,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "Do czego służy __repr__?",
-                listOf("Jednoznaczny opis obiektu dla programisty", "Ładny tekst dla użytkownika", "Porównywanie obiektów", "Tworzenie obiektu"),
+                listOf("Techniczny opis obiektu", "Ładny tekst dla użytkownika", "Porównywanie obiektów", "Tworzenie obiektu"),
                 0,
-                "__repr__ to techniczny opis, często wyglądający jak kod tworzący obiekt.",
+                "__repr__ to jednoznaczny, techniczny opis dla programisty, często wyglądający jak kod tworzący obiekt; ładny tekst daje __str__.",
             ),
             output(
                 "class A:\n    def __str__(self):\n        return \"ładny\"\n    def __repr__(self):\n        return \"techniczny\"\n\na = A()\nprint(str(a), repr(a))",
@@ -44,9 +44,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "Co wypisze print(obiekt), gdy klasa nie ma ani __str__, ani __repr__?",
-                listOf("Coś w rodzaju <__main__.Klasa object at 0x...>", "Nic", "Błąd TypeError", "Listę atrybutów"),
+                listOf("Nazwę klasy i adres w pamięci", "Pusty napis", "Błąd TypeError", "Listę wszystkich atrybutów"),
                 0,
-                "Domyślny opis zawiera tylko nazwę klasy i adres w pamięci.",
+                "Domyślny opis wygląda jak <__main__.Klasa object at 0x...> – zawiera tylko nazwę klasy i adres w pamięci.",
             ),
             tiles(
                 "Napisz nagłówek metody __repr__",
@@ -92,15 +92,15 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – brak porównania <", "Wypisze True", "Wypisze False", "SyntaxError"),
+                listOf("TypeError", "Wypisze True", "Wypisze False", "SyntaxError"),
                 0,
-                "Bez __lt__ Python nie wie, jak porównać dwa obiekty operatorem <.",
+                "Bez __lt__ Python nie wie, jak porównać dwa obiekty operatorem <, więc zgłasza TypeError.",
                 code = "class P:\n    def __init__(self, x):\n        self.x = x\n\nprint(P(1) < P(2))",
             ),
             tiles(
                 "Porównaj obiekty a i b operatorem równości i wypisz wynik",
                 listOf("print(", "a", "==", "b", ")"),
-                listOf("=", "equals("),
+                listOf("=", "!="),
                 "Operator == wywołuje metodę __eq__.",
             ),
         ),
@@ -179,9 +179,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("TypeError – liczba nie umie pomnożyć się przez Kwota", "k będzie Kwota z zl = 15", "k będzie liczbą 15", "SyntaxError"),
+                listOf("TypeError", "k będzie Kwota z zl = 15", "k będzie liczbą 15", "SyntaxError"),
                 0,
-                "3 * obiekt wymaga metody __rmul__; samo __mul__ działa tylko dla obiekt * 3.",
+                "3 * obiekt wymaga metody __rmul__; samo __mul__ działa tylko dla obiekt * 3, więc jest TypeError.",
                 code = "class Kwota:\n    def __init__(self, zl):\n        self.zl = zl\n    def __mul__(self, n):\n        return Kwota(self.zl * n)\n\nk = 3 * Kwota(5)",
             ),
             output(

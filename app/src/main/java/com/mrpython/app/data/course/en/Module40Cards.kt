@@ -60,8 +60,9 @@ internal val module40Cards = listOf(
         "u40l4",
         explain(
             "Decorators in short",
-            "A decorator is a function that takes a function and returns a new one. `@decorate` " +
-                "above `def hello` is short for `hello = decorate(hello)`. That's why, without " +
+            "A decorator is a function that takes a function and returns a new one. You can define " +
+                "that new function with `def` inside the decorator and return it, just as we returned " +
+                "a lambda. `@decorate` above `def hello` is short for `hello = decorate(hello)`. That's why, without " +
                 "`wraps`, the name is the name of the inner function.",
             code = "def decorate(f):\n    def wrapper(): return f()\n    return wrapper\n@decorate\ndef hello(): pass\nprint(hello.__name__)",
             output = "wrapper",

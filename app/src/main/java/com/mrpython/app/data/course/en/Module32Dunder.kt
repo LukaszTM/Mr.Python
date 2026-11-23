@@ -27,9 +27,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "What is __repr__ for?",
-                listOf("An unambiguous description of the object for the programmer", "Pretty text for the user", "Comparing objects", "Creating an object"),
+                listOf("A technical description", "Pretty text for the user", "Comparing two objects", "Creating a new object"),
                 0,
-                "__repr__ is a technical description, often looking like the code that creates the object.",
+                "__repr__ is an unambiguous, technical description for the programmer, often looking like the code that creates the object; pretty text comes from __str__.",
             ),
             output(
                 "class A:\n    def __str__(self):\n        return \"pretty\"\n    def __repr__(self):\n        return \"technical\"\n\na = A()\nprint(str(a), repr(a))",
@@ -45,9 +45,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "What does print(object) show when the class has neither __str__ nor __repr__?",
-                listOf("Something like <__main__.Class object at 0x...>", "Nothing", "A TypeError", "A list of attributes"),
+                listOf("The class name and a memory address", "An empty string", "A TypeError", "A list of all the attributes"),
                 0,
-                "The default description contains only the class name and a memory address.",
+                "The default description looks like <__main__.Class object at 0x...> – it contains only the class name and a memory address.",
             ),
             tiles(
                 "Write the header of the __repr__ method",
@@ -93,15 +93,15 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – no < comparison", "It prints True", "It prints False", "SyntaxError"),
+                listOf("TypeError", "It prints True", "It prints False", "SyntaxError"),
                 0,
-                "Without __lt__, Python doesn't know how to compare two objects with the < operator.",
+                "Without __lt__, Python doesn't know how to compare two objects with the < operator, so it raises a TypeError.",
                 code = "class P:\n    def __init__(self, x):\n        self.x = x\n\nprint(P(1) < P(2))",
             ),
             tiles(
                 "Compare objects a and b with the equality operator and print the result",
                 listOf("print(", "a", "==", "b", ")"),
-                listOf("=", "equals("),
+                listOf("=", "!="),
                 "The == operator calls the __eq__ method.",
             ),
         ),
@@ -180,9 +180,9 @@ internal val module32 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – a number can't multiply itself by a Money", "m will be a Money with dollars = 15", "m will be the number 15", "SyntaxError"),
+                listOf("TypeError", "m will be a Money with dollars = 15", "m will be the number 15", "SyntaxError"),
                 0,
-                "3 * object requires the __rmul__ method; __mul__ alone only works for object * 3.",
+                "3 * object requires the __rmul__ method; __mul__ alone only works for object * 3, so you get a TypeError.",
                 code = "class Money:\n    def __init__(self, dollars):\n        self.dollars = dollars\n    def __mul__(self, n):\n        return Money(self.dollars * n)\n\nm = 3 * Money(5)",
             ),
             output(

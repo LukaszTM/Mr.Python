@@ -89,9 +89,9 @@ internal val module38 = CourseUnit(
             ),
             choice(
                 "Co przekazujemy do defaultdict?",
-                listOf("Funkcję tworzącą wartość domyślną, np. int", "Gotową wartość, np. 0", "Nazwę klucza", "Liczbę elementów"),
+                listOf("Funkcję, np. int", "Wartość, np. 0", "Klucz, np. \"a\"", "Długość, np. 10"),
                 0,
-                "defaultdict wywołuje podaną funkcję, gdy brakuje klucza.",
+                "defaultdict wywołuje podaną funkcję, gdy brakuje klucza (int() daje 0). Gotowej wartości, np. 0, nie przyjmie.",
             ),
             output(
                 "from collections import defaultdict\nd = defaultdict(int)\nfor z in \"kajak\":\n    d[z] += 1\nprint(dict(d))",
@@ -129,9 +129,9 @@ internal val module38 = CourseUnit(
             ),
             choice(
                 "Co się stanie po p.x = 10, gdy p jest namedtuple?",
-                listOf("AttributeError – namedtuple jest niezmienna", "x zmieni się na 10", "Powstanie nowe pole", "SyntaxError"),
+                listOf("AttributeError", "x zmieni się na 10", "Powstanie nowe pole x", "SyntaxError"),
                 0,
-                "Jak każda krotka, namedtuple jest niemutowalna.",
+                "Jak każda krotka, namedtuple jest niezmienna, więc przypisanie do pola daje AttributeError.",
                 code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\"])\np = P(1)\np.x = 10",
             ),
             fill(

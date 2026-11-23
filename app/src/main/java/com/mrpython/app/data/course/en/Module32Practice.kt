@@ -46,23 +46,23 @@ internal val module32Practice = listOf(
             "The object by itself uses __str__, while repr() and the list use __repr__.",
         ),
         choice(
-            "Which method does the str(object) function call?",
-            listOf("__str__, and if it's missing – __repr__", "Always __repr__", "__init__", "__print__"),
+            "Which method does str(object) call when the class has both __str__ and __repr__?",
+            listOf("__str__", "__repr__", "__init__", "__print__"),
             0,
-            "__repr__ is the fallback when a class has no __str__.",
+            "str() calls __str__; __repr__ is only the fallback when a class has no __str__.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – __str__ must return a string", "It prints 5", "It prints None", "It prints '5'"),
+            listOf("TypeError", "It prints 5", "It prints None", "It prints '5'"),
             0,
-            "__str__ returned a number instead of a string.",
+            "__str__ must return a string, but it returned a number – hence the TypeError.",
             code = "class A:\n    def __str__(self):\n        return 5\n\nprint(A())",
         ),
         choice(
             "What does a good __repr__ for a Point class usually look like?",
-            listOf("Point(x=1, y=2) – like the code that creates the object", "point :)", "<object>", "An empty string"),
+            listOf("Point(x=1, y=2)", "Point", "<object>", "An empty string"),
             0,
-            "__repr__ should describe the object unambiguously for the programmer.",
+            "A good __repr__ looks like the code that creates the object and describes it unambiguously.",
         ),
         fill(
             "Fill in the blank so print shows \"Olivia (12 years old)\".",
@@ -222,9 +222,9 @@ internal val module32Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – the object has no len()", "It prints 0", "It prints None", "It prints 1"),
+            listOf("TypeError", "It prints 0", "It prints None", "It prints 1"),
             0,
-            "Without the __len__ method, the len() function doesn't work.",
+            "Without the __len__ method, the len() function raises a TypeError.",
             code = "class A:\n    pass\n\nprint(len(A()))",
         ),
         choice(
@@ -316,9 +316,9 @@ internal val module32Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – + is not supported", "It prints 3", "It prints 12", "It prints None"),
+            listOf("TypeError", "It prints 3", "It prints 12", "It prints None"),
             0,
-            "The class has no __add__, so its objects can't be added.",
+            "The class has no __add__, so adding its objects ends in a TypeError.",
             code = "class A:\n    def __init__(self, n):\n        self.n = n\n\nprint((A(1) + A(2)).n)",
         ),
         choice(

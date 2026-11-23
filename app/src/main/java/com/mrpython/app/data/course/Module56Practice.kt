@@ -41,13 +41,13 @@ internal val module56Practice = listOf(
         output(
             "zadania = [{\"tytul\": \"X\", \"zrobione\": False}]\nfor z in zadania:\n    print(f\"{z['tytul']}: {z['zrobione']}\")",
             "X: False",
-            "W f-stringu sięgamy do pól słownika apostrofami.",
+            "W f-stringu zapisanym w cudzysłowie klucz piszemy w apostrofach – tak jest czytelniej.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("KeyError – brak klucza \"zrobione\"", "Wypisze False", "Wypisze None", "Wypisze Nauka"),
+            listOf("KeyError", "Wypisze False", "Wypisze None", "Wypisze Nauka"),
             0,
-            "Odczyt brakującego klucza przez [] zgłasza KeyError.",
+            "Słownik nie ma klucza \"zrobione\", a odczyt brakującego klucza przez [] zgłasza KeyError.",
             code = "z = {\"tytul\": \"Nauka\"}\nprint(z[\"zrobione\"])",
         ),
         choice(
@@ -58,9 +58,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "Jakiego typu jest wartość pod kluczem \"zrobione\"?",
-            listOf("bool – True albo False", "str", "int", "list"),
+            listOf("bool", "str", "int", "list"),
             0,
-            "Zadanie jest zrobione albo nie – to wartość logiczna.",
+            "Zadanie jest zrobione albo nie – to wartość logiczna True albo False, czyli typ bool.",
         ),
         fill(
             "Uzupełnij, aby wypisać liczbę zadań (2).",
@@ -133,9 +133,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("ValueError – nie ma takiego elementu", "Usunie ostatni element", "Nic się nie stanie", "KeyError"),
+            listOf("ValueError", "Usunie ostatni element", "Nic się nie stanie", "KeyError"),
             0,
-            "remove zgłasza ValueError, gdy wartości nie ma na liście.",
+            "remove zgłasza ValueError, gdy wartości (tu \"C\") nie ma na liście.",
             code = "zadania = [\"A\", \"B\"]\nzadania.remove(\"C\")",
         ),
         choice(
@@ -309,9 +309,9 @@ internal val module56Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("AttributeError – brak atrybutu zrobione", "Wypisze False", "Wypisze None", "Wypisze A"),
+            listOf("AttributeError", "Wypisze False", "Wypisze None", "Wypisze A"),
             0,
-            "__init__ nie ustawił atrybutu zrobione.",
+            "__init__ nie ustawił atrybutu zrobione, więc odczyt z.zrobione zgłasza AttributeError.",
             code = "class Zadanie:\n    def __init__(self, tytul):\n        self.tytul = tytul\n\nz = Zadanie(\"A\")\nprint(z.zrobione)",
         ),
         choice(
@@ -347,7 +347,7 @@ internal val module56Practice = listOf(
             "Do atrybutów obiektu sięgamy przez kropkę.",
         ),
         tiles(
-            "Napisz nagłówek metody zakoncz w klasie Zadanie.",
+            "Napisz nagłówek metody zakoncz w klasie Zadanie, z parametrem self.",
             listOf("def", "zakoncz(", "self", "):"),
             listOf("class", "this"),
             "Pierwszym parametrem metody jest self.",

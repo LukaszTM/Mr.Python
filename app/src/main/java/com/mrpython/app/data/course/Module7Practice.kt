@@ -21,7 +21,7 @@ internal val module7Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – nie ma znaku o indeksie 3", "Wypisze t", "Wypisze pusty napis", "Wypisze kot"),
+            listOf("Błąd IndexError", "Wypisze t", "Wypisze pusty napis", "Wypisze kot"),
             0,
             "Napis „kot” ma indeksy 0, 1 i 2, więc indeks 3 jest poza zakresem.",
             code = "s = \"kot\"\nprint(s[3])",
@@ -116,9 +116,9 @@ internal val module7Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – join() skleja tylko napisy", "Wypisze a 1", "Wypisze a1", "Wypisze ['a', 1]"),
+            listOf("Błąd", "Wypisze a 1", "Wypisze a1", "Wypisze ['a', 1]"),
             0,
-            "Liczbę trzeba najpierw zamienić na napis przez str().",
+            "join() skleja tylko napisy, więc liczbę 1 trzeba najpierw zamienić przez str().",
             code = "print(\" \".join([\"a\", 1]))",
         ),
         fill(
@@ -164,7 +164,7 @@ internal val module7Practice = listOf(
         output("print(\"Python\".find(\"on\") + len(\"on\"))", "6", "„on” zaczyna się od indeksu 4, a 4 + 2 = 6."),
         choice(
             "Co zrobi s.upper(), gdy s = \"hej\"?",
-            listOf("Zwróci nowy napis HEJ, a s się nie zmieni", "Zmieni s na HEJ", "Wypisze HEJ na ekranie", "Zgłosi błąd"),
+            listOf("Zwróci nowy napis HEJ, s bez zmian", "Zmieni s na HEJ i nic nie zwróci", "Wypisze HEJ na ekranie, s bez zmian", "Zmieni s na HEJ i zwróci HEJ"),
             0,
             "Napisy są niezmienne – metody zwracają nowe napisy.",
         ),

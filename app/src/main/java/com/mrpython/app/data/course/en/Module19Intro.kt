@@ -41,7 +41,7 @@ internal val module19Intro = lesson(
     ),
     choice(
         "What does random.randint(1, 6) return?",
-        listOf("An integer from 1 to 6 (inclusive)", "An integer from 1 to 5", "A float from 1 to 6", "Always 6"),
+        listOf("An integer from 1 to 6", "An integer from 1 to 5", "A float from 1 to 6", "An integer from 0 to 6"),
         0,
         "randint includes both limits of the range.",
     ),

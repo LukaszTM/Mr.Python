@@ -59,7 +59,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "Co oznacza adnotacja int | None?",
-                listOf("Wartość może być liczbą całkowitą albo None", "Liczba całkowita różna od zera", "Bitowe OR liczby i None", "Pusta liczba"),
+                listOf("Liczba całkowita albo None", "Liczba całkowita różna od zera", "Liczba całkowita i None naraz", "Pusta liczba całkowita"),
                 0,
                 "Pionowa kreska w adnotacji oznacza „jeden z tych typów”.",
             ),
@@ -71,9 +71,9 @@ internal val module44 = CourseUnit(
             fill(
                 "Uzupełnij, aby adnotacja znaczyła „napis albo None”.",
                 "def opis(x: str | ____ = None) -> str:\n    return \"brak\" if x is None else x\nprint(opis())",
-                listOf("None", "Null", "nil", "empty"),
+                listOf("None", "none", "0", "False"),
                 "None",
-                "W Pythonie brak wartości to None.",
+                "Brak wartości w Pythonie to None, z wielkiej litery; none, 0 i False to coś innego.",
             ),
             choice(
                 "Który zapis jest równoważny Optional[int]?",
@@ -107,7 +107,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "Co się stanie, gdy do funkcji z adnotacją int przekażemy napis?",
-                listOf("Python wykona kod normalnie – adnotacje nie są sprawdzane", "TypeError od razu przy wywołaniu", "Napis zostanie zamieniony na int", "SyntaxError"),
+                listOf("Kod wykona się normalnie", "TypeError przy wywołaniu", "Napis zamieni się na int", "SyntaxError"),
                 0,
                 "Adnotacje to podpowiedzi dla ludzi i narzędzi (np. mypy), nie reguły.",
             ),
@@ -130,7 +130,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "Do czego służą narzędzia takie jak mypy?",
-                listOf("Sprawdzają zgodność typów bez uruchamiania programu", "Uruchamiają program szybciej", "Formatują kod", "Instalują biblioteki"),
+                listOf("Sprawdzają zgodność typów", "Przyspieszają program", "Formatują kod", "Instalują biblioteki"),
                 0,
                 "mypy analizuje adnotacje i wykrywa błędy typów przed uruchomieniem.",
             ),

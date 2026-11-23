@@ -39,7 +39,7 @@ internal val module8Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("A KeyError – there is no key 0", "It prints 1", "It prints a", "It prints {'a': 1}"),
+            listOf("A KeyError", "It prints 1", "It prints a", "It prints {'a': 1}"),
             0,
             "A dictionary has no indexes – 0 is treated as a key, and that key doesn't exist.",
             code = "d = {\"a\": 1, \"b\": 2}\nprint(d[0])",
@@ -102,13 +102,13 @@ internal val module8Practice = listOf(
         choice(
             "What will happen?",
             listOf(
-                "A KeyError – there is no key b",
+                "A KeyError",
                 "Nothing happens",
                 "The dictionary becomes empty",
                 "The key a is removed",
             ),
             0,
-            "del on a key that doesn't exist raises a KeyError.",
+            "There is no key b, and del on a key that doesn't exist raises a KeyError.",
             code = "d = {\"a\": 1}\ndel d[\"b\"]",
         ),
         fill(
@@ -246,9 +246,9 @@ internal val module8Practice = listOf(
         ),
         choice(
             "What can be a value in a dictionary?",
-            listOf("Any object, e.g. a number or a list", "Only a string", "Only a number", "Only another dictionary"),
+            listOf("A value of any type", "Only a string", "Only a number", "Only another dictionary"),
             0,
-            "Values can be of any type.",
+            "A value can be of any type, e.g. a number, a string or a list.",
         ),
         choice(
             "What will this code print?",
