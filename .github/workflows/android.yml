@@ -51,7 +51,13 @@ jobs:
               --title "Mr. Python – wersja testowa (APK)" \
               --notes "Najnowsza wersja testowa aplikacji, podmieniana automatycznie po każdej kompilacji. Zakupy są w niej symulowane, a reklamy próbne."
           fi
-          gh release upload apk-latest mr-python.apk --clobber
+          # Two builds finishing at the same moment (a pull request and the merge
+          # that follows it) can collide while replacing the file, so try again.
+          for attempt in 1 2 3 4; do
+            if gh release upload apk-latest mr-python.apk --clobber; then exit 0; fi
+            sleep $((attempt * 10))
+          done
+          exit 1
 
       # The Google Play bundle. It is signed only when the upload key is stored in the
       # repository secrets (see docs/play-store/CHECKLIST.md); otherwise it is built
