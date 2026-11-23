@@ -46,7 +46,7 @@ internal val module70Intro = lesson(
     ),
     choice(
         "Which keyword raises an exception, e.g. for an out-of-stock item?",
-        listOf("raise", "except", "throw", "error"),
+        listOf("raise", "except", "try", "error"),
         0,
         "In Python you raise an exception with raise.",
     ),

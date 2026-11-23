@@ -145,15 +145,15 @@ internal val module71Practice = listOf(
         ),
         choice(
             "Co oznacza nazwa _ w zapisie x, _ = para?",
-            listOf("Umowny znak, że tej wartości nie potrzebujemy", "Słowo kluczowe, które kasuje wartość", "Błąd składni", "Zmienną globalną"),
+            listOf("Wartość, której nie potrzebujemy", "Wartość usuwaną z pamięci", "Wartość zawsze równą None", "Zmienną widoczną globalnie"),
             0,
             "_ to zwykła zmienna, ale programiści używają jej dla wartości do pominięcia.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("Błąd składni – w przypisaniu wolno użyć tylko jednej gwiazdki", "a = [1], b = [2, 3]", "a = [1, 2, 3], b = []", "a = [], b = [1, 2, 3]"),
+            listOf("Błąd składni", "a = [1], b = [2, 3]", "a = [1, 2, 3], b = []", "a = [], b = [1, 2, 3]"),
             0,
-            "Przy dwóch gwiazdkach Python nie wie, jak podzielić elementy.",
+            "W jednym przypisaniu wolno użyć tylko jednej gwiazdki – przy dwóch Python nie wie, jak podzielić elementy (SyntaxError).",
             code = "*a, *b = [1, 2, 3]",
         ),
         fill(
@@ -403,9 +403,9 @@ internal val module71Practice = listOf(
         ),
         choice(
             "Co robi operator := (mors)?",
-            listOf("Przypisuje wartość do zmiennej i zwraca ją w wyrażeniu", "Porównuje dwie wartości", "Tworzy stałą", "Usuwa zmienną"),
+            listOf("Przypisuje i zwraca wartość", "Porównuje dwie wartości", "Tworzy stałą wartość", "Usuwa zmienną z pamięci"),
             0,
-            "Dzięki temu można przypisać i sprawdzić wartość w jednym warunku.",
+            "Mors zapisuje wartość w zmiennej i zwraca ją, więc można ją przypisać i sprawdzić w jednym warunku.",
         ),
         choice(
             "Co wypisze ten kod?",

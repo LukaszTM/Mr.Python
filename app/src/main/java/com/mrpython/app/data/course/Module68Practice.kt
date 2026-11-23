@@ -52,9 +52,9 @@ internal val module68Practice = listOf(
         ),
         choice(
             "Co zawiera string.punctuation?",
-            listOf("Znaki interpunkcyjne, np. ! . ? ;", "Wszystkie litery alfabetu", "Cyfry od 0 do 9", "Spacje i tabulatory"),
+            listOf("Znaki interpunkcyjne", "Wszystkie litery alfabetu", "Cyfry od 0 do 9", "Spacje i tabulatory"),
             0,
-            "To gotowy napis ze wszystkimi typowymi znakami interpunkcyjnymi.",
+            "To gotowy napis ze wszystkimi typowymi znakami interpunkcyjnymi, np. ! . ? ;",
         ),
         fill(
             "Uzupełnij, aby zamienić tekst na małe litery (program ma wypisać ala ma kota).",
@@ -168,7 +168,7 @@ internal val module68Practice = listOf(
         tiles(
             "Zaimportuj Counter z modułu collections",
             listOf("from", "collections", "import", "Counter"),
-            listOf("include", "counter"),
+            listOf("Collections", "counter"),
             "from moduł import nazwa wczytuje jedną nazwę z modułu.",
         ),
         output(
@@ -228,7 +228,7 @@ internal val module68Practice = listOf(
         ),
         choice(
             "Po co usuwamy słowa takie jak „i”, „w”, „to” przed liczeniem?",
-            listOf("Bo są bardzo częste i zasłaniają ważne słowa", "Bo Counter ich nie obsługuje", "Bo split() ich nie widzi", "Żeby tekst był dłuższy"),
+            listOf("Bo są częste i zasłaniają ważne słowa", "Bo Counter nie potrafi ich policzyć", "Bo split() nie oddziela ich od reszty", "Bo są za krótkie, by je wypisać"),
             0,
             "Bez nich na szczycie rankingu zostają słowa niosące treść.",
         ),
@@ -370,8 +370,8 @@ internal val module68Practice = listOf(
             "Słupki z gwiazdek rysujemy od najczęstszego słowa.",
         ),
         output(
-            "def raport(t):\n    s = t.split()\n    return f\"{len(s)} słów, {len(set(s))} różnych\"\nprint(raport(\"to to i tamto\"))",
-            "4 słów, 3 różnych",
+            "def raport(t):\n    s = t.split()\n    return f\"Słów: {len(s)}, różnych: {len(set(s))}\"\nprint(raport(\"to to i tamto\"))",
+            "Słów: 4, różnych: 3",
             "set() usuwa powtórzone \"to\".",
         ),
         output(
@@ -396,9 +396,9 @@ internal val module68Practice = listOf(
         ),
         choice(
             "Dlaczego dzielimy analizator na małe funkcje (oczysc, policz, raport)?",
-            listOf("Każdą łatwiej zrozumieć, przetestować i użyć ponownie", "Bo Python nie pozwala na długie funkcje", "Żeby program działał szybciej", "Bo Counter wymaga osobnych funkcji"),
+            listOf("Bo łatwiej je zrozumieć i przetestować", "Bo Python nie pozwala na długie funkcje", "Żeby program działał szybciej", "Bo Counter wymaga osobnych funkcji"),
             0,
-            "Małe funkcje robią jedną rzecz i łatwo je sprawdzić.",
+            "Mała funkcja robi jedną rzecz, więc łatwo ją zrozumieć, przetestować i użyć ponownie.",
         ),
         choice(
             "Co wypisze ten program?",

@@ -39,9 +39,9 @@ internal val module71 = CourseUnit(
             ),
             choice(
                 "Kiedy EAFP jest wyraźnie lepszy od LBYL?",
-                listOf("Gdy stan może się zmienić między sprawdzeniem a użyciem, np. plik zniknie", "Gdy chcemy, żeby kod był wolniejszy", "Gdy nie znamy żadnych wyjątków", "Nigdy"),
+                listOf("Gdy stan może się zmienić po sprawdzeniu", "Gdy warunek w ifie jest bardzo prosty", "Gdy błąd zdarza się prawie zawsze", "Gdy nie wiemy, jaki wyjątek wystąpi"),
                 0,
-                "Sprawdzenie ifem może się zdezaktualizować, a try działa w chwili użycia.",
+                "Między ifem a użyciem plik może np. zniknąć, a try sprawdza wszystko w chwili użycia.",
             ),
             tiles(
                 "Napisz wersję LBYL: zamień t na liczbę, gdy ma same cyfry, a w przeciwnym razie daj 0",

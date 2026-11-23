@@ -29,9 +29,9 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "Why is a dictionary the best way to store a room?",
-                listOf("Because its parts (description, exits) have readable key names", "Because dictionaries are always sorted alphabetically", "Because lists can't contain strings", "Because a dictionary can't be changed"),
+                listOf("Because its parts have readable names", "Because dictionaries are always sorted alphabetically", "Because lists can't contain strings", "Because a dictionary can't be changed"),
                 0,
-                "Keys like \"description\" and \"exits\" describe what we are storing.",
+                "Keys like \"description\" and \"exits\" tell us what each part of the room stores.",
             ),
             output(
                 "exits = {\"north\": \"kitchen\", \"east\": \"garden\"}\nfor direction in exits:\n    print(direction)",
@@ -133,7 +133,7 @@ internal val module69 = CourseUnit(
                 "remove() raises ValueError, which is why we check with in first.",
             ),
             tiles(
-                "Print the inventory as a string with commas",
+                "Print the items in the inventory separated by a comma and a space, without brackets or quotes",
                 listOf("print(", "\", \".join(", "inventory", "))"),
                 listOf("inventory.split(", "str("),
                 "join() glues the list elements together with the string \", \".",
@@ -175,14 +175,14 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "What does self refer to in the method call p.go(\"n\")?",
-                listOf("The object p that the method was called on", "The Player class", "The string \"n\"", "The MAP dictionary"),
+                listOf("The object p", "The Player class", "The string \"n\"", "The MAP dictionary"),
                 0,
-                "Python passes the object as the method's first argument by itself.",
+                "self is the object the method was called on – Python passes it as the first argument by itself.",
             ),
             tiles(
                 "Create a player named Amy",
                 listOf("player", "=", "Player(", "\"Amy\"", ")"),
-                listOf("new", "Player."),
+                listOf("self,", "Player."),
                 "We create an object by calling the class like a function.",
             ),
             output(
@@ -223,9 +223,9 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "Why do we test the game on a list of commands instead of input()?",
-                listOf("Because the result is always the same and easy to check", "Because input() doesn't work in a loop", "Because lists are faster than the keyboard", "Because input() returns numbers"),
+                listOf("Because every run is the same", "Because input() doesn't work in a loop", "Because lists are faster than the keyboard", "Because input() returns numbers"),
                 0,
-                "A planned scenario gives a repeatable, deterministic run.",
+                "The same list of commands gives the same run every time, so the result is easy to check.",
             ),
             tiles(
                 "Write the header of a loop that numbers the commands starting from 1",

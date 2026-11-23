@@ -8,14 +8,15 @@ internal val module71Intro = lesson(
         "EAFP or LBYL",
         "Idioms are proven, \"Pythonic\" ways of writing code. LBYL means \"look before you leap\" (`if`), " +
             "and EAFP means \"easier to ask forgiveness than permission\" (`try/except`). " +
-            "Python code often goes with EAFP.",
+            "Python code often goes with EAFP. " +
+            "It wins when the state can change between the check and the use (e.g. a file disappears right after the `if`): `try` acts at the moment of use.",
         code = "d = {\"a\": 1}\ntry:\n    print(d[\"b\"])\nexcept KeyError:\n    print(\"no such key\")",
         output = "no such key",
     ),
     explain(
         "Unpacking and swapping",
         "You can assign values to several variables at once and swap two variables without a helper. " +
-            "The star `*` collects the rest of the elements into a list.",
+            "The star `*` collects the rest of the elements into a list; only one star is allowed in a single assignment.",
         code = "a, b = 1, 2\na, b = b, a\nfirst, *rest = [1, 2, 3]\nprint(a, b, first, rest)",
         output = "2 1 1 [2, 3]",
     ),
@@ -36,9 +37,10 @@ internal val module71Intro = lesson(
     explain(
         "Truthiness, with and :=",
         "An empty list, `0` and `\"\"` are falsy, so we write `if not items:`. `with` closes the file by itself, " +
-            "and the walrus `:=` assigns a value inside a condition.",
-        code = "items = [1, 5, 9]\nif not []:\n    print(\"empty\")\nif (n := len(items)) > 2:\n    print(\"length\", n)",
-        output = "empty\nlength 3",
+            "and the walrus `:=` assigns a value inside a condition. `a or b` returns the first truthy value (or the last one), " +
+            "and `a and b` the first falsy one (or the last one), so `name or \"Anonymous\"` gives a default value.",
+        code = "items = [1, 5, 9]\nif not []:\n    print(\"empty\")\nif (n := len(items)) > 2:\n    print(\"length\", n)\nprint(\"\" or \"Anonymous\", 5 and 0)",
+        output = "empty\nlength 3\nAnonymous 0",
     ),
     output(
         "x, y = 3, 7\nx, y = y, x\nprint(x, y)",

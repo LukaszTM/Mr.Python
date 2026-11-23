@@ -147,15 +147,15 @@ internal val module71Practice = listOf(
         ),
         choice(
             "What does the name _ mean in x, _ = pair?",
-            listOf("A conventional sign that we don't need this value", "A keyword that deletes the value", "A syntax error", "A global variable"),
+            listOf("A value we don't need", "A value deleted from memory", "A value that is always None", "A globally visible variable"),
             0,
             "_ is an ordinary variable, but programmers use it for values to be ignored.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("A syntax error – only one star is allowed in an assignment", "a = [1], b = [2, 3]", "a = [1, 2, 3], b = []", "a = [], b = [1, 2, 3]"),
+            listOf("A syntax error", "a = [1], b = [2, 3]", "a = [1, 2, 3], b = []", "a = [], b = [1, 2, 3]"),
             0,
-            "With two stars, Python doesn't know how to split the elements.",
+            "Only one star is allowed in a single assignment – with two, Python doesn't know how to split the elements (SyntaxError).",
             code = "*a, *b = [1, 2, 3]",
         ),
         fill(
@@ -405,9 +405,9 @@ internal val module71Practice = listOf(
         ),
         choice(
             "What does the := (walrus) operator do?",
-            listOf("It assigns a value to a variable and returns it in the expression", "It compares two values", "It creates a constant", "It deletes a variable"),
+            listOf("It assigns and returns a value", "It compares two values", "It creates a constant value", "It deletes a variable from memory"),
             0,
-            "That lets you assign and check a value in a single condition.",
+            "The walrus stores the value in a variable and returns it, so you can assign and check it in a single condition.",
         ),
         choice(
             "What does this code print?",
