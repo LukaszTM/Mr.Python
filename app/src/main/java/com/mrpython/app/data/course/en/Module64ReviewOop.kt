@@ -22,7 +22,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "What is self in a method?",
-                listOf("The object the method was called on", "The class", "A Python keyword", "A copy of the object"),
+                listOf("The object the method was called on", "The class the method is defined in", "A keyword, just like def", "A copy of the object made for the call"),
                 0,
                 "When you call p.method(), Python passes p as self.",
             ),
@@ -94,7 +94,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "What does the underscore at the start of the name self._balance mean?",
-                listOf("A convention: this is an internal attribute", "Python blocks access to it", "The attribute becomes a constant", "The attribute is faster"),
+                listOf("A convention: the attribute is for internal use", "A lock: Python won't let you read it", "A constant: the attribute can't be changed", "A speed-up: the attribute is faster"),
                 0,
                 "A single underscore is only a convention – access is still possible.",
             ),
@@ -214,7 +214,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "What will happen?",
-                listOf("AttributeError – the __init__ of class A never ran", "It prints 1", "It prints 2", "It prints None"),
+                listOf("AttributeError", "It prints 1", "It prints 2", "It prints None"),
                 0,
                 "B overrides __init__ and doesn't call super().__init__(), so x doesn't exist.",
                 code = "class A:\n    def __init__(self):\n        self.x = 1\nclass B(A):\n    def __init__(self):\n        self.y = 2\nprint(B().x)",
@@ -269,9 +269,9 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "Why don't we write items: list = [] in a dataclass?",
-                listOf("It raises ValueError, because the list would be shared by the objects", "It works the same way", "Lists can't be fields", "Because you have to write list()"),
+                listOf("Python raises ValueError – the list would be shared", "Python raises TypeError – lists can't be fields", "Python raises SyntaxError – you must write list()", "We can, it works just like field(...)"),
                 0,
-                "Mutable default values are given with field(default_factory=list).",
+                "A single [] would be shared by all objects, so dataclass forbids it; field(default_factory=list) gives each object a new list.",
             ),
             output(
                 "from dataclasses import dataclass\n@dataclass(frozen=True)\nclass Pair:\n    a: int\n    b: int\np = Pair(1, 2)\ntry:\n    p.a = 5\nexcept Exception as e:\n    print(type(e).__name__)",
@@ -330,7 +330,7 @@ internal val module64 = CourseUnit(
             fill(
                 "Fill in the blank so the function raises an exception for a bad code.",
                 "class BadCode(Exception):\n    pass\ndef check(code):\n    if len(code) != 4:\n        ____ BadCode(code)\ntry:\n    check(\"12\")\nexcept BadCode:\n    print(\"bad code\")",
-                listOf("raise", "return", "throw"),
+                listOf("raise", "return", "except"),
                 "raise",
                 "You raise an exception with the raise keyword.",
             ),

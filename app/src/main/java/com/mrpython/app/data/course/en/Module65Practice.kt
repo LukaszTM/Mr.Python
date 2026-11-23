@@ -160,7 +160,7 @@ internal val module65Practice = listOf(
         ),
         choice(
             "What does it mean that a sort is stable?",
-            listOf("Elements with equal keys keep their original order", "Sorting never raises an error", "It always takes the same amount of time", "The list doesn't change length"),
+            listOf("Equal keys keep their original order", "Sorting never raises an error", "It always takes the same amount of time", "The result doesn't depend on the input order"),
             0,
             "Thanks to stability, you can sort several times by different keys.",
         ),
@@ -234,9 +234,9 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Why is x in my_list O(n)?",
-            listOf("Python may have to check every element in turn", "Because a list is always sorted", "Because lists use hashing", "It isn't – it's O(1)"),
+            listOf("Because it checks elements one by one", "Because a list is always sorted", "Because lists use hashing", "It isn't – it's O(1)"),
             0,
-            "A list has no index of its values, so it searches linearly.",
+            "A list doesn't use hashing: Python compares the elements one by one and in the worst case checks all n.",
         ),
         output(
             "import math\nprint(math.ceil(math.log2(1000)))",
@@ -316,7 +316,7 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Why is deque better for a queue than a list with pop(0)?",
-            listOf("pop(0) on a list is O(n), and popleft() on a deque is O(1)", "Lists don't have a pop(0) method", "deque sorts the elements", "There's no difference"),
+            listOf("popleft() on a deque is O(1), pop(0) on a list is O(n)", "Lists have no pop(0), so deque has popleft()", "deque sorts its elements, a list doesn't", "No difference, deque is another name for list"),
             0,
             "Removing the first element of a list shifts all the others.",
         ),
@@ -552,9 +552,9 @@ internal val module65Practice = listOf(
         ),
         choice(
             "What is the \"divide and conquer\" approach?",
-            listOf("We split the problem into smaller parts, solve them and combine the results", "We check every possibility one by one", "We always pick the locally best option", "We save the results to a file"),
+            listOf("We split the problem up and combine the results", "We check every possibility one by one", "We always pick the locally best option", "We save the results to a file"),
             0,
-            "That's how merge sort and quicksort work, for example.",
+            "The smaller parts are solved separately and their results combined – that's how merge sort and quicksort work.",
         ),
         output(
             "memo = {}\ndef fib(n):\n    if n < 2:\n        return n\n    if n not in memo:\n        memo[n] = fib(n - 1) + fib(n - 2)\n    return memo[n]\nprint(fib(50))",

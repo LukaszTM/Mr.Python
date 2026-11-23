@@ -69,9 +69,9 @@ internal val module65 = CourseUnit(
             ),
             choice(
                 "Czym różni się lista.sort() od sorted(lista)?",
-                listOf("sort() zmienia listę i zwraca None, sorted() zwraca nową listę", "Niczym", "sorted() zmienia listę w miejscu", "sort() działa tylko na liczbach"),
+                listOf("sort() zmienia listę, sorted() daje nową", "sorted() zmienia listę, sort() daje nową", "sort() działa tylko na liczbach, sorted() na wszystkim", "Niczym – to dwie nazwy jednej funkcji"),
                 0,
-                "sorted() nie rusza oryginału.",
+                "sort() sortuje listę w miejscu i zwraca None, a sorted() zwraca nową listę i nie rusza oryginału.",
             ),
             output(
                 "dane = [(\"b\", 1), (\"a\", 2), (\"c\", 1)]\ndane.sort(key=lambda p: p[1])\nprint(dane)",

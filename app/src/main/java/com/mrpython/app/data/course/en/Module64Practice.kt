@@ -30,7 +30,7 @@ internal val module64Practice = listOf(
         fill(
             "Fill in the first parameter of the method (the program should print I am Tom).",
             "class Cat:\n    def __init__(self, name):\n        self.name = name\n    def introduce(____):\n        return \"I am \" + self.name\nprint(Cat(\"Tom\").introduce())",
-            listOf("self", "this", "name"),
+            listOf("self", "cls", "name"),
             "self",
             "The first parameter of a method is the object – in the method body we use it as self.",
         ),
@@ -46,7 +46,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – the self argument is missing", "It prints 1", "It prints None", "SyntaxError"),
+            listOf("TypeError", "It prints 1", "It prints None", "SyntaxError"),
             0,
             "Calling it on the class doesn't pass an object, so self is missing.",
             code = "class A:\n    def f(self):\n        return 1\nprint(A.f())",
@@ -70,7 +70,7 @@ internal val module64Practice = listOf(
         fill(
             "Fill in the blank to store the name in the object (the program should print Kate).",
             "class Student:\n    def __init__(self, name):\n        ____.name = name\nprint(Student(\"Kate\").name)",
-            listOf("self", "cls", "this"),
+            listOf("self", "cls", "name"),
             "self",
             "You set an object's attributes through self.",
         ),
@@ -134,7 +134,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What is a property setter used for?",
-            listOf("To check or process a value on assignment", "To make the method run faster", "To make the attribute invisible", "To create new objects"),
+            listOf("To check a value on assignment", "To make the method run faster", "To hide the attribute from others", "To create new objects of the class"),
             0,
             "The setter runs on obj.prop = value.",
         ),
@@ -199,9 +199,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What does a static method automatically receive as its first argument?",
-            listOf("Nothing – only the arguments you pass", "The object (self)", "The class (cls)", "The module"),
+            listOf("Nothing extra", "The object (self)", "The class (cls)", "The module"),
             0,
-            "@staticmethod receives neither self nor cls.",
+            "@staticmethod receives neither self nor cls – only the arguments passed in the call.",
         ),
         output(
             "class A:\n    name = \"A\"\n    @classmethod\n    def who(cls):\n        return cls.name\nclass B(A):\n    name = \"B\"\nprint(A.who(), B.who())",
@@ -344,7 +344,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "How is __repr__ different from __str__?",
-            listOf("__repr__ is a description for the programmer (e.g. in lists), __str__ – for the user (print)", "It isn't", "__repr__ only works in subclasses", "__str__ must return a number"),
+            listOf("__repr__ is for the programmer, __str__ for the user", "__str__ is for the programmer, __repr__ for the user", "__repr__ only works in subclasses, __str__ everywhere", "It isn't, they're two names for one method"),
             0,
             "print(obj) calls __str__, and a list prints its elements with __repr__.",
         ),
@@ -402,9 +402,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What do we call the class we inherit from?",
-            listOf("The base class (parent class)", "The derived class", "The static class", "The property class"),
+            listOf("The base class", "The derived class", "The static class", "The property class"),
             0,
-            "The class that inherits is the derived class (subclass).",
+            "The class you inherit from is the base (parent) class; the class that inherits is the derived class (subclass).",
         ),
         output(
             "class A: pass\nclass B(A): pass\nclass C(B): pass\nprint([k.__name__ for k in C.__mro__])",
@@ -419,7 +419,7 @@ internal val module64Practice = listOf(
         tiles(
             "Define the class Cat that inherits from the class Animal",
             listOf("class", "Cat(", "Animal", "):"),
-            listOf("def", "extends"),
+            listOf("def", "self"),
             "The base class goes in parentheses.",
         ),
         fill(
@@ -489,9 +489,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – a field without a default after a field with one", "It works, y = None", "It works, y = 0", "SyntaxError"),
+            listOf("TypeError", "It works, y = None", "It works, y = 0", "SyntaxError"),
             0,
-            "Just like in a function: a parameter without a default can't come after one with a default.",
+            "TypeError: a field without a default can't come after a field with one – just like function parameters.",
             code = "from dataclasses import dataclass\n@dataclass\nclass A:\n    x: int = 0\n    y: int",
         ),
         output(
@@ -514,9 +514,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What does frozen=True mean in @dataclass?",
-            listOf("The object's fields can't be changed after it is created", "The objects can be sorted", "The class can't have methods", "The object is saved to a file"),
+            listOf("Fields can't be changed", "Objects can be sorted", "The class can't have methods", "The object is saved to a file"),
             0,
-            "Trying to change a field raises FrozenInstanceError.",
+            "The fields of a frozen object can't be changed after it is created – trying raises FrozenInstanceError.",
         ),
         output(
             "from dataclasses import dataclass\n@dataclass\nclass Item:\n    name: str\n    price: float = 0.0\nt = Item(\"bread\")\nt.price = 4.5\nprint(t)",
@@ -548,9 +548,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("Exception B is not caught – the program ends with an error", "It prints A", "Nothing happens", "It prints None"),
+            listOf("The program ends with an error", "It prints A", "Nothing is printed, no error", "It prints None"),
             0,
-            "A and B are different classes – except A doesn't catch B.",
+            "A and B are different classes – except A doesn't catch B, so the uncaught exception stops the program with an error.",
             code = "class A(Exception): pass\nclass B(Exception): pass\ntry:\n    raise B()\nexcept A:\n    print(\"A\")",
         ),
         output(
@@ -577,7 +577,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Why create a hierarchy of exceptions (e.g. AppError and its subclasses)?",
-            listOf("To catch a whole group of errors with one except", "To make the program run faster", "Because Python requires it", "So you don't have to write try"),
+            listOf("To catch a group of errors with one except", "To make the program run faster", "Because Python requires it", "So you don't have to write try"),
             0,
             "except AppError also catches all of its subclasses.",
         ),
@@ -594,7 +594,7 @@ internal val module64Practice = listOf(
         tiles(
             "Raise the exception OutOfStock with the message \"milk\"",
             listOf("raise", "OutOfStock(", "\"milk\"", ")"),
-            listOf("throw", "except"),
+            listOf("return", "except"),
             "You raise exceptions with the raise keyword.",
         ),
         fill(
