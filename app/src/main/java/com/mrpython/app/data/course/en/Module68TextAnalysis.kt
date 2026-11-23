@@ -33,7 +33,7 @@ internal val module68 = CourseUnit(
                 "With the punctuation removed, split() divides the text into clean words.",
             ),
             choice(
-                "What does this code return?",
+                "What does this code print?",
                 listOf("['a', 'b', 'c']", "['a', '', 'b', 'c']", "['a  b', 'c']", "['a', 'b', '\\n', 'c']"),
                 0,
                 "split() with no argument splits on any whitespace and skips empty pieces.",
@@ -125,9 +125,9 @@ internal val module68 = CourseUnit(
             ),
             choice(
                 "What does most_common() return with no argument?",
-                listOf("All pairs sorted from the most common", "Only the most common pair", "The dictionary unchanged", "An empty list"),
+                listOf("All pairs from the most common", "Only the most common pair", "The dictionary unchanged", "An empty list"),
                 0,
-                "With no argument we get the full, sorted list of pairs.",
+                "With no argument we get a list of all the pairs, sorted from the most common.",
             ),
             output(
                 "STOP = {\"and\", \"in\", \"a\"}\nwords = \"cat and dog in house\".split()\nkept = [w for w in words if w not in STOP]\nprint(kept)",
@@ -177,9 +177,9 @@ internal val module68 = CourseUnit(
             ),
             choice(
                 "What happens if we compute the average for an empty text without checking?",
-                listOf("ZeroDivisionError – we divide by len([]) = 0", "The result is 0.0", "The result is None", "IndexError"),
+                listOf("ZeroDivisionError", "The result is 0.0", "The result is None", "IndexError"),
                 0,
-                "For an empty list we divide by zero, so we need to check for that first.",
+                "For an empty list we divide by len([]), which is 0, so we need to check for that first.",
             ),
             output(
                 "from statistics import mean\nprint(mean([3, 2, 4, 3]))",

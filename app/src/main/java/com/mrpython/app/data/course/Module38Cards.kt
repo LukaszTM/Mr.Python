@@ -54,7 +54,7 @@ internal val module38Cards = listOf(
         ),
         explain(
             "_replace – zmieniona kopia",
-            "namedtuple jest niezmienna, więc `p.x = 5` daje błąd. Metoda `_replace(pole=wartość)` " +
+            "namedtuple jest niezmienna, więc `p.x = 5` daje błąd `AttributeError`. Metoda `_replace(pole=wartość)` " +
                 "tworzy nową krotkę ze zmienionym polem, a oryginał zostaje bez zmian.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\", \"y\"])\np = P(1, 2)\nq = p._replace(y=9)\nprint(p, q)",
             output = "P(x=1, y=2) P(x=1, y=9)",
@@ -72,7 +72,9 @@ internal val module38Cards = listOf(
         explain(
             "deque jak lista",
             "deque tworzymy z listy, napisu czy `range`, a `maxlen` zostawia tylko ostatnie elementy. " +
-                "Działa `len`, indeksy `d[0]` i `d[-1]`, a `print` pokazuje ją z nazwą `deque`.",
+                "Działa `len`, indeksy `d[0]` i `d[-1]`, a `print` pokazuje ją z nazwą `deque`. Lista też " +
+                "ma `pop(0)`, ale musi wtedy przesunąć wszystkie pozostałe elementy, więc przy długiej " +
+                "liście jest wolna – deque zdejmuje z początku szybko.",
             code = "from collections import deque\nd = deque(\"abcd\", maxlen=3)\nprint(d)\nprint(len(d), d[0], d.maxlen)",
             output = "deque(['b', 'c', 'd'], maxlen=3)\n3 b 3",
         ),

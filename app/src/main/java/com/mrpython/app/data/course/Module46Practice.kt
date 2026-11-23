@@ -51,14 +51,14 @@ internal val module46Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("TypeError – zbiór nie jest typem JSON", "[1, 2]", "{\"s\": [1, 2]}", "null"),
+            listOf("TypeError", "[1, 2]", "{\"s\": [1, 2]}", "null"),
             0,
             "Zbioru nie da się zapisać w JSON bez zamiany na listę.",
             code = "import json\nprint(json.dumps({\"s\": {1, 2}}))",
         ),
         choice(
             "Jak w JSON-ie zapisuje się wartość Pythona None?",
-            listOf("null", "None", "nil", "\"\""),
+            listOf("null", "None", "none", "\"\""),
             0,
             "JSON używa słowa null.",
         ),
@@ -72,9 +72,9 @@ internal val module46Practice = listOf(
         fill(
             "Uzupełnij moduł, aby wypisać {\"ok\": true}.",
             "import ____\nprint(json.dumps({\"ok\": True}))",
-            listOf("json", "csv", "re"),
+            listOf("json", "JSON", "re"),
             "json",
-            "Funkcja dumps pochodzi z modułu json; bez jego importu jest NameError.",
+            "Moduł nazywa się json, małymi literami; modułu JSON nie ma, a po import re nazwa json jest nieznana (NameError).",
         ),
         tiles(
             "Wypisz słownik d jako tekst JSON",
@@ -133,7 +133,7 @@ internal val module46Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("JSONDecodeError – True nie jest poprawnym JSON-em", "True", "[True]", "None"),
+            listOf("JSONDecodeError", "True", "[True]", "None"),
             0,
             "W JSON-ie piszemy true małą literą.",
             code = "import json\nprint(json.loads(\"[True]\"))",
@@ -215,9 +215,9 @@ internal val module46Practice = listOf(
             "ensure_ascii=False zostawia polskie litery.",
         ),
         output(
-            "import json\nt = json.dumps({\"a\": 1}, indent=2)\nprint(len(t.splitlines()))",
-            "3",
-            "Z wcięciem JSON zajmuje 3 linie: {, \"a\": 1 i }.",
+            "import json\nt = json.dumps({\"a\": 1}, indent=2)\nprint(t.count(\"\\n\"))",
+            "2",
+            "Z wcięciem JSON zajmuje 3 linie: {, \"a\": 1 i }, więc są w nim 2 znaki nowej linii.",
         ),
         output(
             "import json\nd = {\"druzyna\": [{\"pkt\": 3}, {\"pkt\": 7}]}\nprint(max(x[\"pkt\"] for x in d[\"druzyna\"]))",
@@ -233,7 +233,7 @@ internal val module46Practice = listOf(
         ),
         choice(
             "Po co używa się ensure_ascii=False?",
-            listOf("Aby znaki takie jak ą czy ł nie były zamieniane na kody \\u", "Aby posortować klucze", "Aby dodać wcięcia", "Aby JSON był krótszy o połowę"),
+            listOf("Aby zostawić ą i ł", "Aby posortować klucze", "Aby dodać wcięcia", "Aby JSON był krótszy o połowę"),
             0,
             "Domyślnie znaki spoza ASCII są zamieniane na sekwencje \\u.",
         ),
@@ -258,7 +258,7 @@ internal val module46Practice = listOf(
             "Parametr indent ustala wcięcie.",
         ),
         tiles(
-            "Zamień słownik d na JSON z czytelnymi polskimi literami",
+            "Zamień słownik d na JSON z czytelnymi polskimi literami i zapisz wynik w zmiennej t",
             listOf("t", "=", "json.dumps(", "d,", "ensure_ascii=False)"),
             listOf("ensure_ascii=True)", "json.loads("),
             "ensure_ascii=False zachowuje polskie znaki.",
@@ -307,8 +307,8 @@ internal val module46Practice = listOf(
             "Klucz w JSON-ie to napis „2”, więc odwołujemy się napisem.",
         ),
         choice(
-            "Która funkcja zamienia tekst JSON na obiekty Pythona?",
-            listOf("json.loads()", "json.dumps()", "json.text()", "json.parse()"),
+            "Która funkcja zamienia napis z JSON-em na obiekty Pythona?",
+            listOf("json.loads()", "json.dumps()", "json.dump()", "json.read()"),
             0,
             "loads – „load string”, czyli wczytaj z napisu.",
         ),
@@ -320,7 +320,7 @@ internal val module46Practice = listOf(
             code = "import json\nprint(json.loads(\"{'a': 1}\"))",
         ),
         choice(
-            "Który obiekt Pythona NIE da się bezpośrednio zapisać przez json.dumps()?",
+            "Którego obiektu Pythona NIE da się bezpośrednio zapisać przez json.dumps()?",
             listOf("Zbiór {1, 2}", "Lista [1, 2]", "Słownik {\"a\": 1}", "Liczba 3.5"),
             0,
             "JSON nie ma typu zbiór.",
@@ -346,7 +346,7 @@ internal val module46Practice = listOf(
             "loads() wczytuje JSON z napisu.",
         ),
         tiles(
-            "Zamień listę wyniki na JSON z posortowanymi kluczami i zapisz w t",
+            "Zamień słownik wyniki na JSON z posortowanymi kluczami i zapisz w t",
             listOf("t", "=", "json.dumps(", "wyniki,", "sort_keys=True)"),
             listOf("indent=True)", "json.loads("),
             "sort_keys=True sortuje klucze słowników.",

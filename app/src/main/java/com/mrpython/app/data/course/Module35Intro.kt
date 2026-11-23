@@ -39,7 +39,7 @@ internal val module35Intro = lesson(
     tiles(
         "Zgłoś wyjątek ZlyWiek z komunikatem \"ujemny\"",
         listOf("raise", "ZlyWiek(", "\"ujemny\"", ")"),
-        listOf("throw", "return"),
+        listOf("except", "return"),
         "Wyjątki zgłaszamy słowem raise.",
     ),
     output(

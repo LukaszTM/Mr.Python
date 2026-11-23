@@ -54,9 +54,9 @@ internal val module68Practice = listOf(
         ),
         choice(
             "What does string.punctuation contain?",
-            listOf("Punctuation marks, e.g. ! . ? ;", "All the letters of the alphabet", "The digits from 0 to 9", "Spaces and tabs"),
+            listOf("Punctuation marks", "All the letters of the alphabet", "The digits from 0 to 9", "Spaces and tabs"),
             0,
-            "It's a ready-made string with all the common punctuation marks.",
+            "It's a ready-made string with all the common punctuation marks, e.g. ! . ? ;",
         ),
         fill(
             "Fill in the blank to convert the text to lowercase (the program should print alice has cats).",
@@ -170,7 +170,7 @@ internal val module68Practice = listOf(
         tiles(
             "Import Counter from the collections module",
             listOf("from", "collections", "import", "Counter"),
-            listOf("include", "counter"),
+            listOf("Collections", "counter"),
             "from module import name loads a single name from a module.",
         ),
         output(
@@ -230,7 +230,7 @@ internal val module68Practice = listOf(
         ),
         choice(
             "Why do we remove words like “and”, “in”, “the” before counting?",
-            listOf("Because they are very common and hide the important words", "Because Counter doesn't support them", "Because split() can't see them", "To make the text longer"),
+            listOf("Because they are common and hide the key words", "Because Counter can't count such short words", "Because split() doesn't separate them", "Because they are too short to print"),
             0,
             "Without them, the words that carry meaning stay at the top of the ranking.",
         ),
@@ -398,9 +398,9 @@ internal val module68Practice = listOf(
         ),
         choice(
             "Why do we split the analyzer into small functions (clean, count, report)?",
-            listOf("Each one is easier to understand, test and reuse", "Because Python doesn't allow long functions", "To make the program run faster", "Because Counter requires separate functions"),
+            listOf("They are easier to understand and test", "Because Python doesn't allow long functions", "To make the program run faster", "Because Counter requires separate functions"),
             0,
-            "Small functions do one thing and are easy to check.",
+            "A small function does one thing, so it is easy to understand, test and reuse.",
         ),
         choice(
             "What will this program print?",

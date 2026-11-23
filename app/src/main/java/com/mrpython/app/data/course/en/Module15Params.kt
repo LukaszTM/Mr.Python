@@ -55,7 +55,7 @@ internal val module15 = CourseUnit(
                 "The default value goes after the = sign in the function header.",
             ),
             tiles(
-                "Define a function describe with a parameter age that defaults to 18",
+                "Define a function describe with the parameters name and age, where age defaults to 18",
                 listOf("def", "describe(", "name,", "age=18", "):"),
                 listOf("age==18", "18=age"),
                 "A default value is written as name=value.",

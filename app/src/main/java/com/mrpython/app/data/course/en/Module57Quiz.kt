@@ -22,9 +22,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Why do we store the answer \"15\" as a string and not a number?",
-                listOf("The player's answer is a string too, so they're easy to compare", "Numbers can't be kept in a dictionary", "A string takes up less space", "Because 15 is an odd number"),
+                listOf("The player's answer is a string too", "Numbers can't be kept in a dictionary", "A string takes up less space", "Strings are faster than numbers"),
                 0,
-                "We compare a string with a string – no type conversion needed.",
+                "input() returns a string, so we compare a string with a string – no type conversion needed.",
             ),
             fill(
                 "Fill in the blank to print the correct answers.",
@@ -82,9 +82,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Why is this condition never true?",
-                listOf("It compares the string \"15\" with the number 15", "A colon is missing", "== doesn't work for strings", "answer is empty"),
+                listOf("\"15\" is a string, 15 is a number", "A colon is missing", "== doesn't work for strings", "answer is empty"),
                 0,
-                "A string and a number are never equal.",
+                "The code compares the string \"15\" with the number 15, and a string is never equal to a number.",
                 code = "answer = \"15\"\nif answer == 15:\n    print(\"correct\")",
             ),
             output(
@@ -161,9 +161,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "What does random.shuffle(items) return?",
-                listOf("None – it changes the list in place", "A new, shuffled list", "The first element", "The number of elements"),
+                listOf("None", "A new, shuffled list", "The first element", "The number of elements"),
                 0,
-                "That's why we don't write items = random.shuffle(items).",
+                "shuffle changes the list in place and returns None, which is why we don't write items = random.shuffle(items).",
             ),
             output(
                 "import random\n\nitems = [1, 2, 3, 4]\nrandom.shuffle(items)\nprint(sorted(items))",
@@ -230,9 +230,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "How do we store the set of questions in this project?",
-                listOf("As a list of dictionaries or a list of Question objects", "As one long string", "As a set of numbers", "In a separate variable for each question"),
+                listOf("As a list of questions", "As one long string", "As a set of numbers", "As separate variables"),
                 0,
-                "A list makes it easy to add, shuffle and loop over the questions.",
+                "We keep the questions (dictionaries or Question objects) in a list – it's easy to add to, shuffle and loop over.",
             ),
             tiles(
                 "Add a point to the points attribute inside a quiz method.",

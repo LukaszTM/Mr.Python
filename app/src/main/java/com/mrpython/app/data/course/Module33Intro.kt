@@ -54,7 +54,7 @@ internal val module33Intro = lesson(
     tiles(
         "Napisz nagłówek klasy Kaczka dziedziczącej po Lata i Plywa",
         listOf("class", "Kaczka(", "Lata,", "Plywa", "):"),
-        listOf("def", "extends"),
+        listOf("def", "and"),
         "Klasy bazowe podajemy po przecinku w nawiasie.",
     ),
 )

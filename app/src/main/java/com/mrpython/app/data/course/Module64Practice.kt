@@ -28,7 +28,7 @@ internal val module64Practice = listOf(
         fill(
             "Uzupełnij pierwszy parametr metody (program ma wypisać Jestem Tom).",
             "class Kot:\n    def __init__(self, imie):\n        self.imie = imie\n    def przedstaw(____):\n        return \"Jestem \" + self.imie\nprint(Kot(\"Tom\").przedstaw())",
-            listOf("self", "this", "imie"),
+            listOf("self", "cls", "imie"),
             "self",
             "Pierwszy parametr metody to obiekt – w ciele metody używamy go jako self.",
         ),
@@ -44,7 +44,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("TypeError – brakuje argumentu self", "Wypisze 1", "Wypisze None", "SyntaxError"),
+            listOf("TypeError", "Wypisze 1", "Wypisze None", "SyntaxError"),
             0,
             "Wywołanie na klasie nie przekazuje obiektu, więc brakuje self.",
             code = "class A:\n    def f(self):\n        return 1\nprint(A.f())",
@@ -68,7 +68,7 @@ internal val module64Practice = listOf(
         fill(
             "Uzupełnij, aby zapisać imię w obiekcie (program ma wypisać Ala).",
             "class Uczen:\n    def __init__(self, imie):\n        ____.imie = imie\nprint(Uczen(\"Ala\").imie)",
-            listOf("self", "cls", "this"),
+            listOf("self", "cls", "imie"),
             "self",
             "Atrybuty obiektu ustawiamy przez self.",
         ),
@@ -132,7 +132,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Po co stosuje się setter właściwości?",
-            listOf("Aby sprawdzać lub przetwarzać wartość przy przypisaniu", "Aby metoda działała szybciej", "Aby atrybut był niewidoczny", "Aby tworzyć nowe obiekty"),
+            listOf("Aby sprawdzać wartość przy przypisaniu", "Aby metoda działała szybciej", "Aby ukryć atrybut przed innymi", "Aby tworzyć nowe obiekty klasy"),
             0,
             "Setter uruchamia się przy obj.wlasciwosc = wartość.",
         ),
@@ -197,9 +197,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Co dostaje automatycznie jako pierwszy argument metoda statyczna?",
-            listOf("Nic – tylko podane argumenty", "Obiekt (self)", "Klasę (cls)", "Moduł"),
+            listOf("Nic dodatkowego", "Obiekt (self)", "Klasę (cls)", "Moduł"),
             0,
-            "@staticmethod nie dostaje ani self, ani cls.",
+            "@staticmethod nie dostaje ani self, ani cls – tylko argumenty podane w wywołaniu.",
         ),
         output(
             "class A:\n    nazwa = \"A\"\n    @classmethod\n    def kim(cls):\n        return cls.nazwa\nclass B(A):\n    nazwa = \"B\"\nprint(A.kim(), B.kim())",
@@ -342,7 +342,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Czym różni się __repr__ od __str__?",
-            listOf("__repr__ to opis dla programisty (np. w listach), __str__ – dla użytkownika (print)", "Niczym", "__repr__ działa tylko w podklasach", "__str__ musi zwracać liczbę"),
+            listOf("__repr__ – dla programisty, __str__ – dla użytkownika", "__str__ – dla programisty, __repr__ – dla użytkownika", "__repr__ działa tylko w podklasach, __str__ wszędzie", "Niczym, to dwie nazwy tej samej metody"),
             0,
             "print(obj) woła __str__, a lista wypisuje elementy przez __repr__.",
         ),
@@ -400,9 +400,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Jak nazywa się klasa, po której dziedziczymy?",
-            listOf("Klasa bazowa (nadrzędna)", "Klasa pochodna", "Klasa statyczna", "Klasa właściwości"),
+            listOf("Klasa bazowa", "Klasa pochodna", "Klasa statyczna", "Klasa właściwości"),
             0,
-            "Klasa, która dziedziczy, to klasa pochodna (podklasa).",
+            "Klasa, po której dziedziczymy, to klasa bazowa (nadrzędna); klasa, która dziedziczy, to klasa pochodna (podklasa).",
         ),
         output(
             "class A: pass\nclass B(A): pass\nclass C(B): pass\nprint([k.__name__ for k in C.__mro__])",
@@ -417,7 +417,7 @@ internal val module64Practice = listOf(
         tiles(
             "Zdefiniuj klasę Kot dziedziczącą po klasie Zwierze",
             listOf("class", "Kot(", "Zwierze", "):"),
-            listOf("def", "extends"),
+            listOf("def", "self"),
             "Klasę bazową podajemy w nawiasie.",
         ),
         fill(
@@ -487,9 +487,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("TypeError – pole bez wartości domyślnej po polu z wartością", "Działa, y = None", "Działa, y = 0", "SyntaxError"),
+            listOf("TypeError", "Działa, y = None", "Działa, y = 0", "SyntaxError"),
             0,
-            "Tak jak w funkcji: parametr bez wartości domyślnej nie może stać po takim z wartością.",
+            "TypeError: pole bez wartości domyślnej nie może stać po polu z wartością – tak jak parametry funkcji.",
             code = "from dataclasses import dataclass\n@dataclass\nclass A:\n    x: int = 0\n    y: int",
         ),
         output(
@@ -512,9 +512,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Co oznacza frozen=True w @dataclass?",
-            listOf("Pól obiektu nie można zmieniać po utworzeniu", "Obiekty można sortować", "Klasa nie może mieć metod", "Obiekt zapisuje się do pliku"),
+            listOf("Pól nie można zmieniać", "Obiekty można sortować", "Klasa nie może mieć metod", "Obiekt zapisuje się do pliku"),
             0,
-            "Próba zmiany pola zgłasza FrozenInstanceError.",
+            "Pól zamrożonego obiektu nie można zmieniać po utworzeniu – próba zgłasza FrozenInstanceError.",
         ),
         output(
             "from dataclasses import dataclass\n@dataclass\nclass Towar:\n    nazwa: str\n    cena: float = 0.0\nt = Towar(\"chleb\")\nt.cena = 4.5\nprint(t)",
@@ -546,9 +546,9 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("Wyjątek B nie zostanie złapany – program zakończy się błędem", "Wypisze A", "Nic się nie stanie", "Wypisze None"),
+            listOf("Program zakończy się błędem", "Wypisze A", "Nic nie wypisze, bez błędu", "Wypisze None"),
             0,
-            "A i B to różne klasy – except A nie łapie B.",
+            "A i B to różne klasy – except A nie łapie B, więc niezłapany wyjątek kończy program błędem.",
             code = "class A(Exception): pass\nclass B(Exception): pass\ntry:\n    raise B()\nexcept A:\n    print(\"A\")",
         ),
         output(
@@ -575,7 +575,7 @@ internal val module64Practice = listOf(
         ),
         choice(
             "Po co tworzyć hierarchię wyjątków (np. BladAplikacji i jego podklasy)?",
-            listOf("Aby jednym except złapać całą grupę błędów", "Aby program działał szybciej", "Bo Python tego wymaga", "Aby nie trzeba było pisać try"),
+            listOf("Aby jednym except złapać grupę błędów", "Aby program działał szybciej", "Bo Python tego wymaga", "Aby nie trzeba było pisać try"),
             0,
             "except BladAplikacji łapie też wszystkie jego podklasy.",
         ),
@@ -592,7 +592,7 @@ internal val module64Practice = listOf(
         tiles(
             "Zgłoś wyjątek BrakTowaru z komunikatem \"mleko\"",
             listOf("raise", "BrakTowaru(", "\"mleko\"", ")"),
-            listOf("throw", "except"),
+            listOf("return", "except"),
             "Wyjątki zgłaszamy słowem raise.",
         ),
         fill(

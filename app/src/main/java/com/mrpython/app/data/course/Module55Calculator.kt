@@ -28,12 +28,12 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Dlaczego każde działanie kalkulatora piszemy jako osobną funkcję?",
-                listOf("Łatwo je testować, poprawiać i wywoływać z różnych miejsc", "Bo Python nie pozwala na operatory w print", "Żeby kod był dłuższy", "Bo funkcje działają szybciej niż operatory"),
+                listOf("Łatwo je testować i poprawiać", "Bo Python nie pozwala na operatory w print", "Żeby kod był dłuższy", "Bo funkcje działają szybciej niż operatory"),
                 0,
-                "Małe funkcje to małe, niezależne klocki programu.",
+                "Małe funkcje to niezależne klocki programu – łatwo je testować, poprawiać i wywoływać z różnych miejsc.",
             ),
             tiles(
-                "Napisz funkcję odejmij w jednej linii.",
+                "Napisz w jednej linii funkcję odejmij, która zwraca a minus b.",
                 listOf("def odejmij(a, b):", "return", "a - b"),
                 listOf("b - a", "print("),
                 "Funkcja zwraca a pomniejszone o b.",
@@ -65,9 +65,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Co jest wartością w słowniku {\"+\": dodaj}?",
-                listOf("Sama funkcja dodaj, bez wywołania", "Wynik dodawania", "Napis \"dodaj\"", "Liczba"),
+                listOf("Funkcja dodaj", "Wynik dodawania", "Napis \"dodaj\"", "Liczba"),
                 0,
-                "Funkcje to obiekty – można je przechowywać w słowniku.",
+                "dodaj bez nawiasów to sama funkcja, a nie jej wynik. Funkcje to obiekty – można je przechowywać w słowniku.",
             ),
             fill(
                 "Uzupełnij słownik, aby znak * wskazywał na funkcję razy.",
@@ -99,9 +99,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Dlaczego słownik funkcji jest lepszy od długiego if/elif?",
-                listOf("Nowe działanie to jeden nowy wpis w słowniku", "Słownik nie wymaga funkcji", "if/elif nie działa ze znakami", "Słownik sam sprawdza błędy"),
+                listOf("Nowe działanie to nowy wpis", "Słownik nie wymaga funkcji", "if/elif nie działa ze znakami", "Słownik sam sprawdza błędy"),
                 0,
-                "Kod wybierający działanie nie zmienia się po dodaniu nowego znaku.",
+                "Nowe działanie to jeden nowy wpis w słowniku, a kod wybierający działanie się nie zmienia.",
             ),
         ),
         lesson(
@@ -147,9 +147,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("ValueError – za dużo wartości do rozpakowania", "a = 2, znak = +, b = 3", "TypeError", "Nic"),
+                listOf("Zgłosi ValueError", "a = 2, znak = +, b = 3", "Zgłosi TypeError", "Nic się nie stanie"),
                 0,
-                "Bez split napis \"2 + 3\" ma 5 znaków, a zmienne są tylko 3.",
+                "Bez split napis \"2 + 3\" rozpakowuje się znak po znaku: ma 5 znaków, a zmienne są tylko 3 – za dużo wartości, więc ValueError.",
                 code = "a, znak, b = \"2 + 3\"",
             ),
         ),
@@ -179,9 +179,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("Program przerwie ZeroDivisionError – nie jest przechwycony", "Wypisze \"Złe dane\"", "Wypisze 0", "Wypisze inf"),
+                listOf("Błąd ZeroDivisionError", "Wypisze \"Złe dane\"", "Wypisze 0", "Wypisze inf"),
                 0,
-                "except ValueError nie łapie dzielenia przez zero.",
+                "except ValueError nie łapie dzielenia przez zero, więc program przerwie nieprzechwycony ZeroDivisionError.",
                 code = "try:\n    a, znak, b = \"3 / 0\".split()\n    print(int(a) / int(b))\nexcept ValueError:\n    print(\"Złe dane\")",
             ),
             tiles(
@@ -232,9 +232,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "W jakiej kolejności działa nasz kalkulator dla tekstu \"6 * 7\"?",
-                listOf("split → wybór funkcji ze słownika → wywołanie → zapis do historii", "zapis do historii → split → wywołanie", "wywołanie → split → słownik", "słownik → historia → split"),
+                listOf("split → słownik → wywołanie → historia", "historia → split → słownik → wywołanie", "wywołanie → split → słownik → historia", "słownik → historia → split → wywołanie"),
                 0,
-                "Najpierw rozbijamy tekst, potem liczymy, na końcu zapamiętujemy wynik.",
+                "Najpierw rozbijamy tekst, potem wybieramy funkcję ze słownika i liczymy, a na końcu zapisujemy wynik w historii.",
             ),
             tiles(
                 "Dopisz do historii krotkę z tekstem i wynikiem.",

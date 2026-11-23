@@ -51,9 +51,9 @@ internal val module42Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("ValueError: I/O operation on closed file", "abc", "Pusty wiersz", "None"),
+            listOf("Błąd ValueError", "abc", "Pusty wiersz", "None"),
             0,
-            "Po wyjściu z bloku plik jest zamknięty, więc nie można z niego czytać.",
+            "Po wyjściu z bloku plik jest zamknięty, więc read() zgłasza ValueError (I/O operation on closed file).",
             code = "with open(\"notatki.txt\", \"w\") as f:\n    f.write(\"abc\")\nwith open(\"notatki.txt\") as f:\n    pass\nprint(f.read())",
         ),
         choice(
@@ -139,7 +139,7 @@ internal val module42Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("A, potem błąd ZeroDivisionError", "A i B", "Tylko B", "Nic"),
+            listOf("A, potem błąd ZeroDivisionError", "A, potem B", "Tylko B", "Tylko błąd ZeroDivisionError"),
             0,
             "__exit__ nie zwraca True, więc wyjątek leci dalej i print(\"B\") się nie wykona.",
             code = "class Blok:\n    def __enter__(self):\n        return self\n    def __exit__(self, t, w, tb):\n        print(\"A\")\nwith Blok():\n    1 / 0\nprint(\"B\")",
@@ -227,7 +227,7 @@ internal val module42Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("A, potem błąd IndexError", "A i koniec", "Tylko koniec", "Nic"),
+            listOf("A, potem błąd IndexError", "A, potem koniec", "Tylko koniec", "Tylko błąd IndexError"),
             0,
             "suppress tłumi tylko KeyError, a lista zgłasza IndexError.",
             code = "from contextlib import suppress\nwith suppress(KeyError):\n    print(\"A\")\n    [1][5]\nprint(\"koniec\")",
@@ -304,13 +304,13 @@ internal val module42Practice = listOf(
         ),
         choice(
             "Które stwierdzenie o menedżerach kontekstu jest prawdziwe?",
-            listOf("__exit__ działa także wtedy, gdy w bloku był wyjątek", "__enter__ działa po bloku", "Każdy menedżer musi być plikiem", "with łapie wszystkie wyjątki"),
+            listOf("__exit__ działa także wtedy, gdy w bloku był wyjątek", "__enter__ działa dopiero po zakończeniu bloku", "Menedżerem kontekstu może być tylko otwarty plik", "with łapie i ukrywa wszystkie wyjątki z bloku"),
             0,
             "Gwarancja sprzątania to główna zaleta with.",
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("start, potem błąd ValueError", "start i stop", "Tylko stop", "start i ok"),
+            listOf("start, potem błąd ValueError", "start, stop i błąd ValueError", "start, stop i ok", "start i ok"),
             0,
             "Bez try/finally kod po yield nie wykona się, gdy blok zgłosi wyjątek.",
             code = "from contextlib import contextmanager\n@contextmanager\ndef blok():\n    print(\"start\")\n    yield\n    print(\"stop\")\nwith blok():\n    int(\"x\")\nprint(\"ok\")",
@@ -349,7 +349,7 @@ internal val module42Practice = listOf(
             "with suppress(Typ): tłumi wyjątki tego typu.",
         ),
         tiles(
-            "Wczytaj zawartość pliku f do zmiennej tekst w bloku with",
+            "Otwórz \"notatki.txt\" w bloku with jako f i wczytaj zawartość do zmiennej tekst",
             listOf("with", "open(\"notatki.txt\")", "as", "f:", "tekst", "=", "f.read()"),
             listOf("f.write()", "for"),
             "Najpierw otwieramy plik w with, potem czytamy read().",

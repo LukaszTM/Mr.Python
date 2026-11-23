@@ -29,9 +29,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Która nazwa w tym kodzie łamie zasady PEP 8?",
-                listOf("ObliczPole – funkcja powinna być w snake_case", "a – za krótka nazwa argumentu", "wynik – zła nazwa zmiennej", "Żadna"),
+                listOf("ObliczPole", "a", "wynik", "Żadna"),
                 0,
-                "Funkcje nazywamy małymi literami z podkreślnikami, np. oblicz_pole.",
+                "ObliczPole to nazwa funkcji, a funkcje nazywamy w snake_case, np. oblicz_pole. Nazwy a i wynik są poprawne.",
                 code = "def ObliczPole(a, b):\n    wynik = a * b\n    return wynik",
             ),
             fill(
@@ -67,7 +67,7 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Gdzie umieszcza się docstring funkcji?",
-                listOf("Jako pierwszy napis w ciele funkcji", "Nad linią def", "Na końcu funkcji", "W komentarzu z #"),
+                listOf("Na początku ciała funkcji", "Nad linią def", "Na końcu ciała funkcji", "W komentarzu z #"),
                 0,
                 "Tylko napis zaraz pod nagłówkiem def staje się docstringiem.",
             ),
@@ -95,9 +95,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Co powinien opisywać docstring funkcji?",
-                listOf("Co robi funkcja, co przyjmuje i co zwraca", "Kto napisał funkcję i kiedy", "Każdą linię kodu po kolei", "Wyniki testów"),
+                listOf("Co robi i co zwraca", "Kto i kiedy ją napisał", "Każdą linię kodu", "Wyniki jej testów"),
                 0,
-                "Docstring wyjaśnia, jak używać funkcji, bez czytania jej kodu.",
+                "Docstring mówi, co robi funkcja i co zwraca, żeby można jej było użyć bez czytania kodu.",
             ),
             output(
                 "def f():\n    \"\"\"Pierwsza linia.\n\n    Szczegóły.\"\"\"\n\nprint(f.__doc__.splitlines()[0])",
@@ -109,15 +109,15 @@ internal val module54 = CourseUnit(
             "u54l3", "Małe funkcje i DRY",
             choice(
                 "Co oznacza zasada DRY?",
-                listOf("Nie powtarzaj się (Don't Repeat Yourself)", "Pisz krótkie nazwy", "Unikaj klas", "Nie używaj pętli"),
+                listOf("Nie powtarzaj się", "Pisz krótkie nazwy", "Unikaj klas", "Nie używaj pętli"),
                 0,
-                "Powtarzający się kod warto wydzielić w jedno miejsce.",
+                "DRY to skrót od Don't Repeat Yourself – powtarzający się kod warto wydzielić w jedno miejsce.",
             ),
             choice(
                 "Jak najlepiej poprawić ten kod?",
-                listOf("Wydzielić funkcję brutto(netto)", "Dopisać czwarty print", "Zmienić 1.23 na 1.2", "Usunąć round"),
+                listOf("Wydzielić funkcję", "Dopisać czwarty print", "Zmienić 1.23 na 1.2", "Usunąć round"),
                 0,
-                "Ten sam wzór w kilku miejscach to sygnał, by stworzyć funkcję.",
+                "Ten sam wzór w kilku miejscach to sygnał, by stworzyć funkcję, np. brutto(netto).",
                 code = "print(round(10 * 1.23, 2))\nprint(round(20 * 1.23, 2))\nprint(round(35 * 1.23, 2))",
             ),
             output(
@@ -139,7 +139,7 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Ile zadań powinna mieć dobrze napisana funkcja?",
-                listOf("Jedno, dobrze określone", "Jak najwięcej", "Co najmniej trzy", "To nie ma znaczenia"),
+                listOf("Jedno", "Jak najwięcej", "Co najmniej trzy", "To nie ma znaczenia"),
                 0,
                 "Funkcja robiąca jedną rzecz jest łatwa do nazwania i przetestowania.",
             ),
@@ -159,9 +159,9 @@ internal val module54 = CourseUnit(
             "u54l4", "Stałe i czytelne warunki",
             choice(
                 "Co to jest magiczna liczba?",
-                listOf("Liczba w kodzie bez wyjaśnienia, skąd się wzięła", "Liczba losowa", "Bardzo duża liczba", "Liczba pierwsza"),
+                listOf("Liczba bez nazwy i wyjaśnienia", "Liczba losowana przez program", "Bardzo duża liczba w kodzie", "Liczba zapisana jako tekst"),
                 0,
-                "Liczbę taką jak 0.23 lepiej nazwać, np. VAT = 0.23.",
+                "Magiczna liczba to liczba w kodzie, o której nie wiadomo, co znaczy. Lepiej ją nazwać, np. VAT = 0.23.",
             ),
             output(
                 "VAT = 0.23\nnetto = 100\nprint(netto * (1 + VAT))",
@@ -187,9 +187,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Jak prościej zapisać warunek if gotowe == True:?",
-                listOf("if gotowe:", "if gotowe is True == True:", "if True == gotowe == True:", "if not not not gotowe:"),
+                listOf("if gotowe:", "if gotowe = True:", "if not gotowe:", "if \"gotowe\":"),
                 0,
-                "Wartość logiczną można sprawdzić bezpośrednio.",
+                "Wartość logiczną można sprawdzić bezpośrednio. = to przypisanie, not odwraca warunek, a niepusty napis \"gotowe\" jest zawsze prawdziwy.",
             ),
             output(
                 "x = 5\nprint(1 < x < 10)",
@@ -213,9 +213,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Jaka jest główna zaleta wczesnego return?",
-                listOf("Mniej zagnieżdżeń – przypadki specjalne obsłużone na początku", "Funkcja działa szybciej", "Nie trzeba pisać testów", "Można pominąć docstring"),
+                listOf("Mniej zagnieżdżonych if-ów", "Funkcja działa szybciej", "Nie trzeba pisać testów", "Można pominąć docstring"),
                 0,
-                "Główna logika nie jest schowana w głębokich if-ach.",
+                "Przypadki specjalne obsługujemy na początku, więc główna logika nie jest schowana w głębokich if-ach.",
             ),
             fill(
                 "Uzupełnij, aby funkcja od razu zakończyła się dla pustego napisu.",
@@ -248,9 +248,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Co warto zmienić w tym kodzie?",
-                listOf("Zamienić 0.77 na nazwaną stałą, np. PO_RABACIE", "Zmienić nazwę cena na Cena", "Usunąć print", "Dopisać pętlę"),
+                listOf("Zastąpić 0.77 stałą", "Zmienić nazwę cena na Cena", "Usunąć print", "Dopisać pętlę"),
                 0,
-                "0.77 to magiczna liczba – nazwa wyjaśnia jej znaczenie.",
+                "0.77 to magiczna liczba – stała z nazwą, np. PO_RABACIE, wyjaśnia jej znaczenie.",
                 code = "cena = 100 * 0.77\nprint(cena)",
             ),
         ),

@@ -47,7 +47,7 @@ internal val module51Cards = listOf(
         explain(
             "copy.copy i mnożenie list",
             "`copy.copy(a)` to płytka kopia, jak `a[:]`. Uwaga: `[[0] * 2] * 2` nie tworzy dwóch list, " +
-                "tylko dwa odnośniki do jednej – zmiana w jednym wierszu widać w obu.",
+                "tylko dwa odnośniki do jednej – zmianę w jednym wierszu widać w obu.",
             code = "m = [[0] * 2] * 2\nm[0][0] = 1\nprint(m)",
             output = "[[1, 0], [1, 0]]",
         ),

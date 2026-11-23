@@ -140,9 +140,9 @@ internal val module55Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("KeyError – brak klucza \"-\"", "Wypisze 3", "Wypisze None", "Wypisze 7"),
+            listOf("Błąd KeyError", "Wypisze 3", "Wypisze None", "Wypisze 7"),
             0,
-            "Odczyt nieistniejącego klucza przez [] zgłasza KeyError.",
+            "W słowniku nie ma klucza \"-\", a odczyt nieistniejącego klucza przez [] zgłasza KeyError.",
             code = "dz = {\"+\": lambda a, b: a + b}\nprint(dz[\"-\"](5, 2))",
         ),
         choice(
@@ -229,15 +229,15 @@ internal val module55Practice = listOf(
         ),
         choice(
             "Dlaczego po split() trzeba użyć int() lub float()?",
-            listOf("split zwraca napisy, a liczyć trzeba na liczbach", "split zwraca liczby zmiennoprzecinkowe", "int() usuwa spacje", "Bez tego split nie zadziała"),
+            listOf("split zwraca napisy, nie liczby", "split zwraca liczby zmiennoprzecinkowe", "int() usuwa spacje", "Bez tego split nie zadziała"),
             0,
             "\"2\" + \"3\" to \"23\", a 2 + 3 to 5.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("ValueError – za mało wartości do rozpakowania", "a = 4, znak = +, b = None", "KeyError", "Nic"),
+            listOf("Zgłosi ValueError", "a = 4, znak = +, b = None", "Zgłosi KeyError", "Nic się nie stanie"),
             0,
-            "split() daje tylko dwie części, a zmienne są trzy.",
+            "split() daje tylko dwie części, a zmienne są trzy – za mało wartości do rozpakowania, więc ValueError.",
             code = "a, znak, b = \"4 +\".split()",
         ),
         fill(
@@ -399,9 +399,9 @@ internal val module55Practice = listOf(
         ),
         choice(
             "Gdzie najlepiej trzymać historię w klasie Kalkulator?",
-            listOf("W atrybucie self.historia ustawionym w __init__", "W zmiennej lokalnej metody dodaj", "W docstringu klasy", "W nazwie klasy"),
+            listOf("W atrybucie self.historia", "W zmiennej lokalnej metody dodaj", "W docstringu klasy", "W nazwie klasy"),
             0,
-            "Atrybut obiektu przetrwa między kolejnymi wywołaniami metod.",
+            "Atrybut obiektu ustawiony w __init__ przetrwa między kolejnymi wywołaniami metod, a zmienna lokalna znika po każdym wywołaniu.",
         ),
         choice(
             "Co wypisze ten kod?",

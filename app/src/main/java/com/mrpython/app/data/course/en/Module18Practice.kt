@@ -30,13 +30,13 @@ internal val module18Practice = listOf(
         choice(
             "What happens when you run this code?",
             listOf(
-                "NameError – math is not imported yet",
+                "NameError",
                 "It prints 2.0",
                 "It prints 2",
-                "ModuleNotFoundError",
+                "SyntaxError",
             ),
             0,
-            "Code runs from the top – at the moment of the call the name math doesn't exist yet.",
+            "Code runs from the top – at the moment of the call the name math doesn't exist yet, so you get a NameError.",
             code = "print(math.sqrt(4))\nimport math",
         ),
         choice(
@@ -108,13 +108,13 @@ internal val module18Practice = listOf(
         choice(
             "What happens when you run this code?",
             listOf(
-                "NameError – the name math was not imported",
+                "NameError",
                 "It prints 2.0",
                 "It prints 2",
                 "SyntaxError",
             ),
             0,
-            "from math import sqrt loads only the name sqrt, not math.",
+            "from math import sqrt loads only the name sqrt, not math – hence the NameError.",
             code = "from math import sqrt\nprint(math.sqrt(4))",
         ),
         choice(
@@ -262,13 +262,13 @@ internal val module18Practice = listOf(
         choice(
             "Why can from math import * be risky?",
             listOf(
-                "It can overwrite names in your program, and it's hard to tell where they come from",
+                "Name conflicts happen easily",
                 "It slows down every math operation",
                 "It only works in old versions of Python",
                 "It deletes the math module from the disk",
             ),
             0,
-            "The star dumps many names in at once, which invites conflicts.",
+            "The star dumps many names in at once: they can overwrite your names or be overwritten by them, and it's hard to tell where they come from.",
         ),
         choice(
             "What is the Python standard library?",
@@ -348,9 +348,9 @@ internal val module18Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – floor doesn't accept a string", "It prints 3", "It prints 3.5", "It prints \"3\""),
+            listOf("TypeError", "It prints 3", "It prints 3.5", "It prints \"3\""),
             0,
-            "The math functions work on numbers, not on strings.",
+            "floor doesn't accept a string – the math functions work on numbers, so you get a TypeError.",
             code = "from math import floor\nprint(floor(\"3.5\"))",
         ),
         fill(

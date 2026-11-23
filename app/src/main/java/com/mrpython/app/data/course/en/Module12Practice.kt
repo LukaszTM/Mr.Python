@@ -68,7 +68,7 @@ internal val module12Practice = listOf(
         output("x = 3.14159\nprint(f\"[{x:>8.2f}]\")", "[    3.14]", "First .2f, then alignment to 8 characters."),
         choice(
             "What does the number 10 mean in the format :>10?",
-            listOf("The field width – at least 10 characters", "The number of spaces before the text", "The maximum length of the text", "The number of repetitions"),
+            listOf("The minimum field width", "The number of spaces before the text", "The maximum length of the text", "The number of repetitions"),
             0,
             "It's the minimum width; the text is padded up to it with spaces.",
         ),

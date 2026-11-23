@@ -53,16 +53,16 @@ internal val module39Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("An islice object, not a list", "[1, 2]", "1 2", "[3]"),
+            listOf("An islice object", "[1, 2]", "1 2", "TypeError"),
             0,
-            "islice returns an iterator – to see the elements you have to use list().",
+            "islice returns an iterator, so print shows the object itself, not the elements – to see them you have to use list().",
             code = "from itertools import islice\nprint(islice([1, 2, 3], 2))",
         ),
         choice(
             "How is count(1) different from range(1, 10)?",
-            listOf("count has no end, and range ends at 9", "It isn't", "count returns a list", "range is infinite"),
+            listOf("count has no end", "It isn't", "count returns a list", "range is infinite"),
             0,
-            "count keeps counting forever until we stop it.",
+            "count keeps counting forever until we stop it, while range(1, 10) ends at 9.",
         ),
         fill(
             "Fill in the blank to count by 10 from zero (prints [0, 10, 20]).",
@@ -324,7 +324,7 @@ internal val module39Practice = listOf(
         ),
         choice(
             "What do we get on each pass of the loop for k, g in groupby(data)?",
-            listOf("The group's key and an iterator over its elements", "An index and an element", "Two neighboring elements", "The key and the number of elements"),
+            listOf("The key and the group's iterator", "An index and an element", "Two neighboring elements", "The key and the number of elements"),
             0,
             "You have to count the elements yourself, e.g. with len(list(g)).",
         ),

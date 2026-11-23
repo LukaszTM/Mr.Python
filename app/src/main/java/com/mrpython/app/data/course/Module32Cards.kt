@@ -42,8 +42,9 @@ internal val module32Cards = listOf(
         ),
         explain(
             "Pętla dzięki __getitem__",
-            "Jeśli klasa ma `__getitem__`, pętla `for` pyta o indeksy 0, 1, 2… aż metoda zgłosi `IndexError`. " +
-                "`__len__` musi zwracać nieujemną liczbę całkowitą – bez niej `len()` daje `TypeError`.",
+            "Jeśli klasa ma `__getitem__`, pętla `for` (a także `list()`) pyta o indeksy 0, 1, 2… aż metoda zgłosi `IndexError`. " +
+                "`__len__` musi zwracać nieujemną liczbę całkowitą – bez tej metody `len()` daje `TypeError`. " +
+                "Obiekt, którego `__len__` zwraca 0, jest – jak pusta lista – fałszywy: `bool(obiekt)` daje `False`.",
             code = "class Trzy:\n    def __getitem__(self, i):\n        if i >= 3:\n            raise IndexError\n        return i * 10\n\nfor x in Trzy():\n    print(x)",
             output = "0\n10\n20",
         ),

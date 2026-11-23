@@ -20,9 +20,9 @@ internal val module9 = CourseUnit(
             output("t = (\"a\", \"b\")\nprint(len(t))", "2", "len() works on tuples too."),
             choice(
                 "What will happen?",
-                listOf("A TypeError – tuples can't be changed", "t will become (5, 2)", "t will become (5,)", "Nothing"),
+                listOf("An error", "t will become (5, 2)", "t will become (5,)", "Nothing"),
                 0,
-                "A tuple is immutable.",
+                "A tuple is immutable, so t[0] = 5 ends in an error (a TypeError).",
                 code = "t = (1, 2)\nt[0] = 5",
             ),
             output("point = (3, 4)\nx, y = point\nprint(x + y)", "7", "Unpacking assigns the elements to the variables in order."),
@@ -38,9 +38,9 @@ internal val module9 = CourseUnit(
             output("print(3 in {1, 2, 3})", "True", "in checks whether an element belongs to the set."),
             choice(
                 "What will happen?",
-                listOf("An error – sets have no indexes", "It prints 1", "It prints {1}", "It prints None"),
+                listOf("An error", "It prints 1", "It prints {1}", "It prints None"),
                 0,
-                "A set has no fixed order, so it has no indexes.",
+                "A set has no fixed order and no indexes, so s[0] ends in an error.",
                 code = "s = {1, 2, 3}\nprint(s[0])",
             ),
             output("print(sorted({3, 1, 2}))", "[1, 2, 3]", "sorted() returns a sorted list."),
@@ -70,7 +70,7 @@ internal val module9 = CourseUnit(
                 "They both like ice cream.",
             ),
             tiles(
-                "Store the intersection of sets a and b in the variable common",
+                "Store the intersection of sets a and b (a first) in the variable common",
                 listOf("common", "=", "a", "&", "b"),
                 listOf("|", "+"),
                 "& gives the elements present in both sets.",

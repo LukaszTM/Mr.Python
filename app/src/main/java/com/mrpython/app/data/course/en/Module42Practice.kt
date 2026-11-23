@@ -53,9 +53,9 @@ internal val module42Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("ValueError: I/O operation on closed file", "abc", "An empty line", "None"),
+            listOf("A ValueError", "abc", "An empty line", "None"),
             0,
-            "After leaving the block the file is closed, so you can't read from it.",
+            "After leaving the block the file is closed, so read() raises a ValueError (I/O operation on closed file).",
             code = "with open(\"notes.txt\", \"w\") as f:\n    f.write(\"abc\")\nwith open(\"notes.txt\") as f:\n    pass\nprint(f.read())",
         ),
         choice(
@@ -141,7 +141,7 @@ internal val module42Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("A, then a ZeroDivisionError", "A and B", "Only B", "Nothing"),
+            listOf("A, then a ZeroDivisionError", "A, then B", "Only B", "Only a ZeroDivisionError"),
             0,
             "__exit__ doesn't return True, so the exception keeps going and print(\"B\") never runs.",
             code = "class Block:\n    def __enter__(self):\n        return self\n    def __exit__(self, t, v, tb):\n        print(\"A\")\nwith Block():\n    1 / 0\nprint(\"B\")",
@@ -229,7 +229,7 @@ internal val module42Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("A, then an IndexError", "A and done", "Only done", "Nothing"),
+            listOf("A, then an IndexError", "A, then done", "Only done", "Only an IndexError"),
             0,
             "suppress only silences KeyError, and the list raises IndexError.",
             code = "from contextlib import suppress\nwith suppress(KeyError):\n    print(\"A\")\n    [1][5]\nprint(\"done\")",
@@ -306,13 +306,13 @@ internal val module42Practice = listOf(
         ),
         choice(
             "Which statement about context managers is true?",
-            listOf("__exit__ also runs when there was an exception in the block", "__enter__ runs after the block", "Every manager must be a file", "with catches all exceptions"),
+            listOf("__exit__ also runs when there was an exception in the block", "__enter__ runs only after the block has finished", "Only an open file can be a context manager", "with catches and hides every exception in the block"),
             0,
             "Guaranteed cleanup is the main advantage of with.",
         ),
         choice(
             "What will this code print?",
-            listOf("start, then a ValueError", "start and stop", "Only stop", "start and ok"),
+            listOf("start, then a ValueError", "start, stop and a ValueError", "start, stop and ok", "start and ok"),
             0,
             "Without try/finally, the code after yield won't run when the block raises an exception.",
             code = "from contextlib import contextmanager\n@contextmanager\ndef block():\n    print(\"start\")\n    yield\n    print(\"stop\")\nwith block():\n    int(\"x\")\nprint(\"ok\")",
@@ -351,7 +351,7 @@ internal val module42Practice = listOf(
             "with suppress(Type): silences exceptions of that type.",
         ),
         tiles(
-            "Read the contents of the file f into the variable text in a with block",
+            "Open \"notes.txt\" in a with block as f and read its contents into the variable text",
             listOf("with", "open(\"notes.txt\")", "as", "f:", "text", "=", "f.read()"),
             listOf("f.write()", "for"),
             "First we open the file in with, then we read it with read().",

@@ -32,7 +32,7 @@ internal val module68 = CourseUnit(
                 "Po usunięciu interpunkcji split() dzieli tekst na czyste słowa.",
             ),
             choice(
-                "Co zwróci ten kod?",
+                "Co wypisze ten kod?",
                 listOf("['a', 'b', 'c']", "['a', '', 'b', 'c']", "['a  b', 'c']", "['a', 'b', '\\n', 'c']"),
                 0,
                 "split() bez argumentu dzieli po dowolnych białych znakach i pomija puste kawałki.",
@@ -124,9 +124,9 @@ internal val module68 = CourseUnit(
             ),
             choice(
                 "Co zwraca most_common() bez argumentu?",
-                listOf("Wszystkie pary posortowane od najczęstszej", "Tylko najczęstszą parę", "Słownik bez zmian", "Pustą listę"),
+                listOf("Wszystkie pary od najczęstszej", "Tylko najczęstszą parę", "Słownik bez zmian", "Pustą listę"),
                 0,
-                "Bez argumentu dostajemy pełną, posortowaną listę par.",
+                "Bez argumentu dostajemy listę wszystkich par, posortowaną od najczęstszej.",
             ),
             output(
                 "STOP = {\"i\", \"w\", \"a\"}\nslowa = \"kot i pies w domu\".split()\nwazne = [s for s in slowa if s not in STOP]\nprint(wazne)",
@@ -176,9 +176,9 @@ internal val module68 = CourseUnit(
             ),
             choice(
                 "Co się stanie, gdy policzymy średnią dla pustego tekstu bez sprawdzenia?",
-                listOf("ZeroDivisionError – dzielimy przez len([]) = 0", "Wynik 0.0", "Wynik None", "IndexError"),
+                listOf("ZeroDivisionError", "Wynik 0.0", "Wynik None", "IndexError"),
                 0,
-                "Dla pustej listy dzielimy przez zero, więc trzeba to sprawdzić wcześniej.",
+                "Dla pustej listy dzielimy przez len([]), czyli przez 0, więc trzeba to sprawdzić wcześniej.",
             ),
             output(
                 "from statistics import mean\nprint(mean([3, 2, 4, 3]))",

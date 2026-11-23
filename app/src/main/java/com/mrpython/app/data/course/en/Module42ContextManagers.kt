@@ -28,7 +28,7 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "Which code is equivalent to with open(\"a.txt\") as f: ...?",
-                listOf("f = open(...), then try with f.close() in finally", "f = open(...) without closing", "import a.txt", "f = close(open(...))"),
+                listOf("f = open(...), then try, with f.close() in finally", "f = open(...), then try, with f.close() in except", "f = open(...) and the block, never closing the file", "f = open(...), and f.close() before the block"),
                 0,
                 "with is a shorter way to write the try / finally pattern.",
             ),
@@ -75,9 +75,9 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "How many parameters (besides self) does the __exit__ method have?",
-                listOf("3: the exception's type, value, and traceback", "0", "1: the exception", "2: enter and exit"),
+                listOf("3", "0", "1", "2"),
                 0,
-                "When there was no error, all three are None.",
+                "Three: the exception's type, value and traceback. When there was no error, all three are None.",
             ),
             fill(
                 "Fill in the blank so that x in the with block is an object of the class Resource.",
@@ -118,9 +118,9 @@ internal val module42 = CourseUnit(
             ),
             choice(
                 "What will this code do?",
-                listOf("Raise KeyError – suppress only silences ValueError", "Print nothing", "Print None", "Suppress the error"),
+                listOf("Raise a KeyError", "Suppress the error and print nothing", "Print None", "Raise a ValueError"),
                 0,
-                "suppress silences only the exception types you list.",
+                "d[\"x\"] raises a KeyError, and suppress silences only the types you list – here ValueError.",
                 code = "from contextlib import suppress\nd = {}\nwith suppress(ValueError):\n    print(d[\"x\"])",
             ),
             output(

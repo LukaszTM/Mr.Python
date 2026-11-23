@@ -44,8 +44,9 @@ internal val module32Cards = listOf(
         ),
         explain(
             "Looping thanks to __getitem__",
-            "If a class has `__getitem__`, a `for` loop asks for indexes 0, 1, 2… until the method raises an `IndexError`. " +
-                "`__len__` must return a non-negative integer – without that method, `len()` gives a `TypeError`.",
+            "If a class has `__getitem__`, a `for` loop (and `list()` too) asks for indexes 0, 1, 2… until the method raises an `IndexError`. " +
+                "`__len__` must return a non-negative integer – without that method, `len()` gives a `TypeError`. " +
+                "An object whose `__len__` returns 0 is falsy, just like an empty list: `bool(object)` gives `False`.",
             code = "class Three:\n    def __getitem__(self, i):\n        if i >= 3:\n            raise IndexError\n        return i * 10\n\nfor x in Three():\n    print(x)",
             output = "0\n10\n20",
         ),

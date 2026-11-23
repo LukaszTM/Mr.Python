@@ -45,9 +45,9 @@ internal val module33Practice = listOf(
         ),
         choice(
             "Co znaczy, że klasa pochodna nadpisuje metodę?",
-            listOf("Definiuje metodę o tej samej nazwie, która zastępuje wersję rodzica", "Usuwa metodę z klasy rodzica", "Tworzy kopię klasy rodzica", "Zmienia nazwę metody rodzica"),
+            listOf("Pisze własną metodę o tej samej nazwie", "Usuwa tę metodę z klasy rodzica", "Kopiuje metodę rodzica bez zmian", "Zmienia nazwę metody w klasie rodzica"),
             0,
-            "Klasa rodzica nadal ma swoją wersję – zmienia się tylko klasa pochodna.",
+            "Własna metoda o tej samej nazwie zastępuje wersję rodzica w klasie pochodnej; rodzic nadal ma swoją wersję.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -75,7 +75,7 @@ internal val module33Practice = listOf(
             "class A:\n    def powitaj(self):\n        return \"Witaj\"\n\nclass B(A):\n    def powitaj(self):\n        return ____.powitaj() + \", Jan!\"\n\nprint(B().powitaj())",
             listOf("super()", "self", "A"),
             "super()",
-            "self.powitaj() wywołałoby samą siebie bez końca.",
+            "self.powitaj() wywołałoby samą siebie bez końca, a A.powitaj() bez obiektu zgłosi TypeError.",
         ),
         tiles(
             "Wywołaj metodę opis z klasy bazowej i zapisz wynik w t",
@@ -256,7 +256,7 @@ internal val module33Practice = listOf(
         tiles(
             "Napisz nagłówek klasy Amfibia dziedziczącej po Auto i Lodz",
             listOf("class", "Amfibia(", "Auto,", "Lodz", "):"),
-            listOf("Auto", "extends"),
+            listOf("Auto", "and"),
             "Klasy bazowe wymieniamy po przecinku.",
         ),
         tiles(
@@ -310,9 +310,9 @@ internal val module33Practice = listOf(
         ),
         choice(
             "Z jakiego modułu importujemy ABC i abstractmethod?",
-            listOf("abc", "abstract", "typing", "dataclasses"),
+            listOf("abc", "ABC", "abstract", "abstraction"),
             0,
-            "Nazwa modułu abc to skrót od Abstract Base Classes.",
+            "Moduł nazywa się abc (małymi literami) – to skrót od Abstract Base Classes; ABC to klasa z tego modułu.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -438,7 +438,7 @@ internal val module33Practice = listOf(
         tiles(
             "Wywołaj konstruktor klasy bazowej z argumentami imie i wiek",
             listOf("super()", ".__init__(", "imie,", "wiek", ")"),
-            listOf("self,", "parent()"),
+            listOf("self,", "super"),
             "self przekazuje się automatycznie.",
         ),
     ),

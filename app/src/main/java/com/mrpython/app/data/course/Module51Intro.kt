@@ -33,7 +33,7 @@ internal val module51Intro = lesson(
     explain(
         "Alias czy kopia?",
         "`b = a` nie kopiuje listy – to druga nazwa tego samego obiektu. Kopię dają `a[:]`, `list(a)` " +
-            "i `a.copy()`, ale są płytkie: listy wewnętrzne zostają wspólne. Pełną kopię robi " +
+            "i `a.copy()`, ale są płytkie: listy wewnętrzne zostają wspólne. Pełną (głęboką) kopię robi " +
             "`copy.deepcopy()`.",
         code = "a = [1, 2]\nb = a\nc = a[:]\nb.append(3)\nprint(a, c)",
         output = "[1, 2, 3] [1, 2]",

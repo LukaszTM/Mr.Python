@@ -12,7 +12,7 @@ internal val module11 = CourseUnit(
             "u11l1", "Your first class",
             choice(
                 "Which keyword creates a class?",
-                listOf("class", "def", "object", "new"),
+                listOf("class", "def", "object", "Class"),
                 0,
                 "We define a class with the class keyword.",
             ),
@@ -28,7 +28,7 @@ internal val module11 = CourseUnit(
             ),
             choice(
                 "What is __init__ for?",
-                listOf("It sets the object's initial state", "It deletes the object", "It prints the object", "It creates a new class"),
+                listOf("It sets up a new object's data", "It deletes the object from memory", "It prints the object on screen", "It creates a new class"),
                 0,
                 "__init__ is called automatically when an object is created.",
             ),
@@ -45,9 +45,9 @@ internal val module11 = CourseUnit(
             fill(
                 "Fill in the blank to store the name in the object.",
                 "class Student:\n    def __init__(self, name):\n        ____.name = name\n\ns = Student(\"Kate\")\nprint(s.name)",
-                listOf("self", "this", "obj"),
+                listOf("self", "s", "obj"),
                 "self",
-                "self means the object being created.",
+                "self means the object being created – the variable s doesn't exist yet at that point.",
             ),
         ),
         lesson(
@@ -171,7 +171,7 @@ internal val module11 = CourseUnit(
             tiles(
                 "Create an object of the Dog class named \"Max\" in the variable d",
                 listOf("d", "=", "Dog(", "\"Max\"", ")"),
-                listOf("new", "class"),
+                listOf("self", "class"),
                 "We create an object by calling the class like a function.",
             ),
             output(

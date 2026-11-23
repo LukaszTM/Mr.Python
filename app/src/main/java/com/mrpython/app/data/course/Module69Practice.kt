@@ -137,16 +137,16 @@ internal val module69Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("ValueError – za mało wartości do rozpakowania", "kier będzie równe None", "kier będzie pustym napisem", "Nic, kod działa"),
+            listOf("ValueError", "kier będzie None", "kier będzie pusty", "Nic, kod zadziała"),
             0,
-            "split() daje jedno słowo, a rozpakowujemy do dwóch zmiennych.",
+            "split() daje jedno słowo, a rozpakowujemy je do dwóch zmiennych – za mało wartości, więc ValueError.",
             code = "czas, kier = \"idź\".split()",
         ),
         choice(
             "Dlaczego piszemy MAPA[pokoj].get(k, pokoj) zamiast MAPA[pokoj][k]?",
-            listOf("Przy złym kierunku gracz zostaje w miejscu zamiast błędu KeyError", "Bo get() jest zawsze szybsze", "Bo [] nie działa na słownikach", "Żeby gracz wracał na start"),
+            listOf("Żeby zły kierunek nie dał KeyError", "Bo get() jest zawsze szybsze", "Bo [] nie działa na słownikach", "Żeby gracz wracał na start"),
             0,
-            "get() z wartością domyślną obsługuje nieistniejące wyjścia.",
+            "Przy nieistniejącym wyjściu get() zwraca obecny pokój, więc gracz zostaje w miejscu zamiast przerwać grę błędem KeyError.",
         ),
         fill(
             "Uzupełnij, aby rozbić komendę na słowa (program ma wypisać idź).",
@@ -231,9 +231,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "Jak sprawić, by ekwipunek mieścił najwyżej 3 przedmioty?",
-            listOf("Przed append() sprawdzić, czy len(ekw) < 3", "Użyć ekw.max(3)", "Zamienić listę na napis", "Nic – lista sama się zatrzyma"),
+            listOf("Przed append() sprawdzić, czy len(ekw) < 3", "Przed append() sprawdzić, czy len(ekw) <= 3", "Utworzyć ją jako ekw = list(3)", "Nic – lista sama się zatrzyma"),
             0,
-            "Lista nie ma limitu, więc pilnujemy go warunkiem.",
+            "Lista nie ma limitu, więc pilnujemy go warunkiem. Przy <= 3 dałoby się dodać czwarty przedmiot, gdy są już trzy.",
         ),
         fill(
             "Uzupełnij, aby przenieść przedmiot z pokoju do ekwipunku (program ma wypisać ['nóż'] []).",
@@ -306,9 +306,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego programu?",
-            listOf("AttributeError – hp to zmienna lokalna, a nie atrybut", "Wypisze 10", "Wypisze None", "Wypisze 0"),
+            listOf("AttributeError", "Wypisze 10", "Wypisze None", "Wypisze 0"),
             0,
-            "Bez self. wartość znika po zakończeniu __init__.",
+            "AttributeError: bez self. hp to tylko zmienna lokalna __init__, która znika po jej zakończeniu.",
             code = "class Player:\n    def __init__(self):\n        hp = 10\np = Player()\nprint(p.hp)",
         ),
         choice(
@@ -320,7 +320,7 @@ internal val module69Practice = listOf(
         fill(
             "Uzupełnij, aby zapisać imię w obiekcie (program ma wypisać Ola).",
             "class Player:\n    def __init__(self, imie):\n        ____.imie = imie\nprint(Player(\"Ola\").imie)",
-            listOf("self", "this", "imie"),
+            listOf("self", "cls", "imie"),
             "self",
             "self to obiekt, w którym zapisujemy atrybut.",
         ),
@@ -405,9 +405,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "Co robi continue w pętli gry?",
-            listOf("Pomija resztę bieżącej tury i przechodzi do następnej komendy", "Kończy całą grę", "Powtarza tę samą komendę", "Restartuje grę od początku"),
+            listOf("Przeskakuje do następnej komendy", "Kończy całą pętlę gry", "Powtarza tę samą komendę jeszcze raz", "Wraca do pierwszej komendy z listy"),
             0,
-            "continue wraca od razu na początek pętli.",
+            "continue pomija resztę bieżącej tury i wraca na początek pętli, czyli do następnej komendy.",
         ),
         fill(
             "Uzupełnij, aby pominąć puste komendy (program ma wypisać n, a potem s).",

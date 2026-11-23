@@ -66,7 +66,7 @@ internal val module66Practice = listOf(
             "For negative numbers floor goes down, that is, away from zero: -3.5 → -4.",
         ),
         tiles(
-            "Compute the area of a circle with radius r and store it in the variable area",
+            "Compute the area of a circle with radius r as math.pi times r squared and store it in the variable area",
             listOf("area", "=", "math.pi", "*", "r ** 2"),
             listOf("math.pi()", "r ^ 2"),
             "math.pi is a constant (no parentheses), and a power is written with **.",
@@ -152,7 +152,7 @@ internal val module66Practice = listOf(
             "Five hours after 22:00 is 3:00 the next day.",
         ),
         tiles(
-            "Add a week to the date d and store the result in the variable next_week",
+            "Store in the variable next_week the date d plus one week (d + …)",
             listOf("next_week", "=", "d", "+", "timedelta(", "weeks=1", ")"),
             listOf("days=1", "date("),
             "timedelta(weeks=1) is a span of 7 days.",
@@ -229,9 +229,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – namedtuple fields can't be changed", "p.x will be equal to 5", "TypeError", "Nothing – the assignment is ignored"),
+            listOf("AttributeError", "p.x will be equal to 5", "TypeError", "Nothing – the assignment is ignored"),
             0,
-            "A namedtuple, like every tuple, is immutable.",
+            "AttributeError: namedtuple fields can't be changed, because like every tuple it is immutable.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", \"x y\")\np = P(1, 2)\np.x = 5",
         ),
         output(
@@ -254,7 +254,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What is a deque better for than a list?",
-            listOf("Fast adding and removing at both ends", "Sorting", "Storing key–value pairs", "Counting occurrences"),
+            listOf("Fast adding and removing at both ends", "Fast sorting of the items", "Storing key–value pairs", "Counting how often items occur"),
             0,
             "A deque has fast operations at both ends.",
         ),
@@ -346,9 +346,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What does combinations(\"ABCD\", 2) return when it's not wrapped in list()?",
-            listOf("An iterator (a lazy object)", "A list of tuples", "A set", "The number 6"),
+            listOf("An iterator", "A list of tuples", "A set", "The number 6"),
             0,
-            "itertools functions create items only on demand.",
+            "itertools functions return lazy iterators, which create items only on demand.",
         ),
     ),
     practice(
@@ -380,7 +380,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What does functools.partial do?",
-            listOf("Creates a new function with some arguments set in advance", "Splits a function into several parts", "Remembers the function's results", "Joins lists"),
+            listOf("Creates a new function with some arguments set in advance", "Splits a function into several smaller functions", "Remembers the results of earlier calls to the function", "Joins several lists into one list"),
             0,
             "partial(f, x) is a function that calls f with x first.",
         ),
@@ -403,9 +403,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – an empty list with no initial value", "Prints 0", "Prints None", "Prints []"),
+            listOf("TypeError", "Prints 0", "Prints None", "Prints []"),
             0,
-            "reduce on an empty sequence needs an initial value.",
+            "TypeError: reduce on an empty sequence needs an initial value (a third argument).",
             code = "from functools import reduce\nprint(reduce(lambda a, b: a + b, []))",
         ),
         output(
@@ -428,7 +428,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "What is functools.reduce for?",
-            listOf("Folds the items of a sequence into one value, combining them in pairs", "Removes duplicates from a list", "Cuts a list in half", "Sorts a list"),
+            listOf("Folds the items into one value", "Removes duplicates from a list", "Cuts a list in half", "Sorts the items of a list"),
             0,
             "reduce(f, [a, b, c]) computes f(f(a, b), c).",
         ),
@@ -463,7 +463,7 @@ internal val module66Practice = listOf(
         output(
             "import re\nprint(re.findall(r\"\\w+\", \"one, two; three!\"))",
             "['one', 'two', 'three']",
-            "\\w+ matches runs of letters (without punctuation).",
+            "\\w+ matches runs of word characters (letters, digits, _), without punctuation.",
         ),
         choice(
             "What does + mean in the pattern \\d+?",
@@ -490,7 +490,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Why do we write patterns as r\"...\"?",
-            listOf("So that backslashes aren't treated as the string's special characters", "So that the pattern runs faster", "Because r stands for regex and is required", "To ignore letter case"),
+            listOf("So that a backslash isn't a special string character", "So that the pattern is checked faster", "Because r stands for regex and re needs it", "So that the pattern ignores letter case"),
             0,
             "In a raw string \\d stays literally \\d.",
         ),

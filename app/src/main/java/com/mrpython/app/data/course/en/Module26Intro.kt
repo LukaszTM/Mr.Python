@@ -37,7 +37,7 @@ internal val module26Intro = lesson(
     explain(
         "Multiple keys and dictionaries",
         "A key can return a tuple – then on a tie the second element decides. Sorting is " +
-            "stable: equal elements keep their order. We sort a dictionary by its values using " +
+            "stable: equal elements keep their order, even with `reverse=True`. We sort a dictionary by its values using " +
             "`items()` and `key=lambda x: x[1]`.",
         code = "points = {\"Zoe\": 7, \"Tom\": 9, \"Eve\": 5}\nfor name, p in sorted(points.items(), key=lambda x: x[1]):\n    print(name, p)",
         output = "Eve 5\nZoe 7\nTom 9",

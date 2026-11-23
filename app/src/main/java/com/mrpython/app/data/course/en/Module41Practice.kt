@@ -53,10 +53,10 @@ internal val module41Practice = listOf(
             code = "def hi():\n    return \"hi\"\nx = hi\ny = hi()",
         ),
         choice(
-            "What will print(hi) print for a defined function hi?",
-            listOf("A description of the function, e.g. <function hi at 0x...>", "The result of the function hi", "NameError", "An empty line"),
+            "What does print(hi) print for a defined function hi?",
+            listOf("A description of the function object", "The result of the function hi", "A NameError", "An empty line"),
             0,
-            "Without parentheses the function isn't called – we print the object itself.",
+            "Without parentheses the function isn't called – print shows a description of the object, e.g. <function hi at 0x...>.",
         ),
         choice(
             "Which line correctly passes the function double to map?",
@@ -135,22 +135,22 @@ internal val module41Practice = listOf(
         ),
         choice(
             "What is the bug in this decorator?",
-            listOf("It returns the result of calling wrapper() instead of the function wrapper itself", "The parameter f is missing", "wrapper can't call f", "There is no bug"),
+            listOf("return wrapper() instead of return wrapper", "The decorator is missing the parameter f", "wrapper is not allowed to call f", "There is no bug"),
             0,
             "A decorator should return a function, so we write return wrapper without parentheses.",
             code = "def decorate(f):\n    def wrapper():\n        print(\"before\")\n        f()\n    return wrapper()",
         ),
         choice(
             "What does hi = decorate(hi) do?",
-            listOf("Replaces hi with the function returned by the decorator", "Calls hi and stores the result", "Deletes the function hi", "Creates a copy of the decorator"),
+            listOf("Replaces hi with the function returned by decorate", "Calls hi and stores its result in hi", "Deletes the function hi from the program", "Creates a copy of the decorator decorate"),
             0,
             "From now on the name hi points to wrapper.",
         ),
         choice(
             "What will this code print?",
-            listOf("Nothing – the function b was never called", "A B C", "B", "A C"),
+            listOf("Nothing", "A B C", "B", "A C"),
             0,
-            "Decorating only replaces the function – wrapper runs only after b().",
+            "The function b was never called. Decorating only replaces it, and wrapper runs only after b().",
             code = "def decorate(f):\n    def wrapper():\n        print(\"A\")\n        f()\n        print(\"C\")\n    return wrapper\ndef b():\n    print(\"B\")\nb = decorate(b)",
         ),
         fill(
@@ -224,9 +224,9 @@ internal val module41Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – wrapper takes no arguments", "It prints 9", "It prints None", "SyntaxError"),
+            listOf("A TypeError", "It prints 9", "It prints None", "A SyntaxError"),
             0,
-            "sq(3) calls w(3), and w has no parameters.",
+            "sq(3) calls w(3), but w has no parameters, so you get a TypeError.",
             code = "def log(f):\n    def w():\n        return f()\n    return w\n@log\ndef sq(x):\n    return x * x\nprint(sq(3))",
         ),
         choice(
@@ -312,10 +312,10 @@ internal val module41Practice = listOf(
         ),
         choice(
             "What is wrong with this code?",
-            listOf("The argument is missing – it should be @repeat(number)", "repeat is missing a return", "Too many levels of functions", "Nothing, the code is correct"),
+            listOf("@repeat is missing its argument", "repeat is missing a return", "Too many levels of functions", "Nothing, the code is correct"),
             0,
-            "repeat is a decorator factory, so it has to be called with an argument.",
-            code = "def repeat(n):\n    def dec(f):\n        def w():\n            for _ in range(n):\n                f()\n        return w\n    return dec\n@repeat\ndef hi():\n    print(\"hi\")",
+            "repeat is a decorator factory, so it has to be called with an argument, e.g. @repeat(3).",
+            code = "def repeat(n):\n    def dec(f):\n        def w():\n            for _ in range(n):\n                f()\n        return w\n    return dec\n@repeat\ndef hi():\n    print(\"hi\")\nhi()",
         ),
         choice(
             "Which line is equivalent to @repeat(3) above def hi()?",

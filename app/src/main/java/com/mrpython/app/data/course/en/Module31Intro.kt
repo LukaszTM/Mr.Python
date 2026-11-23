@@ -13,7 +13,8 @@ internal val module31Intro = lesson(
     ),
     explain(
         "@classmethod",
-        "A method with the `@classmethod` decorator gets the class in the `cls` parameter instead of an object. " +
+        "A line with `@` right above `def` is a decorator – it changes how the method below it works. A method with the " +
+            "`@classmethod` decorator gets the class in the `cls` parameter instead of an object. " +
             "It often serves as an alternative constructor: it creates an object in a different way, e.g. from a string.",
         code = "class Point:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n    @classmethod\n    def zero(cls):\n        return cls(0, 0)\n\nprint(Point.zero().x)",
         output = "0",

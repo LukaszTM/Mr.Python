@@ -103,9 +103,9 @@ internal val module27 = CourseUnit(
                 "Reading index 0 doesn't depend on the length of the list.",
             ),
             tiles(
-                "Arrange the complexities from fastest to slowest",
+                "Put the four complexities you have learned into the list, from fastest to slowest",
                 listOf("orders = [", "\"O(1)\",", "\"O(log n)\",", "\"O(n)\",", "\"O(n²)\"]"),
-                listOf("\"O(0)\",", "\"O(n!)\","),
+                listOf("\"O(0)\",", "\"O(n²)\","),
                 "Constant, logarithmic, linear, and finally quadratic.",
             ),
         ),
@@ -113,15 +113,15 @@ internal val module27 = CourseUnit(
             "u27l3", "List or set?",
             choice(
                 "How much does checking x in a_list cost?",
-                listOf("O(n) – the elements have to be checked one by one", "O(1)", "O(log n)", "O(n²)"),
+                listOf("O(n)", "O(1)", "O(log n)", "O(n²)"),
                 0,
-                "A list doesn't know where x is, so it searches one by one.",
+                "A list doesn't know where x is, so it has to check the elements one by one.",
             ),
             choice(
                 "How much does checking x in a_set cost on average?",
-                listOf("O(1) – a set uses hashing", "O(n)", "O(n²)", "O(log n)"),
+                listOf("O(1)", "O(n)", "O(n²)", "O(log n)"),
                 0,
-                "A set calculates right away where to look for the element.",
+                "A set uses hashing: it calculates right away where to look for the element.",
             ),
             output(
                 "items = [5, 3, 8, 1, 9]\ncomparisons = 0\nfor x in items:\n    comparisons += 1\n    if x == 1:\n        break\nprint(comparisons)",

@@ -14,9 +14,9 @@ internal val module9Practice = listOf(
         output("imie, wiek = (\"Ola\", 25)\nprint(f\"{imie} ma {wiek} lat\")", "Ola ma 25 lat", "Krotkę rozpakowujemy do dwóch zmiennych."),
         choice(
             "Co się stanie?",
-            listOf("Błąd – krotka nie ma metody append", "t będzie równe (1, 2, 3, 4)", "t będzie równe (4,)", "Nic"),
+            listOf("Błąd", "t będzie równe (1, 2, 3, 4)", "t będzie równe (4,)", "Nic"),
             0,
-            "Krotki nie można zmieniać, więc nie ma metod dodających elementy.",
+            "Krotki nie można zmieniać, więc nie ma metody append() – kod kończy się błędem.",
             code = "t = (1, 2, 3)\nt.append(4)",
         ),
         choice(
@@ -27,9 +27,9 @@ internal val module9Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – za dużo wartości do rozpakowania", "x = 1, y = 2", "x = 1, y = (2, 3)", "x = (1, 2), y = 3"),
+            listOf("Błąd", "x = 1, y = 2", "x = 1, y = (2, 3)", "x = (1, 2), y = 3"),
             0,
-            "Liczba zmiennych musi się zgadzać z liczbą elementów.",
+            "Krotka ma 3 elementy, a zmienne są 2 – ich liczba musi się zgadzać, więc jest błąd.",
             code = "x, y = (1, 2, 3)",
         ),
         fill(
@@ -72,9 +72,9 @@ internal val module9Practice = listOf(
         ),
         choice(
             "Co się stanie po wykonaniu s.add(2), gdy s = {1, 2}?",
-            listOf("Nic – 2 już jest w zbiorze", "s będzie równe {1, 2, 2}", "Błąd", "s będzie równe {2}"),
+            listOf("s się nie zmieni", "s będzie równe {1, 2, 2}", "Błąd", "s będzie równe {2}"),
             0,
-            "Zbiór nie przechowuje duplikatów.",
+            "2 już jest w zbiorze, a zbiór nie przechowuje duplikatów.",
         ),
         choice(
             "Kiedy warto użyć zbioru?",
@@ -129,7 +129,7 @@ internal val module9Practice = listOf(
         ),
         choice(
             "Co sprawdza a <= b dla zbiorów?",
-            listOf("Czy a jest podzbiorem b", "Czy a ma mniej elementów niż b", "Czy a jest puste", "Czy największy element a jest mniejszy"),
+            listOf("Czy a jest podzbiorem b", "Czy a ma mniej elementów niż b", "Czy a jest puste", "Czy elementy a są mniejsze od elementów b"),
             0,
             "<= sprawdza, czy każdy element a jest też w b.",
         ),

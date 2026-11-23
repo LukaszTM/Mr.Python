@@ -2,6 +2,16 @@ package com.mrpython.app.data.course
 
 internal val module62Cards = listOf(
     cards(
+        "u62l2",
+        explain(
+            "Rozpakowanie z gwiazdką",
+            "Przy rozpakowaniu jedna zmienna może mieć gwiazdkę `*`. Pozostałe zmienne dostają po jednym " +
+                "elemencie, a ta z gwiazdką zbiera całą resztę – zawsze w listę, nawet gdy po prawej stoi krotka.",
+            code = "t = (1, 2, 3, 4)\npierwszy, *reszta = t\nprint(pierwszy, reszta)\n*poczatek, ostatni = t\nprint(poczatek, ostatni)",
+            output = "1 [2, 3, 4]\n[1, 2, 3] 4",
+        ),
+    ),
+    cards(
         "u62l3",
         explain(
             "Różnica symetryczna ^",
@@ -40,7 +50,8 @@ internal val module62Cards = listOf(
         explain(
             "Dodawanie Counterów",
             "Dwa `Counter`y można dodać przez `+` – liczniki przy tych samych kluczach się sumują. " +
-                "Odejmowanie `-` odejmuje liczniki i usuwa klucze, którym zostało 0 lub mniej.",
+                "Odejmowanie `-` odejmuje liczniki i usuwa klucze, którym zostało 0 lub mniej. " +
+                "Licznik można też utworzyć od razu z licznościami: `Counter(a=3, b=1)`.",
             code = "from collections import Counter\na = Counter(\"aab\")\nb = Counter(\"abc\")\nprint(dict(a + b))\nprint(dict(a - b))",
             output = "{'a': 3, 'b': 2, 'c': 1}\n{'a': 1}",
         ),

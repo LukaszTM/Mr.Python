@@ -57,7 +57,7 @@ internal val module38Intro = lesson(
     fill(
         "Fill in the blank to remove an element from the left side of the queue.",
         "from collections import deque\nd = deque([5, 6, 7])\nprint(d.____())",
-        listOf("popleft", "pop", "left", "shift"),
+        listOf("popleft", "pop", "left", "popfirst"),
         "popleft",
         "popleft removes an element from the left end of a deque.",
     ),

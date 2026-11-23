@@ -58,7 +58,7 @@ internal val module25Practice = listOf(
                 "Python wymaga liczb ujemnych",
             ),
             0,
-            "-1 nie jest poprawnym indeksem znalezionego elementu, więc dobrze oznacza brak.",
+            "Pętla po range(len(...)) daje tylko indeksy od 0 w górę, więc -1 nigdy nie będzie wynikiem trafienia.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -291,7 +291,7 @@ internal val module25Practice = listOf(
         output(
             "def szukaj(lista, cel):\n    lewo, prawo = 0, len(lista) - 1\n    while lewo <= prawo:\n        s = (lewo + prawo) // 2\n        if lista[s] == cel:\n            return s\n        elif lista[s] < cel:\n            lewo = s + 1\n        else:\n            prawo = s - 1\n    return -1\nprint(szukaj([1, 4, 9, 16, 25], 4))",
             "1",
-            "Środek to 9 (za dużo), potem zakres [1, 4] i trafienie pod indeksem 1.",
+            "Środek to 9 (za dużo), potem 1 (za mało), a w końcu 4 pod indeksem 1.",
         ),
         output(
             "def szukaj(lista, cel):\n    lewo, prawo = 0, len(lista) - 1\n    while lewo <= prawo:\n        s = (lewo + prawo) // 2\n        if lista[s] == cel:\n            return s\n        elif lista[s] < cel:\n            lewo = s + 1\n        else:\n            prawo = s - 1\n    return -1\nprint(szukaj([1, 4, 9, 16, 25], 10))",
@@ -351,8 +351,8 @@ internal val module25Practice = listOf(
             "Szukamy, dopóki zakres nie jest pusty – tu 8 znajdujemy w 2 krokach.",
         ),
         choice(
-            "Ile najwyżej kroków potrzebuje wyszukiwanie binarne dla 8 posortowanych elementów?",
-            listOf("Około 3–4", "8", "1", "Około 16"),
+            "Ile razy można podzielić na pół zakres 8 elementów, zanim zostanie 1 element?",
+            listOf("3", "8", "4", "16"),
             0,
             "8 można połowić 3 razy: 8, 4, 2, 1.",
         ),
@@ -412,8 +412,8 @@ internal val module25Practice = listOf(
             "1000, 500, 250, 125, 62, 31, 15, 7, 3, 1 – dziewięć połowień.",
         ),
         choice(
-            "Co zwraca lista.index(5) dla listy [1, 2, 3]?",
-            listOf("ValueError", "-1", "None", "0"),
+            "Co się stanie po wywołaniu [1, 2, 3].index(5)?",
+            listOf("Błąd ValueError", "Wynik -1", "Wynik None", "Wynik 0"),
             0,
             "index() zgłasza błąd, gdy wartości nie ma na liście.",
         ),

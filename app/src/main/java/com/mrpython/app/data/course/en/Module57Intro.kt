@@ -33,7 +33,7 @@ internal val module57Intro = lesson(
     ),
     explain(
         "Shuffling questions",
-        "`random.shuffle(items)` shuffles a list in place, so the order is different every time. " +
+        "`random.shuffle(items)` shuffles a list in place: it puts its elements in a random order and returns `None`. " +
             "To keep the original intact, shuffle a copy: `questions[:]`.",
         code = "import random\n\nquestions = [\"Q1\", \"Q2\", \"Q3\"]\nqueue = questions[:]\nrandom.shuffle(queue)\nprint(sorted(queue) == questions)",
         output = "True",
@@ -45,9 +45,9 @@ internal val module57Intro = lesson(
     ),
     choice(
         "What does random.shuffle(items) do?",
-        listOf("Shuffles the list's elements in place", "Returns a sorted list", "Picks one random element", "Removes a random element"),
+        listOf("Shuffles the list's elements", "Returns a sorted list", "Picks one random element", "Removes a random element"),
         0,
-        "shuffle changes the order of the elements of the list itself.",
+        "shuffle changes the order of the elements of the list itself, in place – it doesn't remove or sort anything.",
     ),
     fill(
         "Fill in the blank so that the answer \" YES \" is accepted as correct.",

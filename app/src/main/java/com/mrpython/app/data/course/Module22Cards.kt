@@ -33,9 +33,10 @@ internal val module22Cards = listOf(
         explain(
             "reversed i list()",
             "`reversed()` też zwraca specjalny obiekt, a nie listę. Żeby zobaczyć wynik, użyj `list()`, " +
-                "a dla napisu – `\"\".join()`.",
-            code = "print(list(reversed(\"abc\")))\nprint(\"\".join(reversed(\"kot\")))",
-            output = "['c', 'b', 'a']\ntok",
+                "a dla napisu – `\"\".join()`. Jest też metoda `lista.reverse()`: działa jak `sort()` – " +
+                "odwraca samą listę w miejscu i zwraca `None`.",
+            code = "print(list(reversed(\"abc\")))\nprint(\"\".join(reversed(\"kot\")))\na = [1, 2, 3]\na.reverse()\nprint(a)",
+            output = "['c', 'b', 'a']\ntok\n[3, 2, 1]",
         ),
     ),
     cards(

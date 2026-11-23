@@ -130,7 +130,7 @@ internal val module29Practice = listOf(
         ),
         choice(
             "From which number does the Sieve of Eratosthenes start crossing out the multiples of i?",
-            listOf("From i * i", "From 0", "From i + 1", "From 2 * n"),
+            listOf("From i * i", "From 0", "From i + 1", "From i"),
             0,
             "Smaller multiples have already been crossed out by smaller prime numbers.",
         ),
@@ -304,10 +304,10 @@ internal val module29Practice = listOf(
             code = "n = 64\nwhile n % 2 == 0 and n > 1:\n    n //= 2\nprint(n == 1)",
         ),
         choice(
-            "What does pow(a, b, m) calculate?",
-            listOf("The remainder of a to the power of b divided by m", "a times b times m", "a to the power of b to the power of m", "The m-th root"),
+            "Which expression gives the same result as pow(a, b, m)?",
+            listOf("a ** b % m", "a * b % m", "a ** (b * m)", "a ** b // m"),
             0,
-            "The third argument is the modulus.",
+            "With the third argument m, pow returns the remainder of dividing a ** b by m.",
         ),
         fill(
             "Fill in the blank to calculate 5 to the power of 3.",
@@ -354,7 +354,7 @@ internal val module29Practice = listOf(
         output(
             "a, b = 0, 1\nfor _ in range(12):\n    a, b = b, a + b\nprint(a)",
             "144",
-            "The twelfth term of the Fibonacci sequence is 144.",
+            "The twelfth term of the Fibonacci sequence (counting from zero) is 144.",
         ),
         output("print(pow(7, 2, 10))", "9", "49 % 10 = 9 – the last digit of 7 squared."),
         output("import math\nprint(math.lcm(6, 9))", "18", "The smallest number divisible by both 6 and 9 is 18."),

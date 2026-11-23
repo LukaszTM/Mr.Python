@@ -49,13 +49,13 @@ internal val module48 = CourseUnit(
             choice(
                 "Why does sorted() put the Polish word \"żaba\" after \"zebra\", but also \"ćma\" after \"dom\"?",
                 listOf(
-                    "It sorts by Unicode numbers, and Polish letters have large numbers",
-                    "It sorts by word length",
-                    "It sorts randomly",
-                    "Polish letters always go last because of a bug",
+                    "It compares Unicode codes",
+                    "It compares word lengths",
+                    "It orders words randomly",
+                    "It compares the last letters",
                 ),
                 0,
-                "The default string sort compares character codes, not the Polish alphabet.",
+                "The default string sort compares character codes, not the Polish alphabet – and Polish letters have large codes.",
             ),
             choice(
                 "How many characters does the string \"źdźbło\" have according to len()?",
@@ -134,7 +134,7 @@ internal val module48 = CourseUnit(
             "u48l5", "Review: strings and Unicode",
             output("print(chr(ord(\"x\") + 1))", "y", "The code of x + 1 is the code of y."),
             output("print(len(\"ćma\"), len(\"ćma\".encode()))", "3 4", "ć takes 2 bytes, m and a one each."),
-            output("print(\"€\".encode())", "b'\\xe2\\x82\\xac'", "The euro sign takes as many as 3 bytes in UTF-8."),
+            output("print(len(\"€\".encode()))", "3", "The euro sign takes as many as 3 bytes in UTF-8."),
             output("print(\"Łódź\".casefold() == \"ŁÓDŹ\".casefold())", "True", "After casefold() both strings are the same."),
             choice(
                 "What will this code print?",

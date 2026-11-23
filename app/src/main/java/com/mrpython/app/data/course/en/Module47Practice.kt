@@ -85,7 +85,7 @@ internal val module47Practice = listOf(
             "The separator is a semicolon.",
         ),
         tiles(
-            "Remove the newline character from the row and split it at the commas",
+            "Remove the newline character from the row line, split it at the commas and store the result in the variable fields",
             listOf("fields", "=", "line.strip()", ".split(\",\")"),
             listOf(".join(\",\")", "line.split()"),
             "First strip(), then split(\",\").",
@@ -222,9 +222,9 @@ internal val module47Practice = listOf(
         ),
         choice(
             "What is each row returned by csv.DictReader?",
-            listOf("A dictionary: column name → value", "A list of numbers", "A tuple of strings", "A single string"),
+            listOf("A dictionary (dict)", "A list of strings (list)", "A tuple of strings (tuple)", "A single string (str)"),
             0,
-            "The keys come from the header row.",
+            "Each row is a dictionary: column name → value; the keys come from the header row.",
         ),
         choice(
             "What will this code print?",
@@ -254,7 +254,7 @@ internal val module47Practice = listOf(
             "The fieldnames attribute holds the header; keys and header don't exist.",
         ),
         tiles(
-            "Create a list of row dictionaries from the file f",
+            "Create a list of row dictionaries from the file f and store it in the variable rows",
             listOf("rows", "=", "list(", "csv.DictReader(", "f))"),
             listOf("csv.reader(", "dict("),
             "list() collects all the rows from DictReader.",
@@ -323,7 +323,7 @@ internal val module47Practice = listOf(
         ),
         choice(
             "What do you have to do to add up the values of a CSV column?",
-            listOf("Convert them to numbers, e.g. with int()", "Nothing – they are already numbers", "Use json.loads()", "Sort them"),
+            listOf("Convert them with int()", "Nothing – they are numbers", "Glue them with join()", "Sort them with sorted()"),
             0,
             "The csv module returns all fields as strings.",
         ),
@@ -342,13 +342,13 @@ internal val module47Practice = listOf(
             "A plain reader gives lists, so r[\"price\"] would raise an error.",
         ),
         tiles(
-            "Create a CSV reader with the separator ; for the file f",
+            "Create a CSV reader with the separator ; for the file f and store it in the variable r",
             listOf("r", "=", "csv.reader(", "f,", "delimiter=\";\")"),
             listOf("sep=\";\")", "csv.writer("),
             "We set the separator with the delimiter parameter.",
         ),
         tiles(
-            "Split the string line into fields at the commas",
+            "Split the string line at the commas and store the result in the variable fields",
             listOf("fields", "=", "line.split(", "\",\"", ")"),
             listOf("line.join(", "split(line"),
             "split(\",\") splits a string into a list of fields.",

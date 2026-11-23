@@ -21,9 +21,9 @@ internal val module48Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – ord() przyjmuje jeden znak", "Wypisze 97 98", "Wypisze 195", "Wypisze a"),
+            listOf("TypeError", "Wypisze 97 98", "Wypisze 195", "Wypisze a"),
             0,
-            "ord() działa tylko dla napisu o długości 1.",
+            "ord() przyjmuje dokładnie jeden znak, więc dla \"ab\" zgłasza TypeError.",
             code = "print(ord(\"ab\"))",
         ),
         choice(
@@ -228,7 +228,7 @@ internal val module48Practice = listOf(
             "Bajty mają metodę decode(), ale nie mają encode() ani casefold().",
         ),
         tiles(
-            "Zapisz w zmiennej t, czy napisy a i b są równe bez względu na wielkość liter",
+            "Zapisz w zmiennej t, czy napisy a i b są równe bez względu na wielkość liter (a po lewej stronie ==)",
             listOf("t", "=", "a.casefold()", "==", "b.casefold()"),
             listOf("!=", "a.upper"),
             "Porównujemy napisy po casefold() operatorem ==.",

@@ -6,8 +6,8 @@ internal val module25Intro = lesson(
     "u25l0", "Introduction: searching",
     explain(
         "Searching one by one",
-        "The simplest way to search: check the elements one after another. It works on any list, " +
-            "but when the value isn't there, you have to look at every element.",
+        "The simplest way to search: check the elements one after another – this is called linear search. " +
+            "It works on any list, but when the value isn't there, you have to look at every element.",
         code = "grades = [5, 3, 5, 4]\ncount = 0\nfor g in grades:\n    if g == 5:\n        count += 1\nprint(count)",
         output = "2",
     ),

@@ -23,13 +23,14 @@ internal val module1Intro = lesson(
     ),
     explain(
         "Liczby i działania",
-        "Liczb nie bierzemy w cudzysłów. Wtedy Python może na nich liczyć – `print()` wypisze wynik.",
+        "Liczb i działań nie bierzemy w cudzysłów – wtedy Python je oblicza, a `print()` wypisuje wynik. " +
+            "Wszystko w cudzysłowie to tekst: wypisze się dokładnie tak, jak go zapisano, nawet jeśli wygląda jak działanie.",
         code = "print(2 + 3)\nprint(\"2 + 3\")",
         output = "5\n2 + 3",
     ),
     explain(
         "Komentarze",
-        "Linia zaczynająca się od `#` to komentarz – notatka dla ludzi. Python ją pomija.",
+        "Znak `#` zaczyna komentarz – od niego do końca linii jest notatka dla ludzi. Python ją pomija.",
         code = "# to jest komentarz\nprint(\"Działa!\")",
         output = "Działa!",
     ),

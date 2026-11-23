@@ -41,18 +41,18 @@ internal val module20 = CourseUnit(
             choice(
                 "What happens after date(2025, 2, 30)?",
                 listOf(
-                    "ValueError – February doesn't have 30 days",
+                    "A ValueError",
                     "It creates the date March 2",
                     "It creates the date February 28",
-                    "Nothing",
+                    "A TypeError",
                 ),
                 0,
-                "Python checks whether such a day exists.",
+                "Python checks whether such a day exists – February has no 30th, so it's a ValueError.",
             ),
             tiles(
                 "Create the date May 1, 2025.",
                 listOf("d =", "date(", "2025, 5, 1", ")"),
-                listOf("1, 5, 2025", "date.today("),
+                listOf("1, 5, 2025", "2025, 1, 5"),
                 "The order is year, month, day.",
             ),
             output(
@@ -150,9 +150,9 @@ internal val module20 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – you can't compare a date with a string", "True", "False", "ValueError"),
+                listOf("TypeError", "True", "False", "ValueError"),
                 0,
-                "A date can only be compared with another date.",
+                "With < a date can only be compared with another date – with a string it's a TypeError.",
                 code = "from datetime import date\nprint(date(2025, 1, 1) < \"2026-01-01\")",
             ),
         ),
@@ -218,7 +218,7 @@ internal val module20 = CourseUnit(
             ),
             choice(
                 "Which method turns a date into a string in a format you choose?",
-                listOf("strftime", "weekday", "timedelta", "isoweek"),
+                listOf("strftime", "weekday", "timedelta", "days"),
                 0,
                 "strftime formats a date according to the given pattern.",
             ),

@@ -40,13 +40,13 @@ internal val module17Practice = listOf(
         ),
         choice(
             "Czym jest rekurencja?",
-            listOf("Wywołaniem funkcji przez samą siebie", "Pętlą while", "Funkcją bez parametrów", "Importem modułu"),
+            listOf("Funkcją wołającą samą siebie", "Pętlą while", "Funkcją bez parametrów", "Importem modułu"),
             0,
             "Funkcja rekurencyjna rozwiązuje problem, wywołując się dla mniejszych danych.",
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("Błąd RecursionError", "Wypisze 0", "Wypisze 3", "Wypisze 1"),
+            listOf("RecursionError", "Wypisze 0", "Wypisze 3", "Wypisze 1"),
             0,
             "n przyjmuje wartości 3, 1, -1, … i nigdy nie trafia w 0.",
             code = "def f(n):\n    if n == 0:\n        return 0\n    return f(n - 2)\n\nprint(f(3))",
@@ -157,7 +157,7 @@ internal val module17Practice = listOf(
             "n // 10 odcina ostatnią cyfrę.",
         ),
         fill(
-            "Uzupełnij przypadek bazowy, aby potega(2, 3) dała 8.",
+            "Uzupełnij, co zwraca warunek stopu, aby potega(2, 3) dała 8.",
             "def potega(a, n):\n    if n == 0:\n        return ____\n    return a * potega(a, n - 1)\n\nprint(potega(2, 3))",
             listOf("1", "0", "a"),
             "1",
@@ -171,7 +171,7 @@ internal val module17Practice = listOf(
             "Wyraz ciągu Fibonacciego to suma dwóch poprzednich.",
         ),
         tiles(
-            "Zapisz w wynik sumę ostatniej cyfry n i sumy cyfr reszty liczby",
+            "Zapisz w wynik: ostatnia cyfra n plus suma cyfr reszty liczby",
             listOf("wynik", "=", "n % 10", "+", "suma_cyfr(n // 10)"),
             listOf("n // 10", "suma_cyfr(n % 10)"),
             "n % 10 to ostatnia cyfra, a n // 10 to reszta liczby.",
@@ -292,8 +292,8 @@ internal val module17Practice = listOf(
         ),
         output("a, b = 0, 1\nfor _ in range(10):\n    a, b = b, a + b\nprint(a)", "55", "Pętla szybko liczy 10. wyraz ciągu Fibonacciego."),
         choice(
-            "Co wypisze ten kod?",
-            listOf("Błąd RecursionError", "koniec", "2000", "0"),
+            "Co się stanie po uruchomieniu?",
+            listOf("Błąd RecursionError", "Wypisze koniec", "Wypisze 2000", "Wypisze 0"),
             0,
             "2000 zagnieżdżonych wywołań przekracza limit około 1000.",
             code = "def f(n):\n    if n == 0:\n        return \"koniec\"\n    return f(n - 1)\n\nprint(f(2000))",
@@ -396,17 +396,17 @@ internal val module17Practice = listOf(
         choice(
             "Jakie dwa elementy musi mieć poprawna funkcja rekurencyjna?",
             listOf(
-                "Warunek stopu i wywołanie dla mniejszego problemu",
-                "Pętlę i return",
+                "Warunek stopu i wywołanie samej siebie",
+                "Pętlę i instrukcję return",
+                "Warunek stopu i pętlę while",
                 "Dwa parametry i print",
-                "Import i try",
             ),
             0,
-            "Bez nich rekurencja nigdy by się nie zakończyła albo nic by nie robiła.",
+            "Funkcja musi wołać samą siebie dla mniejszego problemu, aż dojdzie do warunku stopu. Pętla nie jest potrzebna.",
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd RecursionError", "Zwróci 0", "Zwróci 5", "Nic"),
+            listOf("Błąd RecursionError", "Zwróci 0", "Zwróci 5", "Zakończy się bez błędu"),
             0,
             "n rośnie, więc oddala się od warunku stopu n == 0.",
             code = "def f(n):\n    if n == 0:\n        return 0\n    return f(n + 1)\n\nf(5)",
@@ -433,7 +433,7 @@ internal val module17Practice = listOf(
             "n musi maleć, aby dojść do warunku stopu n == 0.",
         ),
         tiles(
-            "Zapisz w wynik iloczyn pierwszego elementu i iloczynu reszty listy",
+            "Zapisz w wynik: pierwszy element razy iloczyn reszty listy",
             listOf("wynik", "=", "lista[0]", "*", "iloczyn(lista[1:])"),
             listOf("iloczyn(lista)", "+"),
             "Pierwszy element razy wynik dla reszty listy.",

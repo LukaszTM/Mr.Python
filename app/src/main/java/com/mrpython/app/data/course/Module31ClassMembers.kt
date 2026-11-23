@@ -126,9 +126,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("AttributeError – właściwość nie ma settera", "x zmieni się na 10", "SyntaxError", "x zostanie 5, bez błędu"),
+                listOf("AttributeError", "x zmieni się na 10", "SyntaxError", "x zostanie 5, bez błędu"),
                 0,
-                "Sama @property daje tylko odczyt; przypisanie wymaga settera.",
+                "AttributeError, bo właściwość nie ma settera: sama @property daje tylko odczyt.",
                 code = "class K:\n    @property\n    def x(self):\n        return 5\n\nk = K()\nk.x = 10",
             ),
             fill(
@@ -145,9 +145,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "Co oznacza podkreślnik na początku nazwy self._saldo?",
-                listOf("Umowę: to atrybut wewnętrzny, nie zmieniaj go z zewnątrz", "Atrybut jest całkowicie niedostępny", "Atrybut jest stałą", "Błąd składni"),
+                listOf("Atrybut do użytku wewnętrznego", "Atrybut całkowicie niedostępny", "Atrybut, którego nie można zmienić", "Atrybut wspólny dla klasy"),
                 0,
-                "Python nie blokuje dostępu – podkreślnik to tylko umowa między programistami.",
+                "To umowa między programistami: atrybut wewnętrzny, nie zmieniaj go z zewnątrz. Python nie blokuje dostępu.",
             ),
             tiles(
                 "Wypisz właściwość pole obiektu p",
@@ -188,9 +188,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "Dlaczego getter wiek zwraca self._wiek, a nie self.wiek?",
-                listOf("self.wiek wywołałby getter w nieskończoność (RecursionError)", "self.wiek jest wolniejsze", "Tak wymaga składnia dekoratora", "Bez różnicy"),
+                listOf("self.wiek znów wywołałby ten getter", "self.wiek działa wolniej niż self._wiek", "Tak wymaga składnia dekoratora", "Bez różnicy, oba zapisy działają"),
                 0,
-                "Odczyt self.wiek w getterze wywołałby ten sam getter – to nieskończona rekurencja.",
+                "Odczyt self.wiek w getterze wywołałby ten sam getter w nieskończoność (RecursionError).",
             ),
             tiles(
                 "Ustaw właściwość wiek obiektu o na 30 (zadziała setter)",

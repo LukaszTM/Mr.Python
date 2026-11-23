@@ -25,9 +25,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Which name in this code breaks the PEP 8 rules?",
-            listOf("player – a class should be in CapWords", "name – a bad attribute name", "self – it should be this", "None of them"),
+            listOf("player", "name", "self", "None of them"),
             0,
-            "Classes are named in CapWords, e.g. Player.",
+            "player is a class name, and classes are named in CapWords, e.g. Player. The names name and self are fine.",
             code = "class player:\n    def __init__(self, name):\n        self.name = name",
         ),
         choice(
@@ -137,9 +137,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "Which quotes are conventionally used for a docstring?",
-            listOf("Triple quotes: \"\"\"...\"\"\"", "A single apostrophe", "The # character", "Angle brackets"),
+            listOf("Triple: \"\"\"...\"\"\"", "Single: '...'", "Double: \"...\"", "A hash: # ..."),
             0,
-            "Triple quotes also let you write a docstring across multiple lines.",
+            "By convention a docstring is written in triple quotes – they also let it span several lines. # starts a comment, not a docstring.",
         ),
         choice(
             "What will this code print?",
@@ -150,7 +150,7 @@ internal val module54Practice = listOf(
         ),
         choice(
             "How is a docstring different from a # comment?",
-            listOf("A docstring is available in the program through __doc__, a comment isn't", "A comment runs faster", "A docstring can't contain punctuation", "It isn't"),
+            listOf("A docstring goes into __doc__", "A comment runs faster", "A docstring can't contain punctuation", "It isn't"),
             0,
             "Python skips comments, but it stores the docstring in the object.",
         ),
@@ -225,7 +225,7 @@ internal val module54Practice = listOf(
         ),
         choice(
             "What breaks the DRY principle in this code?",
-            listOf("The same .strip().title() repeated three times", "Using print", "The names are too short", "There is no class"),
+            listOf("Repeated .strip().title()", "Using print", "The names are too short", "There is no class"),
             0,
             "A repeated operation is worth extracting into a function, e.g. fix_name.",
             code = "print(\"amy\".strip().title())\nprint(\"tom \".strip().title())\nprint(\" eva\".strip().title())",
@@ -318,15 +318,15 @@ internal val module54Practice = listOf(
             "An empty list is falsy, so not items is enough.",
         ),
         choice(
-            "Which line is more readable and works the same way?",
+            "Which line is more readable and works the same way for every color?",
             listOf("if color in (\"red\", \"green\", \"blue\"):", "if color == \"red\" or \"green\" or \"blue\":", "if color in \"redgreenblue\":", "if color == (\"red\", \"green\", \"blue\"):"),
             0,
-            "in checks membership in a tuple without repeating color ==.",
+            "in checks whether color is an element of the tuple. The version with or \"green\" is always true, and in \"redgreenblue\" also lets through e.g. \"e\".",
             code = "color = \"green\"\nif color == \"red\" or color == \"green\" or color == \"blue\":\n    print(\"RGB\")",
         ),
         choice(
             "Why is it better to write the rate TAX_RATE = 0.23 as a constant at the top of the file?",
-            listOf("When the rate changes, we fix it in one place", "Python requires constants at the top of the file", "The program runs faster that way", "Because constants can't be used in functions"),
+            listOf("A rate change is made in one place", "Python requires constants at the top of the file", "The program runs faster that way", "Because constants can't be used in functions"),
             0,
             "A constant is a single source of truth for the whole program.",
         ),
@@ -414,9 +414,9 @@ internal val module54Practice = listOf(
         ),
         choice(
             "What is the best way to simplify this function?",
-            listOf("Handle the special cases first with an early return", "Add another nested if", "Rename x to X", "Remove return 0"),
+            listOf("Use an early return", "Add another nested if", "Rename x to X", "Remove return 0"),
             0,
-            "An early exit flattens nested conditions.",
+            "An early exit (if x is None: return 0) handles the special case at the start and flattens the nested conditions.",
             code = "def f(x):\n    if x is not None:\n        if x > 0:\n            return x * 2\n    return 0",
         ),
         fill(

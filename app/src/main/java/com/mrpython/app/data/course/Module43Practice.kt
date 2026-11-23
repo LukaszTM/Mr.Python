@@ -57,8 +57,8 @@ internal val module43Practice = listOf(
             code = "def f():\n    z = 5\nf()\nprint(z)",
         ),
         choice(
-            "Co wypisze ten kod?",
-            listOf("UnboundLocalError", "3", "4", "None"),
+            "Co się stanie po uruchomieniu tego kodu?",
+            listOf("Błąd UnboundLocalError", "Globalny wynik zmieni się na 4", "Powstanie lokalny wynik równy 1", "Nic się nie stanie"),
             0,
             "Przypisanie w funkcji czyni wynik lokalnym, a += najpierw próbuje go odczytać.",
             code = "wynik = 3\ndef f():\n    wynik += 1\nf()",
@@ -85,7 +85,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Który zasięg odpowiada literze E w LEGB?",
-            listOf("Zasięg funkcji otaczającej", "Zasięg wyjątków", "Zasięg pliku", "Zasięg wbudowany"),
+            listOf("Funkcja otaczająca", "Obsługa wyjątków", "Cały plik", "Nazwy wbudowane"),
             0,
             "Enclosing to funkcja, wewnątrz której zdefiniowano bieżącą funkcję.",
         ),
@@ -134,7 +134,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("SyntaxError – brak zmiennej n w funkcji otaczającej", "Wypisze 1", "Wypisze 0", "Utworzy globalne n"),
+            listOf("Błąd SyntaxError", "Zmieni globalne n na 1", "Utworzy lokalne n równe 1", "Błąd UnboundLocalError"),
             0,
             "nonlocal wymaga zmiennej w funkcji otaczającej, a nie na poziomie modułu.",
             code = "n = 0\ndef f():\n    nonlocal n\n    n = 1\nf()",
@@ -167,7 +167,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Gdzie można użyć instrukcji nonlocal x?",
-            listOf("W funkcji zagnieżdżonej, gdy x istnieje w funkcji otaczającej", "Na poziomie modułu", "W dowolnym miejscu programu", "Tylko w pętli for"),
+            listOf("W funkcji zagnieżdżonej, gdy x istnieje w funkcji otaczającej", "Na poziomie modułu, gdy x jest zmienną globalną", "W dowolnej funkcji, nawet gdy x istnieje tylko globalnie", "Tylko w pętli for wewnątrz funkcji"),
             0,
             "nonlocal szuka x w funkcjach otaczających – bez nich jest SyntaxError.",
         ),
@@ -188,7 +188,7 @@ internal val module43Practice = listOf(
         output(
             "def prefiks(p):\n    def f(s):\n        return p + s\n    return f\nnie = prefiks(\"nie\")\nprint(nie(\"mądry\"))",
             "niemądry",
-            "Funkcja nie pamięta przedrostka „nie”.",
+            "Domknięcie zapisane w zmiennej nie pamięta przedrostek „nie”.",
         ),
         output(
             "def akumulator():\n    suma = 0\n    def dodaj(x):\n        nonlocal suma\n        suma += x\n        return suma\n    return dodaj\na = akumulator()\na(5)\nprint(a(10))",
@@ -222,13 +222,13 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Co jest potrzebne, aby powstało domknięcie?",
-            listOf("Funkcja wewnętrzna używająca zmiennej funkcji zewnętrznej", "Klasa z metodą __init__", "Zmienna globalna", "Instrukcja with"),
+            listOf("Funkcja wewnętrzna używająca zmiennej funkcji zewnętrznej", "Klasa z metodą __init__ zapisującą atrybuty", "Zmienna globalna zmieniana przez global", "Blok with, który zamyka zasób po użyciu"),
             0,
             "Funkcja wewnętrzna zabiera ze sobą zmienne zasięgu, w którym powstała.",
         ),
         choice(
-            "Co wypisze ten kod?",
-            listOf("UnboundLocalError", "1", "0", "None"),
+            "Co się stanie po uruchomieniu tego kodu?",
+            listOf("Błąd UnboundLocalError", "Wypisze 1", "Wypisze 0", "Błąd NameError"),
             0,
             "Bez nonlocal n += 1 traktuje n jako nową zmienną lokalną bez wartości.",
             code = "def licznik():\n    n = 0\n    def f():\n        n += 1\n        return n\n    return f\nprint(licznik()())",
@@ -310,7 +310,7 @@ internal val module43Practice = listOf(
         ),
         choice(
             "Dlaczego ten kod wypisuje [2, 2, 2]?",
-            listOf("Lambdy odczytują i dopiero przy wywołaniu, gdy i już wynosi 2", "range(3) zwraca same dwójki", "Lambda zawsze zwraca ostatni element", "To błąd Pythona"),
+            listOf("Lambdy odczytują i dopiero przy wywołaniu, gdy i już wynosi 2", "range(3) zwraca w tym miejscu same dwójki", "Lambda zawsze zwraca ostatni element listy", "Lambdy zapisały wartość i z chwili utworzenia"),
             0,
             "Domknięcie pamięta zmienną, a nie jej wartość z chwili utworzenia.",
             code = "fs = [lambda: i for i in range(3)]\nprint([f() for f in fs])",

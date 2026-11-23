@@ -18,7 +18,7 @@ internal val module23 = CourseUnit(
                 "Co robi next(it)?",
                 listOf(
                     "Zwraca kolejny element iteratora",
-                    "Zwraca pierwszy element listy",
+                    "Zawsze zwraca pierwszy element listy",
                     "Przewija iterator na początek",
                     "Zwraca liczbę elementów",
                 ),
@@ -75,13 +75,13 @@ internal val module23 = CourseUnit(
             choice(
                 "Czym różni się yield od return?",
                 listOf(
-                    "yield oddaje wartość i wstrzymuje funkcję – potem można ją wznowić",
-                    "yield kończy funkcję na zawsze",
-                    "yield wypisuje wartość na ekran",
-                    "Niczym",
+                    "yield wstrzymuje funkcję, a return ją kończy",
+                    "yield kończy funkcję, a return ją wstrzymuje",
+                    "yield wypisuje wartość, a return ją zwraca",
+                    "Niczym – to dwie nazwy tego samego",
                 ),
                 0,
-                "Generator pamięta swój stan między kolejnymi wartościami.",
+                "yield oddaje wartość i pauzuje funkcję – kolejne next() wznawia ją od tego miejsca. return kończy funkcję.",
             ),
             output(
                 "def kwadraty(n):\n    for i in range(n):\n        yield i * i\n\nprint(list(kwadraty(4)))",
@@ -123,13 +123,13 @@ internal val module23 = CourseUnit(
             choice(
                 "Czym różni się (x for x in a) od [x for x in a]?",
                 listOf(
-                    "Generator nie tworzy od razu całej listy – liczy na żądanie",
-                    "Nawiasy okrągłe tworzą krotkę",
-                    "Nie ma różnicy",
-                    "Generator działa tylko na liczbach",
+                    "Okrągłe tworzą generator, a nie listę",
+                    "Okrągłe tworzą krotkę, a nie listę",
+                    "Okrągłe działają tylko na liczbach",
+                    "Nie ma między nimi żadnej różnicy",
                 ),
                 0,
-                "Generator oszczędza pamięć, bo nie przechowuje wszystkich wartości.",
+                "(x for x in a) to wyrażenie generatorowe, a nie krotka: liczy wartości na żądanie i nie trzyma całej listy w pamięci.",
             ),
             output(
                 "slowa = [\"kot\", \"żyrafa\", \"pies\"]\nprint(max(len(s) for s in slowa))",
@@ -182,13 +182,13 @@ internal val module23 = CourseUnit(
             choice(
                 "Co się stanie po list(g), gdy g jest nieskończonym generatorem?",
                 listOf(
-                    "Program nigdy nie skończy (albo zabraknie pamięci)",
+                    "Program się nie skończy",
                     "Powstanie lista 10 elementów",
                     "Powstanie pusta lista",
                     "Zostanie zgłoszony StopIteration",
                 ),
                 0,
-                "list() próbuje pobrać wszystkie wartości, a tych nie ma końca.",
+                "list() próbuje pobrać wszystkie wartości, a tych nie ma końca – program działa, aż zabraknie pamięci.",
             ),
             fill(
                 "Uzupełnij warunek stopu, aby wypisać tylko 1, 2, 3.",

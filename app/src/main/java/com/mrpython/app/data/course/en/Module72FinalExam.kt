@@ -194,7 +194,7 @@ internal val module72 = CourseUnit(
             tiles(
                 "Define a class Cat that inherits from Animal",
                 listOf("class", "Cat", "(Animal)", ":"),
-                listOf("extends", "def"),
+                listOf("[Animal]", "def"),
                 "The base class goes in parentheses after the class name.",
             ),
         ),
@@ -229,9 +229,9 @@ internal val module72 = CourseUnit(
             ),
             choice(
                 "What is functools.lru_cache for?",
-                listOf("It remembers a function's results for the same arguments", "It deletes unused variables", "It speeds up for loops", "It saves results to a file"),
+                listOf("It remembers a function's results", "It deletes unused variables", "It speeds up every for loop", "It saves results to a file"),
                 0,
-                "Memoization makes a repeated call with the same arguments instant.",
+                "lru_cache keeps the result for each set of arguments in memory, so a repeated call with the same arguments computes nothing.",
             ),
             output(
                 "import re\nprint(re.findall(r\"\\d+\", \"a1b22c333\"))",

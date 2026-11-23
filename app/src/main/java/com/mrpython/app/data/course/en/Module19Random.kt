@@ -13,10 +13,10 @@ internal val module19 = CourseUnit(
             choice(
                 "What does random.randint(1, 6) return?",
                 listOf(
-                    "An integer from 1 to 6 (inclusive)",
+                    "An integer from 1 to 6",
                     "An integer from 1 to 5",
                     "A float from 1 to 6",
-                    "Always 6",
+                    "An integer from 0 to 6",
                 ),
                 0,
                 "randint includes both ends of the range – like rolling a die.",
@@ -29,10 +29,10 @@ internal val module19 = CourseUnit(
             choice(
                 "What does random.random() return?",
                 listOf(
-                    "A float from the range [0, 1)",
+                    "A float from 0 up to 1 (not 1)",
                     "The integer 0 or 1",
-                    "A number from 1 to 100",
-                    "A random string",
+                    "A float from 1 to 100",
+                    "An integer from 0 to 10",
                 ),
                 0,
                 "random() gives a fraction from 0 (inclusive) up to 1 (not including 1).",
@@ -73,13 +73,13 @@ internal val module19 = CourseUnit(
             choice(
                 "What does random.shuffle(my_list) do?",
                 listOf(
-                    "Shuffles the list's items in place and returns None",
+                    "Shuffles the list in place",
                     "Returns a new, sorted list",
                     "Removes a random item",
                     "Returns one random item",
                 ),
                 0,
-                "shuffle changes the order inside the list itself and returns nothing.",
+                "shuffle changes the order inside the list itself and returns None.",
             ),
             output(
                 "import random\nnumbers = [1, 2, 3, 4]\nrandom.shuffle(numbers)\nprint(sorted(numbers))",
@@ -130,13 +130,13 @@ internal val module19 = CourseUnit(
             choice(
                 "What happens after random.sample([1, 2], 5)?",
                 listOf(
-                    "ValueError – the sample is larger than the list",
+                    "A ValueError",
                     "It returns [1, 2]",
                     "It returns 5 items with repeats",
                     "It returns None",
                 ),
                 0,
-                "Without repeats you can't pick 5 items out of 2.",
+                "Without repeats you can't pick 5 items out of 2 – sample raises a ValueError.",
             ),
             choice(
                 "What happens after random.choice([])?",
@@ -158,7 +158,7 @@ internal val module19 = CourseUnit(
             choice(
                 "What is random.seed(42) for?",
                 listOf(
-                    "It sets the seed so the random results can be repeated",
+                    "It sets the random seed",
                     "It picks the number 42",
                     "It picks 42 random numbers",
                     "It turns randomness off forever",

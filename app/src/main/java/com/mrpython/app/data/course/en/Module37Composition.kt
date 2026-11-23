@@ -65,9 +65,9 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "What is delegation?",
-                listOf("Handing a task to an object that is part of our object", "Copying methods from the base class", "Deleting an object", "Calling super()"),
+                listOf("Handing work to one of its parts", "Copying methods from the base class", "Deleting an object", "Calling super()"),
                 0,
-                "The object hands the work over to one of its parts.",
+                "The object hands the work to an object that is part of it, e.g. Car to its engine.",
             ),
             output(
                 "class Library:\n    def __init__(self):\n        self.books = [\"Emma\", \"Dune\"]\n    def __len__(self):\n        return len(self.books)\n    def __contains__(self, t):\n        return t in self.books\n\nlib = Library()\nprint(len(lib), \"Emma\" in lib)",
@@ -88,12 +88,12 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "Why does Car.drive() call self.engine.start() instead of doing everything itself?",
-                listOf("Each class is responsible for its own job – Car hands the work to the engine", "Because Car can't have methods", "Because inheritance requires it", "To make the program run slower"),
+                listOf("Because each class has its own job", "Because Car can't have methods", "Because inheritance requires it", "So that Car inherits from Engine"),
                 0,
-                "Delegation splits responsibility between classes.",
+                "Car hands the work to its engine – delegation splits responsibility between classes. There is no inheritance here.",
             ),
             tiles(
-                "Start the engine of the car car and save the result in the variable r",
+                "Start the engine of the car stored in car and save the result in the variable r",
                 listOf("r", "=", "car.engine", ".start()"),
                 listOf("Engine", "super()"),
                 "The engine has the start method, so we call it through car.engine.",
@@ -138,7 +138,7 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "What does the rule \"composition over inheritance\" mean?",
-                listOf("When there is no \"is a\" relationship, it's better to build the object from parts", "Never use inheritance", "Every class must have an attribute holding an object", "Composition is faster"),
+                listOf("Without an \"is a\" relationship, build from parts", "Never use inheritance", "Every class must have an attribute holding an object", "Composition is faster"),
                 0,
                 "We use inheritance only when a class really is a kind of another class.",
             ),
@@ -149,9 +149,9 @@ internal val module37 = CourseUnit(
             ),
             choice(
                 "What problem does this version of the stack have?",
-                listOf("It inherits all the list methods, e.g. insert, which break the rules of a stack", "You can't create an object", "The push method doesn't work", "SyntaxError"),
+                listOf("It also has list methods, e.g. insert", "You can't create an object", "The push method doesn't work", "SyntaxError"),
                 0,
-                "A stack is not a list – it's better for it to have a list (composition).",
+                "The stack inherits all the list methods, and insert breaks the rules of a stack. A stack is not a list – it's better for it to have a list (composition).",
                 code = "class Stack(list):\n    def push(self, x):\n        self.append(x)\n\ns = Stack()\ns.push(1)\ns.insert(0, 5)",
             ),
         ),
@@ -191,7 +191,7 @@ internal val module37 = CourseUnit(
                 "We change an attribute of an object that is part of the car.",
             ),
             tiles(
-                "Add the object Player(\"Lily\") to the players list of the team team",
+                "Add the object Player(\"Lily\") to the players list of the team stored in team",
                 listOf("team.players", ".append(", "Player(\"Lily\")", ")"),
                 listOf("team.append(", "Team("),
                 "The player goes into the list that is an attribute of the team.",

@@ -7,21 +7,21 @@ internal val module10Practice = listOf(
         "u10l1",
         choice(
             "What error does this code raise?",
-            listOf("ValueError", "TypeError", "ZeroDivisionError", "None – x will equal 3"),
+            listOf("ValueError", "TypeError", "ZeroDivisionError", "No error – x will equal 3"),
             0,
             "int() won't convert a string with a decimal point to a whole number.",
             code = "x = int(\"3.5\")",
         ),
         choice(
             "What error does this code raise?",
-            listOf("IndexError", "KeyError", "ValueError", "None"),
+            listOf("IndexError", "KeyError", "ValueError", "No error"),
             0,
             "The list has indexes 0–2, so index 3 is out of range.",
             code = "numbers = [1, 2, 3]\nprint(numbers[3])",
         ),
         choice(
             "What error does this code raise?",
-            listOf("NameError", "ValueError", "SyntaxError", "None"),
+            listOf("NameError", "ValueError", "SyntaxError", "No error"),
             0,
             "The variable result was never created.",
             code = "print(result)",
@@ -35,23 +35,23 @@ internal val module10Practice = listOf(
         ),
         choice(
             "What error does this code raise?",
-            listOf("KeyError", "IndexError", "NameError", "None"),
+            listOf("KeyError", "IndexError", "NameError", "No error"),
             0,
             "The dictionary has no key \"Kate\".",
             code = "grades = {\"Amy\": 5}\nprint(grades[\"Kate\"])",
         ),
         choice(
             "What error does this code raise?",
-            listOf("TypeError", "ValueError", "SyntaxError", "None – it prints age: 5"),
+            listOf("TypeError", "ValueError", "SyntaxError", "No error – it prints age: 5"),
             0,
             "You can't add a string to a number.",
             code = "print(\"age: \" + 5)",
         ),
         choice(
             "What error does this code raise?",
-            listOf("SyntaxError – a parenthesis is missing", "NameError", "ValueError", "None"),
+            listOf("SyntaxError", "NameError", "ValueError", "No error"),
             0,
-            "An unclosed parenthesis is a syntax error.",
+            "The closing parenthesis is missing – an unclosed parenthesis is a syntax error (SyntaxError).",
             code = "print(\"hi\"",
         ),
         choice(
@@ -67,7 +67,7 @@ internal val module10Practice = listOf(
             "Python doesn't know the name pirnt.",
         ),
         tiles(
-            "Fix the code: convert the string \"12\" to a number and add 1 to it",
+            "Convert the string \"12\" to a number, add 1 to it, and print the result",
             listOf("print(", "int(\"12\")", "+", "1", ")"),
             listOf("\"12\"", "str(1)"),
             "First int(), then adding the numbers.",
@@ -137,9 +137,9 @@ internal val module10Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("A NameError stops the program – except only catches ValueError", "It prints error", "It prints x", "Nothing"),
+            listOf("A NameError", "It prints error", "It prints x", "Nothing"),
             0,
-            "except catches only the kind of error it names.",
+            "x doesn't exist, so there's a NameError, but except only catches ValueError – the program stops.",
             code = "try:\n    print(x)\nexcept ValueError:\n    print(\"error\")",
         ),
         choice(

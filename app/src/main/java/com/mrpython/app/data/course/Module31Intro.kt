@@ -11,7 +11,8 @@ internal val module31Intro = lesson(
     ),
     explain(
         "@classmethod",
-        "Metoda z dekoratorem `@classmethod` dostaje klasę w parametrze `cls` zamiast obiektu. " +
+        "Linia z `@` tuż nad `def` to dekorator – zmienia działanie metody pod spodem. Metoda z dekoratorem " +
+            "`@classmethod` dostaje klasę w parametrze `cls` zamiast obiektu. " +
             "Często służy jako alternatywny konstruktor: tworzy obiekt w inny sposób, np. z napisu.",
         code = "class Punkt:\n    def __init__(self, x, y):\n        self.x, self.y = x, y\n    @classmethod\n    def zero(cls):\n        return cls(0, 0)\n\nprint(Punkt.zero().x)",
         output = "0",

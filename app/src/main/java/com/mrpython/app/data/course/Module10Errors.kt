@@ -47,9 +47,9 @@ internal val module10 = CourseUnit(
             ),
             choice(
                 "Co jest nie tak z tym kodem?",
-                listOf("Brakuje dwukropka – SyntaxError", "Brakuje nawiasu", "Nic", "Zła nazwa funkcji"),
+                listOf("Brakuje dwukropka", "Brakuje nawiasu", "Nic", "Zła nazwa funkcji"),
                 0,
-                "Błąd składni (SyntaxError) Python wykrywa, zanim uruchomi program.",
+                "Po if True brakuje dwukropka. Taki błąd składni (SyntaxError) Python wykrywa, zanim uruchomi program.",
                 code = "if True\n    print(\"tak\")",
             ),
         ),

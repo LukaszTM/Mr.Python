@@ -30,7 +30,9 @@ internal val module43Cards = listOf(
         explain(
             "Gdzie działa nonlocal",
             "`nonlocal` działa tylko w funkcji zagnieżdżonej, gdy zmienna istnieje w funkcji " +
-                "otaczającej – inaczej jest `SyntaxError`. `global` może nawet utworzyć nową zmienną modułu.",
+                "otaczającej – inaczej jest `SyntaxError`. `global` może nawet utworzyć nową zmienną modułu. " +
+                "Używaj go oszczędnie: gdy wiele funkcji zmienia te same dane, trudno śledzić, kto i kiedy " +
+                "je zmienił. Zwykle lepiej przekazać wartość parametrem i zwrócić wynik przez `return`.",
             code = "def f():\n    global nowa\n    nowa = \"jestem\"\nf()\nprint(nowa)",
             output = "jestem",
         ),

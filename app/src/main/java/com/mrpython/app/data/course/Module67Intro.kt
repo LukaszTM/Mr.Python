@@ -25,8 +25,8 @@ internal val module67Intro = lesson(
     ),
     explain(
         "Generatory",
-        "Funkcja z `yield` to generator – oddaje wartości po jednej, na żądanie. `next(gen, None)` " +
-            "pobiera następną albo zwraca `None`, gdy się skończą.",
+        "Funkcja z `yield` to funkcja generatora: jej wywołanie daje generator, który oddaje wartości " +
+            "po jednej, na żądanie. `next(gen, None)` pobiera następną albo zwraca `None`, gdy się skończą.",
         code = "def parzyste(n):\n    for i in range(n):\n        if i % 2 == 0:\n            yield i\nprint(list(parzyste(7)))",
         output = "[0, 2, 4, 6]",
     ),

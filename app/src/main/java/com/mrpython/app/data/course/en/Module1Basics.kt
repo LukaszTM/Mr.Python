@@ -12,9 +12,9 @@ internal val module1 = CourseUnit(
             "u1l1", "Hello, world!",
             choice(
                 "Which statement prints text on the screen?",
-                listOf("print(\"Hi\")", "echo \"Hi\"", "console.log(\"Hi\")", "printf Hi"),
+                listOf("print(\"Hi\")", "Print(\"Hi\")", "print \"Hi\"", "print(Hi)"),
                 0,
-                "In Python, you print text with the print() function.",
+                "print is written in lowercase, with parentheses, and the string goes in quotes.",
             ),
             output(
                 "print(\"Hello, world!\")",
@@ -24,13 +24,13 @@ internal val module1 = CourseUnit(
             tiles(
                 "Arrange the code to print: Hey",
                 listOf("print(", "\"Hey\"", ")"),
-                listOf("echo", "Hey"),
+                listOf("Print(", "Hey"),
                 "The string has to be in quotes and inside the parentheses of print.",
             ),
             fill(
                 "Fill in the blank to print the word Python.",
                 "____(\"Python\")",
-                listOf("print", "write", "say"),
+                listOf("print", "Print", "write"),
                 "print",
                 "The function that prints text is print.",
             ),
@@ -41,7 +41,7 @@ internal val module1 = CourseUnit(
             ),
             choice(
                 "What is missing from this code?",
-                listOf("A closing parenthesis )", "A semicolon at the end", "The word def", "Nothing – the code is correct"),
+                listOf("A closing parenthesis )", "An opening parenthesis (", "A quote at the end", "Nothing – the code is correct"),
                 0,
                 "Every opening parenthesis has to be closed.",
                 code = "print(\"Hey\"",
@@ -57,13 +57,13 @@ internal val module1 = CourseUnit(
             choice(
                 "What does the # character mean in Python?",
                 listOf(
-                    "The start of a comment – Python skips it",
+                    "The start of a comment",
                     "A number",
                     "The end of the program",
                     "Multiplication",
                 ),
                 0,
-                "Everything from # to the end of the line is a comment for people, not for the computer.",
+                "From # to the end of the line is a comment – a note for people that Python skips.",
             ),
             output(
                 "# print(\"A\")\nprint(\"B\")",
@@ -71,8 +71,8 @@ internal val module1 = CourseUnit(
                 "The first line is a comment, so it doesn't run.",
             ),
             choice(
-                "Which way of writing a string is correct?",
-                listOf("\"text\" and 'text' – both", "Only \"text\"", "Only 'text'", "«text»"),
+                "Are both ways of writing a string correct: \"text\" and 'text'?",
+                listOf("Yes, both", "Only \"text\"", "Only 'text'", "No, neither"),
                 0,
                 "Python accepts both double quotes and single quotes.",
             ),
@@ -108,7 +108,7 @@ internal val module1 = CourseUnit(
             output("print(\"Anna\\nhas a cat\")", "Anna\nhas a cat", "\\n inside a string means: go to a new line."),
             choice(
                 "What does \\t mean in a string?",
-                listOf("A tab (a wide gap)", "A new line", "The letter t", "The end of the string"),
+                listOf("A tab", "A new line", "The letter t", "The end of the string"),
                 0,
                 "\\t inserts a tab character, which is a wide gap.",
             ),
@@ -121,7 +121,7 @@ internal val module1 = CourseUnit(
                 "end",
                 "The end parameter sets what print adds at the end instead of a new line.",
             ),
-            output("print(\"Price:\", 5, \"dollars\")", "Price: 5 dollars", "print() can print strings and numbers together."),
+            output("print(\"Price:\", 5, \"dollars\")", "Price: 5 dollars", "print() prints strings and numbers together and puts a space between the arguments."),
             choice(
                 "How many lines does this code print?",
                 listOf("3", "1", "2", "0"),
@@ -157,7 +157,7 @@ internal val module1 = CourseUnit(
             tiles(
                 "Arrange the code to print: Hey, Emma!",
                 listOf("print(", "\"Hey, \"", "+", "\"Emma!\"", ")"),
-                listOf("-", "echo"),
+                listOf("-", "*"),
                 "+ joins two strings into one.",
             ),
             output("print(\"1\" + \"2\")\nprint(1 + 2)", "12\n3", "Strings are joined, numbers are added."),

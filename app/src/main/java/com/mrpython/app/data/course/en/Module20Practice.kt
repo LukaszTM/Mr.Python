@@ -113,9 +113,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – two dates can't be added", "It prints 4050-02-03", "It prints 2025-01-03", "It prints 1"),
+            listOf("A TypeError", "It prints 4050-02-03", "It prints 2025-01-03", "It prints 1"),
             0,
-            "Dates can be subtracted, but only a timedelta can be added to a date.",
+            "Two dates can't be added (TypeError) – only a timedelta can be added to a date.",
             code = "from datetime import date\nprint(date(2025, 1, 1) + date(2025, 1, 2))",
         ),
         choice(
@@ -279,9 +279,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "What does %d mean in strftime?",
-            listOf("The day of the month (two digits)", "The day of the week", "The number of days in the month", "The year"),
+            listOf("The day of the month", "The day of the week", "The number of days in the month", "The year"),
             0,
-            "%d is the day of the month, e.g. 05.",
+            "%d is the day of the month, always as two digits, e.g. 05.",
         ),
         choice(
             "What type does d.strftime(\"%Y\") return?",
@@ -375,9 +375,9 @@ internal val module20Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("ValueError – April has 30 days", "It prints 2025-05-01", "It prints 2025-04-31", "It prints 2025-04-30"),
+            listOf("A ValueError", "It prints 2025-05-01", "It prints 2025-04-31", "It prints 2025-04-30"),
             0,
-            "date checks whether the given day exists.",
+            "date checks whether the given day exists – April has 30 days, so it's a ValueError.",
             code = "from datetime import date\nprint(date(2025, 4, 31))",
         ),
         fill(
@@ -395,7 +395,7 @@ internal val module20Practice = listOf(
             "The full year is needed at the end – %Y.",
         ),
         tiles(
-            "Store the date d moved by 100 days in new_date.",
+            "Store the date d moved forward by 100 days in the variable new_date.",
             listOf("new_date =", "d +", "timedelta(", "days=100", ")"),
             listOf("d.day +", "date("),
             "We add timedelta(days=100) to the date.",

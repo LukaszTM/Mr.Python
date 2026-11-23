@@ -19,11 +19,22 @@ internal val module65Cards = listOf(
         ),
     ),
     cards(
+        "u65l2",
+        explain(
+            "Jak szybko sortuje sorted()",
+            "Sortowanie bąbelkowe porównuje elementy parami w pętli w pętli – to O(n²). Wbudowane `sorted()` i `sort()` " +
+                "używają algorytmu Timsort, który działa w O(n log n). Dla 1024 elementów n² to ponad milion kroków, " +
+                "a n log n (log₂ 1024 = 10) – około 10 tysięcy.",
+            code = "n = 1024\nprint(n * n, n * 10)",
+            output = "1048576 10240",
+        ),
+    ),
+    cards(
         "u65l3",
         explain(
             "Logarytm: math.log2",
-            "`math.log2(n)` mówi, ile razy trzeba pomnożyć 2, by dostać `n` – czyli ile razy można " +
-                "dzielić na pół. To liczba kroków algorytmu O(log n), np. wyszukiwania binarnego.",
+            "`math.log2(n)` mówi, do jakiej potęgi trzeba podnieść 2, by dostać `n` – czyli ile razy można " +
+                "dzielić `n` na pół, zanim zostanie 1. To liczba kroków algorytmu O(log n), np. wyszukiwania binarnego.",
             code = "import math\nprint(math.log2(16))\nprint(math.ceil(math.log2(1000)))",
             output = "4.0\n10",
         ),
@@ -53,6 +64,24 @@ internal val module65Cards = listOf(
                 "użyj `math.factorial(n)`.",
             code = "import math\nprint(math.factorial(5))\nprint(math.factorial(5) // math.factorial(3))",
             output = "120\n20",
+        ),
+    ),
+    cards(
+        "u65l7",
+        explain(
+            "Dziel i zwyciężaj: scalanie",
+            "Sortowanie przez scalanie dzieli listę na dwie połowy, każdą sortuje rekurencyjnie, a potem scala je w jedną: " +
+                "z początków obu posortowanych list bierze mniejszy element. To zasada „dziel i zwyciężaj”: podziel problem " +
+                "na mniejsze części, rozwiąż je i połącz wyniki. Takie sortowanie działa w O(n log n).",
+            code = "a, b = [1, 5], [2, 9]\nw = []\nwhile a and b:\n    w.append((a if a[0] <= b[0] else b).pop(0))\nprint(w + a + b)",
+            output = "[1, 2, 5, 9]",
+        ),
+        explain(
+            "Quicksort: element osiowy",
+            "Quicksort też dzieli i zwycięża: wybiera element osiowy (np. pierwszy), dzieli resztę na elementy mniejsze " +
+                "i nie mniejsze od niego, sortuje obie części rekurencyjnie i skleja: mniejsze + [osiowy] + większe.",
+            code = "t = [3, 6, 1, 8, 2]\np = t[0]\nprint([x for x in t[1:] if x < p], p, [x for x in t[1:] if x >= p])",
+            output = "[1, 2] 3 [6, 8]",
         ),
     ),
 )

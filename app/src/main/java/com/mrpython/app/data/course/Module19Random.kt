@@ -12,10 +12,10 @@ internal val module19 = CourseUnit(
             choice(
                 "Co zwraca random.randint(1, 6)?",
                 listOf(
-                    "Liczbę całkowitą od 1 do 6 (włącznie)",
+                    "Liczbę całkowitą od 1 do 6",
                     "Liczbę całkowitą od 1 do 5",
                     "Liczbę float od 1 do 6",
-                    "Zawsze 6",
+                    "Liczbę całkowitą od 0 do 6",
                 ),
                 0,
                 "randint obejmuje oba końce przedziału – jak rzut kostką.",
@@ -28,10 +28,10 @@ internal val module19 = CourseUnit(
             choice(
                 "Co zwraca random.random()?",
                 listOf(
-                    "Liczbę float z przedziału [0, 1)",
+                    "Liczbę float od 0 do 1 (bez 1)",
                     "Liczbę całkowitą 0 lub 1",
-                    "Liczbę od 1 do 100",
-                    "Losowy napis",
+                    "Liczbę float od 1 do 100",
+                    "Liczbę całkowitą od 0 do 10",
                 ),
                 0,
                 "random() daje ułamek od 0 (włącznie) do 1 (bez 1).",
@@ -72,13 +72,13 @@ internal val module19 = CourseUnit(
             choice(
                 "Co robi random.shuffle(lista)?",
                 listOf(
-                    "Miesza elementy listy w miejscu i zwraca None",
+                    "Miesza listę w miejscu",
                     "Zwraca nową, posortowaną listę",
                     "Usuwa losowy element",
                     "Zwraca jeden losowy element",
                 ),
                 0,
-                "shuffle zmienia kolejność w samej liście, niczego nie zwraca.",
+                "shuffle zmienia kolejność w samej liście i zwraca None.",
             ),
             output(
                 "import random\nliczby = [1, 2, 3, 4]\nrandom.shuffle(liczby)\nprint(sorted(liczby))",
@@ -129,13 +129,13 @@ internal val module19 = CourseUnit(
             choice(
                 "Co się stanie po random.sample([1, 2], 5)?",
                 listOf(
-                    "ValueError – próbka większa niż lista",
+                    "Błąd ValueError",
                     "Zwróci [1, 2]",
                     "Zwróci 5 elementów z powtórzeniami",
                     "Zwróci None",
                 ),
                 0,
-                "Bez powtórzeń nie da się wybrać 5 elementów z 2.",
+                "Bez powtórzeń nie da się wybrać 5 elementów z 2 – sample zgłasza ValueError.",
             ),
             choice(
                 "Co się stanie po random.choice([])?",
@@ -157,7 +157,7 @@ internal val module19 = CourseUnit(
             choice(
                 "Do czego służy random.seed(42)?",
                 listOf(
-                    "Ustawia ziarno, by losowania dało się powtórzyć",
+                    "Ustawia ziarno losowania",
                     "Losuje liczbę 42",
                     "Losuje 42 liczby",
                     "Wyłącza losowość na zawsze",

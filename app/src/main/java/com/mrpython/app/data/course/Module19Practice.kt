@@ -46,17 +46,17 @@ internal val module19Practice = listOf(
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
-                "ValueError – początek przedziału jest większy niż koniec",
+                "Błąd ValueError",
                 "Wylosuje liczbę od 1 do 5",
                 "Zawsze wypisze 5",
                 "Zawsze wypisze 1",
             ),
             0,
-            "W randint(a, b) musi być a ≤ b – inaczej przedział jest pusty.",
+            "W randint(a, b) musi być a ≤ b – przy randint(5, 1) Python zgłasza ValueError.",
             code = "import random\nprint(random.randint(5, 1))",
         ),
         fill(
-            "Uzupełnij, aby wylosować ułamek z przedziału [0, 1).",
+            "Uzupełnij, aby wylosować ułamek od 0 do 1 (bez 1).",
             "import random\nx = random.____()\nprint(0 <= x < 1)",
             listOf("random", "randint", "choice"),
             "random",
@@ -70,7 +70,7 @@ internal val module19Practice = listOf(
             "randint obejmuje oba końce, więc 1–6 to dokładnie ścianki kostki.",
         ),
         tiles(
-            "Wylosuj ułamek z przedziału [0, 1) do zmiennej u.",
+            "Wylosuj ułamek od 0 do 1 (bez 1) do zmiennej u.",
             listOf("u =", "random.random(", ")"),
             listOf("random.randint(", "0, 1"),
             "random() nie przyjmuje argumentów.",
@@ -123,7 +123,7 @@ internal val module19Practice = listOf(
         choice(
             "Co zwraca random.sample(lista, 3)?",
             listOf(
-                "Nową listę 3 różnych elementów z listy",
+                "Listę 3 różnych elementów",
                 "Trzeci element listy",
                 "Listę pomieszaną w miejscu",
                 "Jeden element powtórzony 3 razy",
@@ -315,7 +315,7 @@ internal val module19Practice = listOf(
         ),
         choice(
             "Co zwraca random.choice(\"abc\")?",
-            listOf("Jedną losową literę napisu", "Listę liter", "Cały napis pomieszany", "None"),
+            listOf("Losową literę", "Listę liter", "Cały napis pomieszany", "None"),
             0,
             "Napis jest sekwencją liter, więc choice wybiera jedną z nich.",
         ),
@@ -343,7 +343,7 @@ internal val module19Practice = listOf(
         tiles(
             "Zaimportuj z modułu random funkcje choice i shuffle.",
             listOf("from", "random", "import", "choice,", "shuffle"),
-            listOf("as", "include"),
+            listOf("as", "and"),
             "Kilka nazw importujemy po przecinku.",
         ),
         tiles(

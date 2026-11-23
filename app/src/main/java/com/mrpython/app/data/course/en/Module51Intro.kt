@@ -36,7 +36,7 @@ internal val module51Intro = lesson(
         "Alias or copy?",
         "`b = a` doesn't copy the list – it's a second name for the same object. `a[:]`, `list(a)` " +
             "and `a.copy()` give you a copy, but a shallow one: the inner lists stay shared. " +
-            "`copy.deepcopy()` makes a full copy.",
+            "`copy.deepcopy()` makes a full (deep) copy.",
         code = "a = [1, 2]\nb = a\nc = a[:]\nb.append(3)\nprint(a, c)",
         output = "[1, 2, 3] [1, 2]",
     ),

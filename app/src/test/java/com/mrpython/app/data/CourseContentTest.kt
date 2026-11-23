@@ -84,4 +84,18 @@ class CourseContentTest {
             }
         }
     }
+
+    @Test
+    fun tilesAcceptAnEquivalentOrder() {
+        val swapped = CoursePl.units.flatMap { it.lessons }.flatMap { it.pool }
+            .filterIsInstance<ArrangeTiles>().filter { it.alternatives.isNotEmpty() }
+        assertTrue(swapped.isNotEmpty())
+        swapped.forEach { exercise ->
+            exercise.alternatives.forEach { alternative ->
+                // Same tiles in another order, and the checker takes it.
+                assertEquals(exercise.id, exercise.solution.sorted(), alternative.sorted())
+                assertTrue(exercise.id, AnswerChecker.isCorrect(exercise, Answer.Tiles(alternative)))
+            }
+        }
+    }
 }

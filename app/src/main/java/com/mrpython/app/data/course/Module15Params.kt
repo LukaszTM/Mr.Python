@@ -54,7 +54,7 @@ internal val module15 = CourseUnit(
                 "Wartość domyślną podajemy po znaku = w nagłówku funkcji.",
             ),
             tiles(
-                "Zdefiniuj funkcję opis z parametrem wiek o domyślnej wartości 18",
+                "Zdefiniuj funkcję opis z parametrami imie oraz wiek o domyślnej wartości 18",
                 listOf("def", "opis(", "imie,", "wiek=18", "):"),
                 listOf("wiek==18", "18=wiek"),
                 "Wartość domyślną zapisujemy jako nazwa=wartość.",

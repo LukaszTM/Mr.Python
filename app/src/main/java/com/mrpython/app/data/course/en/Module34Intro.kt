@@ -34,9 +34,9 @@ internal val module34Intro = lesson(
     ),
     choice(
         "Which method does @dataclass NOT create on its own (without parameters)?",
-        listOf("__lt__ for sorting", "__init__", "__repr__", "__eq__"),
+        listOf("__lt__", "__init__", "__repr__", "__eq__"),
         0,
-        "The < and > comparisons only appear with order=True.",
+        "__lt__ is the < comparison needed for sorting; it only appears with order=True.",
     ),
     output(
         "from dataclasses import dataclass\n\n@dataclass\nclass Cat:\n    name: str\n    age: int = 1\n\nprint(Cat(\"Whiskers\"))",

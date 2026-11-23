@@ -23,10 +23,11 @@ internal val module48Cards = listOf(
         "u48l2",
         explain(
             "Porównywanie napisów",
-            "Napisy porównujemy znak po znaku według ich kodów. Dlatego \"ą\" (261) jest większe niż " +
-                "\"z\" (122), a wielkie litery są „mniejsze” od małych – trafiają w sortowaniu na początek.",
-            code = "print(\"ą\" > \"z\", \"B\" < \"a\")\nprint(sorted([\"zebra\", \"żaba\", \"Ala\"]))",
-            output = "True True\n['Ala', 'zebra', 'żaba']",
+            "Polskie litery mają duże kody, np. ą 261, ó 243, ę 281, ł 322, ż 380. Napisy porównujemy " +
+                "znak po znaku według kodów. Dlatego \"ą\" (261) jest większe niż \"z\" (122), a wielkie " +
+                "litery są „mniejsze” od małych – trafiają w sortowaniu na początek.",
+            code = "print(ord(\"ę\"), ord(\"ł\"), ord(\"ż\"))\nprint(\"ą\" > \"z\", \"B\" < \"a\")\nprint(sorted([\"zebra\", \"żaba\", \"Ala\"]))",
+            output = "281 322 380\nTrue True\n['Ala', 'zebra', 'żaba']",
         ),
     ),
     cards(
@@ -34,9 +35,10 @@ internal val module48Cards = listOf(
         explain(
             "Jak wyglądają bajty",
             "Bajty wypisują się z literą `b` przed cudzysłowem. Znaki ASCII widać normalnie, a inne " +
-                "bajty jako `\\x` i dwie cyfry szesnastkowe. Typ wyniku `encode()` to `bytes`.",
-            code = "print(\"ał\".encode())\nprint(type(b\"a\").__name__)",
-            output = "b'a\\xc5\\x82'\nbytes",
+                "bajty jako `\\x` i dwie cyfry szesnastkowe. Typ wyniku `encode()` to `bytes`. Polska litera " +
+                "zajmuje w UTF-8 2 bajty, ale niektóre znaki więcej – np. znak euro € aż 3.",
+            code = "print(\"ał\".encode())\nprint(\"ę\".encode(), \"ó\".encode(), \"ż\".encode())\nprint(type(b\"a\").__name__)",
+            output = "b'a\\xc5\\x82'\nb'\\xc4\\x99' b'\\xc3\\xb3' b'\\xc5\\xbc'\nbytes",
         ),
         explain(
             "Kodowanie ascii",
@@ -51,7 +53,8 @@ internal val module48Cards = listOf(
         explain(
             "islower i pusty napis",
             "`islower()` sprawdza, czy wszystkie litery są małe. `isupper()` i `islower()` patrzą tylko " +
-                "na litery – cyfry im nie przeszkadzają. Pusty napis daje `False` we wszystkich metodach `is…`.",
+                "na litery – cyfry im nie przeszkadzają. Dla pustego napisu `isdigit()`, `isalpha()`, `isalnum()`, " +
+                "`isupper()` i `islower()` dają `False`.",
             code = "print(\"łąka\".islower(), \"X1\".isupper())\nprint(\"\".isdigit())",
             output = "True True\nFalse",
         ),

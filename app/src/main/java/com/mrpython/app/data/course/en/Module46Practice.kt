@@ -53,14 +53,14 @@ internal val module46Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("TypeError – a set is not a JSON type", "[1, 2]", "{\"s\": [1, 2]}", "null"),
+            listOf("TypeError", "[1, 2]", "{\"s\": [1, 2]}", "null"),
             0,
             "A set can't be written as JSON without converting it to a list.",
             code = "import json\nprint(json.dumps({\"s\": {1, 2}}))",
         ),
         choice(
             "How is the Python value None written in JSON?",
-            listOf("null", "None", "nil", "\"\""),
+            listOf("null", "None", "none", "\"\""),
             0,
             "JSON uses the word null.",
         ),
@@ -74,9 +74,9 @@ internal val module46Practice = listOf(
         fill(
             "Fill in the module so the code prints {\"ok\": true}.",
             "import ____\nprint(json.dumps({\"ok\": True}))",
-            listOf("json", "csv", "re"),
+            listOf("json", "JSON", "re"),
             "json",
-            "The dumps function comes from the json module; without importing it you get a NameError.",
+            "The module is called json, in lowercase; there is no JSON module, and after import re the name json is unknown (NameError).",
         ),
         tiles(
             "Print the dictionary d as JSON text",
@@ -135,7 +135,7 @@ internal val module46Practice = listOf(
         ),
         choice(
             "What will this code print?",
-            listOf("JSONDecodeError – True is not valid JSON", "True", "[True]", "None"),
+            listOf("JSONDecodeError", "True", "[True]", "None"),
             0,
             "In JSON we write true in lowercase.",
             code = "import json\nprint(json.loads(\"[True]\"))",
@@ -217,9 +217,9 @@ internal val module46Practice = listOf(
             "ensure_ascii=False keeps accented letters.",
         ),
         output(
-            "import json\nt = json.dumps({\"a\": 1}, indent=2)\nprint(len(t.splitlines()))",
-            "3",
-            "With indentation the JSON takes 3 lines: {, \"a\": 1 and }.",
+            "import json\nt = json.dumps({\"a\": 1}, indent=2)\nprint(t.count(\"\\n\"))",
+            "2",
+            "With indentation the JSON takes 3 lines: {, \"a\": 1 and }, so it contains 2 newline characters.",
         ),
         output(
             "import json\nd = {\"team\": [{\"pts\": 3}, {\"pts\": 7}]}\nprint(max(x[\"pts\"] for x in d[\"team\"]))",
@@ -235,7 +235,7 @@ internal val module46Practice = listOf(
         ),
         choice(
             "What is ensure_ascii=False used for?",
-            listOf("So that characters like é or ñ aren't replaced with \\u codes", "To sort the keys", "To add indentation", "To make the JSON half as long"),
+            listOf("To keep é and ñ as they are", "To sort the keys", "To add indentation", "To make the JSON half as long"),
             0,
             "By default, non-ASCII characters are replaced with \\u sequences.",
         ),
@@ -260,7 +260,7 @@ internal val module46Practice = listOf(
             "The indent parameter sets the indentation.",
         ),
         tiles(
-            "Convert the dictionary d to JSON with readable accented letters",
+            "Convert the dictionary d to JSON with readable accented letters and store it in the variable t",
             listOf("t", "=", "json.dumps(", "d,", "ensure_ascii=False)"),
             listOf("ensure_ascii=True)", "json.loads("),
             "ensure_ascii=False preserves accented characters.",
@@ -309,8 +309,8 @@ internal val module46Practice = listOf(
             "The key in JSON is the string \"2\", so we access it with a string.",
         ),
         choice(
-            "Which function converts JSON text to Python objects?",
-            listOf("json.loads()", "json.dumps()", "json.text()", "json.parse()"),
+            "Which function converts a JSON string to Python objects?",
+            listOf("json.loads()", "json.dumps()", "json.dump()", "json.read()"),
             0,
             "loads – \"load string\", meaning load from a string.",
         ),
@@ -348,7 +348,7 @@ internal val module46Practice = listOf(
             "loads() loads JSON from a string.",
         ),
         tiles(
-            "Convert the list results to JSON with sorted keys and store it in t",
+            "Convert the dictionary results to JSON with sorted keys and store it in t",
             listOf("t", "=", "json.dumps(", "results,", "sort_keys=True)"),
             listOf("indent=True)", "json.loads("),
             "sort_keys=True sorts the keys of dictionaries.",

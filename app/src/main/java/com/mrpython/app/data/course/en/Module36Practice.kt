@@ -47,22 +47,22 @@ internal val module36Practice = listOf(
         ),
         choice(
             "What does self mean in the deposit method?",
-            listOf("The account object the method was called on", "The Account class", "The deposit amount", "All accounts at once"),
+            listOf("The account the method was called on", "The Account class the method is in", "The amount passed in the call", "All accounts created so far"),
             0,
             "With a.deposit(10) Python passes a as self.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – balance was only a local variable", "It prints 0", "It prints None", "SyntaxError"),
+            listOf("AttributeError", "It prints 0", "It prints None", "SyntaxError"),
             0,
-            "Without self. the balance variable disappears when __init__ ends and never becomes an attribute.",
+            "Without self. balance is only a local variable: it disappears when __init__ ends and never becomes an attribute.",
             code = "class Account:\n    def __init__(self):\n        balance = 0\n\na = Account()\nprint(a.balance)",
         ),
         choice(
             "How many arguments do we pass in Account(...) when the header is def __init__(self, owner, balance)?",
-            listOf("2 – Python passes self on its own", "3", "1", "0"),
+            listOf("2", "3", "1", "0"),
             0,
-            "The new object is passed as self; we provide only the owner and the balance.",
+            "Python passes self (the new object) on its own; we provide only the owner and the balance.",
         ),
         fill(
             "Fill in the blank so every new account starts with a balance of 0 (prints 0).",
@@ -148,7 +148,7 @@ internal val module36Practice = listOf(
         ),
         choice(
             "What happens to the rest of the method's code after raise runs?",
-            listOf("It doesn't run – the method ends", "It runs normally", "The method starts over", "The balance is reset to zero"),
+            listOf("It doesn't run", "It runs normally", "The method starts over", "The balance is reset to zero"),
             0,
             "raise stops the method and passes the exception to the calling code.",
         ),
@@ -230,9 +230,9 @@ internal val module36Practice = listOf(
         ),
         choice(
             "Why do we save a history entry as the tuple (\"deposit\", amount)?",
-            listOf("To keep the transaction type and the amount in one entry", "Because lists can't contain numbers", "So the history sorts itself", "Because tuples can be changed"),
+            listOf("To keep the type and amount together", "Because lists can't contain numbers", "So the history sorts itself", "Because tuples can be changed"),
             0,
-            "A tuple groups several pieces of information about one transaction.",
+            "A tuple groups several pieces of information about one transaction: its type and amount.",
         ),
         choice(
             "How do you read the amount from the last (kind, amount) entry in the history h?",
@@ -261,7 +261,7 @@ internal val module36Practice = listOf(
             "We unpack the tuples from the history right in the for loop.",
         ),
         tiles(
-            "Compute the sum of all amounts in the history h",
+            "Store the sum of all amounts in the history h in the variable total",
             listOf("total", "=", "sum(", "h", ")"),
             listOf("len(", "max("),
             "sum adds up all the numbers in a list.",
@@ -399,9 +399,9 @@ internal val module36Practice = listOf(
         ),
         choice(
             "What does print(a) print if the Account class has no __str__ method?",
-            listOf("A default description, e.g. <__main__.Account object at 0x...>", "The account balance", "The owner's name", "Nothing – there will be an error"),
+            listOf("The class name and an address", "The current account balance", "The account owner's name", "An error message"),
             0,
-            "Without __str__ Python shows only the class name and the object's address.",
+            "Without __str__ Python shows a default description, e.g. <__main__.Account object at 0x...>.",
         ),
         choice(
             "Which method does Python call for a == b when a and b are accounts?",
@@ -411,7 +411,7 @@ internal val module36Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – Python doesn't know how to compare accounts", "It sorts the accounts by balance", "It prints []", "It returns the list unchanged"),
+            listOf("It raises TypeError", "It sorts the accounts by balance", "It prints []", "It returns the list unchanged"),
             0,
             "Without __lt__, Account objects can't be compared with <, so sorted raises an error.",
             code = "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\nprint(sorted([Account(5), Account(1)]))",
@@ -431,7 +431,7 @@ internal val module36Practice = listOf(
             "The .2f format gives exactly two decimal places.",
         ),
         tiles(
-            "From the list accounts, pick the account with the lowest balance",
+            "Store in the variable lowest the account with the lowest balance from the list accounts",
             listOf("lowest", "=", "min(", "accounts,", "key=lambda a:", "a.balance", ")"),
             listOf("max(", "a.owner"),
             "min with key compares the accounts by balance.",

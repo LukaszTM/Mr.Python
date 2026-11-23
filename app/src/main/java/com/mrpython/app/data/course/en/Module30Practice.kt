@@ -60,7 +60,7 @@ internal val module30Practice = listOf(
         ),
         choice(
             "What does -1 mean in s[::-1]?",
-            listOf("The step: we go from the end to the start", "The last character of the string", "Removing the last character", "The length of the string minus 1"),
+            listOf("The step – read from the end", "The last character of the string", "Removing the last character", "The length of the string minus 1"),
             0,
             "The third number in a slice is the step – a negative step reads from the end.",
         ),
@@ -135,9 +135,9 @@ internal val module30Practice = listOf(
         ),
         choice(
             "Why is set(a) == set(b) a bad anagram test?",
-            listOf("A set loses the information about how many times a letter appears", "Sets can't be compared", "set() only works on lists", "set() sorts the letters"),
+            listOf("A set doesn't count repeated letters", "Sets can't be compared", "set() only works on lists", "set() sorts the letters"),
             0,
-            "E.g. “teen” and “ten” have the same sets of letters but are not anagrams.",
+            "A set only remembers which letters appeared, not how many times – e.g. “teen” and “ten” have the same sets of letters but are not anagrams.",
         ),
         choice(
             "What will this code print?",
@@ -229,9 +229,9 @@ internal val module30Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("KeyError – the key \"a\" doesn't exist yet", "d will be {'a': 1}", "d will be {'a': 0}", "Nothing will change"),
+            listOf("KeyError", "d will be {'a': 1}", "d will be {'a': 0}", "Nothing will change"),
             0,
-            "+= first reads d[\"a\"], which doesn't exist – that's why we use get(ch, 0).",
+            "KeyError, because += first reads d[\"a\"], which doesn't exist yet – that's why we use get(ch, 0).",
             code = "d = {}\nd[\"a\"] += 1",
         ),
         choice(

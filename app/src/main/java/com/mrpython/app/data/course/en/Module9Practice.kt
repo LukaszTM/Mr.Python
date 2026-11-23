@@ -16,9 +16,9 @@ internal val module9Practice = listOf(
         output("name, age = (\"Kate\", 25)\nprint(f\"{name} is {age} years old\")", "Kate is 25 years old", "We unpack the tuple into two variables."),
         choice(
             "What will happen?",
-            listOf("An error – a tuple has no append method", "t will equal (1, 2, 3, 4)", "t will equal (4,)", "Nothing"),
+            listOf("An error", "t will equal (1, 2, 3, 4)", "t will equal (4,)", "Nothing"),
             0,
-            "Tuples can't be changed, so they have no methods that add elements.",
+            "Tuples can't be changed, so they have no append() method – the code ends in an error.",
             code = "t = (1, 2, 3)\nt.append(4)",
         ),
         choice(
@@ -29,9 +29,9 @@ internal val module9Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – too many values to unpack", "x = 1, y = 2", "x = 1, y = (2, 3)", "x = (1, 2), y = 3"),
+            listOf("An error", "x = 1, y = 2", "x = 1, y = (2, 3)", "x = (1, 2), y = 3"),
             0,
-            "The number of variables must match the number of elements.",
+            "The tuple has 3 elements but there are 2 variables – the numbers must match, so there's an error.",
             code = "x, y = (1, 2, 3)",
         ),
         fill(
@@ -74,9 +74,9 @@ internal val module9Practice = listOf(
         ),
         choice(
             "What happens after s.add(2) when s = {1, 2}?",
-            listOf("Nothing – 2 is already in the set", "s will equal {1, 2, 2}", "An error", "s will equal {2}"),
+            listOf("s stays the same", "s will equal {1, 2, 2}", "An error", "s will equal {2}"),
             0,
-            "A set doesn't store duplicates.",
+            "2 is already in the set, and a set doesn't store duplicates.",
         ),
         choice(
             "When is a set a good choice?",
@@ -131,7 +131,7 @@ internal val module9Practice = listOf(
         ),
         choice(
             "What does a <= b check for sets?",
-            listOf("Whether a is a subset of b", "Whether a has fewer elements than b", "Whether a is empty", "Whether the largest element of a is smaller"),
+            listOf("Whether a is a subset of b", "Whether a has fewer elements than b", "Whether a is empty", "Whether the elements of a are smaller than those of b"),
             0,
             "<= checks whether every element of a is also in b.",
         ),

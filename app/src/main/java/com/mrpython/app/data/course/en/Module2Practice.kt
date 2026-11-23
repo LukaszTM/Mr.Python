@@ -28,9 +28,9 @@ internal val module2Practice = listOf(
         ),
         choice(
             "What does x *= 3 do?",
-            listOf("Multiplies x by 3 and stores the result in x", "Compares x with 3", "Creates three x variables", "Prints x three times"),
+            listOf("Multiplies x by 3", "Compares x with 3", "Creates three x variables", "Prints x three times"),
             0,
-            "x *= 3 is short for x = x * 3.",
+            "x *= 3 is short for x = x * 3 – the result goes back into x.",
         ),
         fill(
             "Fill in the blank to store the number 10 in the variable result.",
@@ -83,9 +83,9 @@ internal val module2Practice = listOf(
         ),
         choice(
             "What happens?",
-            listOf("An error – \"abc\" is not a number", "It prints 0", "It prints abc", "It prints 3"),
+            listOf("An error occurs", "It prints 0", "It prints abc", "It prints 3"),
             0,
-            "int() can only convert a string that looks like a number.",
+            "\"abc\" is not a number – int() can only convert a string that looks like a whole number.",
             code = "print(int(\"abc\"))",
         ),
         choice(
@@ -242,9 +242,9 @@ internal val module2Practice = listOf(
         output("n = \"7\"\nprint(n * 2, int(n) * 2)", "77 14", "The string is repeated, the number is multiplied."),
         choice(
             "What happens?",
-            listOf("An error – you can't add str and int", "It prints 15", "It prints 105", "It prints 10 5"),
+            listOf("An error occurs", "It prints 15", "It prints 105", "It prints 10 5"),
             0,
-            "\"10\" is a string; you have to convert it with int() first.",
+            "\"10\" is a string, and you can't add a string and a number; convert it with int() first.",
             code = "x = \"10\"\nprint(x + 5)",
         ),
         choice(

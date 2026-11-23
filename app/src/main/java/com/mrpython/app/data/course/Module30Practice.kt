@@ -58,7 +58,7 @@ internal val module30Practice = listOf(
         ),
         choice(
             "Co oznacza -1 w zapisie s[::-1]?",
-            listOf("Krok: idziemy od końca do początku", "Ostatni znak napisu", "Usunięcie ostatniego znaku", "Długość napisu minus 1"),
+            listOf("Krok – czytamy od końca", "Ostatni znak napisu", "Usunięcie ostatniego znaku", "Długość napisu minus 1"),
             0,
             "Trzecia liczba w wycinku to krok – ujemny krok czyta od końca.",
         ),
@@ -133,9 +133,9 @@ internal val module30Practice = listOf(
         ),
         choice(
             "Dlaczego set(a) == set(b) to zły test na anagram?",
-            listOf("Zbiór gubi informację, ile razy litera występuje", "Zbiorów nie można porównywać", "set() działa tylko na listach", "set() sortuje litery"),
+            listOf("Zbiór nie liczy powtórzeń liter", "Zbiorów nie można porównywać", "set() działa tylko na listach", "set() sortuje litery"),
             0,
-            "Np. „lasa” i „las” mają te same zbiory liter, a nie są anagramami.",
+            "Zbiór pamięta tylko, jakie litery wystąpiły, a nie ile razy – np. „lasa” i „las” mają te same zbiory liter, a nie są anagramami.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -227,9 +227,9 @@ internal val module30Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("KeyError – klucza \"a\" jeszcze nie ma", "d będzie {'a': 1}", "d będzie {'a': 0}", "Nic się nie zmieni"),
+            listOf("KeyError", "d będzie {'a': 1}", "d będzie {'a': 0}", "Nic się nie zmieni"),
             0,
-            "+= najpierw odczytuje d[\"a\"], którego nie ma – dlatego używamy get(z, 0).",
+            "KeyError, bo += najpierw odczytuje d[\"a\"], którego jeszcze nie ma – dlatego używamy get(z, 0).",
             code = "d = {}\nd[\"a\"] += 1",
         ),
         choice(
@@ -346,7 +346,7 @@ internal val module30Practice = listOf(
             "26 % 26 = 0, czyli wracamy na początek alfabetu.",
         ),
         tiles(
-            "Zapisz w k pozycję litery z w alfabecie (a to 0)",
+            "Zapisz w k pozycję w alfabecie litery ze zmiennej z (a to 0)",
             listOf("k", "=", "ord(z)", "-", "ord(\"a\")"),
             listOf("chr(z)", "+"),
             "Od kodu litery odejmujemy kod litery a.",
@@ -434,7 +434,7 @@ internal val module30Practice = listOf(
             "Najpierw usuwamy spacje, potem zmieniamy litery na małe.",
         ),
         tiles(
-            "Przesuń literę z o 2 w alfabecie (bez zawijania) i wypisz wynik",
+            "Przesuń literę ze zmiennej z o 2 w alfabecie (bez zawijania) i wypisz wynik",
             listOf("print(", "chr(", "ord(z)", "+ 2", "))"),
             listOf("ord(", "- 2"),
             "Kod litery zwiększamy o 2 i zamieniamy z powrotem na znak.",

@@ -54,7 +54,7 @@ internal val module38Intro = lesson(
     fill(
         "Uzupełnij, aby zdjąć element z lewej strony kolejki.",
         "from collections import deque\nd = deque([5, 6, 7])\nprint(d.____())",
-        listOf("popleft", "pop", "left", "shift"),
+        listOf("popleft", "pop", "left", "popfirst"),
         "popleft",
         "popleft zdejmuje element z lewego końca deque.",
     ),

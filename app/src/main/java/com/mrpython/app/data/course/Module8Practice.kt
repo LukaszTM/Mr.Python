@@ -25,7 +25,7 @@ internal val module8Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd KeyError – nie ma klucza 0", "Wypisze 1", "Wypisze a", "Wypisze {'a': 1}"),
+            listOf("Błąd KeyError", "Wypisze 1", "Wypisze a", "Wypisze {'a': 1}"),
             0,
             "Słownik nie ma indeksów – 0 jest traktowane jak klucz, którego nie ma.",
             code = "d = {\"a\": 1, \"b\": 2}\nprint(d[0])",
@@ -87,9 +87,9 @@ internal val module8Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd KeyError – nie ma klucza b", "Nic się nie stanie", "Słownik stanie się pusty", "Usunięty zostanie klucz a"),
+            listOf("Błąd KeyError", "Nic się nie stanie", "Słownik stanie się pusty", "Usunięty zostanie klucz a"),
             0,
-            "del na nieistniejącym kluczu zgłasza KeyError.",
+            "Klucza b nie ma, a del na nieistniejącym kluczu zgłasza KeyError.",
             code = "d = {\"a\": 1}\ndel d[\"b\"]",
         ),
         fill(
@@ -219,9 +219,9 @@ internal val module8Practice = listOf(
         ),
         choice(
             "Co może być wartością w słowniku?",
-            listOf("Dowolny obiekt, np. liczba lub lista", "Tylko napis", "Tylko liczba", "Tylko inny słownik"),
+            listOf("Wartość dowolnego typu", "Tylko napis", "Tylko liczba", "Tylko inny słownik"),
             0,
-            "Wartości mogą być dowolnego typu.",
+            "Wartość może być dowolnego typu, np. liczbą, napisem albo listą.",
         ),
         choice(
             "Co wypisze ten kod?",

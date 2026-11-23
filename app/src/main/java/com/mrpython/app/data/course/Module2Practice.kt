@@ -26,9 +26,9 @@ internal val module2Practice = listOf(
         ),
         choice(
             "Co robi zapis x *= 3?",
-            listOf("Mnoży x przez 3 i zapisuje wynik w x", "Porównuje x z 3", "Tworzy trzy zmienne x", "Wypisuje x trzy razy"),
+            listOf("Mnoży x przez 3", "Porównuje x z 3", "Tworzy trzy zmienne x", "Wypisuje x trzy razy"),
             0,
-            "x *= 3 to skrót od x = x * 3.",
+            "x *= 3 to skrót od x = x * 3 – wynik mnożenia trafia z powrotem do x.",
         ),
         fill(
             "Uzupełnij, aby zapisać liczbę 10 w zmiennej wynik.",
@@ -81,9 +81,9 @@ internal val module2Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – \"abc\" to nie liczba", "Wypisze 0", "Wypisze abc", "Wypisze 3"),
+            listOf("Pojawi się błąd", "Wypisze 0", "Wypisze abc", "Wypisze 3"),
             0,
-            "int() potrafi zamienić tylko napis wyglądający jak liczba.",
+            "\"abc\" to nie liczba – int() potrafi zamienić tylko napis wyglądający jak liczba całkowita.",
             code = "print(int(\"abc\"))",
         ),
         choice(
@@ -116,7 +116,7 @@ internal val module2Practice = listOf(
     ),
     practice(
         "u2l3",
-        output("miasto = \"Kraków\"\nprint(f\"Mieszkam w {miasto}\")", "Mieszkam w Kraków", "{miasto} zostaje zastąpione wartością zmiennej."),
+        output("miasto = \"Kraków\"\nprint(f\"Moje miasto: {miasto}\")", "Moje miasto: Kraków", "{miasto} zostaje zastąpione wartością zmiennej."),
         output("a = 3\nb = 4\nprint(f\"{a} + {b} = {a + b}\")", "3 + 4 = 7", "Każde wyrażenie w klamrach jest obliczane osobno."),
         output("n = 5\nprint(f\"{n}{n}\")", "55", "Dwie wartości wstawione obok siebie, bez spacji."),
         output("imie = \"Ala\"\nwiek = 8\nprint(f\"{imie} ({wiek})\")", "Ala (8)", "Nawiasy okrągłe w f-stringu to zwykłe znaki."),
@@ -154,7 +154,7 @@ internal val module2Practice = listOf(
         ),
         fill(
             "Uzupełnij, aby w miejscu klamer pojawiła się wartość zmiennej owoc.",
-            "owoc = \"gruszka\"\nprint(f\"Lubię {____}\")",
+            "owoc = \"gruszka\"\nprint(f\"Mój owoc: {____}\")",
             listOf("owoc", "\"owoc\"", "imie"),
             "owoc",
             "W klamrach podajemy nazwę zmiennej bez cudzysłowu.",
@@ -240,9 +240,9 @@ internal val module2Practice = listOf(
         output("n = \"7\"\nprint(n * 2, int(n) * 2)", "77 14", "Napis się powtarza, liczba się mnoży."),
         choice(
             "Co się stanie?",
-            listOf("Błąd – nie można dodać str i int", "Wypisze 15", "Wypisze 105", "Wypisze 10 5"),
+            listOf("Pojawi się błąd", "Wypisze 15", "Wypisze 105", "Wypisze 10 5"),
             0,
-            "\"10\" to napis; najpierw trzeba go zamienić przez int().",
+            "\"10\" to napis, a napisu i liczby nie można dodać; najpierw trzeba go zamienić przez int().",
             code = "x = \"10\"\nprint(x + 5)",
         ),
         choice(

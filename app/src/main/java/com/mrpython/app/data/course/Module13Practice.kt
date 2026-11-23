@@ -150,7 +150,7 @@ internal val module13Practice = listOf(
         ),
         choice(
             "Co oznacza _ w [[0] * 3 for _ in range(2)]?",
-            listOf("Zmienną, której wartości nie używamy", "Błąd składni", "Specjalne słowo kluczowe pętli", "Pustą listę"),
+            listOf("Zmienną, której wartości nie używamy", "Błąd: brakuje tu nazwy zmiennej", "Słowo kluczowe, które kończy pętlę", "Pustą listę, którą pętla wypełnia"),
             0,
             "_ to zwykła nazwa zmiennej, którą zwyczajowo dajemy, gdy jej nie potrzebujemy.",
         ),

@@ -25,10 +25,11 @@ internal val module48Cards = listOf(
         "u48l2",
         explain(
             "Comparing strings",
-            "Strings are compared character by character according to their codes. That's why \"ą\" (261) is greater than " +
+            "Polish letters have large codes, e.g. ą 261, ó 243, ę 281, ł 322, ż 380. Strings are compared " +
+                "character by character according to their codes. That's why \"ą\" (261) is greater than " +
                 "\"z\" (122), and uppercase letters are \"smaller\" than lowercase ones – they end up first when sorting.",
-            code = "print(\"ą\" > \"z\", \"B\" < \"a\")\nprint(sorted([\"zebra\", \"żaba\", \"Amy\"]))",
-            output = "True True\n['Amy', 'zebra', 'żaba']",
+            code = "print(ord(\"ę\"), ord(\"ł\"), ord(\"ż\"))\nprint(\"ą\" > \"z\", \"B\" < \"a\")\nprint(sorted([\"zebra\", \"żaba\", \"Amy\"]))",
+            output = "281 322 380\nTrue True\n['Amy', 'zebra', 'żaba']",
         ),
     ),
     cards(
@@ -36,9 +37,10 @@ internal val module48Cards = listOf(
         explain(
             "What bytes look like",
             "Bytes are printed with the letter `b` before the quote. ASCII characters show up normally, and other " +
-                "bytes as `\\x` and two hexadecimal digits. The type of the result of `encode()` is `bytes`.",
-            code = "print(\"ał\".encode())\nprint(type(b\"a\").__name__)",
-            output = "b'a\\xc5\\x82'\nbytes",
+                "bytes as `\\x` and two hexadecimal digits. The type of the result of `encode()` is `bytes`. A Polish " +
+                "letter takes 2 bytes in UTF-8, but some characters take more – the euro sign € takes 3.",
+            code = "print(\"ał\".encode())\nprint(\"ę\".encode(), \"ó\".encode(), \"ż\".encode())\nprint(type(b\"a\").__name__)",
+            output = "b'a\\xc5\\x82'\nb'\\xc4\\x99' b'\\xc3\\xb3' b'\\xc5\\xbc'\nbytes",
         ),
         explain(
             "The ascii encoding",
@@ -53,7 +55,8 @@ internal val module48Cards = listOf(
         explain(
             "islower and the empty string",
             "`islower()` checks whether all the letters are lowercase. `isupper()` and `islower()` look only " +
-                "at letters – digits don't bother them. An empty string gives `False` in all the `is…` methods.",
+                "at letters – digits don't bother them. For an empty string `isdigit()`, `isalpha()`, `isalnum()`, " +
+                "`isupper()` and `islower()` give `False`.",
             code = "print(\"łąka\".islower(), \"X1\".isupper())\nprint(\"\".isdigit())",
             output = "True True\nFalse",
         ),

@@ -45,9 +45,9 @@ internal val module45Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("AttributeError – None nie ma metody group()", "Pusty napis", "None", "0"),
+            listOf("AttributeError", "Pusty napis", "None", "0"),
             0,
-            "Gdy search() zwróci None, wywołanie group() kończy się błędem.",
+            "search() zwróciło None, a None nie ma metody group(), więc jest AttributeError.",
             code = "import re\nm = re.search(r\"\\d\", \"abc\")\nprint(m.group())",
         ),
         choice(
@@ -220,7 +220,7 @@ internal val module45Practice = listOf(
         ),
         choice(
             "Do czego pasuje wzorzec \\w?",
-            listOf("Do litery, cyfry lub podkreślnika", "Tylko do spacji", "Tylko do cyfry", "Do całego słowa naraz"),
+            listOf("Do litery, cyfry lub _", "Tylko do spacji", "Tylko do cyfry", "Do całego słowa naraz"),
             0,
             "\\w to jeden znak słowa; całe słowa łapie \\w+.",
         ),
@@ -314,14 +314,14 @@ internal val module45Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("{'a': '1', 'b': '2'}", "('1', '2')", "['a', 'b']", "None"),
+            listOf("{'a': '1', 'b': '2'}", "{'a': 1, 'b': 2}", "[('a', '1'), ('b', '2')]", "('1', '2')"),
             0,
-            "groupdict() zwraca słownik: nazwa grupy → tekst.",
+            "groupdict() zwraca słownik: nazwa grupy → tekst (napis, nie liczba).",
             code = "import re\nm = re.search(r\"(?P<a>\\d)(?P<b>\\d)\", \"12\")\nprint(m.groupdict())",
         ),
         choice(
             "Co tworzy para nawiasów ( ) we wzorcu?",
-            listOf("Grupę przechwytującą fragment dopasowania", "Klasę znaków", "Kwantyfikator", "Komentarz"),
+            listOf("Grupę", "Klasę znaków", "Kwantyfikator", "Komentarz"),
             0,
             "Klasy znaków to [ ], a nawiasy okrągłe tworzą grupy.",
         ),
@@ -401,7 +401,7 @@ internal val module45Practice = listOf(
         ),
         choice(
             "Co zwraca re.sub()?",
-            listOf("Nowy napis z zamienionymi fragmentami", "Listę dopasowań", "Obiekt dopasowania", "Liczbę zamian"),
+            listOf("Nowy napis", "Listę dopasowań", "Obiekt dopasowania", "Liczbę zamian"),
             0,
             "Napisy są niezmienne, więc sub() tworzy nowy napis.",
         ),
@@ -433,7 +433,7 @@ internal val module45Practice = listOf(
             "re.sub(wzorzec, zamiana, napis).",
         ),
         tiles(
-            "Podziel napis t w miejscach cyfr",
+            "Podziel napis t w miejscach cyfr i zapisz wynik w zmiennej czesci",
             listOf("czesci", "=", "re.split(", "r\"\\d\",", "t)"),
             listOf("re.sub(", "t.split(r\"\\d\")"),
             "re.split(wzorzec, napis) zwraca listę części.",

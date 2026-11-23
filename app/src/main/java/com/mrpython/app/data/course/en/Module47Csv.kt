@@ -76,7 +76,7 @@ internal val module47 = CourseUnit(
             choice(
                 "What is io.StringIO used for in these examples?",
                 listOf(
-                    "It pretends to be a file but keeps the data in memory",
+                    "It acts as a file in memory",
                     "It saves data to disk",
                     "It converts text to numbers",
                     "It downloads a file from the internet",
@@ -137,9 +137,9 @@ internal val module47 = CourseUnit(
             ),
             choice(
                 "What happens without int()?",
-                listOf("TypeError – you can't add a string to a number", "It prints 30", "It prints 1020", "It prints 0"),
+                listOf("TypeError", "It prints 30", "It prints 1020", "It prints 0"),
                 0,
-                "Values from CSV are strings, and 0 + \"10\" is an error.",
+                "Values from CSV are strings, and 0 + \"10\" raises a TypeError – you can't add a string to a number.",
                 code = "import csv, io\nf = io.StringIO(\"c\\n10\\n20\")\ns = 0\nfor r in csv.DictReader(f):\n    s += r[\"c\"]\nprint(s)",
             ),
             fill(
@@ -198,7 +198,7 @@ internal val module47 = CourseUnit(
             ),
             choice(
                 "What does f.getvalue() return for an io.StringIO object?",
-                listOf("All the written text as a string", "A list of rows", "The number of characters", "The file name"),
+                listOf("All the text (str)", "A list of rows (list)", "The character count (int)", "The file name (str)"),
                 0,
                 "getvalue() returns the entire contents of the buffer.",
             ),

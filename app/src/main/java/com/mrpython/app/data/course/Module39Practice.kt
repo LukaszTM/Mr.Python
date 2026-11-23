@@ -51,16 +51,16 @@ internal val module39Practice = listOf(
         ),
         choice(
             "Co wypisze ten kod?",
-            listOf("Obiekt islice, a nie listę", "[1, 2]", "1 2", "[3]"),
+            listOf("Obiekt islice", "[1, 2]", "1 2", "TypeError"),
             0,
-            "islice zwraca iterator – żeby zobaczyć elementy, trzeba użyć list().",
+            "islice zwraca iterator, więc print pokazuje sam obiekt, a nie elementy – żeby je zobaczyć, trzeba użyć list().",
             code = "from itertools import islice\nprint(islice([1, 2, 3], 2))",
         ),
         choice(
             "Czym różni się count(1) od range(1, 10)?",
-            listOf("count nie ma końca, a range kończy się na 9", "Niczym", "count zwraca listę", "range jest nieskończony"),
+            listOf("count nie ma końca", "Niczym", "count zwraca listę", "range jest nieskończony"),
             0,
-            "count liczy w nieskończoność, dopóki go nie przerwiemy.",
+            "count liczy w nieskończoność, dopóki go nie przerwiemy, a range(1, 10) kończy się na 9.",
         ),
         fill(
             "Uzupełnij, aby liczyć co 10 od zera (wypisze [0, 10, 20]).",
@@ -322,7 +322,7 @@ internal val module39Practice = listOf(
         ),
         choice(
             "Co dostajemy w każdym obrocie pętli for k, g in groupby(dane)?",
-            listOf("Klucz grupy i iterator jej elementów", "Indeks i element", "Dwa sąsiednie elementy", "Klucz i liczbę elementów"),
+            listOf("Klucz i iterator grupy", "Indeks i element", "Dwa sąsiednie elementy", "Klucz i liczbę elementów"),
             0,
             "Liczbę elementów trzeba policzyć samemu, np. len(list(g)).",
         ),

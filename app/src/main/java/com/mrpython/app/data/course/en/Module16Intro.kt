@@ -47,7 +47,7 @@ internal val module16Intro = lesson(
     choice(
         "What is the key parameter of sorted() for?",
         listOf(
-            "It gives a function whose result is used for comparing",
+            "It gives a function to compare by",
             "It sets how many elements to sort",
             "It reverses the order",
             "It removes duplicates",

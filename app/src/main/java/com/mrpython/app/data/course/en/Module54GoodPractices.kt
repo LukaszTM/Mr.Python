@@ -30,9 +30,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Which name in this code breaks the PEP 8 rules?",
-                listOf("CalculateArea – a function should be in snake_case", "a – the argument name is too short", "result – a bad variable name", "None of them"),
+                listOf("CalculateArea", "a", "result", "None of them"),
                 0,
-                "Functions are named in lowercase with underscores, e.g. calculate_area.",
+                "CalculateArea is a function name, and functions are named in snake_case, e.g. calculate_area. The names a and result are fine.",
                 code = "def CalculateArea(a, b):\n    result = a * b\n    return result",
             ),
             fill(
@@ -68,7 +68,7 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "Where do you put a function's docstring?",
-                listOf("As the first string in the function body", "Above the def line", "At the end of the function", "In a # comment"),
+                listOf("At the start of the function body", "Above the def line", "At the end of the function body", "In a # comment"),
                 0,
                 "Only a string right below the def header becomes the docstring.",
             ),
@@ -96,9 +96,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "What should a function's docstring describe?",
-                listOf("What the function does, what it takes and what it returns", "Who wrote the function and when", "Every line of code, one by one", "Test results"),
+                listOf("What it does and returns", "Who wrote it and when", "Every line of the code", "Its test results"),
                 0,
-                "A docstring explains how to use the function without reading its code.",
+                "A docstring says what the function does and what it returns, so you can use it without reading its code.",
             ),
             output(
                 "def f():\n    \"\"\"First line.\n\n    Details.\"\"\"\n\nprint(f.__doc__.splitlines()[0])",
@@ -116,9 +116,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "What is the best way to improve this code?",
-                listOf("Extract a function with_tax(price)", "Add a fourth print", "Change 1.23 to 1.2", "Remove round"),
+                listOf("Extract a function", "Add a fourth print", "Change 1.23 to 1.2", "Remove round"),
                 0,
-                "The same formula in several places is a sign you should create a function.",
+                "The same formula in several places is a sign you should create a function, e.g. with_tax(price).",
                 code = "print(round(10 * 1.23, 2))\nprint(round(20 * 1.23, 2))\nprint(round(35 * 1.23, 2))",
             ),
             output(
@@ -140,7 +140,7 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "How many jobs should a well-written function have?",
-                listOf("One, clearly defined", "As many as possible", "At least three", "It doesn't matter"),
+                listOf("One", "As many as possible", "At least three", "It doesn't matter"),
                 0,
                 "A function that does one thing is easy to name and test.",
             ),
@@ -160,9 +160,9 @@ internal val module54 = CourseUnit(
             "u54l4", "Constants and readable conditions",
             choice(
                 "What is a magic number?",
-                listOf("A number in code with no explanation of where it came from", "A random number", "A very large number", "A prime number"),
+                listOf("A number with no name or explanation", "A number the program draws at random", "A very large number in the code", "A number written as text"),
                 0,
-                "A number like 0.23 is better given a name, e.g. TAX_RATE = 0.23.",
+                "A magic number is a number in code whose meaning isn't clear. It is better given a name, e.g. TAX_RATE = 0.23.",
             ),
             output(
                 "TAX_RATE = 0.23\nprice = 100\nprint(price * (1 + TAX_RATE))",
@@ -188,9 +188,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "What is a simpler way to write the condition if ready == True:?",
-                listOf("if ready:", "if ready is True == True:", "if True == ready == True:", "if not not not ready:"),
+                listOf("if ready:", "if ready = True:", "if not ready:", "if \"ready\":"),
                 0,
-                "A boolean value can be checked directly.",
+                "A boolean value can be checked directly. = is assignment, not reverses the condition, and the non-empty string \"ready\" is always true.",
             ),
             output(
                 "x = 5\nprint(1 < x < 10)",
@@ -214,9 +214,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "What is the main advantage of an early return?",
-                listOf("Less nesting – special cases are handled at the start", "The function runs faster", "You don't need to write tests", "You can skip the docstring"),
+                listOf("Fewer nested ifs", "The function runs faster", "You don't need to write tests", "You can skip the docstring"),
                 0,
-                "The main logic isn't hidden inside deeply nested ifs.",
+                "Special cases are handled at the start, so the main logic isn't hidden inside deeply nested ifs.",
             ),
             fill(
                 "Fill in the blank so the function exits right away for an empty string.",
@@ -249,9 +249,9 @@ internal val module54 = CourseUnit(
             ),
             choice(
                 "What is worth changing in this code?",
-                listOf("Replace 0.77 with a named constant, e.g. AFTER_DISCOUNT", "Rename price to Price", "Remove the print", "Add a loop"),
+                listOf("Replace 0.77 with a constant", "Rename price to Price", "Remove the print", "Add a loop"),
                 0,
-                "0.77 is a magic number – a name explains what it means.",
+                "0.77 is a magic number – a named constant, e.g. AFTER_DISCOUNT, explains what it means.",
                 code = "price = 100 * 0.77\nprint(price)",
             ),
         ),

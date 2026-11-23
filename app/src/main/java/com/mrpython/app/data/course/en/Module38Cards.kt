@@ -58,7 +58,7 @@ internal val module38Cards = listOf(
         ),
         explain(
             "_replace – a modified copy",
-            "A namedtuple is immutable, so `p.x = 5` raises an error. The `_replace(field=value)` " +
+            "A namedtuple is immutable, so `p.x = 5` raises an `AttributeError`. The `_replace(field=value)` " +
                 "method creates a new tuple with the field changed, and the original stays the same.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\", \"y\"])\np = P(1, 2)\nq = p._replace(y=9)\nprint(p, q)",
             output = "P(x=1, y=2) P(x=1, y=9)",
@@ -77,7 +77,9 @@ internal val module38Cards = listOf(
             "A deque is like a list",
             "You create a deque from a list, a string or a `range`, and `maxlen` keeps only the " +
                 "last elements. `len` works, so do the indexes `d[0]` and `d[-1]`, and `print` " +
-                "shows it with the name `deque`.",
+                "shows it with the name `deque`. A list also has `pop(0)`, but then it has to shift all " +
+                "the remaining elements, so it is slow for a long list – a deque removes from the " +
+                "front quickly.",
             code = "from collections import deque\nd = deque(\"abcd\", maxlen=3)\nprint(d)\nprint(len(d), d[0], d.maxlen)",
             output = "deque(['b', 'c', 'd'], maxlen=3)\n3 b 3",
         ),

@@ -22,14 +22,14 @@ internal val module39 = CourseUnit(
             ),
             choice(
                 "What happens when you call list(count())?",
-                listOf("The program never finishes", "An empty list is created", "The list [0] is created", "ValueError"),
+                listOf("The list grows forever", "An empty list is created", "The list [0] is created", "ValueError"),
                 0,
-                "count() is infinite, so list() never finishes collecting elements.",
+                "count() is infinite, so list() keeps collecting numbers until memory runs out – you never get a result.",
             ),
             output(
                 "from itertools import islice\nprint(list(islice(\"python\", 2, 5)))",
                 "['t', 'h', 'o']",
-                "islice works like the slice [2:5], but on any iterator.",
+                "islice works like the slice [2:5], but on anything you can iterate over, iterators included.",
             ),
             fill(
                 "Fill in the blank to take the first 3 elements from an infinite counter.",
@@ -55,7 +55,7 @@ internal val module39 = CourseUnit(
             output(
                 "from itertools import chain\nprint(list(chain([1, 2], [3], [4, 5])))",
                 "[1, 2, 3, 4, 5]",
-                "chain joins iterators one after another into a single sequence.",
+                "chain joins the lists one after another into a single sequence.",
             ),
             output(
                 "from itertools import chain\nprint(\"\".join(chain(\"ab\", \"cd\")))",
@@ -83,7 +83,7 @@ internal val module39 = CourseUnit(
                 "from itertools import chain\nprint(list(____([1], [2])))",
                 listOf("chain", "product", "zip", "count"),
                 "chain",
-                "chain joins iterators one after another.",
+                "chain joins the lists one after another.",
             ),
             output(
                 "from itertools import chain\nlists = [[1, 2], [3], [4]]\nprint(list(chain.from_iterable(lists)))",
@@ -121,9 +121,9 @@ internal val module39 = CourseUnit(
             ),
             choice(
                 "What is the difference between permutations(x, 2) and combinations(x, 2)?",
-                listOf("In permutations, (a, b) and (b, a) are different results", "Nothing", "combinations returns more results", "permutations doesn't accept a second argument"),
+                listOf("In permutations order matters", "Nothing", "combinations gives more results", "permutations doesn't accept 2"),
                 0,
-                "Permutations take order into account, combinations don't.",
+                "Permutations take order into account, so (a, b) and (b, a) are two different results; combinations give only one of them.",
             ),
             output(
                 "from itertools import permutations\nprint(len(list(permutations(\"abcd\", 2))))",
@@ -202,7 +202,7 @@ internal val module39 = CourseUnit(
             output(
                 "from itertools import chain\nprint(list(chain(\"ab\", [1])))",
                 "['a', 'b', 1]",
-                "chain joins iterators of different types.",
+                "chain joins sequences of different types, here a string and a list.",
             ),
             output(
                 "from itertools import count, islice\nprint(list(islice(count(2, 2), 3)))",
@@ -235,7 +235,7 @@ internal val module39 = CourseUnit(
             tiles(
                 "Import the functions chain and product",
                 listOf("from", "itertools", "import", "chain,", "product"),
-                listOf("collections", "include"),
+                listOf("collections", "Itertools"),
                 "We import several names by separating them with commas.",
             ),
         ),

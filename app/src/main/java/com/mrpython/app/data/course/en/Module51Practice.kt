@@ -36,13 +36,13 @@ internal val module51Practice = listOf(
         choice(
             "Why does x[0:3:-1] give an empty list?",
             listOf(
-                "With a negative step, start must be greater than stop",
+                "Start is less than stop",
                 "A step of -1 is not allowed",
                 "The list is too short",
                 "Slices don't work on lists",
             ),
             0,
-            "Going backward from 0, you never reach 3.",
+            "With a negative step, start must be greater than stop: going backward from 0, you never reach 3.",
         ),
         fill(
             "Fill in the blank to print [6, 4, 2].",
@@ -119,13 +119,13 @@ internal val module51Practice = listOf(
         choice(
             "What does copy.copy(a) create for a list of lists a?",
             listOf(
-                "A new outer list with the same inner lists",
-                "A completely independent copy",
+                "A shallow copy",
+                "A deep copy",
                 "An alias for the same list",
                 "An empty list",
             ),
             0,
-            "It's a shallow copy – only the first level is new.",
+            "It's a shallow copy: a new outer list, but with the same inner lists.",
         ),
         choice(
             "What does this code print?",

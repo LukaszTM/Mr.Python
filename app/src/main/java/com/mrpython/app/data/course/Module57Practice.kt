@@ -45,9 +45,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Jak w słowniku pytania wielokrotnego wyboru zapisać poprawną opcję?",
-            listOf("Jako indeks poprawnej opcji, np. \"poprawna\": 1", "W osobnej zmiennej poza słownikiem", "Nie da się tego zapisać", "Jako liczbę wszystkich opcji"),
+            listOf("Jako indeks poprawnej opcji", "Jako liczbę wszystkich opcji", "Jako indeks ostatniej opcji", "W osobnej zmiennej poza słownikiem"),
             0,
-            "Indeks wskazuje poprawny element listy opcji.",
+            "Np. \"poprawna\": 1 – indeks wskazuje poprawny element listy opcji.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -141,9 +141,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Po co wywołujemy strip() na odpowiedzi gracza?",
-            listOf("Aby usunąć przypadkowe spacje z początku i końca", "Aby zamienić litery na małe", "Aby podzielić odpowiedź na słowa", "Aby zamienić tekst na liczbę"),
+            listOf("Aby usunąć spacje z brzegów", "Aby zamienić litery na małe", "Aby podzielić odpowiedź na słowa", "Aby zamienić tekst na liczbę"),
             0,
-            "Gracz może przypadkiem wpisać spację – to nie powinien być błąd.",
+            "strip() usuwa spacje z początku i końca. Gracz może przypadkiem wpisać spację – to nie powinien być błąd.",
         ),
         choice(
             "Które porównanie da True dla odp = \"warszawa\" i poprawna = \"Warszawa\"?",
@@ -235,9 +235,9 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Jaką ocenę zwróci ocena(70)?",
-            listOf("\"3\" – progi są w złej kolejności", "\"4\"", "\"2\"", "Błąd"),
+            listOf("\"3\"", "\"4\"", "\"2\"", "Błąd"),
             0,
-            "70 >= 50 jest prawdą już w pierwszym warunku.",
+            "70 >= 50 jest prawdą już w pierwszym warunku, więc funkcja zwraca \"3\" – progi są w złej kolejności.",
             code = "def ocena(p):\n    if p >= 50:\n        return \"3\"\n    if p >= 70:\n        return \"4\"\n    return \"2\"",
         ),
         fill(
@@ -311,22 +311,22 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Co jest nie tak w tym kodzie?",
-            listOf("shuffle zwraca None, więc pytania staje się None", "Funkcja shuffle nie istnieje", "Lista jest za krótka", "Nic – wypisze potasowaną listę"),
+            listOf("Zmienna pytania będzie None", "Funkcja shuffle nie istnieje", "Lista jest za krótka", "Nic – wypisze potasowaną listę"),
             0,
-            "Wyniku shuffle nie przypisujemy – lista zmienia się w miejscu.",
+            "shuffle zwraca None, więc po przypisaniu pytania to None. Wyniku shuffle nie przypisujemy – lista zmienia się w miejscu.",
             code = "import random\n\npytania = [1, 2, 3]\npytania = random.shuffle(pytania)\nprint(pytania)",
         ),
         choice(
             "Jak dostać pytania w losowej kolejności, nie zmieniając oryginalnej listy?",
-            listOf("random.sample(pytania, len(pytania))", "random.shuffle(pytania)", "pytania.sort()", "random.choice(pytania)"),
+            listOf("random.sample(pytania, len(pytania))", "random.shuffle(pytania)", "sorted(pytania, reverse=True)", "random.choice(pytania)"),
             0,
-            "sample zwraca nową listę, a shuffle zmienia oryginał.",
+            "sample zwraca nową listę w losowej kolejności, a shuffle zmienia oryginał. sorted z reverse=True daje odwrotny porządek, a nie losowy.",
         ),
         choice(
             "Po co wywołuje się random.seed(42) przed tasowaniem?",
-            listOf("Aby kolejność była za każdym razem taka sama, np. w testach", "Aby tasowanie było szybsze", "Aby wybrać 42 pytania", "Aby posortować listę"),
+            listOf("Aby wynik był powtarzalny", "Aby tasowanie było szybsze", "Aby wybrać 42 pytania", "Aby posortować listę"),
             0,
-            "Ustalone ziarno daje powtarzalne wyniki losowania.",
+            "Ustalone ziarno daje za każdym razem tę samą kolejność – przydaje się to np. w testach.",
         ),
         fill(
             "Uzupełnij, aby wylosować jedno pytanie z listy.",
@@ -399,15 +399,15 @@ internal val module57Practice = listOf(
         ),
         choice(
             "Co powinna robić metoda sprawdz w klasie Pytanie?",
-            listOf("Porównać odpowiedź gracza z poprawną i zwrócić True lub False", "Wypisać wszystkie pytania", "Potasować pytania", "Zapisać quiz do pliku"),
+            listOf("Sprawdzić odpowiedź gracza", "Wypisać wszystkie pytania", "Potasować pytania", "Zapisać quiz do pliku"),
             0,
-            "Każda metoda ma jedno, jasne zadanie.",
+            "sprawdz porównuje odpowiedź gracza z poprawną i zwraca True lub False – każda metoda ma jedno, jasne zadanie.",
         ),
         choice(
             "Co wypisze ten kod?",
             listOf("2", "1", "0", "None"),
             0,
-            "Metoda dobrze została wywołana dwa razy.",
+            "Metodę dobrze() wywołano dwa razy, a każde wywołanie dodaje 1 punkt.",
             code = "class Quiz:\n    def __init__(self):\n        self.punkty = 0\n    def dobrze(self):\n        self.punkty += 1\n\nq = Quiz()\nq.dobrze()\nq.dobrze()\nprint(q.punkty)",
         ),
         choice(

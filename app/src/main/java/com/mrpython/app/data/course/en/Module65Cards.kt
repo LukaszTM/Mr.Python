@@ -21,11 +21,22 @@ internal val module65Cards = listOf(
         ),
     ),
     cards(
+        "u65l2",
+        explain(
+            "How fast sorted() is",
+            "Bubble sort compares elements in pairs with a loop inside a loop – that's O(n²). The built-in `sorted()` and `sort()` " +
+                "use an algorithm called Timsort, which runs in O(n log n). For 1024 elements, n² is over a million steps, " +
+                "while n log n (log₂ 1024 = 10) is about 10 thousand.",
+            code = "n = 1024\nprint(n * n, n * 10)",
+            output = "1048576 10240",
+        ),
+    ),
+    cards(
         "u65l3",
         explain(
             "Logarithm: math.log2",
-            "`math.log2(n)` tells you how many times you have to multiply 2 to get `n` – that is, how many times " +
-                "you can halve it. That's the number of steps of an O(log n) algorithm, e.g. binary search.",
+            "`math.log2(n)` tells you the power you have to raise 2 to in order to get `n` – that is, how many times " +
+                "you can halve `n` before reaching 1. That's the number of steps of an O(log n) algorithm, e.g. binary search.",
             code = "import math\nprint(math.log2(16))\nprint(math.ceil(math.log2(1000)))",
             output = "4.0\n10",
         ),
@@ -55,6 +66,24 @@ internal val module65Cards = listOf(
                 "use `math.factorial(n)`.",
             code = "import math\nprint(math.factorial(5))\nprint(math.factorial(5) // math.factorial(3))",
             output = "120\n20",
+        ),
+    ),
+    cards(
+        "u65l7",
+        explain(
+            "Divide and conquer: merging",
+            "Merge sort splits the list into two halves, sorts each half recursively and then merges them into one: " +
+                "it keeps taking the smaller element from the fronts of the two sorted lists. That's the \"divide and conquer\" " +
+                "approach: split the problem into smaller parts, solve them and combine the results. This sort runs in O(n log n).",
+            code = "a, b = [1, 5], [2, 9]\nout = []\nwhile a and b:\n    out.append((a if a[0] <= b[0] else b).pop(0))\nprint(out + a + b)",
+            output = "[1, 2, 5, 9]",
+        ),
+        explain(
+            "Quicksort: the pivot",
+            "Quicksort also divides and conquers: it picks a pivot (e.g. the first element), splits the rest into elements " +
+                "smaller than it and not smaller, sorts both parts recursively and joins them: smaller + [pivot] + larger.",
+            code = "t = [3, 6, 1, 8, 2]\np = t[0]\nprint([x for x in t[1:] if x < p], p, [x for x in t[1:] if x >= p])",
+            output = "[1, 2] 3 [6, 8]",
         ),
     ),
 )

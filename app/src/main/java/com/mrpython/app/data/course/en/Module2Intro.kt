@@ -34,7 +34,8 @@ internal val module2Intro = lesson(
     ),
     explain(
         "True, False, and None",
-        "`True` and `False` are logical values (the `bool` type). The number 0 and the empty string are \"falsy\". " +
+        "`True` and `False` are logical values (the `bool` type). The `bool()` function tells whether a value is \"truthy\" (`True`) " +
+            "or \"falsy\" (`False`): the number 0 and the empty string are falsy. " +
             "`None` means there is no value.",
         code = "print(bool(0))\nprint(bool(\"a\"))\nprint(None)",
         output = "False\nTrue\nNone",

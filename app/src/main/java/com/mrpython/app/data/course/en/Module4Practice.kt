@@ -80,9 +80,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "What does continue do?",
-            listOf("Skips the rest of the iteration and moves to the next one", "Ends the whole loop", "Ends the program", "Repeats the same iteration"),
+            listOf("Moves on to the next iteration", "Ends the whole loop", "Ends the program", "Repeats the same iteration"),
             0,
-            "continue jumps to the next iteration of the loop.",
+            "continue skips the rest of the current iteration and jumps to the next one.",
         ),
         choice(
             "How many times does this loop run?",
@@ -157,9 +157,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "What does this code print?",
-            listOf("Nothing – the range is empty", "5 4 3 2", "5", "Error"),
+            listOf("Nothing", "5 4 3 2", "5", "Error"),
             0,
-            "Without a negative step range doesn't count down, so there are no numbers from 5 to 1.",
+            "The range is empty: without a negative step, range doesn't count down, so there are no numbers from 5 to 1.",
             code = "for i in range(5, 1):\n    print(i)",
         ),
         fill(
@@ -235,10 +235,10 @@ internal val module4Practice = listOf(
             code = "for i in range(2):\n    for j in range(5):\n        print(\"x\")",
         ),
         choice(
-            "What does break stop in a nested loop?",
-            listOf("Only the loop it is in", "Both loops", "The whole program", "Nothing"),
+            "A break is inside the inner one of two loops. What does it stop?",
+            listOf("The inner loop", "Both loops", "The whole program", "The outer loop"),
             0,
-            "break ends the nearest loop – the outer one keeps going.",
+            "break ends only the loop it is in – the outer one keeps going.",
         ),
         choice(
             "What does this code print?",
@@ -301,9 +301,9 @@ internal val module4Practice = listOf(
         ),
         choice(
             "When does a while loop end?",
-            listOf("When the condition stops being true (or after a break)", "Always after 10 iterations", "After going through a whole string", "Never"),
+            listOf("When the condition becomes false", "Always after 10 iterations", "After going through a whole string", "Never"),
             0,
-            "while checks the condition before every iteration.",
+            "while checks the condition before every iteration and ends when it is false (a break can stop it earlier).",
         ),
         choice(
             "What does this code print?",

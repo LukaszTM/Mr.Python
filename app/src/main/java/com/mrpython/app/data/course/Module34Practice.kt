@@ -45,14 +45,14 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – brakuje argumentu y", "y dostanie 0", "y dostanie None", "Kod zadziała bez błędu"),
+            listOf("TypeError", "y dostanie 0", "y dostanie None", "Kod zadziała bez błędu"),
             0,
-            "Pole bez wartości domyślnej jest obowiązkowym argumentem __init__.",
+            "Pole y nie ma wartości domyślnej, więc jest obowiązkowe – brak argumentu to TypeError.",
             code = "from dataclasses import dataclass\n\n@dataclass\nclass A:\n    x: int\n    y: int\n\nA(1)",
         ),
         choice(
             "Jak deklaruje się pole w dataclassie?",
-            listOf("nazwa: typ, np. wiek: int", "self.wiek = int", "int wiek", "wiek = int()"),
+            listOf("wiek: int", "self.wiek = int", "wiek(int)", "wiek = int()"),
             0,
             "Pole to nazwa z adnotacją typu w ciele klasy.",
         ),
@@ -134,9 +134,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Co przekazujemy do default_factory?",
-            listOf("Funkcję lub klasę, którą trzeba wywołać, np. list", "Gotową listę []", "Nazwę pola jako napis", "Liczbę elementów"),
+            listOf("Funkcję bez nawiasów, np. list", "Gotową listę, np. []", "Nazwę pola jako napis", "Liczbę elementów"),
             0,
-            "Fabryka jest wywoływana osobno przy tworzeniu każdego obiektu.",
+            "default_factory dostaje funkcję (lub klasę, np. list), którą wywołuje osobno dla każdego obiektu.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -147,9 +147,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Dlaczego pola z wartością domyślną muszą stać za polami bez niej?",
-            listOf("Bo powstaje z nich __init__, a parametry domyślne muszą być na końcu", "Bo pola są sortowane alfabetycznie", "Bo inaczej __repr__ nie zadziała", "Nie muszą – kolejność jest dowolna"),
+            listOf("Bo z pól powstaje __init__", "Bo pola są sortowane alfabetycznie", "Bo inaczej __repr__ nie zadziała", "Nie muszą – kolejność jest dowolna"),
             0,
-            "To ta sama zasada co przy parametrach funkcji.",
+            "Pola stają się parametrami __init__, a parametry z wartością domyślną muszą stać na końcu – jak w każdej funkcji.",
         ),
         fill(
             "Uzupełnij, aby pole punkty miało wartość domyślną 0 (wypisze G(imie='Ala', punkty=0)).",
@@ -222,14 +222,14 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – obiektu nie da się zahashować", "Powstanie zbiór z jednym elementem", "Powstanie pusty zbiór", "AttributeError"),
+            listOf("TypeError", "Powstanie zbiór z jednym elementem", "Powstanie pusty zbiór", "AttributeError"),
             0,
-            "Zwykła dataclass nie ma __hash__; daje go dopiero frozen=True.",
+            "Zwykłej dataclassy nie da się włożyć do zbioru (unhashable type); umożliwia to dopiero frozen=True.",
             code = "from dataclasses import dataclass\n\n@dataclass\nclass P:\n    x: int\n\ns = {P(1)}",
         ),
         choice(
             "Według czego order=True porównuje obiekty?",
-            listOf("Według pól w kolejności deklaracji, jak krotki", "Według nazwy klasy", "Według pierwszego pola tekstowego", "Według kolejności tworzenia obiektów"),
+            listOf("Według kolejnych pól, jak krotki", "Według nazwy klasy", "Według pierwszego pola tekstowego", "Według kolejności tworzenia obiektów"),
             0,
             "Decyduje pierwsze pole, które się różni.",
         ),
@@ -311,9 +311,9 @@ internal val module34Practice = listOf(
         ),
         choice(
             "Który zapis daje każdemu obiektowi osobną pustą listę?",
-            listOf("field(default_factory=list)", "= []", "= list", "field(default=[])"),
+            listOf("field(default_factory=list)", "field(default=[])", "field(default=list)", "field(default_factory=[])"),
             0,
-            "Tylko fabryka tworzy nową listę dla każdego obiektu.",
+            "default_factory=list wywołuje list() dla każdego obiektu; default=[] to ValueError, default=list daje samą klasę list, a [] nie da się wywołać.",
         ),
         choice(
             "Co wypisze ten kod?",

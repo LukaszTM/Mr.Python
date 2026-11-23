@@ -92,7 +92,7 @@ internal val module60 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("UnboundLocalError", "x będzie równe 2", "NameError", "Nic"),
+                listOf("UnboundLocalError", "x będzie równe 2", "SyntaxError", "Nic"),
                 0,
                 "Przypisanie do x czyni x zmienną lokalną, której nie nadano jeszcze wartości.",
                 code = "x = 1\ndef f():\n    x += 1\n\nf()",
@@ -347,7 +347,7 @@ internal val module60 = CourseUnit(
                 "and nie liczy prawej strony, gdy lewa jest fałszywa – nie dzielimy przez zero.",
             ),
             tiles(
-                "Sprawdź, czy x należy do przedziału od 0 (włącznie) do 10",
+                "Sprawdź, czy x należy do przedziału od 0 (włącznie) do 10 (bez 10)",
                 listOf("if", "0 <=", "x", "< 10:"),
                 listOf("and", "=<"),
                 "Porównania można łączyć w łańcuch.",

@@ -142,9 +142,9 @@ internal val module55Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("KeyError – there is no key \"-\"", "It prints 3", "It prints None", "It prints 7"),
+            listOf("A KeyError", "It prints 3", "It prints None", "It prints 7"),
             0,
-            "Reading a key that doesn't exist with [] raises a KeyError.",
+            "There is no key \"-\" in the dictionary, and reading a key that doesn't exist with [] raises a KeyError.",
             code = "ops = {\"+\": lambda a, b: a + b}\nprint(ops[\"-\"](5, 2))",
         ),
         choice(
@@ -231,15 +231,15 @@ internal val module55Practice = listOf(
         ),
         choice(
             "Why do you need to use int() or float() after split()?",
-            listOf("split returns strings, and you need numbers to calculate", "split returns floating-point numbers", "int() removes spaces", "Without it split won't work"),
+            listOf("split returns strings, not numbers", "split returns floating-point numbers", "int() removes spaces", "Without it split won't work"),
             0,
             "\"2\" + \"3\" is \"23\", while 2 + 3 is 5.",
         ),
         choice(
             "What happens when you run this code?",
-            listOf("ValueError – not enough values to unpack", "a = 4, op = +, b = None", "KeyError", "Nothing"),
+            listOf("It raises ValueError", "a = 4, op = +, b = None", "It raises KeyError", "Nothing happens"),
             0,
-            "split() gives only two parts, but there are three variables.",
+            "split() gives only two parts, but there are three variables – not enough values to unpack, so ValueError.",
             code = "a, op, b = \"4 +\".split()",
         ),
         fill(
@@ -401,9 +401,9 @@ internal val module55Practice = listOf(
         ),
         choice(
             "Where is the best place to keep the history in the Calculator class?",
-            listOf("In the attribute self.history set in __init__", "In a local variable of the add method", "In the class docstring", "In the class name"),
+            listOf("In the attribute self.history", "In a local variable of the add method", "In the class docstring", "In the class name"),
             0,
-            "An object's attribute survives between method calls.",
+            "An object's attribute set in __init__ survives between method calls, while a local variable disappears after each call.",
         ),
         choice(
             "What will this code print?",

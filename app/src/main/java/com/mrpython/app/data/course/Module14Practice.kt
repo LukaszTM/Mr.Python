@@ -13,7 +13,7 @@ internal val module14Practice = listOf(
         output("t = [[\"a\", \"b\"], [\"c\", \"d\"]]\nprint(t[1][0] + t[0][1])", "cb", "t[1][0] to \"c\", a t[0][1] to \"b\"."),
         choice(
             "Co wypisze ten kod?",
-            listOf("Błąd IndexError", "3", "1", "None"),
+            listOf("IndexError", "3", "1", "None"),
             0,
             "Macierz ma tylko wiersze 0 i 1, więc m[2] nie istnieje.",
             code = "m = [[1, 2], [3, 4]]\nprint(m[2][0])",

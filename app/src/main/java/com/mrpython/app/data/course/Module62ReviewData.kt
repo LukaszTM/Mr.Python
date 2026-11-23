@@ -301,7 +301,7 @@ internal val module62 = CourseUnit(
                 "Wartością w słowniku ma być v.",
             ),
             tiles(
-                "Wybierz z listy liczby tylko liczby parzyste",
+                "Zapisz w zmiennej parzyste listę samych liczb parzystych z listy liczby",
                 listOf("parzyste =", "[x", "for x in liczby", "if x % 2 == 0]"),
                 listOf("else", "while"),
                 "Warunek filtrujący stoi na końcu wyrażenia listowego.",
@@ -353,7 +353,7 @@ internal val module62 = CourseUnit(
             tiles(
                 "Zaimportuj klasę Counter z modułu collections",
                 listOf("from", "collections", "import", "Counter"),
-                listOf("Counter()", "include"),
+                listOf("Counter()", "collections.Counter"),
                 "Składnia to: from moduł import nazwa.",
             ),
         ),

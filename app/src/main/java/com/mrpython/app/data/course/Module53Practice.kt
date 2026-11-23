@@ -104,19 +104,19 @@ internal val module53Practice = listOf(
         choice(
             "Czym różni się x = 5 od x == 5?",
             listOf(
-                "x = 5 przypisuje wartość, a x == 5 sprawdza równość",
-                "Niczym, to dwa zapisy tego samego",
-                "x == 5 przypisuje wartość dwa razy",
-                "x = 5 działa tylko w if",
+                "= przypisuje, == porównuje",
+                "Niczym, to to samo",
+                "== przypisuje dwa razy",
+                "= działa tylko w if",
             ),
             0,
-            "Pojedyncze = to przypisanie, podwójne == to porównanie.",
+            "x = 5 przypisuje wartość, a x == 5 sprawdza równość: pojedyncze = to przypisanie, podwójne == to porównanie.",
         ),
         choice(
             "Jaki błąd zgłosi ten kod?",
-            listOf("IndentationError – brak wcięcia po else", "NameError", "TypeError", "Żaden"),
+            listOf("IndentationError", "NameError", "TypeError", "Żaden"),
             0,
-            "Blok po else: musi być wcięty.",
+            "Blok po else: musi być wcięty, a tu return nie ma wcięcia.",
             code = "def f(n):\n    if n > 0:\n        return \"dodatnia\"\n    else:\n    return \"inna\"",
         ),
         fill(
@@ -134,9 +134,9 @@ internal val module53Practice = listOf(
         ),
         choice(
             "Gdzie powinien stać print, aby wypisać sumę tylko raz, po pętli?",
-            listOf("Bez wcięcia, na poziomie słowa for", "Wcięty w pętli", "Przed pętlą", "W warunku if"),
+            listOf("Bez wcięcia", "Wcięty w pętli", "Przed pętlą", "W bloku if"),
             0,
-            "Kod bez wcięcia wykona się po zakończeniu pętli.",
+            "print bez wcięcia (na poziomie słowa for) wykona się raz, po zakończeniu pętli.",
         ),
     ),
     practice(
@@ -185,13 +185,13 @@ internal val module53Practice = listOf(
         choice(
             "Czego używamy zamiast domyślnej wartości lista=[]?",
             listOf(
-                "lista=None i tworzymy nową listę w środku funkcji",
-                "lista=[] z dopisanym copy()",
+                "lista=None",
+                "lista=list()",
                 "lista=0",
-                "Zmiennej globalnej",
+                "lista={}",
             ),
             0,
-            "None jako wartość domyślna jest bezpieczne, bo nie da się go zmienić.",
+            "Dajemy lista=None, a nową listę tworzymy w środku funkcji. lista=list() nic nie zmienia – ta lista też powstaje tylko raz.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -262,9 +262,9 @@ internal val module53Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("Wypisze 5, ale nazwa id przestanie oznaczać funkcję wbudowaną", "NameError", "SyntaxError", "Wypisze adres obiektu"),
+            listOf("Wypisze 5", "NameError", "SyntaxError", "Wypisze adres obiektu"),
             0,
-            "Przesłonięcie nie jest błędem samo w sobie – kłopot pojawia się później.",
+            "Zasłonięcie nie jest błędem samo w sobie – kod wypisze 5, ale nazwa id przestaje oznaczać funkcję wbudowaną i kłopot pojawi się później.",
             code = "id = 5\nprint(id)",
         ),
         choice(
@@ -275,15 +275,15 @@ internal val module53Practice = listOf(
         ),
         choice(
             "Jak przywrócić funkcję wbudowaną po przypadkowym przesłonięciu jej zmienną?",
-            listOf("Usunąć zmienną instrukcją del", "Przypisać zmiennej None", "Napisać import nazwa", "Nie da się tego zrobić"),
+            listOf("Usunąć ją przez del", "Przypisać jej None", "Napisać import nazwa", "Nie da się tego zrobić"),
             0,
             "Po del Python znów znajduje nazwę wbudowaną.",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError: 'int' object is not callable", "Wypisze 8", "Wypisze 4", "ValueError"),
+            listOf("TypeError", "Wypisze 8", "Wypisze 4", "ValueError"),
             0,
-            "int to teraz liczba 3, więc int(\"7\") nie zadziała.",
+            "int to teraz liczba 3, więc int(\"7\") kończy się TypeError: 'int' object is not callable.",
             code = "int = 3\nprint(int(\"7\") + 1)",
         ),
         fill(
@@ -327,9 +327,9 @@ internal val module53Practice = listOf(
         output("print(int(7 / 2), round(7 / 2))", "3 4", "int() obcina, round() zaokrągla remis do parzystej."),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("Wypisze 5, a potem zgłosi TypeError", "Wypisze 10", "Wypisze 5", "Nic nie wypisze"),
+            listOf("5, potem TypeError", "Wypisze 10", "Wypisze 5", "Nic nie wypisze"),
             0,
-            "dodaj wypisuje 5, ale zwraca None, a None * 2 to błąd.",
+            "dodaj wypisuje 5, ale zwraca None, a None * 2 to TypeError.",
             code = "def dodaj(a, b):\n    print(a + b)\n\nwynik = dodaj(2, 3) * 2",
         ),
         choice(
@@ -405,7 +405,7 @@ internal val module53Practice = listOf(
         choice(
             "Program zgłasza „TypeError: 'list' object is not callable”. Co jest najczęstszą przyczyną?",
             listOf(
-                "Zmienna o nazwie list zasłoniła typ wbudowany",
+                "Zmienna list zasłoniła typ",
                 "Lista jest pusta",
                 "Brakuje importu modułu list",
                 "Lista ma za dużo elementów",
@@ -430,7 +430,7 @@ internal val module53Practice = listOf(
             "def srednia(a, b):\n    return (a + b) ____ 2\n\nprint(srednia(3, 4))",
             listOf("/", "//", "%"),
             "/",
-            "/ daje 3.5; // obetnie do 3, a % da resztę 1.",
+            "/ daje 3.5; // zaokrągli w dół do 3, a % da resztę 1.",
         ),
         tiles(
             "Napisz nagłówek pętli po wszystkich indeksach listy x",

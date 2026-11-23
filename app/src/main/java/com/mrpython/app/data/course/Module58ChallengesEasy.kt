@@ -135,7 +135,7 @@ internal val module58 = CourseUnit(
                 "Co wypisze ten kod?",
                 listOf("[0, 5, 0]", "[5, 5, 5]", "[0, 0, 0]", "[5, 0, 0]"),
                 0,
-                "Liczby są niezmienne, więc zmiana a[1] dotyczy tylko jednego miejsca.",
+                "Przypisanie a[1] = 5 podmienia tylko jeden element listy.",
                 code = "a = [0] * 3\na[1] = 5\nprint(a)",
             ),
             fill(
@@ -148,7 +148,7 @@ internal val module58 = CourseUnit(
             output(
                 "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(len(a))",
                 "4",
-                "a i b to ta sama lista, więc zmiana przez b widać też w a.",
+                "a i b to ta sama lista, więc zmianę zrobioną przez b widać też w a.",
             ),
             tiles(
                 "Posortuj listę liczby malejąco (w miejscu)",

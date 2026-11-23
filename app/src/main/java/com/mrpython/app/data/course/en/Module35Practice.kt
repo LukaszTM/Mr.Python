@@ -47,9 +47,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – an exception must inherit from BaseException", "It raises the exception A", "Nothing happens", "NameError"),
+            listOf("TypeError", "It raises the exception A", "Nothing happens", "NameError"),
             0,
-            "Class A doesn't inherit from Exception, so it can't be raised.",
+            "Class A doesn't inherit from BaseException (or Exception), so raise A() raises a TypeError.",
             code = "class A:\n    pass\n\nraise A()",
         ),
         choice(
@@ -68,7 +68,7 @@ internal val module35Practice = listOf(
         fill(
             "Complete the code to raise a custom exception (prints \"too much\").",
             "class TooMuch(Exception):\n    pass\n\ntry:\n    ____ TooMuch(\"too much\")\nexcept TooMuch as e:\n    print(e)",
-            listOf("raise", "return", "throw"),
+            listOf("raise", "return", "except"),
             "raise",
             "In Python we raise exceptions with the raise keyword.",
         ),
@@ -149,9 +149,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Why create a common base class for an application's exceptions?",
-            listOf("To catch all the application's errors with one except", "To make exceptions work faster", "So that you don't have to write raise", "Because Python requires it"),
+            listOf("To catch them with one except", "To make exceptions work faster", "So that you don't have to write raise", "Because Python requires it"),
             0,
-            "A base class groups related errors.",
+            "An except with the base class catches at once all the application's errors that inherit from it.",
         ),
         fill(
             "Complete the code so one except catches both errors (prints \"shop error\" twice).",
@@ -312,7 +312,7 @@ internal val module35Practice = listOf(
         ),
         choice(
             "What does raise X(...) from e mean?",
-            listOf("Raise X and store e as its cause", "Catch X and turn it into e", "Raise e instead of X", "Raise both exceptions at once"),
+            listOf("Raise X with cause e", "Catch X and turn it into e", "Raise e instead of X", "Raise both exceptions at once"),
             0,
             "e ends up in the __cause__ attribute of the new exception.",
         ),
@@ -325,9 +325,9 @@ internal val module35Practice = listOf(
         ),
         choice(
             "Which statement about a bare raise (without an argument) is true?",
-            listOf("In an except block it re-raises the exception being handled", "It always creates a new Exception", "It ends the function and returns None", "It only works outside except"),
+            listOf("It re-raises the handled exception", "It always creates a new Exception", "It ends the function and returns None", "It only works outside except"),
             0,
-            "A bare raise passes the current exception on.",
+            "In an except block a bare raise re-raises the exception being handled and passes it on.",
         ),
         fill(
             "Complete the code so except catches all the application's errors (prints app).",

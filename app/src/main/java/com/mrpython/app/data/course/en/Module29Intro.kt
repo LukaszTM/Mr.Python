@@ -14,7 +14,7 @@ internal val module29Intro = lesson(
     explain(
         "Prime numbers",
         "A prime number (2 and up) is divisible only by 1 and itself. We check divisors – going up to the " +
-            "square root of n is enough. The Sieve of Eratosthenes crosses out multiples to find many primes at once.",
+            "square root of n (`n ** 0.5`) is enough, because if n = a · b, one of the factors is no greater than the square root. The Sieve of Eratosthenes crosses out multiples to find many primes at once.",
         code = "def is_prime(n):\n    if n < 2:\n        return False\n    for d in range(2, int(n ** 0.5) + 1):\n        if n % d == 0:\n            return False\n    return True\nprint(is_prime(7), is_prime(9))",
         output = "True False",
     ),

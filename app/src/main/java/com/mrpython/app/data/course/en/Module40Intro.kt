@@ -42,9 +42,9 @@ internal val module40Intro = lesson(
     ),
     choice(
         "What does partial(f, 1) return?",
-        listOf("A new function with an argument fixed", "The result of f(1)", "The number 1", "A list of arguments"),
+        listOf("A new function", "The result of f(1)", "The number 1", "A list of arguments"),
         0,
-        "partial creates a new function and doesn't call it.",
+        "partial creates a new function with the argument 1 fixed and doesn't call f.",
     ),
     output(
         "from functools import reduce\nprint(reduce(lambda a, b: a + b, [1, 2, 3]))",

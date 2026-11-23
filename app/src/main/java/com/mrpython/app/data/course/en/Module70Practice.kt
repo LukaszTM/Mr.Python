@@ -47,16 +47,16 @@ internal val module70Practice = listOf(
         ),
         choice(
             "What happens when you run this program?",
-            listOf("TypeError – the price argument is missing", "P(name='Mug', price=0)", "P(name='Mug', price=None)", "P(name='Mug')"),
+            listOf("TypeError", "P(name='Mug', price=0)", "P(name='Mug', price=None)", "P(name='Mug')"),
             0,
-            "A field without a default value is required.",
+            "The price argument is missing, and a field without a default value is required, so Python raises a TypeError.",
             code = "from dataclasses import dataclass\n@dataclass\nclass P:\n    name: str\n    price: float\nprint(P(\"Mug\"))",
         ),
         choice(
             "What does @dataclass(frozen=True) give you?",
-            listOf("The object's fields can't be changed after creation", "The class runs faster", "The fields must be numbers", "The object is saved to a file"),
+            listOf("Fields can't be changed", "The class runs faster", "The fields must be numbers", "The object is saved to a file"),
             0,
-            "Trying to change a field of a frozen object raises an error.",
+            "Once the object is created, trying to change one of its fields raises an error.",
         ),
         fill(
             "Fill in the blank to turn the class into a dataclass (the program should print Product(name='Mouse')).",
@@ -81,7 +81,7 @@ internal val module70Practice = listOf(
         tiles(
             "Create a product p named Mug with a price of 19.99",
             listOf("p", "=", "Product(", "\"Mug\",", "19.99", ")"),
-            listOf("new", "Product."),
+            listOf("Product[", "Product."),
             "You create an object by calling the class with the field values.",
         ),
         choice(
@@ -408,7 +408,7 @@ internal val module70Practice = listOf(
         ),
         choice(
             "When does the finally block run?",
-            listOf("Always – after try, whether or not there was an error", "Only when an error occurs", "Only when there is no error", "Never, if there is an else block"),
+            listOf("Always, error or not", "Only when an error occurs", "Only when there is no error", "Never, if there is an else block"),
             0,
             "finally is for cleanup that must always happen.",
         ),

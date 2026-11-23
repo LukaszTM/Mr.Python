@@ -32,9 +32,9 @@ internal val module8 = CourseUnit(
             output("print(len({\"x\": 1, \"y\": 2, \"z\": 3}))", "3", "len() returns the number of pairs in a dictionary."),
             choice(
                 "What will happen?",
-                listOf("A KeyError – there is no key b", "It prints None", "It prints 0", "It prints b"),
+                listOf("A KeyError", "It prints None", "It prints 0", "It prints b"),
                 0,
-                "Reading a key that doesn't exist with [] causes a KeyError.",
+                "There is no key b, and reading a missing key with [] causes a KeyError.",
                 code = "d = {\"a\": 1}\nprint(d[\"b\"])",
             ),
             tiles(

@@ -10,7 +10,7 @@ internal val module3 = CourseUnit(
     lessons = listOf(
         lesson(
             "u3l1", "Math",
-            output("print(7 // 2)", "3", "// is floor division – it cuts off the fractional part."),
+            output("print(7 // 2)", "3", "// is floor division: 7 / 2 = 3.5, and // rounds down to 3."),
             output("print(7 % 2)", "1", "% returns the remainder of a division."),
             output("print(2 ** 3)", "8", "** is exponentiation: 2 · 2 · 2."),
             choice(
@@ -36,7 +36,7 @@ internal val module3 = CourseUnit(
             output("print(3 > 2)", "True", "A comparison returns a logical value: True or False."),
             choice(
                 "Which operator checks whether two values are equal?",
-                listOf("==", "=", "===", "equals"),
+                listOf("==", "=", "!=", "<="),
                 0,
                 "== compares, while a single = assigns.",
             ),
@@ -47,9 +47,9 @@ internal val module3 = CourseUnit(
             ),
             output("print(not False)", "True", "not flips a logical value."),
             tiles(
-                "Write the condition: x is not equal to 0",
+                "Write the condition: x is not equal to 0 (x on the left)",
                 listOf("x", "!=", "0"),
-                listOf("=", "<>"),
+                listOf("=", "=="),
                 "The \"not equal to\" operator is !=.",
             ),
             output("print(10 != 10)", "False", "10 is equal to 10, so \"not equal\" is false."),
@@ -66,7 +66,7 @@ internal val module3 = CourseUnit(
             fill(
                 "Fill in the missing character.",
                 "x = 1\nif x > 0____\n    print(\"positive\")",
-                listOf(":", ";", "{"),
+                listOf(":", ";", ","),
                 ":",
                 "A line with if ends with a colon.",
             ),
@@ -126,7 +126,7 @@ internal val module3 = CourseUnit(
                 "x < 0 means a negative number.",
             ),
             tiles(
-                "Write the condition: age at least 13 and less than 18",
+                "Write the condition: age at least 13 and less than 18 (start with the lower limit)",
                 listOf("age", ">=", "13", "and", "age", "<", "18"),
                 listOf("or", "=>"),
                 "and joins two conditions that both have to be met at the same time.",

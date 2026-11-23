@@ -238,10 +238,10 @@ internal val module28Practice = listOf(
         choice(
             "Co oznacza pusty stos w chwili, gdy przychodzi nawias zamykający?",
             listOf(
-                "Nawias zamyka coś, czego nie otwarto – błąd",
+                "Błąd: nawias nie ma pary",
                 "Wszystko jest w porządku",
-                "Trzeba dodać nawias na stos",
-                "Napis się skończył",
+                "Trzeba odłożyć go na stos",
+                "Napis właśnie się skończył",
             ),
             0,
             "Nie ma żadnego otwartego nawiasu, do którego mógłby pasować.",
@@ -261,7 +261,7 @@ internal val module28Practice = listOf(
             "Otwarte nawiasy odkładamy na stos – są 2.",
         ),
         fill(
-            "Uzupełnij, aby funkcja zwróciła True tylko dla pustego stosu.",
+            "Uzupełnij, aby wynik był True tylko dla pustego stosu.",
             "stos = [\"(\"]\nprint(len(stos) ____ 0)",
             listOf("==", "!=", ">"),
             "==",
@@ -331,7 +331,7 @@ internal val module28Practice = listOf(
         choice(
             "Czym różni się przetwarzanie z kolejką od przetwarzania ze stosem?",
             listOf(
-                "Kolejka idzie wszerz (poziomami), stos w głąb",
+                "Kolejka idzie wszerz, stos w głąb",
                 "Kolejka idzie w głąb, stos wszerz",
                 "Nie ma różnicy",
                 "Stos przetwarza elementy losowo",
@@ -428,9 +428,9 @@ internal val module28Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("IndexError – kolejka jest pusta", "Zwróci None", "Zwróci 0", "Nic się nie stanie"),
+            listOf("IndexError", "Zwróci None", "Zwróci 0", "Nic się nie stanie"),
             0,
-            "Z pustej kolejki nie da się zdjąć elementu.",
+            "Kolejka jest pusta, a popleft() na pustej deque zgłasza IndexError.",
             code = "from collections import deque\nq = deque()\nq.popleft()",
         ),
         fill(

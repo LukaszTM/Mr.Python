@@ -87,9 +87,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("IndexError – there is no task at index 5", "It removes the last task", "It returns None", "KeyError"),
+                listOf("IndexError", "It removes the last task", "It returns None", "KeyError"),
                 0,
-                "The list only has indexes 0 and 1.",
+                "The list only has indexes 0 and 1, so pop(5) raises an IndexError. KeyError is about a missing dictionary key.",
                 code = "tasks = [\"A\", \"B\"]\ntasks.pop(5)",
             ),
             tiles(
@@ -178,9 +178,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "What is the main advantage of the Task class over a dictionary?",
-                listOf("Data and behavior (methods) live in one place", "A class takes up less space", "Dictionaries can't be changed", "Classes don't need __init__"),
+                listOf("Data and methods are kept together", "A class takes up less memory", "Dictionaries can't be changed", "Objects are always faster"),
                 0,
-                "The object itself knows how to complete itself and how to print itself.",
+                "A class keeps the data together with the behavior (methods): the object itself knows how to complete itself and how to print itself.",
             ),
             output(
                 "class TaskList:\n    def __init__(self):\n        self.tasks = []\n    def add(self, title):\n        self.tasks.append(title)\n    def __len__(self):\n        return len(self.tasks)\n\nitems = TaskList()\nitems.add(\"A\")\nitems.add(\"B\")\nprint(len(items))",
@@ -230,9 +230,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "Why is JSON a better choice for saving than str(tasks)?",
-                listOf("JSON is a standard that other programs can read too", "str doesn't work for lists", "JSON is always shorter", "str changes the order of the tasks"),
+                listOf("Other programs read JSON too", "str doesn't work for lists", "JSON is always shorter", "str changes the order of the tasks"),
                 0,
-                "str gives you Python's format, while JSON is a common data exchange format.",
+                "str gives you Python's format, while JSON is a standard data exchange format that other programs can read too.",
             ),
             tiles(
                 "Load the tasks from the JSON string in the variable text.",

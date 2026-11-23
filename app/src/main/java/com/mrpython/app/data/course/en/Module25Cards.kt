@@ -32,7 +32,8 @@ internal val module25Cards = listOf(
         explain(
             "in and index()",
             "`x in items` tells you whether an element is in the list, and `items.index(x)` tells you the index of " +
-                "its first occurrence. When the element is missing, `index()` raises a `ValueError`.",
+                "its first occurrence. When the element is missing, `index()` raises a `ValueError`. " +
+                "It works the same on strings: `\"cat\".index(\"a\")` gives 1.",
             code = "items = [1, 7, 3, 7]\nprint(7 in items)\nprint(items.index(7))",
             output = "True\n1",
         ),

@@ -32,7 +32,9 @@ internal val module43Cards = listOf(
         explain(
             "Where nonlocal works",
             "`nonlocal` works only in a nested function, when the variable exists in an enclosing " +
-                "function – otherwise it's a `SyntaxError`. `global` can even create a new module variable.",
+                "function – otherwise it's a `SyntaxError`. `global` can even create a new module variable. " +
+                "Use it sparingly: when many functions change the same data, it's hard to track who changed " +
+                "it and when. It's usually better to pass the value as a parameter and return the result with `return`.",
             code = "def f():\n    global new\n    new = \"here\"\nf()\nprint(new)",
             output = "here",
         ),

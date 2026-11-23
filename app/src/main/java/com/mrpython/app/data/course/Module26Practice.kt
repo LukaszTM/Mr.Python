@@ -58,7 +58,7 @@ internal val module26Practice = listOf(
         choice(
             "Dlaczego wewnętrzna pętla może iść do n - 1 - k?",
             listOf(
-                "Ostatnie k elementów jest już na swoich miejscach",
+                "Bo ostatnie k elementów jest już na miejscu",
                 "Bo inaczej pętla byłaby nieskończona",
                 "Bo k to liczba zamian",
                 "Bo pierwsze k elementów jest posortowane",
@@ -137,9 +137,9 @@ internal val module26Practice = listOf(
         ),
         choice(
             "Ile zamian najwyżej wykona sortowanie przez wybieranie dla listy n elementów?",
-            listOf("Około n – jedna na przejście", "Około n²", "Zawsze 0", "Dokładnie 1"),
+            listOf("Około n", "Około n²", "Zawsze 0", "Dokładnie 1"),
             0,
-            "W każdym przejściu jest najwyżej jedna zamiana.",
+            "Przejść jest około n, a w każdym jest najwyżej jedna zamiana.",
         ),
         choice(
             "Co oznacza zmienna m w sortowaniu przez wybieranie?",
@@ -266,7 +266,7 @@ internal val module26Practice = listOf(
             "insert(indeks, wartość) wstawia element w środek listy.",
         ),
         tiles(
-            "Napisz nagłówek pętli przesuwającej większe elementy",
+            "Napisz nagłówek pętli przesuwającej większe elementy; najpierw sprawdź j >= 0",
             listOf("while", "j >= 0", "and", "a[j] > x", ":"),
             listOf("or", "a[j] < x"),
             "Przesuwamy, dopóki nie dojdziemy do początku i element jest większy od x.",
@@ -399,7 +399,7 @@ internal val module26Practice = listOf(
         choice(
             "Co zwraca sorted(d.items())?",
             listOf(
-                "Listę par (klucz, wartość) posortowaną po kluczach",
+                "Listę par posortowaną po kluczach",
                 "Posortowany słownik",
                 "Listę samych wartości",
                 "Listę par posortowaną po wartościach",

@@ -23,7 +23,7 @@ internal val module7Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – there is no character at index 3", "It prints t", "It prints an empty string", "It prints cat"),
+            listOf("An IndexError", "It prints t", "It prints an empty string", "It prints cat"),
             0,
             "The string \"cat\" has indexes 0, 1 and 2, so index 3 is out of range.",
             code = "s = \"cat\"\nprint(s[3])",
@@ -71,7 +71,7 @@ internal val module7Practice = listOf(
         output(
             "print(\"Alabama\".lower().count(\"a\"))",
             "4",
-            "After lower() the string is \"alabama\", and it has four letters a.",
+            "After lower() the string is \"alabama\", and it has four a's.",
         ),
         choice(
             "What does \"banana\".find(\"n\") return?",
@@ -142,9 +142,9 @@ internal val module7Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – join() glues only strings", "It prints a 1", "It prints a1", "It prints ['a', 1]"),
+            listOf("An error", "It prints a 1", "It prints a1", "It prints ['a', 1]"),
             0,
-            "The number has to be converted to a string with str() first.",
+            "join() glues only strings, so the number 1 has to be converted with str() first.",
             code = "print(\" \".join([\"a\", 1]))",
         ),
         fill(
@@ -195,10 +195,10 @@ internal val module7Practice = listOf(
         choice(
             "What does s.upper() do when s = \"hey\"?",
             listOf(
-                "It returns a new string HEY, and s doesn't change",
-                "It changes s to HEY",
-                "It prints HEY on the screen",
-                "It raises an error",
+                "It returns a new string HEY, s unchanged",
+                "It changes s to HEY and returns nothing",
+                "It prints HEY on the screen, s unchanged",
+                "It changes s to HEY and returns HEY",
             ),
             0,
             "Strings are immutable – methods return new strings.",
@@ -210,7 +210,7 @@ internal val module7Practice = listOf(
             "The separator disappears, and the pieces go into a list.",
         ),
         fill(
-            "Fill in the blank to count the letters a in the word.",
+            "Fill in the blank to count the a's in the word.",
             "print(\"banana\".____(\"a\"))",
             listOf("count", "split", "upper"),
             "count",

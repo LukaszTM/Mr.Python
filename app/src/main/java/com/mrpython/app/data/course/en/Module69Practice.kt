@@ -139,16 +139,16 @@ internal val module69Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("ValueError – not enough values to unpack", "direction will be None", "direction will be an empty string", "Nothing, the code works"),
+            listOf("ValueError", "direction will be None", "direction will be empty", "Nothing, the code works"),
             0,
-            "split() gives one word, but we unpack into two variables.",
+            "split() gives one word, but we unpack it into two variables – not enough values, so ValueError.",
             code = "verb, direction = \"go\".split()",
         ),
         choice(
             "Why do we write MAP[room].get(k, room) instead of MAP[room][k]?",
-            listOf("With a wrong direction the player stays put instead of getting a KeyError", "Because get() is always faster", "Because [] doesn't work on dictionaries", "So the player goes back to the start"),
+            listOf("So a wrong direction gives no KeyError", "Because get() is always faster", "Because [] doesn't work on dictionaries", "So the player goes back to the start"),
             0,
-            "get() with a default value handles exits that don't exist.",
+            "For an exit that doesn't exist, get() returns the current room, so the player stays put instead of the game stopping with a KeyError.",
         ),
         fill(
             "Fill in the blank to split the command into words (the program should print go).",
@@ -233,9 +233,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "How can you make the inventory hold at most 3 items?",
-            listOf("Check whether len(inv) < 3 before append()", "Use inv.max(3)", "Turn the list into a string", "Nothing – the list will stop by itself"),
+            listOf("Check whether len(inv) < 3 before append()", "Check whether len(inv) <= 3 before append()", "Create it as inv = list(3)", "Nothing – the list will stop by itself"),
             0,
-            "A list has no limit, so we enforce it with a condition.",
+            "A list has no limit, so we enforce it with a condition. With <= 3 you could add a fourth item when there are already three.",
         ),
         fill(
             "Fill in the blank to move the item from the room to the inventory (the program should print ['knife'] []).",
@@ -308,9 +308,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "What happens when you run this program?",
-            listOf("AttributeError – hp is a local variable, not an attribute", "It prints 10", "It prints None", "It prints 0"),
+            listOf("AttributeError", "It prints 10", "It prints None", "It prints 0"),
             0,
-            "Without self. the value disappears when __init__ finishes.",
+            "AttributeError: without self. hp is just a local variable of __init__, and it disappears when __init__ finishes.",
             code = "class Player:\n    def __init__(self):\n        hp = 10\np = Player()\nprint(p.hp)",
         ),
         choice(
@@ -322,7 +322,7 @@ internal val module69Practice = listOf(
         fill(
             "Fill in the blank to store the name in the object (the program should print Amy).",
             "class Player:\n    def __init__(self, name):\n        ____.name = name\nprint(Player(\"Amy\").name)",
-            listOf("self", "this", "name"),
+            listOf("self", "cls", "name"),
             "self",
             "self is the object in which we store the attribute.",
         ),
@@ -407,9 +407,9 @@ internal val module69Practice = listOf(
         ),
         choice(
             "What does continue do in a game loop?",
-            listOf("It skips the rest of the current turn and moves on to the next command", "It ends the whole game", "It repeats the same command", "It restarts the game from the beginning"),
+            listOf("It jumps to the next command", "It ends the whole game loop", "It repeats the same command", "It goes back to the first command"),
             0,
-            "continue jumps straight back to the top of the loop.",
+            "continue skips the rest of the current turn and goes back to the top of the loop, to the next command.",
         ),
         fill(
             "Fill in the blank to skip empty commands (the program should print n, and then s).",

@@ -54,15 +54,15 @@ internal val module38Practice = listOf(
         ),
         choice(
             "What does most_common(2) return?",
-            listOf("A list of 2 (element, count) pairs, most common first", "A dictionary with 2 keys", "The two most common elements without counts", "The number 2"),
+            listOf("A list of 2 (element, count) pairs", "A dictionary with 2 keys", "A list of 2 elements without counts", "The number 2"),
             0,
-            "Each pair is an element and the number of times it appears.",
+            "We get a list of 2 pairs, most common first – each pair is an element and the number of times it appears.",
         ),
         choice(
             "What is a Counter?",
-            listOf("A dictionary where the keys are elements and the values are their counts", "A kind of list", "A function that returns a single number", "A tuple with named fields"),
+            listOf("A dictionary for counting", "A kind of list", "A function returning a number", "A tuple with named fields"),
             0,
-            "Counter is a subclass of dict designed for counting.",
+            "Counter is a subclass of dict: the keys are elements and the values are their counts.",
         ),
         fill(
             "Fill in the blank to count how often the numbers appear (prints 2).",
@@ -87,7 +87,7 @@ internal val module38Practice = listOf(
         tiles(
             "Import Counter from the collections module",
             listOf("from", "collections", "import", "Counter"),
-            listOf("itertools", "include"),
+            listOf("itertools", "Collections"),
             "Counter is found in the collections module.",
         ),
     ),
@@ -142,9 +142,9 @@ internal val module38Practice = listOf(
         ),
         choice(
             "Why do we write defaultdict(int) and not defaultdict(0)?",
-            listOf("You have to pass a function that can be called, and 0 isn't one", "0 is too small a number", "int runs faster", "Both forms work the same"),
+            listOf("It needs a function", "0 is too small a number", "int runs faster", "Both forms work"),
             0,
-            "defaultdict calls the given object for every missing key.",
+            "defaultdict calls the given object for every missing key: int() gives 0, but the number 0 can't be called.",
         ),
         choice(
             "What value does a new key get in defaultdict(list)?",
@@ -223,16 +223,16 @@ internal val module38Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("AttributeError – there is no field z", "It prints None", "It prints 0", "KeyError"),
+            listOf("AttributeError", "It prints None", "It prints 0", "KeyError"),
             0,
-            "The type P only has the fields x and y.",
+            "The type P only has the fields x and y, so reading p.z raises AttributeError.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\", \"y\"])\np = P(1, 2)\nprint(p.z)",
         ),
         choice(
             "How is a namedtuple different from a regular tuple?",
-            listOf("The fields have names, so you can write p.x instead of p[0]", "You can change its elements", "You can't index it", "It can only have two fields"),
+            listOf("Its fields have names", "You can change its elements", "You can't index it", "It has only two fields"),
             0,
-            "A namedtuple is a tuple with field names added.",
+            "A namedtuple is a tuple with field names, so you can write p.x instead of p[0].",
         ),
         choice(
             "What does p._replace(x=5) return?",
@@ -318,9 +318,9 @@ internal val module38Practice = listOf(
         ),
         choice(
             "What happens when we append an element to a full deque(maxlen=3)?",
-            listOf("The oldest element on the left drops off", "An error is raised", "The new element is ignored", "maxlen grows to 4"),
+            listOf("The oldest element drops off", "An error is raised", "The new element is ignored", "maxlen grows to 4"),
             0,
-            "A deque with maxlen always holds at most maxlen elements.",
+            "A deque with maxlen holds at most maxlen elements, so append pushes the oldest one out on the left.",
         ),
         choice(
             "Does a regular dictionary in Python 3.7+ remember the order in which keys were inserted?",
@@ -331,7 +331,7 @@ internal val module38Practice = listOf(
         fill(
             "Fill in the blank to remove an element from the left side (prints a).",
             "from collections import deque\nd = deque([\"a\", \"b\", \"c\"])\nprint(d.____())",
-            listOf("popleft", "pop", "leftpop", "shift"),
+            listOf("popleft", "pop", "leftpop", "popfirst"),
             "popleft",
             "popleft removes the first element.",
         ),
@@ -439,7 +439,7 @@ internal val module38Practice = listOf(
         tiles(
             "Import Counter and deque from collections",
             listOf("from", "collections", "import", "Counter,", "deque"),
-            listOf("itertools", "include"),
+            listOf("itertools", "Collections"),
             "We import several names from one module by separating them with commas.",
         ),
     ),

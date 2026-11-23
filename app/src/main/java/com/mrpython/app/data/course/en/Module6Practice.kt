@@ -38,10 +38,10 @@ internal val module6Practice = listOf(
         choice(
             "How is return different from print?",
             listOf(
-                "return hands a result back from the function, print only displays it",
-                "It isn't",
-                "print hands a result back from the function",
-                "return displays text on the screen",
+                "return hands back a result, print only displays it",
+                "print hands back a result, return only displays it",
+                "It isn't – they work the same",
+                "return works only with numbers",
             ),
             0,
             "A result from return can be stored in a variable and used later.",
@@ -118,9 +118,9 @@ internal val module6Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – the argument b is missing", "It prints 1", "It prints None", "It prints 0"),
+            listOf("An error", "It prints 1", "It prints None", "It prints 0"),
             0,
-            "The parameter b has no default value, so you have to pass it.",
+            "The argument b is missing, and the parameter b has no default value, so you have to pass it.",
             code = "def f(a, b):\n    return a + b\n\nprint(f(1))",
         ),
         fill(
@@ -193,7 +193,7 @@ internal val module6Practice = listOf(
         ),
         choice(
             "What does a function with the line return a, b return?",
-            listOf("Both values at once", "Only a", "Only b", "An error"),
+            listOf("Both values at once", "Only the value a", "Only the value b", "The sum a + b"),
             0,
             "Values separated by a comma are returned together.",
         ),
@@ -237,7 +237,7 @@ internal val module6Practice = listOf(
         output(
             "def count_a(s):\n    n = 0\n    for ch in s:\n        if ch == \"a\":\n            n += 1\n    return n\n\nprint(count_a(\"banana\"))",
             "3",
-            "The word banana has three letters a.",
+            "The word banana has three a's.",
         ),
         output("def f():\n    print(\"X\")\n\nw = f()\nprint(w)", "X\nNone", "f() prints X but returns None."),
         output(
@@ -253,7 +253,7 @@ internal val module6Practice = listOf(
         output(
             "def describe(name, age=10):\n    return f\"{name} ({age})\"\n\nprint(describe(\"John\"))\nprint(describe(\"Eve\", age=12))",
             "John (10)\nEve (12)",
-            "Once the default value is used, once a keyword argument.",
+            "The first call uses the default value, the second a keyword argument.",
         ),
         output(
             "def evens(items):\n    w = []\n    for e in items:\n        if e % 2 == 0:\n            w.append(e)\n    return w\n\nprint(evens([1, 2, 3, 4]))",

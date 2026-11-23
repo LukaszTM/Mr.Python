@@ -20,7 +20,7 @@ internal val module66Intro = lesson(
     ),
     explain(
         "itertools",
-        "`itertools` gives you ready-made iterators: `chain` joins, `combinations` picks pairs, " +
+        "`itertools` gives you ready-made iterators: `chain` joins, `combinations` picks combinations (e.g. pairs)," +
             "`accumulate` computes running totals, and `groupby` groups neighboring items.",
         code = "from itertools import accumulate, combinations\nprint(list(accumulate([1, 2, 3])))\nprint(list(combinations(\"ABC\", 2)))",
         output = "[1, 3, 6]\n[('A', 'B'), ('A', 'C'), ('B', 'C')]",

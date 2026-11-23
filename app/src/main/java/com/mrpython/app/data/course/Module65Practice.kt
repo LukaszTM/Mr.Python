@@ -158,7 +158,7 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Co znaczy, że sortowanie jest stabilne?",
-            listOf("Elementy o równych kluczach zachowują pierwotną kolejność", "Sortowanie nigdy nie zgłasza błędu", "Zawsze trwa tyle samo czasu", "Lista nie zmienia długości"),
+            listOf("Równe klucze zachowują pierwotną kolejność", "Sortowanie nigdy nie zgłasza błędu", "Sortowanie zawsze trwa tyle samo czasu", "Wynik nie zależy od kolejności danych"),
             0,
             "Dzięki stabilności można sortować kilka razy po różnych kluczach.",
         ),
@@ -232,9 +232,9 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Dlaczego x in lista ma złożoność O(n)?",
-            listOf("Python może musieć sprawdzić każdy element po kolei", "Bo lista jest zawsze posortowana", "Bo listy używają haszowania", "To nieprawda – to O(1)"),
+            listOf("Bo sprawdza elementy po kolei", "Bo lista jest zawsze posortowana", "Bo listy używają haszowania", "To nieprawda – to O(1)"),
             0,
-            "Lista nie ma indeksu wartości, więc szuka liniowo.",
+            "Lista nie używa haszowania: Python porównuje elementy po kolei i w najgorszym razie przejrzy wszystkie n.",
         ),
         output(
             "import math\nprint(math.ceil(math.log2(1000)))",
@@ -314,7 +314,7 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Dlaczego do kolejki lepszy jest deque niż lista z pop(0)?",
-            listOf("pop(0) na liście to O(n), a popleft() na deque to O(1)", "Lista nie ma metody pop(0)", "deque sortuje elementy", "Nie ma żadnej różnicy"),
+            listOf("popleft() na deque jest O(1), a pop(0) na liście O(n)", "Lista nie ma pop(0), dlatego deque ma popleft()", "deque sam sortuje elementy, a lista nie", "Nie ma różnicy, deque to inna nazwa listy"),
             0,
             "Usunięcie pierwszego elementu listy przesuwa wszystkie pozostałe.",
         ),
@@ -550,9 +550,9 @@ internal val module65Practice = listOf(
         ),
         choice(
             "Na czym polega zasada „dziel i zwyciężaj”?",
-            listOf("Dzielimy problem na mniejsze części, rozwiązujemy je i łączymy wyniki", "Sprawdzamy po kolei wszystkie możliwości", "Zawsze wybieramy najlepszą lokalnie opcję", "Zapisujemy wyniki do pliku"),
+            listOf("Dzielimy problem na mniejsze i łączymy wyniki", "Sprawdzamy po kolei wszystkie możliwości", "Zawsze wybieramy najlepszą lokalnie opcję", "Zapisujemy wyniki do pliku"),
             0,
-            "Tak działają np. sortowanie przez scalanie i quicksort.",
+            "Mniejsze części rozwiązujemy osobno, a potem łączymy ich wyniki – tak działają sortowanie przez scalanie i quicksort.",
         ),
         output(
             "pamiec = {}\ndef fib(n):\n    if n < 2:\n        return n\n    if n not in pamiec:\n        pamiec[n] = fib(n - 1) + fib(n - 2)\n    return pamiec[n]\nprint(fib(50))",

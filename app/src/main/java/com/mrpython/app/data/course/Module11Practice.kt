@@ -41,9 +41,9 @@ internal val module11Practice = listOf(
         ),
         choice(
             "Jak utworzyć obiekt klasy Auto?",
-            listOf("a = Auto()", "a = new Auto()", "a = class Auto", "a = Auto.create"),
+            listOf("a = Auto()", "a = Auto", "a = class Auto", "a = Auto(self)"),
             0,
-            "Obiekt tworzymy, wywołując klasę jak funkcję.",
+            "Obiekt tworzymy, wywołując klasę jak funkcję – z nawiasami. Samo Auto to klasa, a nie obiekt.",
         ),
         choice(
             "Co się stanie?",
@@ -61,7 +61,7 @@ internal val module11Practice = listOf(
         fill(
             "Uzupełnij, aby utworzyć klasę Rower.",
             "____ Rower:\n    pass\n\nr = Rower()\nprint(\"gotowe\")",
-            listOf("class", "def", "new"),
+            listOf("class", "def", "Class"),
             "class",
             "Klasę definiujemy słowem class.",
         ),
@@ -75,7 +75,7 @@ internal val module11Practice = listOf(
         tiles(
             "Utwórz obiekt klasy Punkt o współrzędnych 3 i 4 w zmiennej p",
             listOf("p", "=", "Punkt(", "3,", "4", ")"),
-            listOf("new", "self,"),
+            listOf("class", "self,"),
             "Argumenty podajemy w nawiasie, bez self.",
         ),
         tiles(
@@ -134,22 +134,22 @@ internal val module11Practice = listOf(
         ),
         choice(
             "Co jest nie tak z ostatnią linią?",
-            listOf("Brakuje nawiasów – metoda nie zostanie wywołana", "Nic, wypisze Hau", "Brakuje self w wywołaniu", "Pies nie ma metody szczekaj"),
+            listOf("Brakuje nawiasów po szczekaj", "Nic, wypisze Hau", "Brakuje self w wywołaniu", "Pies nie ma metody szczekaj"),
             0,
             "Bez () wypisujemy samą metodę, zamiast ją wywołać.",
             code = "class Pies:\n    def szczekaj(self):\n        return \"Hau\"\n\np = Pies()\nprint(p.szczekaj)",
         ),
         choice(
             "Metoda ma nagłówek def ustaw(self, x). Ile argumentów podajemy w wywołaniu k.ustaw(...)?",
-            listOf("Jeden – self Python przekazuje sam", "Dwa", "Zero", "Trzy"),
+            listOf("Jeden", "Dwa", "Zero", "Trzy"),
             0,
-            "Obiekt przed kropką staje się self.",
+            "Podajemy tylko x – obiekt przed kropką Python sam przekazuje jako self.",
         ),
         choice(
             "Czym metoda różni się od zwykłej funkcji?",
-            listOf("Jest zdefiniowana w klasie i działa na obiekcie", "Nie może zwracać wartości", "Nie może mieć parametrów", "Niczym"),
+            listOf("Jest zdefiniowana w klasie", "Nie może zwracać wartości", "Nie może mieć parametrów", "Niczym"),
             0,
-            "Metodę wywołujemy na obiekcie, np. obiekt.metoda().",
+            "Metodę definiujemy w klasie i wywołujemy na obiekcie, np. obiekt.metoda().",
         ),
         fill(
             "Uzupełnij, aby metoda odczytała atrybut obiektu.",
@@ -221,9 +221,9 @@ internal val module11Practice = listOf(
         ),
         choice(
             "Co powinna zwracać metoda __str__?",
-            listOf("Napis, który pokaże print()", "Liczbę", "Nowy obiekt", "None"),
+            listOf("Napis", "Liczbę", "Nowy obiekt", "None"),
             0,
-            "__str__ zwraca tekstowy opis obiektu.",
+            "__str__ zwraca napis – tekstowy opis obiektu, który pokaże print().",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -234,7 +234,7 @@ internal val module11Practice = listOf(
         ),
         choice(
             "Do czego służy super().__init__() w klasie potomnej?",
-            listOf("Wywołuje __init__ klasy bazowej", "Tworzy nową klasę", "Usuwa obiekt", "Wywołuje __str__"),
+            listOf("Wywołuje __init__ klasy bazowej", "Tworzy nową klasę bazową", "Usuwa obiekt klasy bazowej", "Wywołuje __str__ klasy bazowej"),
             0,
             "Dzięki temu klasa bazowa ustawia swoje atrybuty.",
         ),
@@ -314,16 +314,16 @@ internal val module11Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Błąd – obiekt nie ma atrybutu wiek", "Wypisze None", "Wypisze 0", "Wypisze Tom"),
+            listOf("Błąd", "Wypisze None", "Wypisze 0", "Wypisze Tom"),
             0,
-            "Odczyt nieistniejącego atrybutu zgłasza AttributeError.",
+            "Kot ma tylko atrybut imie – odczyt nieistniejącego atrybutu wiek zgłasza AttributeError.",
             code = "class Kot:\n    def __init__(self):\n        self.imie = \"Tom\"\n\nk = Kot()\nprint(k.wiek)",
         ),
         choice(
             "Co klasa potomna dostaje od klasy bazowej?",
-            listOf("Jej metody, które może też nadpisać", "Tylko nazwę", "Nic", "Tylko metodę __str__"),
+            listOf("Jej metody", "Tylko nazwę", "Nic", "Tylko metodę __str__"),
             0,
-            "Klasa potomna dziedziczy wszystkie metody bazowej.",
+            "Klasa potomna dziedziczy wszystkie metody klasy bazowej i może je nadpisać.",
         ),
         fill(
             "Uzupełnij, aby utworzyć obiekt i wypisać jego atrybut.",

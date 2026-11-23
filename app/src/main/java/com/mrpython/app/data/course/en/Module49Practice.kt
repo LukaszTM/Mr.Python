@@ -79,7 +79,7 @@ internal val module49Practice = listOf(
         ),
         choice(
             "How many decimal places does round(x, 1) keep?",
-            listOf("One", "None", "Two", "It depends on x"),
+            listOf("One", "Zero", "Two", "It depends on x"),
             0,
             "The second argument is the number of decimal places.",
         ),

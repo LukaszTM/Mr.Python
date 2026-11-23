@@ -48,7 +48,7 @@ internal val module21Practice = listOf(
         choice(
             "What does f.read() return?",
             listOf(
-                "The whole contents of the file as one string",
+                "All the content as a string",
                 "A list of numbers",
                 "Only the first character",
                 "The name of the file",
@@ -59,7 +59,7 @@ internal val module21Practice = listOf(
         choice(
             "Why do we call f.close()?",
             listOf(
-                "To close the file and save the changes to disk",
+                "To finish working with the file",
                 "To delete the file",
                 "To clear the file's contents",
                 "To open the file again",
@@ -70,13 +70,13 @@ internal val module21Practice = listOf(
         choice(
             "What happens when you run this code?",
             listOf(
-                "ValueError – the file is already closed",
+                "A ValueError",
                 "The file will contain xy",
                 "The file will contain y",
                 "Nothing happens",
             ),
             0,
-            "You can't write to a closed file anymore.",
+            "You can't write to a closed file anymore – write raises a ValueError.",
             code = "f = open(\"a.txt\", \"w\")\nf.write(\"x\")\nf.close()\nf.write(\"y\")",
         ),
         fill(
@@ -162,13 +162,13 @@ internal val module21Practice = listOf(
         choice(
             "What happens when you run this code?",
             listOf(
-                "ValueError – the file is already closed",
+                "A ValueError",
                 "The file will contain ab",
                 "The file will contain b",
                 "Nothing happens",
             ),
             0,
-            "After the with block the file is closed, so the write fails.",
+            "After the with block the file is closed, so write raises a ValueError.",
             code = "with open(\"a.txt\", \"w\") as f:\n    f.write(\"a\")\nf.write(\"b\")",
         ),
         choice(
@@ -249,7 +249,7 @@ internal val module21Practice = listOf(
         choice(
             "What does f.readlines() return?",
             listOf(
-                "A list of strings – one for each line",
+                "A list of all the lines",
                 "The number of lines",
                 "One line – the next one",
                 "The whole file as one string",
@@ -463,8 +463,8 @@ internal val module21Practice = listOf(
             "A list comprehension has the form [expression for variable in file].",
         ),
         fill(
-            "Fill in the mode to write the file from scratch.",
-            "with open(\"p.txt\", \"____\") as f:\n    f.write(\"new text\")",
+            "Fill in the mode so the program prints only: new text.",
+            "with open(\"p.txt\", \"w\") as f:\n    f.write(\"old \")\nwith open(\"p.txt\", \"____\") as f:\n    f.write(\"new text\")\nprint(open(\"p.txt\").read())",
             listOf("w", "a", "r"),
             "w",
             "\"w\" clears the file, \"a\" only appends, and \"r\" doesn't allow writing.",

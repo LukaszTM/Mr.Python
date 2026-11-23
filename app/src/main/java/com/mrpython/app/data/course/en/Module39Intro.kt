@@ -14,7 +14,7 @@ internal val module39Intro = lesson(
     ),
     explain(
         "chain and product",
-        "`chain` joins several iterators into a single sequence, one after another. `product` " +
+        "`chain` joins several sequences (lists, strings, iterators) into one, one after another. `product` " +
             "creates all the pairs – it works like two nested `for` loops.",
         code = "from itertools import chain, product\nprint(list(chain([1, 2], [3])))\nprint(list(product(\"ab\", [1, 2])))",
         output = "[1, 2, 3]\n[('a', 1), ('a', 2), ('b', 1), ('b', 2)]",
@@ -50,7 +50,7 @@ internal val module39Intro = lesson(
     output(
         "from itertools import chain\nprint(list(chain(\"ab\", \"c\")))",
         "['a', 'b', 'c']",
-        "chain joins iterators one after another.",
+        "chain joins sequences one after another – here two strings.",
     ),
     fill(
         "Fill in the blank to get the running totals [1, 3, 6].",

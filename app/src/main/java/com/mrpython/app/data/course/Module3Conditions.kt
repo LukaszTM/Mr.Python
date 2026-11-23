@@ -9,7 +9,7 @@ internal val module3 = CourseUnit(
     lessons = listOf(
         lesson(
             "u3l1", "Matematyka",
-            output("print(7 // 2)", "3", "// to dzielenie całkowite – odcina część ułamkową."),
+            output("print(7 // 2)", "3", "// to dzielenie całkowite: 7 / 2 = 3.5, a // zaokrągla w dół do 3."),
             output("print(7 % 2)", "1", "% zwraca resztę z dzielenia."),
             output("print(2 ** 3)", "8", "** to potęgowanie: 2 · 2 · 2."),
             choice(
@@ -35,7 +35,7 @@ internal val module3 = CourseUnit(
             output("print(3 > 2)", "True", "Porównanie zwraca wartość logiczną True lub False."),
             choice(
                 "Który operator sprawdza, czy dwie wartości są równe?",
-                listOf("==", "=", "===", "equals"),
+                listOf("==", "=", "!=", "<="),
                 0,
                 "== porównuje, a pojedyncze = przypisuje.",
             ),
@@ -46,9 +46,9 @@ internal val module3 = CourseUnit(
             ),
             output("print(not False)", "True", "not odwraca wartość logiczną."),
             tiles(
-                "Zapisz warunek: x jest różne od 0",
+                "Zapisz warunek: x jest różne od 0 (x po lewej stronie)",
                 listOf("x", "!=", "0"),
-                listOf("=", "<>"),
+                listOf("=", "=="),
                 "Operator „różne od” to !=.",
             ),
             output("print(10 != 10)", "False", "10 jest równe 10, więc „różne” to fałsz."),
@@ -65,7 +65,7 @@ internal val module3 = CourseUnit(
             fill(
                 "Uzupełnij brakujący znak.",
                 "x = 1\nif x > 0____\n    print(\"dodatnia\")",
-                listOf(":", ";", "{"),
+                listOf(":", ";", ","),
                 ":",
                 "Linia z if kończy się dwukropkiem.",
             ),
@@ -125,7 +125,7 @@ internal val module3 = CourseUnit(
                 "x < 0 oznacza liczbę ujemną.",
             ),
             tiles(
-                "Zapisz warunek: wiek co najmniej 13 i mniej niż 18",
+                "Zapisz warunek: wiek co najmniej 13 i mniej niż 18 (zacznij od dolnej granicy)",
                 listOf("wiek", ">=", "13", "and", "wiek", "<", "18"),
                 listOf("or", "=>"),
                 "and łączy dwa warunki, które muszą być spełnione jednocześnie.",

@@ -38,7 +38,8 @@ internal val module26Cards = listOf(
         explain(
             "Przesuwanie w prawo",
             "Wstawiając `x = a[i]`, idziemy w lewo od `j = i - 1`. Każdy element większy od `x` " +
-                "przesuwamy o jedno miejsce w prawo (`a[j + 1] = a[j]`), a `x` wpisujemy w lukę: `a[j + 1] = x`.",
+                "przesuwamy o jedno miejsce w prawo (`a[j + 1] = a[j]`), a `x` wpisujemy w lukę: `a[j + 1] = x`. " +
+                "Im mniej przesunięć, tym szybciej działa całe sortowanie.",
             code = "a = [1, 4, 2]\nx, j = a[2], 1\nwhile j >= 0 and a[j] > x:\n    a[j + 1] = a[j]\n    j -= 1\na[j + 1] = x",
         ),
         explain(

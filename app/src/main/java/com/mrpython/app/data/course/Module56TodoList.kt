@@ -86,9 +86,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("IndexError – nie ma zadania o indeksie 5", "Usunie ostatnie zadanie", "Zwróci None", "KeyError"),
+                listOf("IndexError", "Usunie ostatnie zadanie", "Zwróci None", "KeyError"),
                 0,
-                "Lista ma tylko indeksy 0 i 1.",
+                "Lista ma tylko indeksy 0 i 1, więc pop(5) zgłasza IndexError. KeyError dotyczy brakującego klucza słownika.",
                 code = "zadania = [\"A\", \"B\"]\nzadania.pop(5)",
             ),
             tiles(
@@ -177,9 +177,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "Jaka jest główna zaleta klasy Zadanie nad słownikiem?",
-                listOf("Dane i zachowanie (metody) są w jednym miejscu", "Klasa zajmuje mniej miejsca", "Słowników nie da się zmieniać", "Klasy nie wymagają __init__"),
+                listOf("Dane i metody są razem", "Klasa zajmuje mniej pamięci", "Słowników nie da się zmieniać", "Obiekty są zawsze szybsze"),
                 0,
-                "Obiekt sam wie, jak się zakończyć i jak się wypisać.",
+                "Klasa trzyma dane razem z zachowaniem (metodami): obiekt sam wie, jak się zakończyć i jak się wypisać.",
             ),
             output(
                 "class ListaZadan:\n    def __init__(self):\n        self.zadania = []\n    def dodaj(self, tytul):\n        self.zadania.append(tytul)\n    def __len__(self):\n        return len(self.zadania)\n\nlista = ListaZadan()\nlista.dodaj(\"A\")\nlista.dodaj(\"B\")\nprint(len(lista))",
@@ -229,9 +229,9 @@ internal val module56 = CourseUnit(
             ),
             choice(
                 "Dlaczego do zapisu lepiej użyć JSON niż str(zadania)?",
-                listOf("JSON to standard, który odczytają też inne programy", "str nie działa dla list", "JSON jest zawsze krótszy", "str zmienia kolejność zadań"),
+                listOf("Inne programy też czytają JSON", "str nie działa dla list", "JSON jest zawsze krótszy", "str zmienia kolejność zadań"),
                 0,
-                "str daje format Pythona, a JSON jest wspólnym formatem wymiany danych.",
+                "str daje format Pythona, a JSON to standard wymiany danych, który odczytają też inne programy.",
             ),
             tiles(
                 "Wczytaj zadania z napisu JSON w zmiennej tekst.",

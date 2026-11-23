@@ -56,13 +56,13 @@ internal val module50 = CourseUnit(
             choice(
                 "How is & different from and?",
                 listOf(
-                    "& works on individual bits, and works on the truthiness of values",
-                    "They are the same",
-                    "& works only on strings",
-                    "and works on bits, & on Boolean values",
+                    "& works on bits, and on whole values",
+                    "There is no difference between them",
+                    "& works only on strings and lists",
+                    "and works on bits, & on whole values",
                 ),
                 0,
-                "6 & 3 is 2, while 6 and 3 is 3.",
+                "& works bit by bit, while and looks at the truthiness of whole values: 6 & 3 is 2, while 6 and 3 is 3.",
             ),
             fill(
                 "Fill in the blank to combine the bits of both numbers (result 7).",

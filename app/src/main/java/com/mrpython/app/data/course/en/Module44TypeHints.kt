@@ -60,7 +60,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "What does the hint int | None mean?",
-                listOf("The value can be an integer or None", "A nonzero integer", "Bitwise OR of a number and None", "An empty number"),
+                listOf("An integer or None", "A nonzero integer", "An integer and None at once", "An empty integer"),
                 0,
                 "A vertical bar in a hint means \"one of these types\".",
             ),
@@ -72,9 +72,9 @@ internal val module44 = CourseUnit(
             fill(
                 "Complete the hint so it means \"a string or None\".",
                 "def describe(x: str | ____ = None) -> str:\n    return \"none\" if x is None else x\nprint(describe())",
-                listOf("None", "Null", "nil", "empty"),
+                listOf("None", "none", "0", "False"),
                 "None",
-                "In Python, a missing value is None.",
+                "A missing value in Python is None, with a capital N; none, 0 and False are something else.",
             ),
             choice(
                 "Which notation is equivalent to Optional[int]?",
@@ -108,7 +108,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "What happens when we pass a string to a function with an int hint?",
-                listOf("Python runs the code normally – hints aren't checked", "TypeError right at the call", "The string gets converted to int", "SyntaxError"),
+                listOf("The code runs normally", "TypeError at the call", "The string becomes an int", "SyntaxError"),
                 0,
                 "Type hints are hints for people and tools (e.g. mypy), not rules.",
             ),
@@ -131,7 +131,7 @@ internal val module44 = CourseUnit(
             ),
             choice(
                 "What are tools like mypy for?",
-                listOf("They check types without running the program", "They make the program run faster", "They format code", "They install libraries"),
+                listOf("They check types", "They speed up programs", "They format code", "They install libraries"),
                 0,
                 "mypy analyzes type hints and finds type errors before the program runs.",
             ),

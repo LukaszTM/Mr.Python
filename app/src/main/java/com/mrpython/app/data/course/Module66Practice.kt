@@ -64,7 +64,7 @@ internal val module66Practice = listOf(
             "Dla ujemnych floor idzie w dół, czyli od zera: -3.5 → -4.",
         ),
         tiles(
-            "Oblicz pole koła o promieniu r i zapisz je w zmiennej pole",
+            "Oblicz pole koła o promieniu r jako math.pi razy r do kwadratu i zapisz je w zmiennej pole",
             listOf("pole", "=", "math.pi", "*", "r ** 2"),
             listOf("math.pi()", "r ^ 2"),
             "math.pi to stała (bez nawiasów), a potęgę zapisujemy **.",
@@ -150,7 +150,7 @@ internal val module66Practice = listOf(
             "Pięć godzin po 22:00 to 3:00 następnego dnia.",
         ),
         tiles(
-            "Dodaj do daty d tydzień i zapisz wynik w zmiennej za_tydzien",
+            "Zapisz w zmiennej za_tydzien datę d powiększoną o tydzień (d + …)",
             listOf("za_tydzien", "=", "d", "+", "timedelta(", "weeks=1", ")"),
             listOf("days=1", "date("),
             "timedelta(weeks=1) to odstęp 7 dni.",
@@ -227,9 +227,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("AttributeError – pól namedtuple nie można zmieniać", "p.x będzie równe 5", "TypeError", "Nic – przypisanie zostanie zignorowane"),
+            listOf("AttributeError", "p.x będzie równe 5", "TypeError", "Nic – przypisanie zostanie zignorowane"),
             0,
-            "namedtuple, jak każda krotka, jest niezmienna.",
+            "AttributeError: pól namedtuple nie można zmieniać, bo jak każda krotka jest niezmienna.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", \"x y\")\np = P(1, 2)\np.x = 5",
         ),
         output(
@@ -252,7 +252,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Do czego najlepiej użyć deque zamiast listy?",
-            listOf("Do szybkiego dodawania i usuwania z obu końców", "Do sortowania", "Do przechowywania par klucz–wartość", "Do liczenia wystąpień"),
+            listOf("Do szybkiego dodawania i usuwania z obu końców", "Do szybkiego sortowania elementów", "Do przechowywania par klucz–wartość", "Do liczenia wystąpień elementów"),
             0,
             "deque ma szybkie operacje na obu końcach.",
         ),
@@ -344,9 +344,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Co zwraca combinations(\"ABCD\", 2) bez otoczenia list()?",
-            listOf("Iterator (leniwy obiekt)", "Listę krotek", "Zbiór", "Liczbę 6"),
+            listOf("Iterator", "Listę krotek", "Zbiór", "Liczbę 6"),
             0,
-            "Funkcje itertools tworzą elementy dopiero na żądanie.",
+            "Funkcje itertools zwracają leniwe iteratory, które tworzą elementy dopiero na żądanie.",
         ),
     ),
     practice(
@@ -378,7 +378,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Co robi functools.partial?",
-            listOf("Tworzy nową funkcję z częścią argumentów ustawionych z góry", "Dzieli funkcję na kilka części", "Zapamiętuje wyniki funkcji", "Łączy listy"),
+            listOf("Tworzy nową funkcję z częścią argumentów ustawionych z góry", "Dzieli funkcję na kilka mniejszych funkcji", "Zapamiętuje wyniki wcześniejszych wywołań funkcji", "Łączy kilka list w jedną listę"),
             0,
             "partial(f, x) to funkcja, która woła f z x na początku.",
         ),
@@ -401,9 +401,9 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu?",
-            listOf("TypeError – pusta lista bez wartości początkowej", "Wypisze 0", "Wypisze None", "Wypisze []"),
+            listOf("TypeError", "Wypisze 0", "Wypisze None", "Wypisze []"),
             0,
-            "reduce na pustej sekwencji potrzebuje wartości początkowej.",
+            "TypeError: reduce na pustej sekwencji potrzebuje wartości początkowej (trzeciego argumentu).",
             code = "from functools import reduce\nprint(reduce(lambda a, b: a + b, []))",
         ),
         output(
@@ -426,7 +426,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Do czego służy functools.reduce?",
-            listOf("Składa elementy sekwencji w jedną wartość, łącząc je parami", "Usuwa duplikaty z listy", "Zmniejsza listę o połowę", "Sortuje listę"),
+            listOf("Składa elementy w jedną wartość", "Usuwa duplikaty z listy", "Zmniejsza listę o połowę", "Sortuje elementy listy"),
             0,
             "reduce(f, [a, b, c]) liczy f(f(a, b), c).",
         ),
@@ -461,7 +461,7 @@ internal val module66Practice = listOf(
         output(
             "import re\nprint(re.findall(r\"\\w+\", \"ala, ma; kota!\"))",
             "['ala', 'ma', 'kota']",
-            "\\w+ dopasowuje ciągi liter (bez znaków przestankowych).",
+            "\\w+ dopasowuje ciągi znaków słowa (litery, cyfry, _), bez znaków przestankowych.",
         ),
         choice(
             "Co oznacza + we wzorcu \\d+?",
@@ -488,7 +488,7 @@ internal val module66Practice = listOf(
         ),
         choice(
             "Po co wzorce zapisujemy jako r\"...\"?",
-            listOf("Aby ukośniki wsteczne nie były traktowane jako znaki specjalne napisu", "Aby wzorzec działał szybciej", "Bo r oznacza regex i jest wymagane", "Aby ignorować wielkość liter"),
+            listOf("Aby ukośnik \\ nie był znakiem specjalnym napisu", "Aby wzorzec był szybciej sprawdzany", "Bo r oznacza regex i bez niego re nie działa", "Aby wzorzec ignorował wielkość liter"),
             0,
             "W surowym napisie \\d zostaje dosłownie \\d.",
         ),

@@ -28,9 +28,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Gdzie najlepiej ustawić początkowe saldo konta?",
-                listOf("W __init__, przez self.saldo", "W metodzie wplac", "Jako zmienną globalną", "W __str__"),
+                listOf("W metodzie __init__", "W metodzie wplac", "Jako zmienną globalną", "W metodzie __str__"),
                 0,
-                "__init__ przygotowuje stan każdego nowego obiektu.",
+                "__init__ przygotowuje stan każdego nowego obiektu, np. self.saldo = 0.",
             ),
             output(
                 "class Konto:\n    def __init__(self, saldo=0):\n        self.saldo = saldo\n\nprint(Konto().saldo, Konto(200).saldo)",
@@ -50,9 +50,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Jaki jest problem z metodą wplac bez żadnego sprawdzania?",
-                listOf("Można wpłacić ujemną kwotę i w ten sposób zmniejszyć saldo", "Nie da się wpłacić dwa razy", "Saldo zawsze zostaje 0", "Nie ma problemu"),
+                listOf("Można wpłacić ujemną kwotę", "Nie da się wpłacić dwa razy", "Saldo zawsze zostaje 0", "Nie ma problemu"),
                 0,
-                "Dlatego w następnej lekcji dodamy walidację.",
+                "Ujemna „wpłata” zmniejszyłaby saldo. Dlatego w następnej lekcji dodamy walidację.",
             ),
         ),
         lesson(
@@ -100,9 +100,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Dlaczego lepiej zgłosić wyjątek niż tylko wypisać „Brak środków”?",
-                listOf("Kod wywołujący może sam zdecydować, jak obsłużyć błąd", "Wyjątki są szybsze niż print", "print nie działa w metodach", "Bo wtedy saldo samo się poprawi"),
+                listOf("Kod wywołujący sam zdecyduje, co zrobić", "Wyjątki są szybsze niż print", "print nie działa w metodach", "Bo wtedy saldo samo się poprawi"),
                 0,
-                "Wyjątek informuje kod wywołujący, że operacja się nie udała.",
+                "Wyjątek informuje kod wywołujący, że operacja się nie udała, a ten może go złapać w try i obsłużyć po swojemu.",
             ),
         ),
         lesson(
@@ -114,9 +114,9 @@ internal val module36 = CourseUnit(
             ),
             choice(
                 "Dlaczego historia = [] tworzymy w __init__, a nie jako atrybut klasy?",
-                listOf("Atrybut klasy byłby jedną wspólną listą dla wszystkich kont", "Atrybuty klasy nie mogą być listami", "W __init__ lista działa szybciej", "Bez różnicy"),
+                listOf("Wszystkie konta dzieliłyby jedną listę", "Atrybuty klasy nie mogą być listami", "W __init__ lista działa szybciej", "Bez różnicy"),
                 0,
-                "Każde konto potrzebuje własnej historii.",
+                "Lista w atrybucie klasy jest jedna, wspólna dla wszystkich obiektów, a każde konto potrzebuje własnej historii.",
             ),
             fill(
                 "Uzupełnij, aby zapisać operację w historii.",

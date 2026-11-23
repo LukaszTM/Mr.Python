@@ -114,8 +114,8 @@ internal val module26 = CourseUnit(
             choice(
                 "Jak działa sortowanie przez wstawianie?",
                 listOf(
-                    "Bierze kolejny element i wstawia go we właściwe miejsce posortowanej części",
-                    "Wybiera największy element i przenosi go na koniec",
+                    "Wsuwa kolejny element w posortowaną część",
+                    "Przenosi największy element na koniec",
                     "Zamienia losowe pary elementów",
                     "Sortuje osobno obie połowy listy",
                 ),
@@ -185,9 +185,9 @@ internal val module26 = CourseUnit(
             ),
             choice(
                 "Co zwraca a.sort()?",
-                listOf("None – sortuje listę w miejscu", "Nową posortowaną listę", "Posortowaną krotkę", "Liczbę elementów"),
+                listOf("None", "Nową posortowaną listę", "Posortowaną krotkę", "Liczbę elementów"),
                 0,
-                "sort() zmienia listę a i nic nie zwraca.",
+                "sort() sortuje listę a w miejscu i zwraca None.",
             ),
             output(
                 "imiona = [\"ola\", \"Ewa\", \"adam\"]\nprint(sorted(imiona))\nprint(sorted(imiona, key=str.lower))",
@@ -206,7 +206,7 @@ internal val module26 = CourseUnit(
             choice(
                 "Co znaczy, że sortowanie w Pythonie jest stabilne?",
                 listOf(
-                    "Elementy o równych kluczach zachowują swoją kolejność",
+                    "Równe elementy zachowują kolejność",
                     "Sortowanie nigdy nie zgłasza błędu",
                     "Lista po sortowaniu się nie zmienia",
                     "Sortowanie zawsze trwa tyle samo",

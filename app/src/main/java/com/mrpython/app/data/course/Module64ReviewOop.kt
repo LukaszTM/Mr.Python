@@ -21,7 +21,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "Czym jest self w metodzie?",
-                listOf("Obiektem, na którym wywołano metodę", "Klasą", "Słowem kluczowym Pythona", "Kopią obiektu"),
+                listOf("Obiektem, na którym wywołano metodę", "Klasą, w której zdefiniowano metodę", "Słowem kluczowym, takim jak def", "Kopią obiektu tworzoną przy wywołaniu"),
                 0,
                 "Przy wywołaniu p.metoda() Python przekazuje p jako self.",
             ),
@@ -93,7 +93,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "Co oznacza podkreślenie na początku nazwy self._saldo?",
-                listOf("Umowną informację: to atrybut wewnętrzny", "Python blokuje do niego dostęp", "Atrybut staje się stałą", "Atrybut jest szybszy"),
+                listOf("Umowę: atrybut jest do użytku wewnętrznego", "Blokadę: Python nie pozwala go odczytać", "Stałą: atrybutu nie można zmienić", "Przyspieszenie: atrybut działa szybciej"),
                 0,
                 "Jedno podkreślenie to tylko konwencja – dostęp nadal jest możliwy.",
             ),
@@ -213,7 +213,7 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("AttributeError – __init__ klasy A się nie wykonał", "Wypisze 1", "Wypisze 2", "Wypisze None"),
+                listOf("AttributeError", "Wypisze 1", "Wypisze 2", "Wypisze None"),
                 0,
                 "B nadpisuje __init__ i nie woła super().__init__(), więc x nie istnieje.",
                 code = "class A:\n    def __init__(self):\n        self.x = 1\nclass B(A):\n    def __init__(self):\n        self.y = 2\nprint(B().x)",
@@ -268,9 +268,9 @@ internal val module64 = CourseUnit(
             ),
             choice(
                 "Dlaczego w dataclass nie piszemy rzeczy: list = []?",
-                listOf("Zgłosi ValueError, bo lista byłaby wspólna dla obiektów", "To działa tak samo", "Listy nie mogą być polami", "Bo trzeba napisać list()"),
+                listOf("Python zgłosi ValueError – lista byłaby wspólna", "Python zgłosi TypeError – listy nie mogą być polami", "Python zgłosi SyntaxError – trzeba napisać list()", "Można, to działa tak samo jak field(...)"),
                 0,
-                "Zmienne wartości domyślne podajemy przez field(default_factory=list).",
+                "Jedna lista [] byłaby wspólna dla wszystkich obiektów, więc dataclass to blokuje; nową listę dla każdego obiektu daje field(default_factory=list).",
             ),
             output(
                 "from dataclasses import dataclass\n@dataclass(frozen=True)\nclass Para:\n    a: int\n    b: int\np = Para(1, 2)\ntry:\n    p.a = 5\nexcept Exception as e:\n    print(type(e).__name__)",
@@ -329,7 +329,7 @@ internal val module64 = CourseUnit(
             fill(
                 "Uzupełnij, aby funkcja zgłosiła wyjątek dla złego kodu.",
                 "class ZlyKod(Exception):\n    pass\ndef sprawdz(kod):\n    if len(kod) != 4:\n        ____ ZlyKod(kod)\ntry:\n    sprawdz(\"12\")\nexcept ZlyKod:\n    print(\"zły kod\")",
-                listOf("raise", "return", "throw"),
+                listOf("raise", "return", "except"),
                 "raise",
                 "Wyjątek zgłaszamy słowem raise.",
             ),

@@ -70,9 +70,9 @@ internal val module65 = CourseUnit(
             ),
             choice(
                 "How is my_list.sort() different from sorted(my_list)?",
-                listOf("sort() changes the list and returns None, sorted() returns a new list", "It isn't", "sorted() changes the list in place", "sort() only works on numbers"),
+                listOf("sort() changes the list, sorted() returns a new one", "sorted() changes the list, sort() returns a new one", "sort() only works on numbers, sorted() on anything", "It isn't – they're two names for one function"),
                 0,
-                "sorted() leaves the original alone.",
+                "sort() sorts the list in place and returns None, while sorted() returns a new list and leaves the original alone.",
             ),
             output(
                 "data = [(\"b\", 1), (\"a\", 2), (\"c\", 1)]\ndata.sort(key=lambda p: p[1])\nprint(data)",

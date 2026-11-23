@@ -26,36 +26,36 @@ internal val module23Practice = listOf(
         choice(
             "Co zwraca iter(lista)?",
             listOf(
-                "Iterator, który podaje elementy po kolei",
-                "Kopię listy",
+                "Iterator tej listy",
+                "Kopię tej listy",
                 "Pierwszy element listy",
-                "Liczbę elementów",
+                "Liczbę elementów listy",
             ),
             0,
-            "Z iteratora pobieramy elementy funkcją next().",
+            "iter() tworzy iterator, z którego elementy pobieramy po kolei funkcją next().",
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
                 "Wypisze 1, a potem zgłosi StopIteration",
-                "Wypisze 1 i 1",
-                "Wypisze 1 i None",
-                "Zgłosi IndexError",
+                "Wypisze 1, a potem jeszcze raz 1",
+                "Wypisze 1, a potem None",
+                "Wypisze 1, a potem zgłosi IndexError",
             ),
             0,
-            "Iterator miał tylko jeden element.",
+            "Iterator miał tylko jeden element, więc drugie next() zgłasza StopIteration, a nie IndexError.",
             code = "it = iter([1])\nprint(next(it))\nprint(next(it))",
         ),
         choice(
             "Co robi pętla for, gdy iterator się skończy?",
             listOf(
-                "Sama obsługuje StopIteration i kończy pętlę",
-                "Zgłasza błąd programu",
+                "Po prostu kończy pętlę",
+                "Zgłasza StopIteration",
                 "Zaczyna od początku",
                 "Wypisuje None",
             ),
             0,
-            "Dlatego w zwykłej pętli for nie widzimy StopIteration.",
+            "for sam łapie StopIteration i kończy pętlę bez błędu – dlatego w zwykłej pętli go nie widzimy.",
         ),
         fill(
             "Uzupełnij, aby program wypisał 8.",
@@ -129,13 +129,13 @@ internal val module23Practice = listOf(
         choice(
             "Co zwraca wywołanie funkcji, która zawiera yield?",
             listOf(
-                "Obiekt generatora – kod funkcji jeszcze się nie wykonał",
+                "Obiekt generatora",
                 "Wartość z pierwszego yield",
                 "Listę wszystkich wartości",
                 "None",
             ),
             0,
-            "Kod rusza dopiero przy pierwszym next().",
+            "Kod funkcji jeszcze się nie wykonał – rusza dopiero przy pierwszym next().",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -195,9 +195,9 @@ internal val module23Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – generatora nie można indeksować", "Wypisze 1", "Wypisze 0", "Wypisze [1]"),
+            listOf("Zgłosi TypeError", "Wypisze liczbę 1", "Wypisze liczbę 0", "Wypisze listę [1]"),
             0,
-            "Generator nie przechowuje wartości, więc nie ma g[0].",
+            "Generator nie przechowuje wartości, więc nie można go indeksować – g[0] to TypeError.",
             code = "g = (x for x in [1, 2, 3])\nprint(g[0])",
         ),
         choice(
@@ -278,13 +278,13 @@ internal val module23Practice = listOf(
         choice(
             "Co znaczy, że generator jest leniwy?",
             listOf(
-                "Liczy kolejną wartość dopiero wtedy, gdy jest potrzebna",
+                "Liczy wartość dopiero na żądanie",
                 "Działa wolniej niż lista",
                 "Liczy wszystkie wartości od razu",
                 "Zatrzymuje się po 10 wartościach",
             ),
             0,
-            "Dzięki temu może być nawet nieskończony.",
+            "Kolejna wartość powstaje dopiero przy next() – dzięki temu generator może być nawet nieskończony.",
         ),
         choice(
             "Co wypisze ten kod?",
@@ -295,9 +295,9 @@ internal val module23Practice = listOf(
         ),
         choice(
             "Jak bezpiecznie pobrać 5 wartości z nieskończonego generatora g?",
-            listOf("[next(g) for _ in range(5)]", "list(g)", "list(g)[:5]", "g[:5]"),
+            listOf("[next(g) for _ in range(5)]", "[list(g) for _ in range(5)]", "[g[i] for i in range(5)]", "list(g)[:5]"),
             0,
-            "list(g) próbowałoby pobrać nieskończenie wiele wartości.",
+            "list(g) próbowałoby pobrać nieskończenie wiele wartości, a g[i] to TypeError – zostaje next().",
         ),
         fill(
             "Uzupełnij, aby generator był nieskończony.",

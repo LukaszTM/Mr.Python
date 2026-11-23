@@ -14,7 +14,7 @@ internal val module35Cards = listOf(
         ),
         explain(
             "What can you raise?",
-            "`raise` only accepts exceptions – the class must inherit from `Exception`, otherwise you get a `TypeError`. " +
+            "`raise` only accepts exceptions – the class must inherit from `BaseException` (we base our own exceptions on `Exception`, which inherits from it), otherwise you get a `TypeError`. " +
                 "You can raise an object `MyError(\"description\")` or just the class `MyError`. Names usually end in `Error`.",
             code = "class Stop(Exception):\n    pass\n\ntry:\n    raise Stop\nexcept Stop:\n    print(\"caught\")",
             output = "caught",
@@ -25,7 +25,7 @@ internal val module35Cards = listOf(
         explain(
             "The family of built-in exceptions",
             "Built-in exceptions inherit from each other too: `KeyError` and `IndexError` from `LookupError`, " +
-                "and `ZeroDivisionError` from `ArithmeticError`. They all inherit from `Exception`.",
+                "and `ZeroDivisionError` from `ArithmeticError`. These classes, and also e.g. `ValueError` and `TypeError`, inherit from `Exception`.",
             code = "print(issubclass(KeyError, LookupError))\ntry:\n    1 / 0\nexcept ArithmeticError as e:\n    print(type(e).__name__)",
             output = "True\nZeroDivisionError",
         ),

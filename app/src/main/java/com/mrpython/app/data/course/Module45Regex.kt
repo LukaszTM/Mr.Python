@@ -45,7 +45,7 @@ internal val module45 = CourseUnit(
             choice(
                 "Po co piszemy r przed wzorcem, np. r\"\\d+\"?",
                 listOf(
-                    "Żeby ukośnik \\ nie był traktowany jako znak specjalny napisu",
+                    "Żeby ukośnik \\ zostawał bez zmian",
                     "Żeby wzorzec działał szybciej",
                     "Żeby wielkość liter nie miała znaczenia",
                     "Bez r moduł re nie działa w ogóle",
@@ -150,7 +150,7 @@ internal val module45 = CourseUnit(
             ),
             choice(
                 "Do czego pasuje \\s we wzorcu?",
-                listOf("Do białego znaku, np. spacji", "Do dowolnej litery", "Do cyfry", "Do litery s"),
+                listOf("Do białego znaku", "Do dowolnej litery", "Do cyfry", "Do litery s"),
                 0,
                 "\\s to spacja, tabulator, znak nowej linii itp.",
             ),

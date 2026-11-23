@@ -37,7 +37,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("TypeError – zbioru nie da się zapisać w JSON", "Wypisze [1, 2]", "Wypisze {1, 2}", "Wypisze null"),
+                listOf("TypeError", "Wypisze [1, 2]", "Wypisze {1, 2}", "Wypisze null"),
                 0,
                 "JSON nie ma typu zbiór; najpierw trzeba go zamienić np. na listę.",
                 code = "import json\nprint(json.dumps({1, 2}))",
@@ -80,7 +80,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "Co się stanie?",
-                listOf("Błąd – JSON wymaga podwójnych cudzysłowów", "Wypisze {'a': 1}", "Wypisze 1", "Wypisze None"),
+                listOf("JSONDecodeError", "Wypisze {'a': 1}", "Wypisze 1", "Wypisze None"),
                 0,
                 "Apostrofy nie są poprawnym JSON-em, więc loads() zgłasza JSONDecodeError.",
                 code = "import json\nprint(json.loads(\"{'a': 1}\"))",
@@ -150,7 +150,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "Co robi parametr indent w json.dumps()?",
-                listOf("Formatuje JSON w wielu liniach z wcięciami", "Sortuje klucze", "Usuwa spacje", "Kompresuje dane"),
+                listOf("Dodaje wcięcia", "Sortuje klucze", "Usuwa spacje", "Kompresuje dane"),
                 0,
                 "indent ustala liczbę spacji wcięcia, dzięki czemu JSON jest czytelny.",
             ),

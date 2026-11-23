@@ -33,7 +33,8 @@ internal val module23Intro = lesson(
     explain(
         "Leniwe i nieskończone",
         "Generator liczy kolejną wartość dopiero, gdy o nią poprosisz. Dlatego może nie mieć końca " +
-            "(`while True`) – wystarczy w porę przerwać pętlę przez `break`.",
+            "(`while True`) – wystarczy w porę przerwać pętlę przez `break` albo pobrać kilka wartości przez `next()`. " +
+            "W przykładzie `_` to zwykła nazwa zmiennej, której wartość nie jest potrzebna.",
         code = "def naturalne():\n    n = 1\n    while True:\n        yield n\n        n += 1\n\ng = naturalne()\nprint([next(g) for _ in range(3)])",
         output = "[1, 2, 3]",
     ),

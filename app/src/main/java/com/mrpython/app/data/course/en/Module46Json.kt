@@ -38,7 +38,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "What will happen?",
-                listOf("TypeError – a set can't be written as JSON", "It prints [1, 2]", "It prints {1, 2}", "It prints null"),
+                listOf("TypeError", "It prints [1, 2]", "It prints {1, 2}", "It prints null"),
                 0,
                 "JSON has no set type; you have to convert it first, e.g. to a list.",
                 code = "import json\nprint(json.dumps({1, 2}))",
@@ -81,7 +81,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "What will happen?",
-                listOf("An error – JSON requires double quotes", "It prints {'a': 1}", "It prints 1", "It prints None"),
+                listOf("JSONDecodeError", "It prints {'a': 1}", "It prints 1", "It prints None"),
                 0,
                 "Single quotes aren't valid JSON, so loads() raises a JSONDecodeError.",
                 code = "import json\nprint(json.loads(\"{'a': 1}\"))",
@@ -151,7 +151,7 @@ internal val module46 = CourseUnit(
             ),
             choice(
                 "What does the indent parameter of json.dumps() do?",
-                listOf("Formats the JSON over several lines with indentation", "Sorts the keys", "Removes spaces", "Compresses the data"),
+                listOf("Adds indentation", "Sorts the keys", "Removes spaces", "Compresses the data"),
                 0,
                 "indent sets the number of indentation spaces, which makes the JSON readable.",
             ),

@@ -165,7 +165,7 @@ internal val module14 = CourseUnit(
             ),
             choice(
                 "What does the statement b = a do when a is a list?",
-                listOf("Gives the same list a second name", "Creates a shallow copy", "Creates a deep copy", "Clears the list a"),
+                listOf("Gives the same list a second name", "Creates a shallow copy of a", "Creates a deep copy of a", "Removes everything from a"),
                 0,
                 "Assignment never copies – both variables point to the same object.",
             ),

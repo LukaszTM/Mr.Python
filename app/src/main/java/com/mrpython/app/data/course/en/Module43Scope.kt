@@ -58,7 +58,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "What happens without the line global counter?",
-                listOf("UnboundLocalError", "It prints 2", "It prints 0", "NameError at the definition"),
+                listOf("An UnboundLocalError", "counter changes to 1", "A local counter equal to 1 is created", "A NameError at the definition"),
                 0,
                 "counter += 1 treats counter as local, and it doesn't have a value yet.",
                 code = "counter = 0\ndef add():\n    counter += 1\nadd()",
@@ -82,7 +82,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "What's the difference between global and nonlocal?",
-                listOf("global – module scope, nonlocal – the nearest enclosing function", "Nothing", "nonlocal works only in classes", "global creates a new local variable"),
+                listOf("global – a module variable, nonlocal – a variable of the enclosing function", "global – a variable of the enclosing function, nonlocal – a module variable", "global – a local variable, nonlocal – a module variable", "Nothing, both words work the same way"),
                 0,
                 "nonlocal reaches into the outer function, global to the file level.",
             ),
@@ -112,7 +112,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "What is a closure?",
-                listOf("A function that remembers variables from the scope where it was created", "A function with no arguments", "A closed file", "A class with no methods"),
+                listOf("A function that remembers variables from the scope where it was created", "A function that deletes all of its variables when it finishes", "A with block that closes the file on its own when it ends", "A function defined in a class that receives self"),
                 0,
                 "A closure keeps the enclosing function's variables even after that function has finished.",
             ),
@@ -149,7 +149,7 @@ internal val module43 = CourseUnit(
             ),
             choice(
                 "How do you fix the lambda: i trap in a loop?",
-                listOf("Use a default argument: lambda i=i: i", "Add global i", "Use while instead of for", "You can't"),
+                listOf("Add a default argument: lambda i=i: i", "Add nonlocal i before the loop", "Replace the for loop with a while loop", "Call every lambda once more after the loop"),
                 0,
                 "The default value is computed once, when the function is created.",
             ),

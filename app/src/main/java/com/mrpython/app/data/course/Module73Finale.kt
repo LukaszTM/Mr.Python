@@ -12,7 +12,7 @@ internal val module73 = CourseUnit(
             output(
                 "def pal(s):\n    s = \"\".join(c for c in s.lower()\n                if c.isalnum())\n    return s == s[::-1]\nprint(pal(\"Kobyła ma mały bok\"))\nprint(pal(\"Python\"))",
                 "True\nFalse",
-                "Po usunięciu spacji i wielkich liter sprawdzamy, czy napis czyta się tak samo od końca.",
+                "Po zamianie liter na małe i usunięciu spacji sprawdzamy, czy napis czyta się tak samo od końca.",
             ),
             output(
                 "def szyfr(t, k):\n    return \"\".join(\n        chr((ord(c) - 97 + k) % 26 + 97)\n        for c in t)\nprint(szyfr(\"xyz\", 3))\nprint(szyfr(\"abc\", 1))",
@@ -85,9 +85,9 @@ internal val module73 = CourseUnit(
             ),
             choice(
                 "Dlaczego x in zbior jest zwykle szybsze niż x in lista?",
-                listOf("Zbiór używa haszowania – sprawdzenie trwa średnio O(1)", "Zbiór jest zawsze posortowany", "Lista nie obsługuje operatora in", "Zbiory przechowują tylko liczby"),
+                listOf("Zbiór szuka elementu po haszu", "Zbiór jest zawsze posortowany", "Lista nie obsługuje operatora in", "Zbiory przechowują tylko liczby"),
                 0,
-                "Lista musi być przeszukana element po elemencie, czyli O(n).",
+                "Zbiór dzięki haszowaniu sprawdza element średnio w O(1), a listę trzeba przeszukać element po elemencie, czyli O(n).",
             ),
             output(
                 "import heapq\nprint(heapq.nlargest(3, [5, 1, 9, 3, 7]))\nprint(heapq.nsmallest(2, [5, 1, 9, 3, 7]))",
@@ -238,7 +238,7 @@ internal val module73 = CourseUnit(
             tiles(
                 "Wypisz swój tytuł za pomocą f-stringu",
                 listOf("print(", "f\"Dzień {dzien}:", "Mistrz Pythona!\"", ")"),
-                listOf("echo(", "\"Uczeń\""),
+                listOf("\"Dzień {dzien}:", "\"Uczeń\""),
                 "Gratulacje – f-string wstawia numer dnia, a Ty jesteś Mistrzem Pythona!",
             ),
         ),

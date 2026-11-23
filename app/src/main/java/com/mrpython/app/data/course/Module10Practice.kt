@@ -47,9 +47,9 @@ internal val module10Practice = listOf(
         ),
         choice(
             "Jaki błąd wywoła ten kod?",
-            listOf("SyntaxError – brakuje nawiasu", "NameError", "ValueError", "Żaden"),
+            listOf("SyntaxError", "NameError", "ValueError", "Żaden"),
             0,
-            "Niezamknięty nawias to błąd składni.",
+            "Brakuje nawiasu zamykającego – niezamknięty nawias to błąd składni (SyntaxError).",
             code = "print(\"hej\"",
         ),
         choice(
@@ -65,7 +65,7 @@ internal val module10Practice = listOf(
             "Python nie zna nazwy pirnt.",
         ),
         tiles(
-            "Napraw kod: zamień napis \"12\" na liczbę i dodaj do niej 1",
+            "Zamień napis \"12\" na liczbę, dodaj do niej 1 i wypisz wynik",
             listOf("print(", "int(\"12\")", "+", "1", ")"),
             listOf("\"12\"", "str(1)"),
             "Najpierw int(), potem dodawanie liczb.",
@@ -135,9 +135,9 @@ internal val module10Practice = listOf(
         ),
         choice(
             "Co się stanie?",
-            listOf("Program przerwie NameError – except łapie tylko ValueError", "Wypisze błąd", "Wypisze x", "Nic"),
+            listOf("Błąd NameError", "Wypisze błąd", "Wypisze x", "Nic"),
             0,
-            "except przechwytuje tylko wymieniony rodzaj błędu.",
+            "Zmiennej x nie ma, więc jest NameError, a except łapie tylko ValueError – program się zatrzyma.",
             code = "try:\n    print(x)\nexcept ValueError:\n    print(\"błąd\")",
         ),
         choice(
@@ -231,7 +231,7 @@ internal val module10Practice = listOf(
             "Co robi instrukcja raise?",
             listOf("Zgłasza wyjątek", "Przechwytuje wyjątek", "Ignoruje błąd", "Kończy pętlę"),
             0,
-            "raise sami wywołujemy błąd, np. raise ValueError(\"...\").",
+            "Słowem raise sami zgłaszamy błąd, np. raise ValueError(\"...\").",
         ),
         choice(
             "Co wypisze ten kod?",

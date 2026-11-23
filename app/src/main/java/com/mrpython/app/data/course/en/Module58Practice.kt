@@ -52,9 +52,9 @@ internal val module58Practice = listOf(
         ),
         choice(
             "What does this code print?",
-            listOf("An empty string (a blank line)", "IndexError", "n", "Python"),
+            listOf("Empty line", "IndexError", "n", "Python"),
             0,
-            "A slice that's out of range doesn't raise an error – it just gives an empty string.",
+            "A slice that's out of range doesn't raise an error – it just gives an empty string, so print shows an empty line.",
             code = "print(\"Python\"[10:])",
         ),
         choice(

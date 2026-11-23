@@ -22,7 +22,7 @@ internal val module41 = CourseUnit(
             ),
             choice(
                 "What's the difference between hi and hi()?",
-                listOf("hi is the function itself, hi() calls it", "Nothing", "hi() is the function itself", "hi is a syntax error"),
+                listOf("hi is the function, hi() calls it", "Nothing, they mean the same", "hi() is the function, hi calls it", "hi without parentheses is a syntax error"),
                 0,
                 "Parentheses call the function; without them you have the function object.",
             ),
@@ -64,7 +64,7 @@ internal val module41 = CourseUnit(
             ),
             choice(
                 "What is a decorator?",
-                listOf("A function that takes a function and returns a new function", "A special Python class", "A comment above a function", "A way to import a module"),
+                listOf("A function that takes a function and returns a new function", "A special class that Python attaches to a function", "A comment above a function that Python skips", "A way to import a function from another module"),
                 0,
                 "A decorator gets a function and returns an improved version of it.",
             ),

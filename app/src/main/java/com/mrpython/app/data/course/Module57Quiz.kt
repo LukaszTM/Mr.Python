@@ -21,9 +21,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Dlaczego odpowiedź \"15\" zapisujemy jako napis, a nie liczbę?",
-                listOf("Odpowiedź gracza też jest napisem, więc łatwo je porównać", "Liczb nie można trzymać w słowniku", "Napis zajmuje mniej miejsca", "Bo 15 to liczba nieparzysta"),
+                listOf("Odpowiedź gracza też jest napisem", "Liczb nie można trzymać w słowniku", "Napis zajmuje mniej miejsca", "Napis działa szybciej niż liczba"),
                 0,
-                "Porównujemy napis z napisem – bez zamiany typów.",
+                "input() zwraca napis, więc porównujemy napis z napisem – bez zamiany typów.",
             ),
             fill(
                 "Uzupełnij, aby wypisać poprawne odpowiedzi.",
@@ -81,9 +81,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Dlaczego ten warunek nigdy nie jest spełniony?",
-                listOf("Porównuje napis \"15\" z liczbą 15", "Brakuje dwukropka", "== nie działa dla napisów", "odp jest pusty"),
+                listOf("\"15\" to napis, a 15 – liczba", "Brakuje dwukropka", "== nie działa dla napisów", "odp jest pusty"),
                 0,
-                "Napis i liczba nigdy nie są sobie równe.",
+                "Kod porównuje napis \"15\" z liczbą 15, a napis nigdy nie jest równy liczbie.",
                 code = "odp = \"15\"\nif odp == 15:\n    print(\"dobrze\")",
             ),
             output(
@@ -160,9 +160,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Co zwraca random.shuffle(lista)?",
-                listOf("None – zmienia listę w miejscu", "Nową, potasowaną listę", "Pierwszy element", "Liczbę elementów"),
+                listOf("None", "Nową, potasowaną listę", "Pierwszy element", "Liczbę elementów"),
                 0,
-                "Dlatego nie piszemy lista = random.shuffle(lista).",
+                "shuffle zmienia listę w miejscu i zwraca None, dlatego nie piszemy lista = random.shuffle(lista).",
             ),
             output(
                 "import random\n\nlista = [1, 2, 3, 4]\nrandom.shuffle(lista)\nprint(sorted(lista))",
@@ -229,9 +229,9 @@ internal val module57 = CourseUnit(
             ),
             choice(
                 "Jak w tym projekcie przechowujemy zestaw pytań?",
-                listOf("Jako listę słowników albo listę obiektów Pytanie", "Jako jeden długi napis", "Jako zbiór liczb", "W osobnej zmiennej na każde pytanie"),
+                listOf("Jako listę pytań", "Jako jeden długi napis", "Jako zbiór liczb", "Jako osobne zmienne"),
                 0,
-                "Lista pozwala łatwo dodawać, tasować i przechodzić po pytaniach.",
+                "Pytania (słowniki albo obiekty Pytanie) trzymamy w liście – łatwo ją uzupełniać, tasować i przechodzić po niej pętlą.",
             ),
             tiles(
                 "Dodaj punkt do atrybutu punkty w metodzie quizu.",

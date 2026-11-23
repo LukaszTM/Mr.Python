@@ -31,10 +31,10 @@ internal val module34Intro = lesson(
         output = "True",
     ),
     choice(
-        "Których metod NIE tworzy samo @dataclass (bez parametrów)?",
-        listOf("__lt__ do sortowania", "__init__", "__repr__", "__eq__"),
+        "Której metody NIE tworzy samo @dataclass (bez parametrów)?",
+        listOf("__lt__", "__init__", "__repr__", "__eq__"),
         0,
-        "Porównania < i > pojawiają się dopiero z order=True.",
+        "__lt__ to porównanie < potrzebne do sortowania; pojawia się dopiero z order=True.",
     ),
     output(
         "from dataclasses import dataclass\n\n@dataclass\nclass Kot:\n    imie: str\n    wiek: int = 1\n\nprint(Kot(\"Mruczek\"))",

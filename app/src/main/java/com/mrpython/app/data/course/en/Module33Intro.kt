@@ -56,7 +56,7 @@ internal val module33Intro = lesson(
     tiles(
         "Write the header of the class Duck that inherits from Flyer and Swimmer",
         listOf("class", "Duck(", "Flyer,", "Swimmer", "):"),
-        listOf("def", "extends"),
+        listOf("def", "and"),
         "Base classes go in the parentheses, separated by commas.",
     ),
 )

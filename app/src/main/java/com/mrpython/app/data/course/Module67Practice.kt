@@ -237,7 +237,7 @@ internal val module67Practice = listOf(
             "class PustyKoszyk(____):\n    pass\ntry:\n    raise PustyKoszyk(\"pusto\")\nexcept PustyKoszyk as e:\n    print(e)",
             listOf("Exception", "list", "int"),
             "Exception",
-            "Własny wyjątek musi dziedziczyć po Exception.",
+            "Własny wyjątek tworzymy jako klasę dziedziczącą po Exception.",
         ),
         fill(
             "Uzupełnij, aby wypisać kwotę z groszami (program ma wypisać 5.50).",
@@ -249,8 +249,8 @@ internal val module67Practice = listOf(
         tiles(
             "Zgłoś wyjątek ValueError z komunikatem \"zła cena\"",
             listOf("raise", "ValueError(", "\"zła cena\"", ")"),
-            listOf("throw", "except"),
-            "Wyjątki zgłaszamy słowem raise.",
+            listOf("return", "except"),
+            "Wyjątki zgłaszamy słowem raise; return tylko zwróciłby obiekt wyjątku bez zgłaszania go.",
         ),
         tiles(
             "Policz łączną cenę wszystkich produktów ze słownika ceny",
@@ -599,7 +599,7 @@ internal val module67Practice = listOf(
             "Różnica dat to timedelta, a jej atrybut days to liczba dni.",
         ),
         tiles(
-            "Pobierz z kopca h zadanie o najniższym priorytecie",
+            "Zdejmij z kopca h zadanie o najmniejszej liczbie priorytetu i zapisz je w zmiennej zadanie",
             listOf("zadanie", "=", "heapq.heappop(", "h", ")"),
             listOf("heapq.heappush(", "h.pop("),
             "heappop zdejmuje z kopca najmniejszy element.",

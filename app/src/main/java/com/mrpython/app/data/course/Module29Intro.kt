@@ -12,14 +12,14 @@ internal val module29Intro = lesson(
     explain(
         "Liczby pierwsze",
         "Liczba pierwsza (od 2 w górę) dzieli się tylko przez 1 i siebie. Sprawdzamy dzielniki – " +
-            "wystarczy do pierwiastka z n. Sito Eratostenesa wykreśla wielokrotności, by znaleźć wiele pierwszych naraz.",
+            "wystarczy do pierwiastka z n (`n ** 0.5`), bo gdy n = a · b, jeden z czynników nie przekracza pierwiastka. Sito Eratostenesa wykreśla wielokrotności, by znaleźć wiele pierwszych naraz.",
         code = "def pierwsza(n):\n    if n < 2:\n        return False\n    for d in range(2, int(n ** 0.5) + 1):\n        if n % d == 0:\n            return False\n    return True\nprint(pierwsza(7), pierwsza(9))",
         output = "True False",
     ),
     explain(
         "NWD i NWW",
         "NWD to największy wspólny dzielnik. Algorytm Euklidesa powtarza `a, b = b, a % b`, aż b " +
-            "będzie 0. NWW liczymy wzorem `a * b // nwd`. Gotowe są też `math.gcd()` i `math.lcm()`.",
+            "będzie 0. NWW, czyli najmniejszą wspólną wielokrotność, liczymy wzorem `a * b // nwd`. Gotowe są też `math.gcd()` i `math.lcm()`.",
         code = "a, b = 48, 18\nwhile b:\n    a, b = b, a % b\nprint(a)",
         output = "6",
     ),

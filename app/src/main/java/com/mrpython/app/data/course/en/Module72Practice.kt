@@ -80,9 +80,9 @@ internal val module72Practice = listOf(
         fill(
             "Print \"yes\" when the number is both even and positive.",
             "n = 8\nif n % 2 == 0 ____ n > 0:\n    print(\"yes\")",
-            listOf("and", "&&", "not"),
+            listOf("and", "&", "not"),
             "and",
-            "In Python, logical AND is written with the word and.",
+            "Two conditions that must both hold are joined with the word and; & works on bits and sets, it is not a logical \"and\".",
         ),
         tiles(
             "Print the numbers from 1 to 5 on one line, separated by commas",
@@ -316,7 +316,7 @@ internal val module72Practice = listOf(
         ),
         choice(
             "What is the self parameter in a method for?",
-            listOf("It refers to the object the method was called on", "It refers to the base class", "It's a global variable", "It stores the method's result"),
+            listOf("It refers to the object the method was called on", "It refers to the base class of the object", "It's a global variable of the whole module", "It stores the value the method returns"),
             0,
             "obj.method() passes the object as the first argument, which is self.",
         ),
@@ -350,7 +350,7 @@ internal val module72Practice = listOf(
         tiles(
             "Write the header of a constructor that takes a name",
             listOf("def", "__init__(", "self,", "name", "):"),
-            listOf("init(", "this,"),
+            listOf("init(", "self):"),
             "The constructor is called __init__, and its first parameter is self.",
         ),
     ),
@@ -437,7 +437,7 @@ internal val module72Practice = listOf(
         tiles(
             "Import only the sqrt function and the constant pi from the math module",
             listOf("from", "math", "import", "sqrt, pi"),
-            listOf("include", "math.sqrt"),
+            listOf("*", "math.sqrt"),
             "from module import names loads the selected items.",
         ),
     ),

@@ -53,7 +53,7 @@ internal val module4 = CourseUnit(
             ),
             choice(
                 "What stops a loop immediately?",
-                listOf("break", "continue", "stop", "exit loop"),
+                listOf("break", "continue", "stop", "else"),
                 0,
                 "break ends the loop, while continue moves on to the next iteration.",
             ),
@@ -82,13 +82,13 @@ internal val module4 = CourseUnit(
             choice(
                 "What is wrong with this loop?",
                 listOf(
-                    "It never ends – n doesn't change",
+                    "It never ends",
                     "It doesn't run even once",
                     "The colon is missing",
                     "Nothing, it's correct",
                 ),
                 0,
-                "Without decreasing n, the condition n > 0 will always be true.",
+                "n doesn't change, so the condition n > 0 will always be true.",
                 code = "n = 5\nwhile n > 0:\n    print(n)",
             ),
         ),
@@ -150,10 +150,10 @@ internal val module4 = CourseUnit(
             ),
             fill(
                 "Fill in the blank so the loop runs until it hits break.",
-                "while ____:\n    answer = \"yes\"\n    if answer == \"yes\":\n        break",
+                "while ____:\n    print(\"asking\")\n    answer = \"yes\"\n    if answer == \"yes\":\n        break\nprint(\"done\")",
                 listOf("True", "False", "0"),
                 "True",
-                "while True is an \"endless\" loop that you leave with break.",
+                "while True is an \"endless\" loop that you leave with break. With False or 0 the loop wouldn't run even once.",
             ),
         ),
         lesson(

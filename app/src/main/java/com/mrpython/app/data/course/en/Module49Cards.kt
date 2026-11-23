@@ -26,9 +26,10 @@ internal val module49Cards = listOf(
         explain(
             "Negative places in round",
             "A negative number of places rounds before the decimal point: `-1` to tens, `-2` to hundreds. " +
-                "`round(x, n)` with `n` given returns a float, and for a whole number – an int.",
-            code = "print(round(1567, -1), round(1234, -2))\nprint(round(2.567, 1))",
-            output = "1570 1200\n2.6",
+                "`round(x, n)` with `n` given returns a float, and for a whole number – an int. The format " +
+                "`{x:.0f}` also rounds ties to the even number.",
+            code = "print(round(1567, -1), round(1234, -2))\nprint(round(2.567, 1))\nprint(f\"{0.5:.0f} {1.5:.0f}\")",
+            output = "1570 1200\n2.6\n0 2",
         ),
         explain(
             "A trap: round(2.675, 2)",

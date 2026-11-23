@@ -17,7 +17,7 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Which class does a custom exception usually inherit from?",
-                listOf("Exception", "Error", "object", "Throwable"),
+                listOf("Exception", "Error", "object", "str"),
                 0,
                 "Custom exceptions inherit from Exception (or one of its subclasses).",
             ),
@@ -41,14 +41,14 @@ internal val module35 = CourseUnit(
             tiles(
                 "Raise the exception NoFunds with the message \"too little\"",
                 listOf("raise", "NoFunds(", "\"too little\"", ")"),
-                listOf("throw", "return"),
+                listOf("except", "return"),
                 "We raise exceptions with the raise keyword.",
             ),
             choice(
                 "Why is it worth creating your own exceptions?",
-                listOf("The name says what went wrong, and they can be caught separately", "Because built-in exceptions are slower", "Because Python has no built-in exceptions", "So that the program never stops"),
+                listOf("The name says what went wrong", "Because built-in exceptions are slower", "Because Python has no built-in exceptions", "So that the program never stops"),
                 0,
-                "A custom exception precisely describes a problem in our program.",
+                "The name of a custom exception describes a problem in our program, and such an exception can be caught separately.",
             ),
             output(
                 "class CodeError(Exception):\n    def __init__(self, code):\n        super().__init__(f\"code {code}\")\n        self.code = code\n\ntry:\n    raise CodeError(404)\nexcept CodeError as e:\n    print(e, e.code)",
@@ -70,9 +70,9 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Which class does the built-in ValueError inherit from?",
-                listOf("Exception", "KeyError", "TypeError", "ValueBase"),
+                listOf("Exception", "KeyError", "TypeError", "LookupError"),
                 0,
-                "Almost all built-in exceptions inherit from Exception.",
+                "ValueError, like TypeError or LookupError, inherits directly from Exception.",
             ),
             output(
                 "print(issubclass(KeyError, LookupError))\nprint(issubclass(ZeroDivisionError, ArithmeticError))",
@@ -137,9 +137,9 @@ internal val module35 = CourseUnit(
             ),
             choice(
                 "Why write raise NewError(...) from e?",
-                listOf("To keep the information about the original cause of the error", "To silence the error", "To raise two exceptions at once", "To speed up the program"),
+                listOf("To keep the cause of the error", "To silence the error", "To raise two exceptions at once", "To speed up the program"),
                 0,
-                "The error message will show both exceptions: the cause and the new one.",
+                "The cause ends up in __cause__, and the error message will show both exceptions.",
             ),
             tiles(
                 "Raise AppError(\"x\") with the cause e",
@@ -179,8 +179,8 @@ internal val module35 = CourseUnit(
                 "You can list several exception classes in parentheses; raise also accepts just the class.",
             ),
             choice(
-                "Which except will catch LoginError if it inherits from ApplicationError?",
-                listOf("Both except LoginError and except ApplicationError", "Only except LoginError", "Only except ApplicationError", "Neither"),
+                "Which except can catch LoginError if it inherits from ApplicationError?",
+                listOf("Either of the two", "Only except LoginError", "Only except ApplicationError", "Neither of the two"),
                 0,
                 "An exception matches its own class and all of its base classes.",
             ),

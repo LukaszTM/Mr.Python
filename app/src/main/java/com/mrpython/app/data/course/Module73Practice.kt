@@ -147,9 +147,9 @@ internal val module73Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – lista nie może być kluczem", "{[1, 2]: 'x'}", "{(1, 2): 'x'}", "KeyError"),
+            listOf("TypeError", "KeyError", "ValueError", "Działa bez błędu"),
             0,
-            "Klucz słownika musi być niezmienny, a lista jest zmienna.",
+            "Klucz słownika musi być niezmienny (haszowalny), a lista jest zmienna – dlatego TypeError.",
             code = "d = {}\nd[[1, 2]] = \"x\"",
         ),
         fill(
@@ -400,9 +400,9 @@ internal val module73Practice = listOf(
         ),
         choice(
             "Co wyświetli polecenie import this?",
-            listOf("Zen of Python – zasady pisania dobrego kodu", "Listę wszystkich modułów", "Wersję Pythona", "Błąd importu"),
+            listOf("Zasady Zen of Python", "Listę wszystkich modułów", "Wersję Pythona", "Błąd importu"),
             0,
-            "To ukryty „easter egg” z zasadami Pythona.",
+            "To ukryty „easter egg”: krótkie zasady pisania dobrego kodu w Pythonie.",
         ),
         choice(
             "Które zdanie pochodzi z Zen of Python?",

@@ -53,7 +53,7 @@ internal val module61 = CourseUnit(
             tiles(
                 "Print the string \"Result:\" and the value of the variable result",
                 listOf("print(", "\"Result:\",", "result", ")"),
-                listOf("+", "result)"),
+                listOf("\"result\"", "Print("),
                 "print() accepts multiple values separated by commas.",
             ),
         ),
@@ -153,8 +153,8 @@ internal val module61 = CourseUnit(
             tiles(
                 "Check whether x is even and positive",
                 listOf("if", "x % 2 == 0", "and", "x > 0:"),
-                listOf("&&", "x > 0"),
-                "In Python, conditions are joined with the word and.",
+                listOf("or", "x > 0"),
+                "Both conditions must hold at once, so they are joined with and.",
             ),
         ),
         lesson(
@@ -240,7 +240,7 @@ internal val module61 = CourseUnit(
                 "What does this code print?",
                 listOf("Cat", "CAT", "cat", "CaT"),
                 0,
-                "capitalize() makes only the first letter uppercase.",
+                "capitalize() makes the first letter uppercase and the rest lowercase.",
                 code = "print(\"cat\".capitalize())",
             ),
             fill(

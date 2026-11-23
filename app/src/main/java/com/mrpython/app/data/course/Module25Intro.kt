@@ -4,8 +4,8 @@ internal val module25Intro = lesson(
     "u25l0", "Wprowadzenie: wyszukiwanie",
     explain(
         "Szukanie po kolei",
-        "Najprostszy sposób szukania: sprawdzać elementy jeden po drugim. Działa na każdej liście, " +
-            "ale gdy szukanej wartości nie ma, trzeba obejrzeć wszystkie elementy.",
+        "Najprostszy sposób szukania: sprawdzać elementy jeden po drugim – to wyszukiwanie liniowe. " +
+            "Działa na każdej liście, ale gdy szukanej wartości nie ma, trzeba obejrzeć wszystkie elementy.",
         code = "oceny = [5, 3, 5, 4]\nile = 0\nfor o in oceny:\n    if o == 5:\n        ile += 1\nprint(ile)",
         output = "2",
     ),

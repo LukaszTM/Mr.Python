@@ -47,9 +47,9 @@ internal val module33Practice = listOf(
         ),
         choice(
             "What does it mean that a derived class overrides a method?",
-            listOf("It defines a method with the same name that replaces the parent's version", "It removes the method from the parent class", "It creates a copy of the parent class", "It renames the parent's method"),
+            listOf("It writes its own method with the same name", "It removes that method from the parent class", "It copies the parent's method unchanged", "It renames the method in the parent class"),
             0,
-            "The parent class still has its own version – only the derived class changes.",
+            "Its own method with the same name replaces the parent's version in the derived class; the parent still has its own version.",
         ),
         choice(
             "What does this code print?",
@@ -77,7 +77,7 @@ internal val module33Practice = listOf(
             "class A:\n    def greet(self):\n        return \"Hello\"\n\nclass B(A):\n    def greet(self):\n        return ____.greet() + \", John!\"\n\nprint(B().greet())",
             listOf("super()", "self", "A"),
             "super()",
-            "self.greet() would call itself forever.",
+            "self.greet() would call itself forever, and A.greet() without an object raises a TypeError.",
         ),
         tiles(
             "Call the describe method from the base class and store the result in t",
@@ -224,7 +224,7 @@ internal val module33Practice = listOf(
         ),
         choice(
             "Where does Python first look for a method called on an object?",
-            listOf("In that object's class", "In the built-in class object","In the last base class", "In the abc module"),
+            listOf("In that object's class", "In the built-in class object", "In the last base class", "In the abc module"),
             0,
             "The object's own class always comes first in the MRO.",
         ),
@@ -258,7 +258,7 @@ internal val module33Practice = listOf(
         tiles(
             "Write the header of the class Amphibian that inherits from Car and Boat",
             listOf("class", "Amphibian(", "Car,", "Boat", "):"),
-            listOf("Car", "extends"),
+            listOf("Car", "and"),
             "Base classes are listed separated by commas.",
         ),
         tiles(
@@ -312,9 +312,9 @@ internal val module33Practice = listOf(
         ),
         choice(
             "Which module do we import ABC and abstractmethod from?",
-            listOf("abc", "abstract", "typing", "dataclasses"),
+            listOf("abc", "ABC", "abstract", "abstraction"),
             0,
-            "The module name abc is short for Abstract Base Classes.",
+            "The module is called abc (lowercase) – short for Abstract Base Classes; ABC is a class from that module.",
         ),
         choice(
             "What does this code print?",
@@ -407,7 +407,7 @@ internal val module33Practice = listOf(
         ),
         choice(
             "What happens when a derived class overrides __init__ and doesn't call super().__init__()?",
-            listOf("The code in the parent's __init__ doesn't run", "Python calls it automatically", "A SyntaxError appears", "The object isn't created"),
+            listOf("The parent's __init__ doesn't run", "Python calls it automatically", "A SyntaxError appears", "The object isn't created"),
             0,
             "The attributes set by the parent are then never created.",
         ),
@@ -440,7 +440,7 @@ internal val module33Practice = listOf(
         tiles(
             "Call the base class's constructor with the arguments name and age",
             listOf("super()", ".__init__(", "name,", "age", ")"),
-            listOf("self,", "parent()"),
+            listOf("self,", "super"),
             "self is passed automatically.",
         ),
     ),

@@ -78,9 +78,9 @@ internal val module72Practice = listOf(
         fill(
             "Wypisz \"tak\", gdy liczba jest jednocześnie parzysta i dodatnia.",
             "n = 8\nif n % 2 == 0 ____ n > 0:\n    print(\"tak\")",
-            listOf("and", "&&", "not"),
+            listOf("and", "&", "not"),
             "and",
-            "W Pythonie koniunkcję zapisujemy słowem and.",
+            "Oba warunki naraz łączymy słowem and; & to operator na bitach i zbiorach, a nie logiczne „i”.",
         ),
         tiles(
             "Wypisz liczby od 1 do 5 w jednej linii, oddzielone przecinkami",
@@ -314,7 +314,7 @@ internal val module72Practice = listOf(
         ),
         choice(
             "Do czego służy parametr self w metodzie?",
-            listOf("Wskazuje obiekt, na którym wywołano metodę", "Wskazuje klasę bazową", "Jest zmienną globalną", "Przechowuje wynik metody"),
+            listOf("Wskazuje obiekt, na którym wywołano metodę", "Wskazuje klasę bazową tego obiektu", "Jest zmienną globalną całego modułu", "Przechowuje wynik zwracany przez metodę"),
             0,
             "obiekt.metoda() przekazuje obiekt jako pierwszy argument, czyli self.",
         ),
@@ -348,7 +348,7 @@ internal val module72Practice = listOf(
         tiles(
             "Napisz nagłówek konstruktora przyjmującego imię",
             listOf("def", "__init__(", "self,", "imie", "):"),
-            listOf("init(", "this,"),
+            listOf("init(", "self):"),
             "Konstruktor nazywa się __init__, a pierwszym parametrem jest self.",
         ),
     ),
@@ -435,7 +435,7 @@ internal val module72Practice = listOf(
         tiles(
             "Zaimportuj z modułu math tylko funkcję sqrt i stałą pi",
             listOf("from", "math", "import", "sqrt, pi"),
-            listOf("include", "math.sqrt"),
+            listOf("*", "math.sqrt"),
             "from moduł import nazwy wczytuje wybrane elementy.",
         ),
     ),

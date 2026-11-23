@@ -44,7 +44,7 @@ internal val module70Intro = lesson(
     ),
     choice(
         "Jakim słowem zgłaszamy wyjątek, np. brak towaru?",
-        listOf("raise", "except", "throw", "error"),
+        listOf("raise", "except", "try", "error"),
         0,
         "W Pythonie wyjątek zgłasza się przez raise.",
     ),

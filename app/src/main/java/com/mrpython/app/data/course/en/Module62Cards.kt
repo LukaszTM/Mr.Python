@@ -4,6 +4,16 @@ import com.mrpython.app.data.course.*
 
 internal val module62Cards = listOf(
     cards(
+        "u62l2",
+        explain(
+            "Unpacking with a star",
+            "When unpacking, one variable can have a star `*`. The other variables get one element each, " +
+                "and the starred one collects all the rest – always into a list, even when there's a tuple on the right.",
+            code = "t = (1, 2, 3, 4)\nfirst, *rest = t\nprint(first, rest)\n*start, last = t\nprint(start, last)",
+            output = "1 [2, 3, 4]\n[1, 2, 3] 4",
+        ),
+    ),
+    cards(
         "u62l3",
         explain(
             "Symmetric difference ^",
@@ -42,7 +52,8 @@ internal val module62Cards = listOf(
         explain(
             "Adding Counters",
             "You can add two `Counter`s with `+` – the counts for the same keys are summed. " +
-                "Subtracting with `-` subtracts the counts and removes keys left with 0 or less.",
+                "Subtracting with `-` subtracts the counts and removes keys left with 0 or less. " +
+                "You can also create a Counter with the counts given directly: `Counter(a=3, b=1)`.",
             code = "from collections import Counter\na = Counter(\"aab\")\nb = Counter(\"abc\")\nprint(dict(a + b))\nprint(dict(a - b))",
             output = "{'a': 3, 'b': 2, 'c': 1}\n{'a': 1}",
         ),

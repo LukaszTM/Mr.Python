@@ -17,7 +17,7 @@ internal val module17 = CourseUnit(
             choice(
                 "Czym jest warunek stopu w rekurencji?",
                 listOf(
-                    "Przypadkiem, w którym funkcja kończy się bez wywołania samej siebie",
+                    "Przypadkiem, gdy funkcja nie woła siebie",
                     "Instrukcją break w pętli",
                     "Pierwszym wywołaniem funkcji",
                     "Błędem, który zatrzymuje program",
@@ -109,7 +109,7 @@ internal val module17 = CourseUnit(
                 "Każde wywołanie dzieli n przez 2, aż n dojdzie do 1.",
             ),
             tiles(
-                "Zapisz w wynik krok rekurencyjny ciągu Fibonacciego",
+                "Zapisz w wynik krok rekurencyjny ciągu Fibonacciego: najpierw fib(n - 1), potem fib(n - 2)",
                 listOf("wynik", "=", "fib(n - 1)", "+", "fib(n - 2)"),
                 listOf("*", "fib(n)"),
                 "Wyraz ciągu to suma dwóch poprzednich wyrazów.",
@@ -142,13 +142,13 @@ internal val module17 = CourseUnit(
             choice(
                 "Po co w rekurencji na napisach używamy s[1:]?",
                 listOf(
-                    "Aby zmniejszyć problem – bierzemy napis bez pierwszego znaku",
+                    "Aby skrócić napis o pierwszy znak",
                     "Aby odwrócić napis",
                     "Aby skopiować cały napis",
                     "Aby usunąć ostatni znak",
                 ),
                 0,
-                "Każde wywołanie dostaje krótszy napis, aż dojdzie do pustego.",
+                "s[1:] to napis bez pierwszego znaku – każde wywołanie dostaje mniejszy problem, aż dojdzie do pustego napisu.",
             ),
             fill(
                 "Uzupełnij, aby funkcja zliczała litery „a”.",
@@ -197,13 +197,13 @@ internal val module17 = CourseUnit(
             choice(
                 "Kiedy lepiej użyć pętli zamiast rekurencji?",
                 listOf(
-                    "Gdy liczba kroków może być bardzo duża, np. 100 000",
+                    "Gdy kroków może być bardzo dużo",
                     "Gdy dane są krótkim napisem",
                     "Nigdy – rekurencja jest zawsze lepsza",
                     "Gdy funkcja ma warunek stopu",
                 ),
                 0,
-                "Głęboka rekurencja przekroczy limit, a pętla nie ma takiego ograniczenia.",
+                "Np. 100 000 zagnieżdżonych wywołań przekroczy limit, a pętla nie ma takiego ograniczenia.",
             ),
             output(
                 "a, b = 0, 1\nfor _ in range(6):\n    a, b = b, a + b\nprint(a)",
@@ -268,7 +268,7 @@ internal val module17 = CourseUnit(
                 "Prosta rekurencja wiele razy liczy te same wartości.",
             ),
             tiles(
-                "Zapisz w wynik sumę pierwszego elementu i sumy reszty listy",
+                "Zapisz w wynik: pierwszy element plus suma reszty listy",
                 listOf("wynik", "=", "lista[0]", "+", "suma(lista[1:])"),
                 listOf("suma(lista)", "lista[1:]"),
                 "Krok rekurencyjny: pierwszy element plus suma reszty.",

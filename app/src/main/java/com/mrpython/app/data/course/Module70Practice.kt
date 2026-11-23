@@ -45,16 +45,16 @@ internal val module70Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego programu?",
-            listOf("TypeError – brakuje argumentu cena", "P(nazwa='Kubek', cena=0)", "P(nazwa='Kubek', cena=None)", "P(nazwa='Kubek')"),
+            listOf("TypeError", "P(nazwa='Kubek', cena=0)", "P(nazwa='Kubek', cena=None)", "P(nazwa='Kubek')"),
             0,
-            "Pole bez wartości domyślnej jest obowiązkowe.",
+            "Brakuje argumentu cena, a pole bez wartości domyślnej jest obowiązkowe, więc Python zgłasza TypeError.",
             code = "from dataclasses import dataclass\n@dataclass\nclass P:\n    nazwa: str\n    cena: float\nprint(P(\"Kubek\"))",
         ),
         choice(
             "Co daje @dataclass(frozen=True)?",
-            listOf("Pól obiektu nie można zmienić po utworzeniu", "Klasa działa szybciej", "Pola muszą być liczbami", "Obiekt jest zapisywany do pliku"),
+            listOf("Pól nie można zmieniać", "Klasa działa szybciej", "Pola muszą być liczbami", "Obiekt jest zapisywany do pliku"),
             0,
-            "Próba zmiany pola zamrożonego obiektu zgłasza błąd.",
+            "Po utworzeniu obiektu próba zmiany jego pola zgłasza błąd.",
         ),
         fill(
             "Uzupełnij, aby zamienić klasę w dataclass (program ma wypisać Produkt(nazwa='Mysz')).",
@@ -79,7 +79,7 @@ internal val module70Practice = listOf(
         tiles(
             "Utwórz produkt p o nazwie Kubek i cenie 19.99",
             listOf("p", "=", "Produkt(", "\"Kubek\",", "19.99", ")"),
-            listOf("new", "Produkt."),
+            listOf("Produkt[", "Produkt."),
             "Obiekt tworzymy, wywołując klasę z wartościami pól.",
         ),
         choice(
@@ -406,7 +406,7 @@ internal val module70Practice = listOf(
         ),
         choice(
             "Kiedy wykona się blok finally?",
-            listOf("Zawsze – po try, niezależnie od błędu", "Tylko gdy wystąpi błąd", "Tylko gdy nie ma błędu", "Nigdy, jeśli jest blok else"),
+            listOf("Zawsze, z błędem czy bez", "Tylko gdy wystąpi błąd", "Tylko gdy nie ma błędu", "Nigdy, jeśli jest blok else"),
             0,
             "finally służy do sprzątania, które musi się wykonać zawsze.",
         ),

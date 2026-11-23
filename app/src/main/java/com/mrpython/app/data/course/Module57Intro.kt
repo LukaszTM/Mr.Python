@@ -31,7 +31,7 @@ internal val module57Intro = lesson(
     ),
     explain(
         "Tasowanie pytań",
-        "`random.shuffle(lista)` miesza listę w miejscu, więc kolejność za każdym razem jest inna. " +
+        "`random.shuffle(lista)` miesza listę w miejscu: losowo zmienia kolejność jej elementów i zwraca `None`. " +
             "Żeby nie zepsuć oryginału, tasuj kopię `pytania[:]`.",
         code = "import random\n\npytania = [\"P1\", \"P2\", \"P3\"]\nkolejka = pytania[:]\nrandom.shuffle(kolejka)\nprint(sorted(kolejka) == pytania)",
         output = "True",
@@ -43,9 +43,9 @@ internal val module57Intro = lesson(
     ),
     choice(
         "Co robi random.shuffle(lista)?",
-        listOf("Miesza elementy listy w miejscu", "Zwraca posortowaną listę", "Losuje jeden element", "Usuwa losowy element"),
+        listOf("Miesza elementy listy", "Zwraca posortowaną listę", "Losuje jeden element", "Usuwa losowy element"),
         0,
-        "shuffle zmienia kolejność elementów samej listy.",
+        "shuffle zmienia w miejscu kolejność elementów samej listy – niczego nie usuwa ani nie sortuje.",
     ),
     fill(
         "Uzupełnij, aby odpowiedź \" TAK \" została uznana za poprawną.",

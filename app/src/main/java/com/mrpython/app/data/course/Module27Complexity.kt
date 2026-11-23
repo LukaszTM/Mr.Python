@@ -102,9 +102,9 @@ internal val module27 = CourseUnit(
                 "Odczyt po indeksie 0 nie zależy od długości listy.",
             ),
             tiles(
-                "Ułóż złożoności od najszybszej do najwolniejszej",
+                "Ułóż w liście cztery poznane złożoności od najszybszej do najwolniejszej",
                 listOf("rzedy = [", "\"O(1)\",", "\"O(log n)\",", "\"O(n)\",", "\"O(n²)\"]"),
-                listOf("\"O(0)\",", "\"O(n!)\","),
+                listOf("\"O(0)\",", "\"O(n²)\","),
                 "Stała, logarytmiczna, liniowa, a na końcu kwadratowa.",
             ),
         ),
@@ -112,15 +112,15 @@ internal val module27 = CourseUnit(
             "u27l3", "Lista czy zbiór?",
             choice(
                 "Ile kosztuje sprawdzenie x in lista?",
-                listOf("O(n) – trzeba przejrzeć elementy po kolei", "O(1)", "O(log n)", "O(n²)"),
+                listOf("O(n)", "O(1)", "O(log n)", "O(n²)"),
                 0,
-                "Lista nie wie, gdzie jest x, więc szuka po kolei.",
+                "Lista nie wie, gdzie jest x, więc musi przejrzeć elementy po kolei.",
             ),
             choice(
                 "Ile średnio kosztuje sprawdzenie x in zbior?",
-                listOf("O(1) – zbiór używa haszowania", "O(n)", "O(n²)", "O(log n)"),
+                listOf("O(1)", "O(n)", "O(n²)", "O(log n)"),
                 0,
-                "Zbiór od razu wylicza, gdzie szukać elementu.",
+                "Zbiór używa haszowania: od razu wylicza, gdzie szukać elementu.",
             ),
             output(
                 "lista = [5, 3, 8, 1, 9]\nporownania = 0\nfor x in lista:\n    porownania += 1\n    if x == 1:\n        break\nprint(porownania)",

@@ -59,7 +59,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Where does the hint for a function's return type go?",
-            listOf("After the parameter parentheses, following the arrow ->", "Before the word def", "In the return statement", "On the first line of the function body"),
+            listOf("After the arrow ->", "Before the word def", "In the return statement", "On the body's first line"),
             0,
             "E.g. def f(x: int) -> str:",
         ),
@@ -146,7 +146,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "What does the hint int | str mean?",
-            listOf("The value can be an integer or a string", "The value must be both int and str at once", "A number written as a string", "A syntax error"),
+            listOf("An integer or a string", "Both int and str at once", "A number written as a string", "A syntax error"),
             0,
             "The bar | in a hint means \"or\".",
         ),
@@ -160,9 +160,9 @@ internal val module44Practice = listOf(
         fill(
             "Complete the hint: the result is an integer or None.",
             "from typing import Optional\ndef index(s: str) -> ____[int]:\n    return s.find(\"x\") if \"x\" in s else None\nprint(index(\"abc\"))",
-            listOf("Optional", "Maybe", "Nullable"),
+            listOf("Optional", "optional", "Option"),
             "Optional",
-            "Optional[int] means int or None; Maybe and Nullable don't exist in Python.",
+            "Optional[int] means int or None; the name must match the import exactly, so optional and Option give a NameError.",
         ),
         tiles(
             "Write the header of a function find that takes a str and returns an int or None",
@@ -227,7 +227,7 @@ internal val module44Practice = listOf(
         ),
         choice(
             "Who uses type hints?",
-            listOf("Programmers, code editors and tools like mypy", "Only the Python interpreter", "Nobody – they're comments removed at startup", "Only the operating system"),
+            listOf("People, editors and mypy", "Only the Python interpreter", "Nobody – removed at startup", "Only the operating system"),
             0,
             "Type hints help people and tools catch errors.",
         ),
@@ -248,9 +248,9 @@ internal val module44Practice = listOf(
         fill(
             "Complete the code to print the number of the function's type hints (3).",
             "def f(a: int, b: int) -> int:\n    return a + b\nprint(len(f.____))",
-            listOf("__annotations__", "__name__", "__doc__"),
+            listOf("__annotations__", "__name__", "__types__"),
             "__annotations__",
-            "__annotations__ has 3 entries; __name__ is \"f\" (length 1), and __doc__ is None.",
+            "__annotations__ has 3 entries; __name__ is \"f\" (length 1), and __types__ doesn't exist.",
         ),
         tiles(
             "Print the type hint dictionary of the function count",
@@ -309,13 +309,13 @@ internal val module44Practice = listOf(
         ),
         choice(
             "What is true about type hints in Python?",
-            listOf("They're hints that the interpreter doesn't enforce", "They enforce the type on every assignment", "They speed up the program", "They're required in every function"),
+            listOf("The interpreter doesn't enforce them", "They enforce types on assignment", "They speed up the program", "They're required in every function"),
             0,
             "Type hints are documentation for people and tools.",
         ),
         choice(
             "Which one is a correct variable type hint?",
-            listOf("x: int = 5", "int x = 5", "x -> int = 5", "x = int: 5"),
+            listOf("x: int = 5", "x = 5: int", "x -> int = 5", "x = int: 5"),
             0,
             "The type goes after the colon, before the = sign.",
         ),
@@ -329,9 +329,9 @@ internal val module44Practice = listOf(
         fill(
             "Complete the hint: a string or None.",
             "def f(x: str | ____ = None) -> str:\n    return x or \"-\"\nprint(f())",
-            listOf("None", "Null", "nil"),
+            listOf("None", "none", "0"),
             "None",
-            "A missing value in Python is None; Null and nil don't exist.",
+            "A missing value in Python is None, with a capital N; none is an unknown name, and 0 is a number.",
         ),
         tiles(
             "Declare a variable results as a dictionary with str keys and float values, empty",

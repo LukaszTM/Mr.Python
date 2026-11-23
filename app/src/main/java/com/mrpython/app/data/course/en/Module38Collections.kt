@@ -90,9 +90,9 @@ internal val module38 = CourseUnit(
             ),
             choice(
                 "What do we pass to defaultdict?",
-                listOf("A function that creates the default value, e.g. int", "A ready-made value, e.g. 0", "The name of a key", "The number of elements"),
+                listOf("A function, e.g. int", "A value, e.g. 0", "A key, e.g. \"a\"", "A length, e.g. 10"),
                 0,
-                "defaultdict calls the given function when a key is missing.",
+                "defaultdict calls the given function when a key is missing (int() gives 0). It won't accept a ready-made value such as 0.",
             ),
             output(
                 "from collections import defaultdict\nd = defaultdict(int)\nfor ch in \"kayak\":\n    d[ch] += 1\nprint(dict(d))",
@@ -130,9 +130,9 @@ internal val module38 = CourseUnit(
             ),
             choice(
                 "What happens after p.x = 10 when p is a namedtuple?",
-                listOf("AttributeError – a namedtuple is immutable", "x changes to 10", "A new field is created", "SyntaxError"),
+                listOf("AttributeError", "x changes to 10", "A new field x is created", "SyntaxError"),
                 0,
-                "Like every tuple, a namedtuple is immutable.",
+                "Like every tuple, a namedtuple is immutable, so assigning to a field raises AttributeError.",
                 code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\"])\np = P(1)\np.x = 10",
             ),
             fill(

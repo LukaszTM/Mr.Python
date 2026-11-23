@@ -87,9 +87,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "How do you fix the code from the previous exercise so it prints only 6?",
-                listOf("Unindent print so it's outside the loop", "Change += to =", "Add a return", "Turn the list into a tuple"),
+                listOf("Unindent print", "Change += to =", "Add a return", "Turn the list into a tuple"),
                 0,
-                "Unindented code runs once, after the loop finishes.",
+                "An unindented print is outside the loop, so it runs once, after the loop finishes.",
             ),
             output(
                 "def has_even(items):\n    for x in items:\n        if x % 2 == 0:\n            return True\n        return False\n\nprint(has_even([1, 2]))",
@@ -118,9 +118,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Why does the second call to add remember the previous element?",
-                listOf("The default list is created once, when the function is defined", "append copies the list", "Python saves function results", "Because x is global"),
+                listOf("The default list is created once", "append copies the list", "Python saves function results", "Because x is global"),
                 0,
-                "A default value is created only once and then shared.",
+                "A default value is created only once, when the function is defined, and then shared.",
             ),
             fill(
                 "Fix the function so that every call starts with an empty list.",
@@ -141,9 +141,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Why did the number 4 stay in the list in the previous exercise?",
-                listOf("Removing during the loop shifts the elements and the loop skips the next one", "remove only removes odd numbers", "4 % 2 is not equal to 0", "The for loop doesn't see changes"),
+                listOf("The loop skipped over 4", "remove only removes odd numbers", "4 % 2 is not equal to 0", "The for loop doesn't see changes"),
                 0,
-                "Don't modify a list while you're iterating over it.",
+                "After 2 was removed, the elements shifted and the loop skipped over 4. Don't modify a list while you're iterating over it.",
             ),
             fill(
                 "Fill in the blank so the loop goes over a copy of the list and removes all even numbers.",
@@ -167,7 +167,7 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "Why didn't list(\"abc\") work in the previous exercise?",
-                listOf("The variable list shadowed the built-in list type", "list doesn't accept strings", "An import is missing", "The string is too short"),
+                listOf("A variable shadowed list", "list doesn't accept strings", "An import is missing", "The string is too short"),
                 0,
                 "Your own variable with the name of a built-in function hides it.",
             ),
@@ -178,9 +178,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError: 'int' object is not callable", "It prints 9", "It prints 15", "NameError"),
+                listOf("TypeError", "It prints 9", "It prints 15", "NameError"),
                 0,
-                "sum is now the number 6, so it can't be called like a function.",
+                "sum is now the number 6, so it can't be called like a function: 'int' object is not callable.",
                 code = "sum = 0\nfor x in [1, 2, 3]:\n    sum += x\nprint(sum([4, 5]))",
             ),
             fill(
@@ -212,13 +212,13 @@ internal val module53 = CourseUnit(
             output(
                 "print(7 / 2, 7 // 2)",
                 "3.5 3",
-                "/ gives a float, while // cuts off the fractional part.",
+                "/ gives a float, while // rounds down to a whole number.",
             ),
             choice(
                 "The average of the grades 4 and 5 should be 4.5. Where is the bug?",
-                listOf("// cuts off the result – you need /", "sum doesn't work on lists", "len returns the wrong number", "round is missing"),
+                listOf("It needs / instead of //", "sum doesn't work on lists", "len returns the wrong number", "round is missing"),
                 0,
-                "An average needs ordinary division with /.",
+                "// rounds the result down (9 // 2 is 4), but an average needs ordinary division with /.",
                 code = "grades = [4, 5]\naverage = sum(grades) // len(grades)\nprint(average)",
             ),
             output(
@@ -259,15 +259,15 @@ internal val module53 = CourseUnit(
             "u53l6", "Review: debugging",
             choice(
                 "Which error does this code raise?",
-                listOf("IndexError – the range is one too large", "KeyError", "TypeError", "No error"),
+                listOf("IndexError", "KeyError", "TypeError", "No error"),
                 0,
-                "The last index is 2, but range(4) goes up to 3.",
+                "The range is one too large: the last index is 2, but range(4) goes up to 3.",
                 code = "items = [1, 2, 3]\nfor i in range(len(items) + 1):\n    print(items[i])",
             ),
             output(
                 "def half(n):\n    return n // 2\n\nprint(half(5))",
                 "2",
-                "// cuts off the fractional part – half of 5 needs /.",
+                "// rounds down, so 5 // 2 is 2 – half of 5 needs /.",
             ),
             output(
                 "def larger(a, b):\n    if a > b:\n        return a\n    elif b > a:\n        return b\n\nprint(larger(3, 3))",
@@ -288,9 +288,9 @@ internal val module53 = CourseUnit(
             fill(
                 "Fill in the operator to check the password.",
                 "password = \"secret\"\nif password ____ \"secret\":\n    print(\"OK\")",
-                listOf("==", "=", "==="),
+                listOf("==", "=", "!="),
                 "==",
-                "In Python, comparison is ==; there is no === operator.",
+                "Equality is checked with ==; = is assignment (a SyntaxError in an if), and != checks whether the values differ.",
             ),
             tiles(
                 "Write the header of a loop that goes over a copy of the list numbers.",
@@ -300,9 +300,9 @@ internal val module53 = CourseUnit(
             ),
             choice(
                 "What's the best thing to do first when a program gives a wrong result?",
-                listOf("Reproduce the bug on a small example and print the variables' values", "Rewrite the whole program from scratch", "Add more loops", "Ignore the bug"),
+                listOf("Print the variables' values", "Rewrite the whole program", "Add more loops", "Ignore the bug"),
                 0,
-                "A small example and print (or a debugger) show where the values go off track.",
+                "Reproduce the bug on a small example and print the variables' values (or use a debugger) – you'll see where they go off track.",
             ),
         ),
     ),

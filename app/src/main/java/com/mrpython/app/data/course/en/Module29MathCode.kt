@@ -63,10 +63,10 @@ internal val module29 = CourseUnit(
             choice(
                 "Why is it enough to look for divisors up to the square root of n?",
                 listOf(
-                    "If n = a · b, then one of the factors is no greater than the square root of n",
-                    "Because there are no larger divisors",
-                    "Because prime numbers are small",
-                    "Because Python requires it",
+                    "If n = a · b, one of the factors is at most the square root of n",
+                    "n has no divisors greater than the square root of n",
+                    "The square root of n is always a prime number",
+                    "A range() loop can't go beyond the square root of n",
                 ),
                 0,
                 "If both factors were greater than the square root, their product would exceed n.",
@@ -92,9 +92,9 @@ internal val module29 = CourseUnit(
                 "What does the Sieve of Eratosthenes do?",
                 listOf(
                     "It crosses out the multiples of successive prime numbers",
-                    "It divides every number by 2",
-                    "It picks prime numbers at random",
-                    "It sorts numbers in ascending order",
+                    "It checks each number by dividing it by all smaller ones",
+                    "It crosses out the numbers that leave a remainder when divided by 2",
+                    "It prints the successive numbers that divide n evenly",
                 ),
                 0,
                 "Whatever is left uncrossed is a prime number.",
@@ -174,8 +174,8 @@ internal val module29 = CourseUnit(
                 "Why is the iterative version of Fibonacci faster than simple recursion?",
                 listOf(
                     "It calculates each number only once",
-                    "Because loops are always faster than functions",
-                    "Because it doesn't use addition",
+                    "Loops are always faster than functions",
+                    "It doesn't use addition",
                     "It isn't faster",
                 ),
                 0,
@@ -191,7 +191,7 @@ internal val module29 = CourseUnit(
             output(
                 "print(2 ** 10)\nprint(pow(3, 4))\nprint(pow(2, 10, 1000))",
                 "1024\n81\n24",
-                "pow(a, b, m) calculates the remainder of a to the power of b divided by m: 1024 % 1000 = 24.",
+                "pow(a, b, m) calculates the remainder of dividing a ** b by m: 1024 % 1000 = 24.",
             ),
             output(
                 "def power_of_two(n):\n    while n % 2 == 0 and n > 1:\n        n //= 2\n    return n == 1\n\nprint(power_of_two(16), power_of_two(12))",

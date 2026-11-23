@@ -98,7 +98,7 @@ internal val module70 = CourseUnit(
             output(
                 "from collections import Counter\nk = Counter()\nk[\"kubek\"] += 2\nk[\"łyżka\"] += 1\nk[\"kubek\"] -= 1\nprint(k[\"kubek\"], sum(k.values()))",
                 "1 2",
-                "Counter też dobrze sprawdza się jako koszyk.",
+                "Brakujący klucz w Counter ma wartość 0, więc += działa od razu: kubek 2 − 1 = 1, razem 2 sztuki.",
             ),
         ),
         lesson(
@@ -115,9 +115,9 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "Dlaczego piszemy Decimal(\"19.99\"), a nie Decimal(19.99)?",
-                listOf("Float 19.99 już jest niedokładny, a napis zachowuje dokładną wartość", "Decimal nie przyjmuje liczb", "Napis jest szybszy", "Nie ma różnicy"),
+                listOf("Float 19.99 jest już niedokładny", "Decimal nie przyjmuje liczb", "Napis liczy się szybciej", "Oba dają tę samą wartość"),
                 0,
-                "Decimal(19.99) skopiowałby błąd zaokrąglenia floata.",
+                "Float 19.99 jest zapisany w pamięci z małym błędem, a Decimal(19.99) skopiowałby ten błąd; napis \"19.99\" daje dokładną wartość.",
             ),
             output(
                 "from decimal import Decimal\nCENY = {\"kubek\": Decimal(\"19.99\"),\n        \"talerz\": Decimal(\"12.50\")}\nkoszyk = {\"kubek\": 2, \"talerz\": 1}\nsuma = sum(CENY[n] * i\n           for n, i in koszyk.items())\nprint(suma)",
@@ -174,7 +174,7 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "Co oznacza :>8 w f\"{nazwa:>8}\"?",
-                listOf("Wyrównanie do prawej na szerokości 8 znaków", "Pierwsze 8 liter nazwy", "Nazwa powtórzona 8 razy", "Liczba większa niż 8"),
+                listOf("Wyrównanie do prawej na szerokości 8 znaków", "Wyrównanie do lewej na szerokości 8 znaków", "Wyrównanie do środka na szerokości 8 znaków", "Obcięcie nazwy do pierwszych 8 znaków"),
                 0,
                 "> wyrównuje do prawej, a 8 to szerokość pola.",
             ),
@@ -212,7 +212,7 @@ internal val module70 = CourseUnit(
                 "class BladSklepu(____):\n    pass\ntry:\n    raise BladSklepu(\"pusty koszyk\")\nexcept BladSklepu as e:\n    print(e)",
                 listOf("Exception", "object", "str"),
                 "Exception",
-                "Zgłaszać można tylko klasy dziedziczące po Exception.",
+                "raise przyjmuje tylko wyjątki, a własne wyjątki dziedziczą po Exception; object i str dałyby TypeError.",
             ),
             choice(
                 "Dlaczego except ValueError złapie wyjątek ZlaIlosc?",
@@ -228,7 +228,7 @@ internal val module70 = CourseUnit(
             tiles(
                 "Zgłoś własny wyjątek BrakTowaru z komunikatem \"kubek\"",
                 listOf("raise", "BrakTowaru(", "\"kubek\"", ")"),
-                listOf("throw", "except"),
+                listOf("try", "except"),
                 "W Pythonie wyjątek zgłaszamy słowem raise.",
             ),
             output(
@@ -238,9 +238,9 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "Gdzie najlepiej sprawdzać, czy ilość jest poprawna?",
-                listOf("W metodzie dodającej do koszyka, zanim zmieni jego stan", "Dopiero przy drukowaniu paragonu", "W klasie wyjątku", "Nigdzie – błędne dane same się poprawią"),
+                listOf("Przy dodawaniu, zanim zmieni się koszyk", "Dopiero przy drukowaniu paragonu", "W samej klasie wyjątku ZlaIlosc", "Po zapisaniu całego zamówienia"),
                 0,
-                "Walidacja na wejściu chroni koszyk przed złymi danymi.",
+                "Walidacja na wejściu, zanim koszyk się zmieni, chroni go przed złymi danymi; później zła ilość już w nim siedzi.",
             ),
         ),
     ),

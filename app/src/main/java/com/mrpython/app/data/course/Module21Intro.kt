@@ -24,8 +24,8 @@ internal val module21Intro = lesson(
     ),
     explain(
         "Czytanie linii",
-        "Po pliku można iść pętlą `for` – linia po linii. Każda linia kończy się znakiem `\\n`, " +
-            "dlatego zwykle obcinamy go przez `strip()`.",
+        "Po pliku można iść pętlą `for` – linia po linii. Linia zwykle kończy się znakiem `\\n` (tylko ostatnia " +
+            "może go nie mieć), dlatego najczęściej obcinamy go przez `strip()`.",
         code = "with open(\"a.txt\", \"w\") as f:\n    f.write(\"x\\ny\\n\")\nwith open(\"a.txt\") as f:\n    for linia in f:\n        print(linia.strip())",
         output = "x\ny",
     ),

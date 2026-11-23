@@ -115,8 +115,8 @@ internal val module26 = CourseUnit(
             choice(
                 "How does insertion sort work?",
                 listOf(
-                    "It takes the next element and inserts it in the right place in the sorted part",
-                    "It selects the largest element and moves it to the end",
+                    "It slides the next element into the sorted part",
+                    "It moves the largest element to the end",
                     "It swaps random pairs of elements",
                     "It sorts both halves of the list separately",
                 ),
@@ -186,9 +186,9 @@ internal val module26 = CourseUnit(
             ),
             choice(
                 "What does a.sort() return?",
-                listOf("None – it sorts the list in place", "A new sorted list", "A sorted tuple", "The number of elements"),
+                listOf("None", "A new sorted list", "A sorted tuple", "The number of elements"),
                 0,
-                "sort() changes the list a and returns nothing.",
+                "sort() sorts the list a in place and returns None.",
             ),
             output(
                 "names = [\"tom\", \"Eve\", \"adam\"]\nprint(sorted(names))\nprint(sorted(names, key=str.lower))",
@@ -207,7 +207,7 @@ internal val module26 = CourseUnit(
             choice(
                 "What does it mean that sorting in Python is stable?",
                 listOf(
-                    "Elements with equal keys keep their order",
+                    "Equal elements keep their order",
                     "Sorting never raises an error",
                     "The list doesn't change after sorting",
                     "Sorting always takes the same amount of time",

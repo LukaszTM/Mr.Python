@@ -23,9 +23,9 @@ internal val module48Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – ord() takes one character", "It prints 97 98", "It prints 195", "It prints a"),
+            listOf("TypeError", "It prints 97 98", "It prints 195", "It prints a"),
             0,
-            "ord() works only for a string of length 1.",
+            "ord() takes exactly one character, so for \"ab\" it raises a TypeError.",
             code = "print(ord(\"ab\"))",
         ),
         choice(
@@ -230,7 +230,7 @@ internal val module48Practice = listOf(
             "Bytes have a decode() method, but no encode() or casefold().",
         ),
         tiles(
-            "Store in the variable t whether the strings a and b are equal regardless of letter case",
+            "Store in the variable t whether the strings a and b are equal regardless of letter case (a on the left of ==)",
             listOf("t", "=", "a.casefold()", "==", "b.casefold()"),
             listOf("!=", "a.upper"),
             "We compare the strings after casefold() with the == operator.",

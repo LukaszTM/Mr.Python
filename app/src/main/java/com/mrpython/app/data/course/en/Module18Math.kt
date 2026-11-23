@@ -14,7 +14,7 @@ internal val module18 = CourseUnit(
             choice(
                 "What does the statement import math do?",
                 listOf(
-                    "It loads the math module so you can use its functions",
+                    "It loads the math module",
                     "It creates a new numeric variable",
                     "It reinstalls Python",
                     "It prints all the math functions",
@@ -32,9 +32,9 @@ internal val module18 = CourseUnit(
             output("import math\nprint(math.floor(7.9))", "7", "floor rounds down to a whole number."),
             choice(
                 "What happens when you run this code?",
-                listOf("NameError – you have to write math.sqrt", "It prints 3.0", "It prints 3", "SyntaxError"),
+                listOf("NameError", "It prints 3.0", "It prints 3", "SyntaxError"),
                 0,
-                "After import math we call functions with the math. prefix.",
+                "After import math we call functions with the prefix: math.sqrt(9). A bare sqrt doesn't exist, so you get a NameError.",
                 code = "import math\nprint(sqrt(9))",
             ),
             tiles(
@@ -83,9 +83,9 @@ internal val module18 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("NameError – only the name m is available", "It prints 3.141592653589793", "It prints m", "SyntaxError"),
+                listOf("NameError", "It prints 3.141592653589793", "It prints m", "SyntaxError"),
                 0,
-                "After import math as m the module is visible only under the name m.",
+                "After import math as m the module is visible only under the name m, so math gives a NameError.",
                 code = "import math as m\nprint(math.pi)",
             ),
         ),
@@ -129,7 +129,7 @@ internal val module18 = CourseUnit(
             choice(
                 "What is a module in Python?",
                 listOf(
-                    "A .py file with code that can be imported",
+                    "A .py file with code",
                     "A kind of loop",
                     "A type of number",
                     "A comment in the code",
@@ -158,7 +158,7 @@ internal val module18 = CourseUnit(
             choice(
                 "Why is it worth splitting a program into modules?",
                 listOf(
-                    "The code is organized and can be reused",
+                    "The code is easier to organize and reuse",
                     "The program always runs faster",
                     "Modules remove bugs on their own",
                     "Python requires it",
@@ -169,13 +169,13 @@ internal val module18 = CourseUnit(
             choice(
                 "What does from math import * mean?",
                 listOf(
-                    "It imports all public names from math",
-                    "It multiplies the math module",
-                    "It imports only pi",
+                    "It imports all the names from math",
+                    "It imports only the constant pi",
+                    "It imports the module under the name *",
                     "It's a syntax error",
                 ),
                 0,
-                "The star imports everything, but name conflicts happen easily then – better to avoid it.",
+                "The star imports all the module's public names, but name conflicts happen easily then – better to avoid it.",
             ),
             output(
                 "import math\nimport math\nprint(math.gcd(8, 12))",

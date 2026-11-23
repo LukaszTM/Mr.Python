@@ -43,9 +43,9 @@ internal val module11Practice = listOf(
         ),
         choice(
             "How do you create an object of the Car class?",
-            listOf("c = Car()", "c = new Car()", "c = class Car", "c = Car.create"),
+            listOf("c = Car()", "c = Car", "c = class Car", "c = Car(self)"),
             0,
-            "We create an object by calling the class like a function.",
+            "We create an object by calling the class like a function – with parentheses. Car alone is the class, not an object.",
         ),
         choice(
             "What will happen?",
@@ -63,7 +63,7 @@ internal val module11Practice = listOf(
         fill(
             "Fill in the blank to create the Bike class.",
             "____ Bike:\n    pass\n\nb = Bike()\nprint(\"done\")",
-            listOf("class", "def", "new"),
+            listOf("class", "def", "Class"),
             "class",
             "We define a class with the class keyword.",
         ),
@@ -77,7 +77,7 @@ internal val module11Practice = listOf(
         tiles(
             "Create an object of the Point class with coordinates 3 and 4 in the variable p",
             listOf("p", "=", "Point(", "3,", "4", ")"),
-            listOf("new", "self,"),
+            listOf("class", "self,"),
             "We pass the arguments in parentheses, without self.",
         ),
         tiles(
@@ -136,22 +136,22 @@ internal val module11Practice = listOf(
         ),
         choice(
             "What's wrong with the last line?",
-            listOf("The parentheses are missing – the method won't be called", "Nothing, it prints Woof", "self is missing in the call", "Dog has no bark method"),
+            listOf("bark has no parentheses", "Nothing, it prints Woof", "self is missing in the call", "Dog has no bark method"),
             0,
             "Without () we print the method itself instead of calling it.",
             code = "class Dog:\n    def bark(self):\n        return \"Woof\"\n\nd = Dog()\nprint(d.bark)",
         ),
         choice(
             "A method has the header def set(self, x). How many arguments do we pass in the call c.set(...)?",
-            listOf("One – Python passes self itself", "Two", "Zero", "Three"),
+            listOf("One", "Two", "Zero", "Three"),
             0,
-            "The object before the dot becomes self.",
+            "We pass only x – Python passes the object before the dot as self.",
         ),
         choice(
             "How is a method different from a regular function?",
-            listOf("It's defined in a class and works on an object", "It can't return a value", "It can't have parameters", "It isn't"),
+            listOf("It's defined in a class", "It can't return a value", "It can't have parameters", "It isn't"),
             0,
-            "We call a method on an object, like obj.method().",
+            "We define a method in a class and call it on an object, like obj.method().",
         ),
         fill(
             "Fill in the blank so the method reads the object's attribute.",
@@ -223,9 +223,9 @@ internal val module11Practice = listOf(
         ),
         choice(
             "What should the __str__ method return?",
-            listOf("The string that print() will show", "A number", "A new object", "None"),
+            listOf("A string", "A number", "A new object", "None"),
             0,
-            "__str__ returns a text description of the object.",
+            "__str__ returns a string – the text description of the object that print() shows.",
         ),
         choice(
             "What will this code print?",
@@ -236,7 +236,7 @@ internal val module11Practice = listOf(
         ),
         choice(
             "What is super().__init__() for in a child class?",
-            listOf("It calls the base class's __init__", "It creates a new class", "It deletes the object", "It calls __str__"),
+            listOf("It calls the base class's __init__", "It creates a new base class", "It deletes the base class's object", "It calls the base class's __str__"),
             0,
             "This way the base class sets its attributes.",
         ),
@@ -316,16 +316,16 @@ internal val module11Practice = listOf(
         ),
         choice(
             "What will happen?",
-            listOf("An error – the object has no age attribute", "It prints None", "It prints 0", "It prints Tom"),
+            listOf("An error", "It prints None", "It prints 0", "It prints Tom"),
             0,
-            "Reading an attribute that doesn't exist raises an AttributeError.",
+            "Cat has only the name attribute – reading the missing age attribute raises an AttributeError.",
             code = "class Cat:\n    def __init__(self):\n        self.name = \"Tom\"\n\nc = Cat()\nprint(c.age)",
         ),
         choice(
             "What does a child class get from its base class?",
-            listOf("Its methods, which it can also override", "Only its name", "Nothing", "Only the __str__ method"),
+            listOf("Its methods", "Only its name", "Nothing", "Only the __str__ method"),
             0,
-            "A child class inherits all the methods of the base class.",
+            "A child class inherits all the methods of the base class and can override them.",
         ),
         fill(
             "Fill in the blank to create an object and print its attribute.",

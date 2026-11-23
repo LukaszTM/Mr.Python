@@ -13,7 +13,7 @@ internal val module18 = CourseUnit(
             choice(
                 "Co robi instrukcja import math?",
                 listOf(
-                    "Wczytuje moduł math, by używać jego funkcji",
+                    "Wczytuje moduł math",
                     "Tworzy nową zmienną liczbową",
                     "Instaluje Pythona od nowa",
                     "Wypisuje wszystkie funkcje math",
@@ -31,9 +31,9 @@ internal val module18 = CourseUnit(
             output("import math\nprint(math.floor(7.9))", "7", "floor zaokrągla w dół do liczby całkowitej."),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("NameError – trzeba napisać math.sqrt", "Wypisze 3.0", "Wypisze 3", "SyntaxError"),
+                listOf("NameError", "Wypisze 3.0", "Wypisze 3", "SyntaxError"),
                 0,
-                "Po import math funkcje wywołujemy z przedrostkiem math.",
+                "Po import math funkcje wywołujemy z przedrostkiem: math.sqrt(9). Samo sqrt nie istnieje, więc jest NameError.",
                 code = "import math\nprint(sqrt(9))",
             ),
             tiles(
@@ -82,9 +82,9 @@ internal val module18 = CourseUnit(
             ),
             choice(
                 "Co się stanie po uruchomieniu tego kodu?",
-                listOf("NameError – dostępna jest tylko nazwa m", "Wypisze 3.141592653589793", "Wypisze m", "SyntaxError"),
+                listOf("NameError", "Wypisze 3.141592653589793", "Wypisze m", "SyntaxError"),
                 0,
-                "Po import math as m moduł jest widoczny tylko pod nazwą m.",
+                "Po import math as m moduł jest widoczny tylko pod nazwą m, więc math to NameError.",
                 code = "import math as m\nprint(math.pi)",
             ),
         ),
@@ -128,7 +128,7 @@ internal val module18 = CourseUnit(
             choice(
                 "Czym jest moduł w Pythonie?",
                 listOf(
-                    "Plikiem .py z kodem, który można zaimportować",
+                    "Plikiem .py z kodem",
                     "Rodzajem pętli",
                     "Typem liczby",
                     "Komentarzem w kodzie",
@@ -157,7 +157,7 @@ internal val module18 = CourseUnit(
             choice(
                 "Dlaczego warto dzielić program na moduły?",
                 listOf(
-                    "Kod jest uporządkowany i można go używać ponownie",
+                    "Kod łatwiej uporządkować i użyć ponownie",
                     "Program zawsze działa szybciej",
                     "Moduły same usuwają błędy",
                     "Python tego wymaga",
@@ -168,13 +168,13 @@ internal val module18 = CourseUnit(
             choice(
                 "Co oznacza from math import *?",
                 listOf(
-                    "Importuje wszystkie publiczne nazwy z math",
-                    "Mnoży moduł math",
-                    "Importuje tylko pi",
+                    "Importuje wszystkie nazwy z math",
+                    "Importuje tylko stałą pi",
+                    "Importuje moduł pod nazwą *",
                     "To błąd składni",
                 ),
                 0,
-                "Gwiazdka importuje wszystko, ale łatwo wtedy o konflikt nazw – lepiej jej unikać.",
+                "Gwiazdka importuje wszystkie publiczne nazwy modułu, ale łatwo wtedy o konflikt nazw – lepiej jej unikać.",
             ),
             output(
                 "import math\nimport math\nprint(math.gcd(8, 12))",

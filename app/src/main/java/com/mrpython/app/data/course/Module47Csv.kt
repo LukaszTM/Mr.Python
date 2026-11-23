@@ -75,7 +75,7 @@ internal val module47 = CourseUnit(
             choice(
                 "Do czego służy io.StringIO w tych przykładach?",
                 listOf(
-                    "Udaje plik, ale trzyma dane w pamięci",
+                    "Udaje plik w pamięci",
                     "Zapisuje dane na dysku",
                     "Zamienia tekst na liczby",
                     "Pobiera plik z internetu",
@@ -136,9 +136,9 @@ internal val module47 = CourseUnit(
             ),
             choice(
                 "Co się stanie bez int()?",
-                listOf("TypeError – nie można dodać napisu do liczby", "Wypisze 30", "Wypisze 1020", "Wypisze 0"),
+                listOf("TypeError", "Wypisze 30", "Wypisze 1020", "Wypisze 0"),
                 0,
-                "Wartości z CSV są napisami, a 0 + \"10\" to błąd.",
+                "Wartości z CSV są napisami, a 0 + \"10\" zgłasza TypeError – nie można dodać napisu do liczby.",
                 code = "import csv, io\nf = io.StringIO(\"c\\n10\\n20\")\ns = 0\nfor r in csv.DictReader(f):\n    s += r[\"c\"]\nprint(s)",
             ),
             fill(
@@ -197,7 +197,7 @@ internal val module47 = CourseUnit(
             ),
             choice(
                 "Co zwraca f.getvalue() dla obiektu io.StringIO?",
-                listOf("Cały zapisany tekst jako napis", "Listę wierszy", "Liczbę znaków", "Nazwę pliku"),
+                listOf("Cały tekst (str)", "Listę wierszy (list)", "Liczbę znaków (int)", "Nazwę pliku (str)"),
                 0,
                 "getvalue() zwraca całą zawartość bufora.",
             ),

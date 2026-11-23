@@ -99,7 +99,7 @@ internal val module70 = CourseUnit(
             output(
                 "from collections import Counter\nc = Counter()\nc[\"mug\"] += 2\nc[\"spoon\"] += 1\nc[\"mug\"] -= 1\nprint(c[\"mug\"], sum(c.values()))",
                 "1 2",
-                "A Counter also works well as a cart.",
+                "A missing key in a Counter counts as 0, so += works straight away: mug 2 − 1 = 1, 2 units in total.",
             ),
         ),
         lesson(
@@ -116,9 +116,9 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "Why do we write Decimal(\"19.99\") and not Decimal(19.99)?",
-                listOf("The float 19.99 is already inexact, while the string keeps the exact value", "Decimal doesn't accept numbers", "A string is faster", "There's no difference"),
+                listOf("The float 19.99 is already inexact", "Decimal doesn't accept numbers", "A string is calculated faster", "Both give the same value"),
                 0,
-                "Decimal(19.99) would copy the float's rounding error.",
+                "The float 19.99 is stored with a tiny error, and Decimal(19.99) would copy it; the string \"19.99\" gives the exact value.",
             ),
             output(
                 "from decimal import Decimal\nPRICES = {\"mug\": Decimal(\"19.99\"),\n          \"plate\": Decimal(\"12.50\")}\ncart = {\"mug\": 2, \"plate\": 1}\ntotal = sum(PRICES[n] * q\n            for n, q in cart.items())\nprint(total)",
@@ -175,7 +175,7 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "What does :>8 mean in f\"{name:>8}\"?",
-                listOf("Right-align in a field 8 characters wide", "The first 8 letters of the name", "The name repeated 8 times", "A number greater than 8"),
+                listOf("Right-align in a field 8 characters wide", "Left-align in a field 8 characters wide", "Center in a field 8 characters wide", "Cut the name to its first 8 characters"),
                 0,
                 "> aligns to the right, and 8 is the field width.",
             ),
@@ -213,7 +213,7 @@ internal val module70 = CourseUnit(
                 "class ShopError(____):\n    pass\ntry:\n    raise ShopError(\"empty cart\")\nexcept ShopError as e:\n    print(e)",
                 listOf("Exception", "object", "str"),
                 "Exception",
-                "You can only raise classes that inherit from Exception.",
+                "raise accepts only exceptions, and custom exceptions inherit from Exception; object or str would give a TypeError.",
             ),
             choice(
                 "Why does except ValueError catch the BadQuantity exception?",
@@ -229,7 +229,7 @@ internal val module70 = CourseUnit(
             tiles(
                 "Raise the custom OutOfStock exception with the message \"mug\"",
                 listOf("raise", "OutOfStock(", "\"mug\"", ")"),
-                listOf("throw", "except"),
+                listOf("try", "except"),
                 "In Python you raise an exception with the raise keyword.",
             ),
             output(
@@ -239,9 +239,9 @@ internal val module70 = CourseUnit(
             ),
             choice(
                 "Where is the best place to check that a quantity is valid?",
-                listOf("In the method that adds to the cart, before it changes the cart's state", "Only when printing the receipt", "In the exception class", "Nowhere – bad data will fix itself"),
+                listOf("When adding, before the cart changes", "Only when printing the receipt", "In the BadQuantity exception class", "After the whole order is saved"),
                 0,
-                "Validating at the entry point protects the cart from bad data.",
+                "Validating on the way in, before the cart changes, protects it from bad data; later the bad quantity is already inside.",
             ),
         ),
     ),

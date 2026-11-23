@@ -16,7 +16,7 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Co się stanie, gdy warunek w assert jest fałszywy?",
-                listOf("Zostanie zgłoszony AssertionError", "Wypisze się False", "Nic, program działa dalej", "Funkcja zwróci None"),
+                listOf("Błąd AssertionError", "Wypisze się False", "Nic się nie stanie", "Funkcja zwróci None"),
                 0,
                 "Fałszywy warunek w assert zgłasza wyjątek AssertionError.",
             ),
@@ -45,9 +45,9 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Dlaczego ten assert nigdy nie zgłosi błędu?",
-                listOf("Nawiasy tworzą krotkę, a niepusta krotka jest zawsze prawdziwa", "Bo x jest ujemne", "Bo komunikat jest napisem", "Bo assert działa tylko w funkcjach"),
+                listOf("Bo nawiasy tworzą krotkę", "Bo x jest ujemne", "Bo komunikat jest napisem", "Bo assert działa tylko w funkcjach"),
                 0,
-                "assert (warunek, tekst) sprawdza krotkę – nie stawiaj nawiasów po assert.",
+                "assert (warunek, tekst) sprawdza krotkę, a niepusta krotka jest zawsze prawdziwa – nie stawiaj nawiasów po assert.",
                 code = "x = -5\nassert(x > 0, \"ujemne\")\nprint(\"przeszło\")",
             ),
             output(
@@ -87,7 +87,7 @@ internal val module52 = CourseUnit(
                 "Lista par (dane, oczekiwany wynik) pozwala sprawdzić wiele przypadków w pętli.",
             ),
             tiles(
-                "Sprawdź, że długość napisu \"kot\" to 3.",
+                "Sprawdź, że długość napisu \"kot\" to 3 (najpierw sprawdzany wynik, potem oczekiwana wartość).",
                 listOf("assert", "len(\"kot\")", "==", "3"),
                 listOf("=", "return"),
                 "assert z porównaniem == sprawdza oczekiwany wynik.",
@@ -99,9 +99,9 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Co powinien zawierać dobry test?",
-                listOf("Konkretne dane i znany oczekiwany wynik", "Losowe dane bez sprawdzania", "Tylko wywołanie funkcji", "Wypisanie wyniku na ekran"),
+                listOf("Dane i oczekiwany wynik", "Losowe dane bez sprawdzania", "Tylko wywołanie funkcji", "Wypisanie wyniku na ekran"),
                 0,
-                "Test porównuje wynik z wartością, którą znamy z góry.",
+                "Test wywołuje kod z konkretnymi danymi i porównuje wynik z wartością, którą znamy z góry.",
             ),
         ),
         lesson(
@@ -133,7 +133,7 @@ internal val module52 = CourseUnit(
                 "Jak poprawić funkcję maks z poprzedniego zadania?",
                 listOf("Zacząć od wynik = lista[0]", "Zacząć od wynik = 1", "Zamienić > na <", "Usunąć return"),
                 0,
-                "Pierwszy element listy jest dobrym punktem startowym.",
+                "Pierwszy element listy jest dobrym punktem startowym (pustą listę trzeba wtedy obsłużyć osobno).",
             ),
             output(
                 "def znak(n):\n    if n > 0:\n        return \"+\"\n    elif n < 0:\n        return \"-\"\n\nprint(znak(5), znak(-2), znak(0))",
@@ -141,16 +141,16 @@ internal val module52 = CourseUnit(
                 "Zapomniano o zerze – funkcja nic nie zwraca, więc wynik to None.",
             ),
             tiles(
-                "Napisz test: silnia z zera ma wynosić 1.",
+                "Napisz test: silnia z zera ma wynosić 1 (najpierw sprawdzany wynik, potem oczekiwana wartość).",
                 listOf("assert", "silnia(0)", "==", "1"),
                 listOf("=", "return"),
                 "Zero to klasyczny przypadek brzegowy dla silni.",
             ),
             choice(
                 "Które dane najlepiej przetestować dla funkcji dziel(a, b)?",
-                listOf("b = 0, liczby ujemne i zwykłe liczby", "Tylko 10 i 2", "Tylko duże liczby", "Wystarczy jeden dowolny przykład"),
+                listOf("Różne, także b = 0", "Tylko 10 i 2", "Tylko duże liczby", "Jeden dowolny przykład"),
                 0,
-                "Dobre testy obejmują zwykłe przypadki i brzegowe.",
+                "Dobre testy obejmują zwykłe przypadki i brzegowe: b = 0, liczby ujemne i zwykłe liczby.",
             ),
         ),
         lesson(
@@ -175,7 +175,7 @@ internal val module52 = CourseUnit(
                 "unittest uruchamia metody, których nazwa zaczyna się od test.",
             ),
             tiles(
-                "Sprawdź w metodzie testu, że dodaj(2, 2) daje 4.",
+                "Sprawdź w metodzie testu, że dodaj(2, 2) daje 4 (najpierw sprawdzany wynik, potem oczekiwana wartość).",
                 listOf("self.assertEqual(", "dodaj(2, 2)", ",", "4", ")"),
                 listOf("assertTrue(", "="),
                 "assertEqual(a, b) sprawdza, czy a == b.",
@@ -206,9 +206,9 @@ internal val module52 = CourseUnit(
             "u52l5", "Powtórka: myślenie testami",
             choice(
                 "Od czego zaczynasz, pracując metodą TDD (test-driven development)?",
-                listOf("Od napisania testu, który na razie nie przechodzi", "Od napisania całej funkcji", "Od wypisania wyników", "Od usunięcia starych testów"),
+                listOf("Od napisania testu", "Od napisania funkcji", "Od wypisania wyników", "Od usunięcia testów"),
                 0,
-                "W TDD najpierw powstaje test, a dopiero potem kod, który go spełnia.",
+                "W TDD najpierw powstaje test, który na razie nie przechodzi, a dopiero potem kod, który go spełnia.",
             ),
             choice(
                 "Jaka jest kolejność kroków w TDD?",
@@ -234,7 +234,7 @@ internal val module52 = CourseUnit(
                 "Warunek jest fałszywy, więc łapiemy AssertionError z komunikatem.",
             ),
             tiles(
-                "Napisz test: suma pustej listy ma wynosić 0.",
+                "Napisz test: suma pustej listy ma wynosić 0 (najpierw sprawdzany wynik, potem oczekiwana wartość).",
                 listOf("assert", "suma([])", "==", "0"),
                 listOf("return", "!="),
                 "Pusta lista to ważny przypadek brzegowy.",
@@ -246,7 +246,7 @@ internal val module52 = CourseUnit(
             ),
             choice(
                 "Który assert zgłosi błąd?",
-                listOf("Drugi: len([]) == 1", "Pierwszy: upper()", "Żaden", "Oba"),
+                listOf("Drugi", "Pierwszy", "Żaden", "Oba"),
                 0,
                 "\"abc\".upper() to \"ABC\", ale długość pustej listy to 0, nie 1.",
                 code = "assert \"abc\".upper() == \"ABC\"\nassert len([]) == 1\nprint(\"koniec\")",

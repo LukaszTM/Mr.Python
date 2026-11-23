@@ -18,8 +18,8 @@ internal val module21 = CourseUnit(
             choice(
                 "What does the mode \"w\" mean in open()?",
                 listOf(
-                    "Writing – the file is created or cleared",
-                    "Reading the file",
+                    "Writing",
+                    "Reading",
                     "Appending at the end",
                     "Deleting the file",
                 ),
@@ -52,13 +52,13 @@ internal val module21 = CourseUnit(
             choice(
                 "What happens after f.write(5) for a file opened in mode \"w\"?",
                 listOf(
-                    "TypeError – write only accepts strings",
-                    "It writes the number 5",
+                    "A TypeError",
+                    "It writes the string \"5\"",
                     "It writes five spaces",
                     "Nothing happens",
                 ),
                 0,
-                "We write strings to a text file – a number has to be converted with str().",
+                "write only accepts strings, so a number gives a TypeError – convert it with str() first.",
             ),
             tiles(
                 "Open the file notes.txt for writing.",
@@ -116,10 +116,10 @@ internal val module21 = CourseUnit(
             choice(
                 "Why is it worth using with for files?",
                 listOf(
-                    "You don't have to remember close(), even when an error occurs",
+                    "It always closes the file for you",
                     "Without with you can't read files",
-                    "with encrypts the file",
-                    "with only works with .txt files",
+                    "It encrypts the file",
+                    "It only works with .txt files",
                 ),
                 0,
                 "with always closes the file – even after an exception.",

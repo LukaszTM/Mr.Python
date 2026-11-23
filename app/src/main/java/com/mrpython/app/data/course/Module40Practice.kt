@@ -229,15 +229,15 @@ internal val module40Practice = listOf(
         ),
         choice(
             "Co oznacza skrót LRU w lru_cache?",
-            listOf("Least Recently Used – usuwany jest najdawniej używany wynik", "Last Result Used – pamiętany jest tylko ostatni wynik", "Long Running Unit", "Loop Recursion Utility"),
+            listOf("Least Recently Used", "Last Result Used", "Long Running Unit", "Loop Recursion Utility"),
             0,
-            "Gdy pamięć się zapełni, wypada wynik nieużywany najdłużej.",
+            "Least Recently Used – najdawniej używany: gdy pamięć się zapełni, wypada wynik nieużywany najdłużej.",
         ),
         choice(
             "Dla której funkcji @lru_cache ma sens?",
-            listOf("Takiej, która dla tych samych argumentów zawsze zwraca ten sam wynik", "Takiej, która losuje liczby", "Takiej, która zwraca aktualną godzinę", "Takiej, która nic nie zwraca"),
+            listOf("Liczącej kwadrat liczby", "Losującej liczbę", "Zwracającej aktualną godzinę", "Wypisującej tekst"),
             0,
-            "Zapamiętany wynik musi być zawsze aktualny dla danych argumentów.",
+            "Kwadrat zależy tylko od argumentu, więc zapamiętany wynik jest zawsze dobry. Przy losowaniu i godzinie dostalibyśmy stary wynik, a tekst nie wypisałby się ponownie.",
         ),
         fill(
             "Uzupełnij, aby wypisać liczbę pudeł pamięci (wypisze 2).",

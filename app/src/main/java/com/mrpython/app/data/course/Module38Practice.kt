@@ -52,15 +52,15 @@ internal val module38Practice = listOf(
         ),
         choice(
             "Co zwraca most_common(2)?",
-            listOf("Listę 2 par (element, liczba) od najczęstszego", "Słownik z 2 kluczami", "Dwa najczęstsze elementy bez liczb", "Liczbę 2"),
+            listOf("Listę 2 par (element, liczba)", "Słownik z 2 kluczami", "Listę 2 elementów bez liczb", "Liczbę 2"),
             0,
-            "Każda para to element i liczba jego wystąpień.",
+            "Dostajemy listę 2 par od najczęstszej – każda para to element i liczba jego wystąpień.",
         ),
         choice(
             "Czym jest Counter?",
-            listOf("Słownikiem, w którym klucze to elementy, a wartości to liczby wystąpień", "Rodzajem listy", "Funkcją zwracającą jedną liczbę", "Krotką z nazwanymi polami"),
+            listOf("Słownikiem do liczenia", "Rodzajem listy", "Funkcją zwracającą liczbę", "Krotką z nazwanymi polami"),
             0,
-            "Counter to podklasa dict przeznaczona do zliczania.",
+            "Counter to podklasa dict: klucze to elementy, a wartości to liczby wystąpień.",
         ),
         fill(
             "Uzupełnij, aby policzyć wystąpienia liczb (wypisze 2).",
@@ -85,7 +85,7 @@ internal val module38Practice = listOf(
         tiles(
             "Zaimportuj Counter z modułu collections",
             listOf("from", "collections", "import", "Counter"),
-            listOf("itertools", "include"),
+            listOf("itertools", "Collections"),
             "Counter znajduje się w module collections.",
         ),
     ),
@@ -140,9 +140,9 @@ internal val module38Practice = listOf(
         ),
         choice(
             "Dlaczego piszemy defaultdict(int), a nie defaultdict(0)?",
-            listOf("Trzeba podać funkcję, którą można wywołać, a 0 nią nie jest", "0 to za mała liczba", "int działa szybciej", "Oba zapisy działają tak samo"),
+            listOf("Trzeba podać funkcję", "0 to za mała liczba", "int działa szybciej", "Oba zapisy działają"),
             0,
-            "defaultdict wywołuje podany obiekt przy każdym brakującym kluczu.",
+            "defaultdict wywołuje podany obiekt przy każdym brakującym kluczu: int() daje 0, a liczby 0 nie da się wywołać.",
         ),
         choice(
             "Jaką wartość dostanie nowy klucz w defaultdict(list)?",
@@ -221,16 +221,16 @@ internal val module38Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("AttributeError – nie ma pola z", "Wypisze None", "Wypisze 0", "KeyError"),
+            listOf("AttributeError", "Wypisze None", "Wypisze 0", "KeyError"),
             0,
-            "Typ P ma tylko pola x i y.",
+            "Typ P ma tylko pola x i y, więc odczyt p.z daje AttributeError.",
             code = "from collections import namedtuple\nP = namedtuple(\"P\", [\"x\", \"y\"])\np = P(1, 2)\nprint(p.z)",
         ),
         choice(
             "Czym namedtuple różni się od zwykłej krotki?",
-            listOf("Pola mają nazwy, więc można pisać p.x zamiast p[0]", "Można zmieniać jej elementy", "Nie można jej indeksować", "Może mieć tylko dwa pola"),
+            listOf("Jej pola mają nazwy", "Można zmieniać jej elementy", "Nie można jej indeksować", "Ma tylko dwa pola"),
             0,
-            "namedtuple to krotka z dodatkowymi nazwami pól.",
+            "namedtuple to krotka z nazwami pól, więc można pisać p.x zamiast p[0].",
         ),
         choice(
             "Co zwraca p._replace(x=5)?",
@@ -316,9 +316,9 @@ internal val module38Practice = listOf(
         ),
         choice(
             "Co się dzieje, gdy do pełnej deque(maxlen=3) dodamy element przez append?",
-            listOf("Najstarszy element z lewej strony wypada", "Zgłaszany jest błąd", "Nowy element jest ignorowany", "maxlen rośnie do 4"),
+            listOf("Wypada najstarszy element", "Zgłaszany jest błąd", "Nowy element jest pomijany", "maxlen rośnie do 4"),
             0,
-            "deque z maxlen zawsze trzyma najwyżej maxlen elementów.",
+            "deque z maxlen trzyma najwyżej maxlen elementów, więc append wypycha najstarszy element z lewej strony.",
         ),
         choice(
             "Czy zwykły słownik w Pythonie 3.7+ pamięta kolejność wstawiania kluczy?",
@@ -329,7 +329,7 @@ internal val module38Practice = listOf(
         fill(
             "Uzupełnij, aby zdjąć element z lewej strony (wypisze a).",
             "from collections import deque\nd = deque([\"a\", \"b\", \"c\"])\nprint(d.____())",
-            listOf("popleft", "pop", "leftpop", "shift"),
+            listOf("popleft", "pop", "leftpop", "popfirst"),
             "popleft",
             "popleft zdejmuje pierwszy element.",
         ),
@@ -437,7 +437,7 @@ internal val module38Practice = listOf(
         tiles(
             "Zaimportuj Counter i deque z collections",
             listOf("from", "collections", "import", "Counter,", "deque"),
-            listOf("itertools", "include"),
+            listOf("itertools", "Collections"),
             "Kilka nazw z jednego modułu importujemy po przecinku.",
         ),
     ),

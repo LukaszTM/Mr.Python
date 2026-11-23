@@ -8,7 +8,7 @@ internal val module33Cards = listOf(
         explain(
             "The forgotten super().__init__()",
             "A class without its own `__init__` inherits the parent's constructor. But when you write your own `__init__` " +
-                "and don't call `super().__init__()`, the parent's attributes are never created (`AttributeError`).",
+                "and don't call `super().__init__()`, the parent's attributes are never created – trying to read them gives an `AttributeError`.",
             code = "class A:\n    def __init__(self, x):\n        self.x = x\n\nclass B(A):\n    pass\n\nprint(B(7).x)",
             output = "7",
         ),

@@ -47,7 +47,7 @@ internal val module49Intro = lesson(
     ),
     choice(
         "Which type should you choose for amounts of money?",
-        listOf("Decimal", "float", "bool", "complex"),
+        listOf("Decimal", "float", "bool", "str"),
         0,
         "Decimal calculates exactly in the decimal system.",
     ),

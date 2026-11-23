@@ -40,7 +40,8 @@ internal val module26Cards = listOf(
         explain(
             "Shifting to the right",
             "To insert `x = a[i]`, we walk left starting from `j = i - 1`. Every element greater than `x` " +
-                "is shifted one place to the right (`a[j + 1] = a[j]`), and `x` goes into the gap: `a[j + 1] = x`.",
+                "is shifted one place to the right (`a[j + 1] = a[j]`), and `x` goes into the gap: `a[j + 1] = x`. " +
+                "The fewer shifts, the faster the whole sort runs.",
             code = "a = [1, 4, 2]\nx, j = a[2], 1\nwhile j >= 0 and a[j] > x:\n    a[j + 1] = a[j]\n    j -= 1\na[j + 1] = x",
         ),
         explain(

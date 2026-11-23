@@ -53,7 +53,7 @@ internal val module60Intro = lesson(
     ),
     choice(
         "What is the recommended way to check whether the variable x is None?",
-        listOf("x is None", "x = None", "x === None", "x in None"),
+        listOf("x is None", "x = None", "x is \"None\"", "x in None"),
         0,
         "None is a single object, so we compare with it using is.",
     ),

@@ -29,12 +29,12 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Why do we write each calculator operation as a separate function?",
-                listOf("They are easy to test, fix and call from different places", "Because Python doesn't allow operators in print", "To make the code longer", "Because functions run faster than operators"),
+                listOf("They are easy to test and fix", "Because Python doesn't allow operators in print", "To make the code longer", "Because functions run faster than operators"),
                 0,
-                "Small functions are small, independent building blocks of a program.",
+                "Small functions are independent building blocks of a program – easy to test, fix and call from different places.",
             ),
             tiles(
-                "Write the function subtract in one line.",
+                "Write, in one line, the function subtract that returns a minus b.",
                 listOf("def subtract(a, b):", "return", "a - b"),
                 listOf("b - a", "print("),
                 "The function returns a reduced by b.",
@@ -66,9 +66,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "What is the value in the dictionary {\"+\": add}?",
-                listOf("The function add itself, without calling it", "The result of an addition", "The string \"add\"", "A number"),
+                listOf("The function add", "The result of an addition", "The string \"add\"", "A number"),
                 0,
-                "Functions are objects – you can store them in a dictionary.",
+                "add without parentheses is the function itself, not its result. Functions are objects – you can store them in a dictionary.",
             ),
             fill(
                 "Fill in the dictionary so the * symbol points to the function times.",
@@ -100,9 +100,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "Why is a dictionary of functions better than a long if/elif?",
-                listOf("A new operation is just one new entry in the dictionary", "A dictionary doesn't need functions", "if/elif doesn't work with symbols", "A dictionary checks for errors by itself"),
+                listOf("A new operation is a new entry", "A dictionary doesn't need functions", "if/elif doesn't work with symbols", "A dictionary checks for errors by itself"),
                 0,
-                "The code that picks the operation doesn't change when you add a new symbol.",
+                "A new operation is one new entry in the dictionary, and the code that picks the operation doesn't change.",
             ),
         ),
         lesson(
@@ -148,9 +148,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("ValueError – too many values to unpack", "a = 2, op = +, b = 3", "TypeError", "Nothing"),
+                listOf("It raises ValueError", "a = 2, op = +, b = 3", "It raises TypeError", "Nothing happens"),
                 0,
-                "Without split, the string \"2 + 3\" has 5 characters, but there are only 3 variables.",
+                "Without split, the string \"2 + 3\" is unpacked character by character: it has 5 characters but there are only 3 variables – too many values, so ValueError.",
                 code = "a, op, b = \"2 + 3\"",
             ),
         ),
@@ -180,9 +180,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("The program stops with ZeroDivisionError – it isn't caught", "It prints \"Bad input\"", "It prints 0", "It prints inf"),
+                listOf("A ZeroDivisionError", "It prints \"Bad input\"", "It prints 0", "It prints inf"),
                 0,
-                "except ValueError doesn't catch division by zero.",
+                "except ValueError doesn't catch division by zero, so the uncaught ZeroDivisionError stops the program.",
                 code = "try:\n    a, op, b = \"3 / 0\".split()\n    print(int(a) / int(b))\nexcept ValueError:\n    print(\"Bad input\")",
             ),
             tiles(
@@ -233,9 +233,9 @@ internal val module55 = CourseUnit(
             ),
             choice(
                 "In what order does our calculator work for the text \"6 * 7\"?",
-                listOf("split → pick the function from the dictionary → call it → save to history", "save to history → split → call", "call → split → dictionary", "dictionary → history → split"),
+                listOf("split → dictionary → call → history", "history → split → dictionary → call", "call → split → dictionary → history", "dictionary → history → split → call"),
                 0,
-                "First we break up the text, then we calculate, and finally we remember the result.",
+                "First we break up the text, then we pick the function from the dictionary and calculate, and finally we save the result to the history.",
             ),
             tiles(
                 "Add a tuple with the text and the result to the history.",

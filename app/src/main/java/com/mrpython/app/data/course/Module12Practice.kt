@@ -66,7 +66,7 @@ internal val module12Practice = listOf(
         output("x = 3.14159\nprint(f\"[{x:>8.2f}]\")", "[    3.14]", "Najpierw .2f, potem wyrównanie do 8 znaków."),
         choice(
             "Co oznacza liczba 10 w formacie :>10?",
-            listOf("Szerokość pola – co najmniej 10 znaków", "Liczbę spacji przed tekstem", "Maksymalną długość tekstu", "Liczbę powtórzeń"),
+            listOf("Minimalną szerokość pola", "Liczbę spacji przed tekstem", "Maksymalną długość tekstu", "Liczbę powtórzeń tekstu"),
             0,
             "To minimalna szerokość; tekst dopełniany jest do niej spacjami.",
         ),

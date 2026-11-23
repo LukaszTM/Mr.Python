@@ -22,7 +22,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "What does @dataclass create automatically?",
-                listOf("__init__, __repr__ and __eq__", "Only __init__", "__lt__ and __gt__", "Nothing – it's just a comment"),
+                listOf("__init__, __repr__ and __eq__", "Only __init__ and __repr__", "__init__, __lt__ and __gt__", "Nothing – it's just a comment"),
                 0,
                 "__init__, __repr__ and __eq__ are built from the list of fields.",
             ),
@@ -71,15 +71,15 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "What happens if you write items: list = [] in a dataclass?",
-                listOf("ValueError – for a list you must use field(default_factory=list)", "Each object gets its own list", "The list will be empty and immutable", "SyntaxError"),
+                listOf("ValueError", "Each object gets its own list", "All objects get one shared list", "SyntaxError"),
                 0,
-                "A dataclass forbids mutable default values to avoid a shared list.",
+                "A dataclass forbids a list as a plain default value (ValueError), because the objects would share one list; use field(default_factory=list).",
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – a field without a default after a field with one", "y gets the value 0", "y gets None", "The code runs without an error"),
+                listOf("TypeError", "y gets the value 0", "y gets None", "The code runs without an error"),
                 0,
-                "Fields with default values must come last, just like function parameters.",
+                "Field y has no default but comes after a field with one, so the class definition itself raises a TypeError.",
                 code = "from dataclasses import dataclass\n\n@dataclass\nclass A:\n    x: int = 0\n    y: int",
             ),
             fill(
@@ -115,7 +115,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "What does the frozen=True parameter do?",
-                listOf("The object cannot be changed after it is created", "Objects can be sorted", "Fields become private", "The object is created faster"),
+                listOf("The object cannot be changed", "Objects can be sorted", "Fields become private", "The object is created faster"),
                 0,
                 "frozen=True blocks assigning to fields.",
             ),
@@ -131,9 +131,9 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("TypeError – no < comparison", "It prints True", "It prints False", "SyntaxError"),
+                listOf("TypeError", "It prints True", "It prints False", "SyntaxError"),
                 0,
-                "Without order=True a dataclass has no < and > comparison methods.",
+                "Without order=True a dataclass has no < comparison, so W(1) < W(2) raises a TypeError.",
                 code = "from dataclasses import dataclass\n\n@dataclass\nclass W:\n    a: int\n\nprint(W(1) < W(2))",
             ),
             fill(
@@ -187,7 +187,7 @@ internal val module34 = CourseUnit(
             ),
             choice(
                 "Which error appears when you try to change a field of an object with frozen=True?",
-                listOf("FrozenInstanceError (a kind of AttributeError)", "ValueError", "KeyError", "None – the field will change"),
+                listOf("FrozenInstanceError", "ValueError", "KeyError", "None – the field will change"),
                 0,
                 "FrozenInstanceError inherits from AttributeError.",
             ),
@@ -197,7 +197,7 @@ internal val module34 = CourseUnit(
                 "The list of players is a field and shows up in __repr__.",
             ),
             tiles(
-                "Create a Point object with x=3 and y=4 using keyword arguments",
+                "Create a Point object with x=3 and y=4 (keyword arguments) and save it in p",
                 listOf("p", "=", "Point(", "x=3,", "y=4", ")"),
                 listOf("new", "x:3,"),
                 "A dataclass accepts keyword arguments like an ordinary function.",

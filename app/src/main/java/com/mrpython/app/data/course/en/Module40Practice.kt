@@ -231,15 +231,15 @@ internal val module40Practice = listOf(
         ),
         choice(
             "What does LRU stand for in lru_cache?",
-            listOf("Least Recently Used – the least recently used result is removed", "Last Result Used – only the last result is remembered", "Long Running Unit", "Loop Recursion Utility"),
+            listOf("Least Recently Used", "Last Result Used", "Long Running Unit", "Loop Recursion Utility"),
             0,
-            "When the cache fills up, the result that hasn't been used for the longest time drops out.",
+            "Least Recently Used: when the cache fills up, the result that hasn't been used for the longest time drops out.",
         ),
         choice(
             "For which function does @lru_cache make sense?",
-            listOf("One that always returns the same result for the same arguments", "One that picks random numbers", "One that returns the current time", "One that returns nothing"),
+            listOf("One that squares a number", "One that picks a random number", "One that returns the current time", "One that prints text"),
             0,
-            "A remembered result must always be up to date for the given arguments.",
+            "A square depends only on the argument, so a remembered result is always right. With random numbers or the time we would get an old result, and the text would not be printed again.",
         ),
         fill(
             "Fill in the blank to print the number of cache misses (prints 2).",

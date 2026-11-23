@@ -21,7 +21,7 @@ internal val module13Practice = listOf(
         ),
         choice(
             "Which variable takes the successive values in [n * 2 for n in data]?",
-            listOf("n", "data", "n * 2", "None"),
+            listOf("n", "data", "n * 2", "None of them"),
             0,
             "The variable comes right after for – here it is n.",
         ),
@@ -152,7 +152,7 @@ internal val module13Practice = listOf(
         ),
         choice(
             "What does _ mean in [[0] * 3 for _ in range(2)]?",
-            listOf("A variable whose value we don't use", "A syntax error", "A special loop keyword", "An empty list"),
+            listOf("A variable whose value we don't use", "An error: the variable name is missing", "A keyword that ends the loop", "An empty list that the loop fills"),
             0,
             "_ is an ordinary variable name that we use by convention when we don't need the variable.",
         ),

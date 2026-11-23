@@ -40,9 +40,9 @@ internal val module71 = CourseUnit(
             ),
             choice(
                 "When is EAFP clearly better than LBYL?",
-                listOf("When the state can change between the check and the use, e.g. a file disappears", "When we want the code to be slower", "When we don't know any exceptions", "Never"),
+                listOf("When the state can change after the check", "When the if condition is very simple", "When the error happens almost every time", "When we don't know which exception occurs"),
                 0,
-                "An if check can go stale, while try works at the moment of use.",
+                "Between the if and the use a file can, say, disappear, while try checks everything at the moment of use.",
             ),
             tiles(
                 "Write the LBYL version: convert t to a number if it is all digits, otherwise give 0",

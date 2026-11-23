@@ -84,7 +84,7 @@ internal val module27Practice = listOf(
             "+= 1 zlicza każdy wykonany krok.",
         ),
         tiles(
-            "Napisz pętlę, która połowi n, dopóki jest większe od 1",
+            "Napisz nagłówek pętli, która działa, dopóki n jest większe od 1",
             listOf("while", "n > 1", ":"),
             listOf("for", "n < 1"),
             "Pętla while działa, dopóki warunek jest prawdziwy.",
@@ -171,9 +171,9 @@ internal val module27Practice = listOf(
             "Dwie zagnieżdżone pętle po n obiegów to n · n.",
         ),
         tiles(
-            "Ułóż złożoności od najwolniejszej do najszybszej",
+            "Ułóż w liście cztery poznane złożoności od najwolniejszej do najszybszej",
             listOf("rzedy = [", "\"O(n²)\",", "\"O(n)\",", "\"O(log n)\",", "\"O(1)\"]"),
-            listOf("\"O(n³)\",", "\"O(0)\","),
+            listOf("\"O(1)\",", "\"O(0)\","),
             "Kwadratowa, liniowa, logarytmiczna, a na końcu stała.",
         ),
         tiles(
@@ -195,18 +195,18 @@ internal val module27Practice = listOf(
             "Dlaczego x in lista jest O(n)?",
             listOf(
                 "Lista porównuje x z elementami po kolei",
-                "Lista jest zawsze posortowana",
-                "Lista zamienia się na zbiór",
-                "Lista liczy swoją długość",
+                "Lista najpierw sortuje swoje elementy",
+                "Lista najpierw zamienia się na zbiór",
+                "Lista najpierw liczy swoją długość",
             ),
             0,
             "W najgorszym razie trzeba sprawdzić wszystkie elementy.",
         ),
         choice(
             "Czego NIE zapewnia zbiór w porównaniu z listą?",
-            listOf("Zachowania kolejności i powtórzeń", "Szybkiego sprawdzania in", "Dodawania elementów", "Usuwania elementów"),
+            listOf("Kolejności elementów", "Szybkiego sprawdzania in", "Dodawania elementów", "Usuwania elementów"),
             0,
-            "Zbiór przechowuje każdy element raz i nie ma indeksów.",
+            "Zbiór nie pamięta kolejności (nie ma indeksów) i przechowuje każdy element tylko raz.",
         ),
         output(
             "lista = [2, 4, 6, 8, 10]\nporownania = 0\nfor x in lista:\n    porownania += 1\n    if x == 10:\n        break\nprint(porownania)",
@@ -258,7 +258,7 @@ internal val module27Practice = listOf(
             "Zbiór ma metodę add(), a nie append().",
         ),
         choice(
-            "Program sprawdza 10 000 razy, czy słowo jest w słowniku języka (100 000 słów). Jak przechowywać słowa?",
+            "Program sprawdza 10 000 razy, czy słowo jest na liście 100 000 poprawnych słów. Jak przechowywać te słowa?",
             listOf("W zbiorze", "W liście", "W jednym długim napisie", "W krotce"),
             0,
             "Każde sprawdzenie w zbiorze to średnio O(1), a w liście O(n).",

@@ -12,7 +12,7 @@ internal val module35Cards = listOf(
         ),
         explain(
             "Co można zgłosić?",
-            "`raise` przyjmuje tylko wyjątki – klasa musi dziedziczyć po `Exception`, inaczej będzie `TypeError`. " +
+            "`raise` przyjmuje tylko wyjątki – klasa musi dziedziczyć po `BaseException` (własne wyjątki opieramy na `Exception`, która po niej dziedziczy), inaczej będzie `TypeError`. " +
                 "Można zgłosić obiekt `Blad(\"opis\")` albo samą klasę `Blad`. Nazwy kończymy zwykle na `Error`.",
             code = "class Stop(Exception):\n    pass\n\ntry:\n    raise Stop\nexcept Stop:\n    print(\"złapany\")",
             output = "złapany",
@@ -23,7 +23,7 @@ internal val module35Cards = listOf(
         explain(
             "Rodzina wbudowanych wyjątków",
             "Wbudowane wyjątki też dziedziczą po sobie: `KeyError` i `IndexError` po `LookupError`, " +
-                "a `ZeroDivisionError` po `ArithmeticError`. Wszystkie dziedziczą po `Exception`.",
+                "a `ZeroDivisionError` po `ArithmeticError`. Te klasy, a także np. `ValueError` i `TypeError`, dziedziczą po `Exception`.",
             code = "print(issubclass(KeyError, LookupError))\ntry:\n    1 / 0\nexcept ArithmeticError as e:\n    print(type(e).__name__)",
             output = "True\nZeroDivisionError",
         ),

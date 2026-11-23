@@ -333,9 +333,9 @@ internal val module59Practice = listOf(
         ),
         choice(
             "What is essential in every recursive function?",
-            listOf("A base case that ends the calls", "A while loop", "A global variable", "A yield statement"),
+            listOf("A base case", "A while loop", "A global variable", "A yield statement"),
             0,
-            "Without a base case the calls would never end.",
+            "The base case ends the chain of calls – without it they would never end.",
         ),
         choice(
             "What does this code print?",

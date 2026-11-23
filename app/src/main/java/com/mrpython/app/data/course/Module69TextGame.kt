@@ -28,9 +28,9 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "Dlaczego pokój najlepiej zapisać jako słownik?",
-                listOf("Bo jego części (opis, wyjścia) mają czytelne nazwy-klucze", "Bo słowniki są zawsze posortowane alfabetycznie", "Bo listy nie mogą zawierać napisów", "Bo słownika nie da się zmienić"),
+                listOf("Bo jego części mają czytelne nazwy", "Bo słowniki są zawsze posortowane alfabetycznie", "Bo listy nie mogą zawierać napisów", "Bo słownika nie da się zmienić"),
                 0,
-                "Klucze takie jak \"opis\" i \"wyjscia\" opisują, co przechowujemy.",
+                "Klucze takie jak \"opis\" i \"wyjscia\" mówią, co przechowujemy w każdej części pokoju.",
             ),
             output(
                 "wyjscia = {\"północ\": \"kuchnia\", \"wschód\": \"ogród\"}\nfor kierunek in wyjscia:\n    print(kierunek)",
@@ -132,7 +132,7 @@ internal val module69 = CourseUnit(
                 "remove() zgłasza ValueError, dlatego najpierw sprawdzamy in.",
             ),
             tiles(
-                "Wypisz ekwipunek jako napis z przecinkami",
+                "Wypisz przedmioty z ekwipunku rozdzielone przecinkiem i spacją, bez nawiasów i cudzysłowów",
                 listOf("print(", "\", \".join(", "ekwipunek", "))"),
                 listOf("ekwipunek.split(", "str("),
                 "join() skleja elementy listy napisem \", \".",
@@ -174,14 +174,14 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "Na co wskazuje self w metodzie p.idz(\"n\")?",
-                listOf("Na obiekt p, na którym wywołano metodę", "Na klasę Player", "Na napis \"n\"", "Na słownik MAPA"),
+                listOf("Na obiekt p", "Na klasę Player", "Na napis \"n\"", "Na słownik MAPA"),
                 0,
-                "Python sam przekazuje obiekt jako pierwszy argument metody.",
+                "self to obiekt, na którym wywołano metodę – Python sam przekazuje go jako pierwszy argument.",
             ),
             tiles(
                 "Utwórz gracza o imieniu Ola",
                 listOf("gracz", "=", "Player(", "\"Ola\"", ")"),
-                listOf("new", "Player."),
+                listOf("self,", "Player."),
                 "Obiekt tworzymy, wywołując klasę jak funkcję.",
             ),
             output(
@@ -222,9 +222,9 @@ internal val module69 = CourseUnit(
             ),
             choice(
                 "Dlaczego testujemy grę na liście komend zamiast input()?",
-                listOf("Bo wynik jest zawsze taki sam i łatwo go sprawdzić", "Bo input() nie działa w pętli", "Bo listy są szybsze od klawiatury", "Bo input() zwraca liczby"),
+                listOf("Bo przebieg jest powtarzalny", "Bo input() nie działa w pętli", "Bo listy są szybsze od klawiatury", "Bo input() zwraca liczby"),
                 0,
-                "Zaplanowany scenariusz daje powtarzalny, deterministyczny przebieg.",
+                "Ta sama lista komend daje za każdym razem ten sam przebieg, więc wynik łatwo sprawdzić.",
             ),
             tiles(
                 "Napisz nagłówek pętli numerującej komendy od 1",

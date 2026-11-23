@@ -188,12 +188,12 @@ internal val module72 = CourseUnit(
             output(
                 "class Zwierze:\n    def glos(self):\n        return \"...\"\nclass Pies(Zwierze):\n    def glos(self):\n        return \"Hau\"\nclass Ryba(Zwierze):\n    pass\nprint([z.glos() for z in [Pies(), Ryba()]])",
                 "['Hau', '...']",
-                "Polimorfizm: Ryba nie nadpisuje glos(), więc używa wersji z Zwierze.",
+                "Polimorfizm: Ryba nie nadpisuje glos(), więc używa wersji z klasy Zwierze.",
             ),
             tiles(
                 "Zdefiniuj klasę Kot dziedziczącą po Zwierze",
                 listOf("class", "Kot", "(Zwierze)", ":"),
-                listOf("extends", "def"),
+                listOf("[Zwierze]", "def"),
                 "Klasę bazową podajemy w nawiasie po nazwie klasy.",
             ),
         ),
@@ -228,9 +228,9 @@ internal val module72 = CourseUnit(
             ),
             choice(
                 "Do czego służy functools.lru_cache?",
-                listOf("Zapamiętuje wyniki funkcji dla tych samych argumentów", "Usuwa nieużywane zmienne", "Przyspiesza pętle for", "Zapisuje wyniki do pliku"),
+                listOf("Zapamiętuje wyniki funkcji", "Usuwa nieużywane zmienne", "Przyspiesza każdą pętlę for", "Zapisuje wyniki do pliku"),
                 0,
-                "Memoizacja sprawia, że ponowne wywołanie z tymi samymi argumentami jest natychmiastowe.",
+                "lru_cache zapamiętuje w pamięci wynik dla każdych argumentów, więc ponowne wywołanie z tymi samymi argumentami nic nie liczy.",
             ),
             output(
                 "import re\nprint(re.findall(r\"\\d+\", \"a1b22c333\"))",
