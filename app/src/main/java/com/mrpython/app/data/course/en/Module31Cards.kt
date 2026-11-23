@@ -49,7 +49,8 @@ internal val module31Cards = listOf(
         explain(
             "No parentheses!",
             "Reading a property gives you the result right away, e.g. a number. If you add parentheses `obj.x()`, Python " +
-                "will try to call that number and raise a `TypeError`.",
+                "will try to call that number and raise a `TypeError`. Without a setter a property is read-only: " +
+                "the assignment `obj.x = 10` raises an `AttributeError`.",
             code = "class A:\n    @property\n    def x(self):\n        return 7\n\nprint(A().x)",
             output = "7",
         ),

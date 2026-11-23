@@ -60,7 +60,7 @@ internal val module25Practice = listOf(
                 "Python requires negative numbers",
             ),
             0,
-            "-1 is not a valid index of a found element, so it's a good marker for “missing”.",
+            "A loop over range(len(...)) only gives indexes from 0 up, so -1 can never be the result of a match.",
         ),
         choice(
             "What does this code print?",
@@ -293,7 +293,7 @@ internal val module25Practice = listOf(
         output(
             "def search(items, target):\n    left, right = 0, len(items) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if items[mid] == target:\n            return mid\n        elif items[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\nprint(search([1, 4, 9, 16, 25], 4))",
             "1",
-            "The middle is 9 (too big), then the range is [1, 4] and we get a match at index 1.",
+            "The middle is 9 (too big), then 1 (too small), and finally 4 at index 1.",
         ),
         output(
             "def search(items, target):\n    left, right = 0, len(items) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if items[mid] == target:\n            return mid\n        elif items[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\nprint(search([1, 4, 9, 16, 25], 10))",
@@ -353,8 +353,8 @@ internal val module25Practice = listOf(
             "We search as long as the range isn't empty – here we find 8 in 2 steps.",
         ),
         choice(
-            "At most how many steps does binary search need for 8 sorted elements?",
-            listOf("About 3–4", "8", "1", "About 16"),
+            "How many times can you halve a range of 8 elements before 1 element is left?",
+            listOf("3", "8", "4", "16"),
             0,
             "You can halve 8 three times: 8, 4, 2, 1.",
         ),
@@ -414,8 +414,8 @@ internal val module25Practice = listOf(
             "1000, 500, 250, 125, 62, 31, 15, 7, 3, 1 – nine halvings.",
         ),
         choice(
-            "What does items.index(5) give for the list [1, 2, 3]?",
-            listOf("ValueError", "-1", "None", "0"),
+            "What happens when you call [1, 2, 3].index(5)?",
+            listOf("A ValueError", "It gives -1", "It gives None", "It gives 0"),
             0,
             "index() raises an error when the value is not in the list.",
         ),

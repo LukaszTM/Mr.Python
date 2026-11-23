@@ -60,7 +60,7 @@ internal val module26Practice = listOf(
         choice(
             "Why can the inner loop go only up to n - 1 - k?",
             listOf(
-                "The last k elements are already in their places",
+                "Because the last k elements are already in place",
                 "Because otherwise the loop would never end",
                 "Because k is the number of swaps",
                 "Because the first k elements are sorted",
@@ -139,9 +139,9 @@ internal val module26Practice = listOf(
         ),
         choice(
             "At most how many swaps does selection sort make for a list of n elements?",
-            listOf("About n – one per pass", "About n²", "Always 0", "Exactly 1"),
+            listOf("About n", "About n²", "Always 0", "Exactly 1"),
             0,
-            "There is at most one swap in every pass.",
+            "There are about n passes, with at most one swap in each.",
         ),
         choice(
             "What does the variable m mean in selection sort?",
@@ -268,7 +268,7 @@ internal val module26Practice = listOf(
             "insert(index, value) puts an element into the middle of a list.",
         ),
         tiles(
-            "Write the header of the loop that shifts the bigger elements",
+            "Write the header of the loop that shifts the bigger elements; check j >= 0 first",
             listOf("while", "j >= 0", "and", "a[j] > x", ":"),
             listOf("or", "a[j] < x"),
             "We keep shifting as long as we haven't reached the start and the element is greater than x.",
@@ -401,7 +401,7 @@ internal val module26Practice = listOf(
         choice(
             "What does sorted(d.items()) return?",
             listOf(
-                "A list of (key, value) pairs sorted by key",
+                "A list of pairs sorted by key",
                 "A sorted dictionary",
                 "A list of just the values",
                 "A list of pairs sorted by value",

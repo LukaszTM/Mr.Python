@@ -117,9 +117,9 @@ internal val module25 = CourseUnit(
             choice(
                 "Dlaczego maksimum zaczynamy od liczby[0], a nie od 0?",
                 listOf(
-                    "Dla samych liczb ujemnych 0 byłoby błędnym wynikiem",
-                    "Bo 0 nie jest liczbą",
-                    "Bo tak jest szybciej",
+                    "Bo lista może mieć same liczby ujemne",
+                    "Bo 0 nie jest liczbą całkowitą",
+                    "Bo tak pętla działa szybciej",
                     "Bo lista nie może zawierać zera",
                 ),
                 0,

@@ -127,9 +127,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "What happens when you run this code?",
-                listOf("AttributeError – the property has no setter", "x will change to 10", "SyntaxError", "x will stay 5, with no error"),
+                listOf("AttributeError", "x will change to 10", "SyntaxError", "x will stay 5, with no error"),
                 0,
-                "@property alone only allows reading; assignment requires a setter.",
+                "AttributeError, because the property has no setter: @property alone only allows reading.",
                 code = "class K:\n    @property\n    def x(self):\n        return 5\n\nk = K()\nk.x = 10",
             ),
             fill(
@@ -146,9 +146,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "What does the underscore at the start of the name self._balance mean?",
-                listOf("A convention: it's an internal attribute, don't change it from outside", "The attribute is completely inaccessible", "The attribute is a constant", "A syntax error"),
+                listOf("An attribute for internal use", "A completely inaccessible attribute", "An attribute that can't be changed", "An attribute shared by the class"),
                 0,
-                "Python doesn't block access – the underscore is just a convention among programmers.",
+                "It's a convention among programmers: an internal attribute, don't change it from outside. Python doesn't block access.",
             ),
             tiles(
                 "Print the property area of the object p",
@@ -189,9 +189,9 @@ internal val module31 = CourseUnit(
             ),
             choice(
                 "Why does the getter age return self._age and not self.age?",
-                listOf("self.age would call the getter endlessly (RecursionError)", "self.age is slower", "The decorator's syntax requires it", "No difference"),
+                listOf("self.age would call this getter again", "self.age is slower than self._age", "The decorator's syntax requires it", "No difference, both work"),
                 0,
-                "Reading self.age in the getter would call the same getter – that's infinite recursion.",
+                "Reading self.age in the getter would call the same getter endlessly (RecursionError).",
             ),
             tiles(
                 "Set the property age of the object p to 30 (the setter will run)",

@@ -30,7 +30,8 @@ internal val module25Cards = listOf(
         explain(
             "in i index()",
             "`x in lista` mówi, czy element jest na liście, a `lista.index(x)` – pod którym indeksem jest " +
-                "jego pierwsze wystąpienie. Gdy elementu brak, `index()` zgłasza `ValueError`.",
+                "jego pierwsze wystąpienie. Gdy elementu brak, `index()` zgłasza `ValueError`. " +
+                "Na napisach działa to tak samo: `\"kot\".index(\"o\")` daje 1.",
             code = "lista = [1, 7, 3, 7]\nprint(7 in lista)\nprint(lista.index(7))",
             output = "True\n1",
         ),

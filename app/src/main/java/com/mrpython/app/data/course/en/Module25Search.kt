@@ -118,9 +118,9 @@ internal val module25 = CourseUnit(
             choice(
                 "Why do we start the maximum from numbers[0] and not from 0?",
                 listOf(
-                    "With only negative numbers, 0 would be a wrong result",
-                    "Because 0 is not a number",
-                    "Because it's faster",
+                    "Because the list may hold only negative numbers",
+                    "Because 0 is not a whole number",
+                    "Because it makes the loop run faster",
                     "Because a list can't contain zero",
                 ),
                 0,

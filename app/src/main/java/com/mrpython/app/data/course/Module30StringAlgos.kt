@@ -40,13 +40,13 @@ internal val module30 = CourseUnit(
             choice(
                 "Dlaczego \"Kajak\" == \"Kajak\"[::-1] daje False?",
                 listOf(
-                    "Wielkie K na początku to inny znak niż małe k na końcu",
+                    "Bo K i k to dwa różne znaki",
                     "Bo [::-1] nie działa na napisach",
                     "Bo słowo kajak nie jest palindromem",
                     "Bo napisów nie można porównywać",
                 ),
                 0,
-                "Porównanie rozróżnia wielkość liter – trzeba użyć lower().",
+                "Wielkie K na początku to inny znak niż małe k na końcu – porównanie rozróżnia wielkość liter, więc trzeba użyć lower().",
             ),
             tiles(
                 "Zapisz w zmiennej odwr słowa z listy slowa w odwrotnej kolejności",
@@ -60,13 +60,13 @@ internal val module30 = CourseUnit(
             choice(
                 "Kiedy dwa słowa są anagramami?",
                 listOf(
-                    "Gdy składają się z tych samych liter w tej samej liczbie",
-                    "Gdy mają tę samą długość",
+                    "Gdy mają te same litery tyle samo razy",
+                    "Gdy mają tę samą liczbę liter",
                     "Gdy zaczynają się na tę samą literę",
                     "Gdy jedno jest odwróceniem drugiego",
                 ),
                 0,
-                "Anagram to przestawienie liter, np. „kosz” i „szok”.",
+                "Anagram to przestawienie liter, np. „kosz” i „szok”. Sama długość nie wystarczy: „kot” i „las” też mają po 3 litery.",
             ),
             output("print(sorted(\"kosz\") == sorted(\"szok\"))", "True", "Po posortowaniu liter oba słowa dają tę samą listę."),
             output(
@@ -116,7 +116,7 @@ internal val module30 = CourseUnit(
                 "key=licznik.get porównuje klucze według ich wartości.",
             ),
             fill(
-                "Uzupełnij, aby zwiększyć licznik litery z, także gdy jej jeszcze nie ma w słowniku.",
+                "Uzupełnij, aby zwiększyć licznik litery ze zmiennej z, także gdy jej jeszcze nie ma w słowniku.",
                 "d = {}\nfor z in \"ala\":\n    d[z] = d.____(z, 0) + 1\nprint(d)",
                 listOf("get", "keys", "values"),
                 "get",
@@ -130,13 +130,13 @@ internal val module30 = CourseUnit(
             choice(
                 "Dlaczego do liczenia wszystkich liter lepiej użyć słownika niż wołać tekst.count(z) dla każdej litery?",
                 listOf(
-                    "count() za każdym razem przechodzi cały napis, a słownik liczy w jednym przejściu",
-                    "count() nie działa na napisach",
-                    "Słownik sam sortuje litery",
-                    "Nie ma żadnej różnicy",
+                    "count() za każdym razem czyta cały napis od nowa",
+                    "count() nie działa na pojedynczych literach",
+                    "Słownik dodatkowo sortuje litery alfabetycznie",
+                    "Nie ma różnicy, oba sposoby są tak samo szybkie",
                 ),
                 0,
-                "Jedno przejście to O(n), a count() dla każdej litery może dać O(n²).",
+                "Słownik liczy wszystkie litery w jednym przejściu, czyli O(n), a count() dla każdej litery może dać O(n²).",
             ),
             output(
                 "d = {}\nfor z in \"kotlet\":\n    d[z] = d.get(z, 0) + 1\nprint([z for z in d if d[z] == 1])",
@@ -149,7 +149,7 @@ internal val module30 = CourseUnit(
                 "Minus przy wartości sortuje od najczęstszego znaku.",
             ),
             tiles(
-                "Zwiększ licznik znaku z w słowniku d",
+                "Zwiększ w słowniku d licznik znaku ze zmiennej z",
                 listOf("d[z]", "=", "d.get(z, 0)", "+ 1"),
                 listOf("d[z, 0]", "=="),
                 "Bierzemy dotychczasową liczbę (lub 0) i dodajemy 1.",
@@ -162,7 +162,7 @@ internal val module30 = CourseUnit(
             output(
                 "z = \"y\"\nk = (ord(z) - ord(\"a\") + 3) % 26\nprint(chr(ord(\"a\") + k))",
                 "b",
-                "y to pozycja 24, 24 + 3 = 27, a 27 % 26 = 1, czyli b.",
+                "y to pozycja 24 (licząc od a = 0), 24 + 3 = 27, a 27 % 26 = 1, czyli b.",
             ),
             choice(
                 "Po co w szyfrze Cezara jest % 26?",
@@ -193,7 +193,7 @@ internal val module30 = CourseUnit(
                 "Spacja zostaje bez zmian, a litery przesuwają się o 1.",
             ),
             tiles(
-                "Przesuń literę z o 1 w alfabecie (bez zawijania) i zapisz w zmiennej nowa",
+                "Przesuń literę ze zmiennej z o 1 w alfabecie (bez zawijania) i zapisz w zmiennej nowa",
                 listOf("nowa", "=", "chr(", "ord(z)", "+ 1", ")"),
                 listOf("ord(", "chr(z)"),
                 "Najpierw kod litery, potem +1, a na końcu chr() z powrotem na znak.",
@@ -229,11 +229,11 @@ internal val module30 = CourseUnit(
                 "Odwracamy każde słowo osobno, ale ich kolejność zostaje.",
             ),
             fill(
-                "Uzupełnij, aby każde słowo zaczynało się wielką literą.",
+                "Uzupełnij, aby wypisać „Jan Nowak”.",
                 "print(\"jan nowak\".____())",
                 listOf("title", "upper", "capitalize"),
                 "title",
-                "title() daje wielką literę na początku każdego słowa.",
+                "title() daje wielką pierwszą literę każdego słowa i małe pozostałe; upper() da „JAN NOWAK”, a capitalize() – „Jan nowak”.",
             ),
             tiles(
                 "Wypisz, czy napis t jest palindromem",

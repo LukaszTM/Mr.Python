@@ -149,7 +149,7 @@ internal val module31Practice = listOf(
         ),
         choice(
             "What is the first parameter of a class method usually called?",
-            listOf("cls", "self", "klass", "this"),
+            listOf("cls", "self", "klass", "obj"),
             0,
             "A method with @classmethod gets the class in the cls parameter.",
         ),
@@ -224,14 +224,14 @@ internal val module31Practice = listOf(
         ),
         choice(
             "What happens when you run this code?",
-            listOf("TypeError – the number 7 can't be called", "It prints 7", "It prints None", "AttributeError"),
+            listOf("TypeError", "It prints 7", "It prints None", "AttributeError"),
             0,
-            "A().x is already the number 7, and the added () tries to call it.",
+            "TypeError: A().x is already the number 7, and the added () tries to call it.",
             code = "class A:\n    @property\n    def x(self):\n        return 7\n\nprint(A().x())",
         ),
         choice(
             "What is the main advantage of @property?",
-            listOf("We read a value computed by a method like a regular attribute", "The method runs faster", "The attribute becomes shared by the class", "It can be used without an object"),
+            listOf("A method's result is read like an attribute", "The method runs faster than a regular one", "The attribute becomes shared by the class", "It can be used without creating an object"),
             0,
             "From the outside a property looks like an attribute, but inside it's a method.",
         ),
@@ -313,7 +313,7 @@ internal val module31Practice = listOf(
         ),
         choice(
             "When is the setter of the property age called?",
-            listOf("On the assignment p.age = value", "On reading p.age", "When the class is created", "Never automatically"),
+            listOf("On the assignment p.age = 5", "On reading the value p.age", "When the class itself is defined", "Never – you have to call it"),
             0,
             "Reading is handled by the getter, and assignment by the setter.",
         ),

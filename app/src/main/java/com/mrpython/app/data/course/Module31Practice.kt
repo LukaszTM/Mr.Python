@@ -147,7 +147,7 @@ internal val module31Practice = listOf(
         ),
         choice(
             "Jak zwyczajowo nazywa się pierwszy parametr metody klasy?",
-            listOf("cls", "self", "klasa", "this"),
+            listOf("cls", "self", "klasa", "obiekt"),
             0,
             "Metoda z @classmethod dostaje klasę w parametrze cls.",
         ),
@@ -222,14 +222,14 @@ internal val module31Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – liczby 7 nie da się wywołać", "Wypisze 7", "Wypisze None", "AttributeError"),
+            listOf("TypeError", "Wypisze 7", "Wypisze None", "AttributeError"),
             0,
-            "A().x to już liczba 7, a dopisane () próbuje ją wywołać.",
+            "TypeError: A().x to już liczba 7, a dopisane () próbuje ją wywołać.",
             code = "class A:\n    @property\n    def x(self):\n        return 7\n\nprint(A().x())",
         ),
         choice(
             "Jaka jest główna zaleta @property?",
-            listOf("Wartość liczoną przez metodę odczytujemy jak zwykły atrybut", "Metoda działa szybciej", "Atrybut staje się wspólny dla klasy", "Można jej używać bez obiektu"),
+            listOf("Wynik metody czytamy jak zwykły atrybut", "Metoda wykonuje się szybciej niż zwykła", "Atrybut staje się wspólny dla całej klasy", "Metody można używać bez tworzenia obiektu"),
             0,
             "Właściwość wygląda z zewnątrz jak atrybut, a w środku jest metodą.",
         ),
@@ -311,7 +311,7 @@ internal val module31Practice = listOf(
         ),
         choice(
             "Kiedy wywołuje się setter właściwości wiek?",
-            listOf("Przy przypisaniu o.wiek = wartość", "Przy odczycie o.wiek", "Przy tworzeniu klasy", "Nigdy automatycznie"),
+            listOf("Przy przypisaniu o.wiek = 5", "Przy odczycie wartości o.wiek", "Przy definiowaniu samej klasy", "Nigdy – trzeba go wywołać"),
             0,
             "Odczyt obsługuje getter, a przypisanie – setter.",
         ),

@@ -47,7 +47,8 @@ internal val module31Cards = listOf(
         explain(
             "Bez nawiasów!",
             "Odczyt właściwości od razu daje wynik, np. liczbę. Gdy dopiszesz nawiasy `obiekt.x()`, Python " +
-                "spróbuje wywołać tę liczbę i zgłosi `TypeError`.",
+                "spróbuje wywołać tę liczbę i zgłosi `TypeError`. Bez settera właściwość jest tylko do odczytu: " +
+                "przypisanie `obiekt.x = 10` zgłosi `AttributeError`.",
             code = "class A:\n    @property\n    def x(self):\n        return 7\n\nprint(A().x)",
             output = "7",
         ),

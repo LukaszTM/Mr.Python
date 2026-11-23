@@ -41,13 +41,13 @@ internal val module30 = CourseUnit(
             choice(
                 "Why does \"Kayak\" == \"Kayak\"[::-1] give False?",
                 listOf(
-                    "The uppercase K at the start is a different character than the lowercase k at the end",
+                    "Because K and k are different characters",
                     "Because [::-1] doesn't work on strings",
                     "Because the word kayak is not a palindrome",
                     "Because strings can't be compared",
                 ),
                 0,
-                "The comparison is case-sensitive – you need to use lower().",
+                "The uppercase K at the start is a different character than the lowercase k at the end – the comparison is case-sensitive, so you need lower().",
             ),
             tiles(
                 "Store the words from the list words in reverse order in the variable rev",
@@ -61,13 +61,13 @@ internal val module30 = CourseUnit(
             choice(
                 "When are two words anagrams?",
                 listOf(
-                    "When they are made of the same letters, each used the same number of times",
-                    "When they have the same length",
+                    "When they have the same letters, equally often",
+                    "When they have the same number of letters",
                     "When they start with the same letter",
                     "When one is the reverse of the other",
                 ),
                 0,
-                "An anagram is a rearrangement of letters, e.g. “stop” and “pots”.",
+                "An anagram is a rearrangement of letters, e.g. “stop” and “pots”. The same length is not enough: “cat” and “dog” both have 3 letters.",
             ),
             output("print(sorted(\"stop\") == sorted(\"pots\"))", "True", "After sorting the letters, both words give the same list."),
             output(
@@ -131,13 +131,13 @@ internal val module30 = CourseUnit(
             choice(
                 "Why is a dictionary better for counting all the letters than calling text.count(ch) for every letter?",
                 listOf(
-                    "count() walks through the whole string every time, while a dictionary counts in a single pass",
-                    "count() doesn't work on strings",
-                    "A dictionary sorts the letters by itself",
-                    "There is no difference",
+                    "count() reads the whole string again every time",
+                    "count() doesn't work on single letters",
+                    "A dictionary also sorts the letters alphabetically",
+                    "No difference, both ways are equally fast",
                 ),
                 0,
-                "A single pass is O(n), while count() for every letter can give O(n²).",
+                "A dictionary counts all the letters in a single pass, which is O(n), while count() for every letter can give O(n²).",
             ),
             output(
                 "d = {}\nfor ch in \"kitten\":\n    d[ch] = d.get(ch, 0) + 1\nprint([ch for ch in d if d[ch] == 1])",
@@ -163,7 +163,7 @@ internal val module30 = CourseUnit(
             output(
                 "ch = \"y\"\nk = (ord(ch) - ord(\"a\") + 3) % 26\nprint(chr(ord(\"a\") + k))",
                 "b",
-                "y is position 24, 24 + 3 = 27, and 27 % 26 = 1, which is b.",
+                "y is position 24 (counting from a = 0), 24 + 3 = 27, and 27 % 26 = 1, which is b.",
             ),
             choice(
                 "What is % 26 for in the Caesar cipher?",
@@ -230,11 +230,11 @@ internal val module30 = CourseUnit(
                 "We reverse each word separately, but their order stays the same.",
             ),
             fill(
-                "Fill in the blank so every word starts with an uppercase letter.",
+                "Fill in the blank to print “John Smith”.",
                 "print(\"john smith\".____())",
                 listOf("title", "upper", "capitalize"),
                 "title",
-                "title() puts an uppercase letter at the start of every word.",
+                "title() capitalizes the first letter of every word and lowercases the rest; upper() gives “JOHN SMITH”, and capitalize() gives “John smith”.",
             ),
             tiles(
                 "Print whether the string t is a palindrome",

@@ -35,7 +35,7 @@ internal val module26Intro = lesson(
     explain(
         "Kilka kluczy i słowniki",
         "Klucz może zwracać krotkę – wtedy przy remisie decyduje drugi element. Sortowanie jest " +
-            "stabilne: równe elementy zachowują kolejność. Słownik sortujemy po wartościach przez " +
+            "stabilne: równe elementy zachowują kolejność, także przy `reverse=True`. Słownik sortujemy po wartościach przez " +
             "`items()` i `key=lambda x: x[1]`.",
         code = "punkty = {\"Ola\": 7, \"Jan\": 9, \"Ewa\": 5}\nfor imie, p in sorted(punkty.items(), key=lambda x: x[1]):\n    print(imie, p)",
         output = "Ewa 5\nOla 7\nJan 9",
