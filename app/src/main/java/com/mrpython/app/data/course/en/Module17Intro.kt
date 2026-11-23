@@ -47,12 +47,12 @@ internal val module17Intro = lesson(
     choice(
         "What is the base case in recursion?",
         listOf(
-            "The case where the function ends without calling itself",
+            "The case where it doesn't call itself",
             "A break statement in a loop",
             "The first call of the function",
             "An error that stops the program",
         ),
         0,
-        "The base case ends the chain of calls.",
+        "The base case is the case where the function ends without calling itself – it ends the chain of calls.",
     ),
 )

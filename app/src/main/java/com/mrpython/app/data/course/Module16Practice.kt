@@ -86,7 +86,7 @@ internal val module16Practice = listOf(
         choice(
             "Czy key=len() z nawiasami jest poprawne?",
             listOf(
-                "Nie, key oczekuje samej funkcji, bez wywołania",
+                "Nie, key potrzebuje samej funkcji",
                 "Tak, to to samo co key=len",
                 "Tak, nawiasy są obowiązkowe",
                 "Nie, key przyjmuje tylko lambdy",
@@ -146,16 +146,16 @@ internal val module16Practice = listOf(
             code = "print(list(filter(lambda x: x < 0, [1, 2])))",
         ),
         choice(
-            "Które wyrażenie listowe daje to samo co list(map(str.upper, s))?",
+            "Które wyrażenie listowe daje to samo co list(map(lambda x: x.upper(), s))?",
             listOf("[x.upper() for x in s]", "[x for x in s if x.upper()]", "[str for x in s]", "[x.upper for x in s]"),
             0,
             "map() wywołuje funkcję dla każdego elementu – tu upper().",
         ),
         choice(
             "Co zwraca funkcja przekazana do filter()?",
-            listOf("True lub False – czy zostawić element", "Nową wartość elementu", "Indeks elementu", "Liczbę elementów"),
+            listOf("True albo False", "Nową wartość elementu", "Indeks elementu", "Liczbę elementów"),
             0,
-            "filter() zostawia elementy, dla których funkcja daje prawdę.",
+            "filter() zostawia element, gdy funkcja da True, a odrzuca, gdy da False.",
         ),
         fill(
             "Uzupełnij, aby zamienić napisy na liczby i je zsumować.",
@@ -220,7 +220,7 @@ internal val module16Practice = listOf(
         ),
         choice(
             "Co jest wynikiem mnoznik(2)?",
-            listOf("Funkcja, która mnoży przez 2", "Liczba 2", "Liczba 4", "Błąd"),
+            listOf("Nowa funkcja", "Liczba 2", "Liczba 4", "Błąd"),
             0,
             "mnoznik zwraca lambdę, którą dopiero trzeba wywołać.",
             code = "def mnoznik(n):\n    return lambda x: x * n",
@@ -297,7 +297,7 @@ internal val module16Practice = listOf(
         ),
         choice(
             "Czym jest lambda?",
-            listOf("Małą funkcją bez nazwy zapisaną jednym wyrażeniem", "Rodzajem pętli", "Typem listy", "Modułem Pythona"),
+            listOf("Funkcją bez nazwy", "Rodzajem pętli", "Typem listy", "Modułem Pythona"),
             0,
             "Lambda to funkcja anonimowa z jednym wyrażeniem.",
         ),

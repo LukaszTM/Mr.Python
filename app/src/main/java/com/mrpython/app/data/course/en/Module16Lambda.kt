@@ -64,7 +64,7 @@ internal val module16 = CourseUnit(
             choice(
                 "What is the key parameter of sorted() for?",
                 listOf(
-                    "It gives a function whose result is used for comparing",
+                    "It gives a function to compare by",
                     "It sets how many elements to sort",
                     "It gives a dictionary key to remove",
                     "It reverses the order",
@@ -103,7 +103,7 @@ internal val module16 = CourseUnit(
             choice(
                 "Why do we write list(map(...))?",
                 listOf(
-                    "map() returns a map object, and list() turns it into a list",
+                    "To turn the map object into a list",
                     "Without list(), map() won't work",
                     "list() sorts the results",
                     "list() removes duplicates",
@@ -150,7 +150,7 @@ internal val module16 = CourseUnit(
             ),
             choice(
                 "What is the difference between f and f()?",
-                listOf("f is the function itself, and f() calls it", "None", "f() is the function, and f is its result", "f only works for lambdas"),
+                listOf("f is the function itself, and f() calls it", "There is no difference", "f() is the function, and f is its result", "f only works for lambdas"),
                 0,
                 "Without parentheses we pass the function, with parentheses – its result.",
             ),
@@ -187,7 +187,7 @@ internal val module16 = CourseUnit(
             output("print(max([3, -9, 4], key=abs))", "-9", "-9 has the largest absolute value."),
             choice(
                 "What does map(f, lst) return?",
-                listOf("A map object that can be turned into a list", "Always a list", "A tuple", "The number of elements"),
+                listOf("A map object", "A list", "A tuple", "The number of elements"),
                 0,
                 "map() returns an object that gives out results one by one – list() collects them into a list.",
             ),

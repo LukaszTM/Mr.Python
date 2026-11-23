@@ -45,12 +45,12 @@ internal val module17Intro = lesson(
     choice(
         "Czym jest warunek stopu w rekurencji?",
         listOf(
-            "Przypadkiem, w którym funkcja kończy się bez wywołania samej siebie",
+            "Przypadkiem, gdy funkcja nie woła siebie",
             "Instrukcją break w pętli",
             "Pierwszym wywołaniem funkcji",
             "Błędem, który zatrzymuje program",
         ),
         0,
-        "Warunek stopu kończy łańcuch wywołań.",
+        "Warunek stopu to przypadek, w którym funkcja kończy się bez wywołania samej siebie – kończy łańcuch wywołań.",
     ),
 )

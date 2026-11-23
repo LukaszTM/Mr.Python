@@ -28,13 +28,13 @@ internal val module18Practice = listOf(
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
-                "NameError – math nie jest jeszcze zaimportowany",
+                "NameError",
                 "Wypisze 2.0",
                 "Wypisze 2",
-                "ModuleNotFoundError",
+                "SyntaxError",
             ),
             0,
-            "Kod wykonuje się od góry – w chwili wywołania nazwy math jeszcze nie ma.",
+            "Kod wykonuje się od góry – w chwili wywołania nazwy math jeszcze nie ma, więc jest NameError.",
             code = "print(math.sqrt(4))\nimport math",
         ),
         choice(
@@ -106,13 +106,13 @@ internal val module18Practice = listOf(
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
             listOf(
-                "NameError – nazwa math nie została zaimportowana",
+                "NameError",
                 "Wypisze 2.0",
                 "Wypisze 2",
                 "SyntaxError",
             ),
             0,
-            "from math import sqrt wczytuje tylko nazwę sqrt, nie math.",
+            "from math import sqrt wczytuje tylko nazwę sqrt, nie math – dlatego NameError.",
             code = "from math import sqrt\nprint(math.sqrt(4))",
         ),
         choice(
@@ -260,13 +260,13 @@ internal val module18Practice = listOf(
         choice(
             "Dlaczego from math import * bywa ryzykowne?",
             listOf(
-                "Może nadpisać nazwy w programie i trudno ustalić, skąd pochodzą",
+                "Łatwo o konflikt nazw",
                 "Spowalnia każdą operację matematyczną",
                 "Działa tylko w starych wersjach Pythona",
                 "Usuwa moduł math z dysku",
             ),
             0,
-            "Gwiazdka wrzuca wiele nazw naraz, co sprzyja konfliktom.",
+            "Gwiazdka wrzuca wiele nazw naraz: mogą nadpisać Twoje nazwy albo zostać przez nie nadpisane, a trudno ustalić, skąd pochodzą.",
         ),
         choice(
             "Czym jest biblioteka standardowa Pythona?",
@@ -346,9 +346,9 @@ internal val module18Practice = listOf(
         ),
         choice(
             "Co się stanie po uruchomieniu tego kodu?",
-            listOf("TypeError – floor nie przyjmuje napisu", "Wypisze 3", "Wypisze 3.5", "Wypisze \"3\""),
+            listOf("TypeError", "Wypisze 3", "Wypisze 3.5", "Wypisze \"3\""),
             0,
-            "Funkcje math działają na liczbach, nie na napisach.",
+            "floor nie przyjmuje napisu – funkcje math działają na liczbach, więc jest TypeError.",
             code = "from math import floor\nprint(floor(\"3.5\"))",
         ),
         fill(

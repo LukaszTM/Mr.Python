@@ -45,7 +45,7 @@ internal val module16Intro = lesson(
     choice(
         "Do czego służy parametr key w sorted()?",
         listOf(
-            "Podaje funkcję, której wynik służy do porównywania",
+            "Podaje funkcję do porównywania",
             "Określa, ile elementów posortować",
             "Odwraca kolejność",
             "Usuwa duplikaty",

@@ -88,7 +88,7 @@ internal val module16Practice = listOf(
         choice(
             "Is key=len() with parentheses correct?",
             listOf(
-                "No, key expects the function itself, without a call",
+                "No, key needs the function itself",
                 "Yes, it's the same as key=len",
                 "Yes, the parentheses are required",
                 "No, key only accepts lambdas",
@@ -148,16 +148,16 @@ internal val module16Practice = listOf(
             code = "print(list(filter(lambda x: x < 0, [1, 2])))",
         ),
         choice(
-            "Which list comprehension gives the same result as list(map(str.upper, s))?",
+            "Which list comprehension gives the same result as list(map(lambda x: x.upper(), s))?",
             listOf("[x.upper() for x in s]", "[x for x in s if x.upper()]", "[str for x in s]", "[x.upper for x in s]"),
             0,
             "map() calls the function for every element – here upper().",
         ),
         choice(
             "What does the function passed to filter() return?",
-            listOf("True or False – whether to keep the element", "The element's new value", "The element's index", "The number of elements"),
+            listOf("True or False", "The element's new value", "The element's index", "The number of elements"),
             0,
-            "filter() keeps the elements for which the function gives a true value.",
+            "filter() keeps an element when the function gives True and drops it when it gives False.",
         ),
         fill(
             "Fill in the blank to turn the strings into numbers and add them up.",
@@ -222,7 +222,7 @@ internal val module16Practice = listOf(
         ),
         choice(
             "What is the result of multiplier(2)?",
-            listOf("A function that multiplies by 2", "The number 2", "The number 4", "Error"),
+            listOf("A new function", "The number 2", "The number 4", "Error"),
             0,
             "multiplier returns a lambda that still has to be called.",
             code = "def multiplier(n):\n    return lambda x: x * n",
@@ -299,7 +299,7 @@ internal val module16Practice = listOf(
         ),
         choice(
             "What is a lambda?",
-            listOf("A small nameless function written as one expression", "A kind of loop", "A type of list", "A Python module"),
+            listOf("A nameless function", "A kind of loop", "A type of list", "A Python module"),
             0,
             "A lambda is an anonymous function with a single expression.",
         ),
@@ -312,7 +312,7 @@ internal val module16Practice = listOf(
         ),
         fill(
             "Fill in the blank to pick the word with the most letters \"a\".",
-            "s = [\"anna\", \"banana\", \"cat\"]\nprint(max(s, key=lambda x: x.____(\"a\")))",
+            "s = [\"anna\", \"banana\", \"dog\"]\nprint(max(s, key=lambda x: x.____(\"a\")))",
             listOf("count", "split", "index"),
             "count",
             "count(\"a\") counts the letters a, so banana wins.",

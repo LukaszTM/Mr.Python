@@ -18,7 +18,7 @@ internal val module17 = CourseUnit(
             choice(
                 "What is the base case in recursion?",
                 listOf(
-                    "The case where the function ends without calling itself",
+                    "The case where it doesn't call itself",
                     "A break statement in a loop",
                     "The first call of the function",
                     "An error that stops the program",
@@ -110,7 +110,7 @@ internal val module17 = CourseUnit(
                 "Every call divides n by 2 until n reaches 1.",
             ),
             tiles(
-                "Store in result the recursive step of the Fibonacci sequence",
+                "Store in result the recursive step of the Fibonacci sequence: fib(n - 1) first, then fib(n - 2)",
                 listOf("result", "=", "fib(n - 1)", "+", "fib(n - 2)"),
                 listOf("*", "fib(n)"),
                 "A term of the sequence is the sum of the two previous terms.",
@@ -143,13 +143,13 @@ internal val module17 = CourseUnit(
             choice(
                 "Why do we use s[1:] in recursion on strings?",
                 listOf(
-                    "To make the problem smaller – we take the string without its first character",
+                    "To drop the first character",
                     "To reverse the string",
                     "To copy the whole string",
                     "To remove the last character",
                 ),
                 0,
-                "Every call gets a shorter string until it reaches the empty one.",
+                "s[1:] is the string without its first character – every call gets a smaller problem until it reaches the empty string.",
             ),
             fill(
                 "Fill in the blank so the function counts the letters \"a\".",
@@ -198,13 +198,13 @@ internal val module17 = CourseUnit(
             choice(
                 "When is it better to use a loop instead of recursion?",
                 listOf(
-                    "When the number of steps can be very large, e.g. 100,000",
+                    "When there can be very many steps",
                     "When the data is a short string",
                     "Never – recursion is always better",
                     "When the function has a base case",
                 ),
                 0,
-                "Deep recursion will exceed the limit, while a loop has no such restriction.",
+                "For example, 100,000 nested calls will exceed the limit, while a loop has no such restriction.",
             ),
             output(
                 "a, b = 0, 1\nfor _ in range(6):\n    a, b = b, a + b\nprint(a)",
@@ -269,7 +269,7 @@ internal val module17 = CourseUnit(
                 "Simple recursion computes the same values many times.",
             ),
             tiles(
-                "Store in result the sum of the first element and the total of the rest of the list",
+                "Store in result: the first element plus the total of the rest of the list",
                 listOf("result", "=", "items[0]", "+", "total(items[1:])"),
                 listOf("total(items)", "items[1:]"),
                 "The recursive step: the first element plus the sum of the rest.",

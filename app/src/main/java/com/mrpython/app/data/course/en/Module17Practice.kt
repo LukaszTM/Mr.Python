@@ -159,7 +159,7 @@ internal val module17Practice = listOf(
             "n // 10 cuts off the last digit.",
         ),
         fill(
-            "Fill in the base case so power(2, 3) gives 8.",
+            "Fill in what the base case returns so power(2, 3) gives 8.",
             "def power(a, n):\n    if n == 0:\n        return ____\n    return a * power(a, n - 1)\n\nprint(power(2, 3))",
             listOf("1", "0", "a"),
             "1",
@@ -173,7 +173,7 @@ internal val module17Practice = listOf(
             "A term of the Fibonacci sequence is the sum of the two before it.",
         ),
         tiles(
-            "Store in result the sum of the last digit of n and the digit sum of the rest of the number",
+            "Store in result: the last digit of n plus the digit sum of the rest of the number",
             listOf("result", "=", "n % 10", "+", "digit_sum(n // 10)"),
             listOf("n // 10", "digit_sum(n % 10)"),
             "n % 10 is the last digit, and n // 10 is the rest of the number.",
@@ -294,8 +294,8 @@ internal val module17Practice = listOf(
         ),
         output("a, b = 0, 1\nfor _ in range(10):\n    a, b = b, a + b\nprint(a)", "55", "The loop quickly computes the 10th term of the Fibonacci sequence."),
         choice(
-            "What will this code print?",
-            listOf("A RecursionError", "done", "2000", "0"),
+            "What happens when you run this?",
+            listOf("A RecursionError", "It prints done", "It prints 2000", "It prints 0"),
             0,
             "2000 nested calls exceed the limit of about 1000.",
             code = "def f(n):\n    if n == 0:\n        return \"done\"\n    return f(n - 1)\n\nprint(f(2000))",
@@ -398,17 +398,17 @@ internal val module17Practice = listOf(
         choice(
             "Which two things must a correct recursive function have?",
             listOf(
-                "A base case and a call for a smaller problem",
-                "A loop and return",
+                "A base case and a call to itself",
+                "A loop and a return statement",
+                "A base case and a while loop",
                 "Two parameters and print",
-                "An import and try",
             ),
             0,
-            "Without them the recursion would never end or would do nothing.",
+            "The function has to call itself for a smaller problem until it reaches the base case. No loop is needed.",
         ),
         choice(
             "What happens?",
-            listOf("A RecursionError", "It returns 0", "It returns 5", "Nothing"),
+            listOf("A RecursionError", "It returns 0", "It returns 5", "It ends without an error"),
             0,
             "n grows, so it moves away from the base case n == 0.",
             code = "def f(n):\n    if n == 0:\n        return 0\n    return f(n + 1)\n\nf(5)",
@@ -435,7 +435,7 @@ internal val module17Practice = listOf(
             "n has to decrease to reach the base case n == 0.",
         ),
         tiles(
-            "Store in result the product of the first element and the product of the rest of the list",
+            "Store in result: the first element times the product of the rest of the list",
             listOf("result", "=", "items[0]", "*", "product(items[1:])"),
             listOf("product(items)", "+"),
             "The first element times the result for the rest of the list.",

@@ -33,7 +33,7 @@ internal val module16 = CourseUnit(
             ),
             output("parz = lambda n: n % 2 == 0\nprint(parz(3), parz(4))", "False True", "Lambda zwraca wynik porównania."),
             tiles(
-                "Zapisz w zmiennej trzy lambdę, która mnoży x przez 3",
+                "Zapisz w zmiennej trzy lambdę mnożącą x przez 3",
                 listOf("trzy", "=", "lambda x:", "x * 3"),
                 listOf("def x:", "return"),
                 "Po dwukropku lambdy piszemy tylko wyrażenie, bez return.",
@@ -63,7 +63,7 @@ internal val module16 = CourseUnit(
             choice(
                 "Do czego służy parametr key w sorted()?",
                 listOf(
-                    "Podaje funkcję, której wynik służy do porównywania",
+                    "Podaje funkcję do porównywania",
                     "Określa, ile elementów posortować",
                     "Podaje klucz słownika do usunięcia",
                     "Odwraca kolejność",
@@ -102,7 +102,7 @@ internal val module16 = CourseUnit(
             choice(
                 "Po co piszemy list(map(...))?",
                 listOf(
-                    "map() zwraca obiekt map, a list() zamienia go na listę",
+                    "Żeby zamienić obiekt map na listę",
                     "Bez list() map() nie zadziała",
                     "list() sortuje wyniki",
                     "list() usuwa duplikaty",
@@ -186,7 +186,7 @@ internal val module16 = CourseUnit(
             output("print(max([3, -9, 4], key=abs))", "-9", "Największą wartość bezwzględną ma -9."),
             choice(
                 "Co zwraca map(f, lista)?",
-                listOf("Obiekt map, który można zamienić na listę", "Zawsze listę", "Krotkę", "Liczbę elementów"),
+                listOf("Obiekt map", "Listę", "Krotkę", "Liczbę elementów"),
                 0,
                 "map() zwraca obiekt, który oddaje wyniki po kolei – list() zbiera je w listę.",
             ),
